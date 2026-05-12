@@ -284,6 +284,278 @@ def q_short(id_, topic, stem, answer, explanation, source, difficulty="中"):
     return {"id": id_, "type": "short", "topic": topic, "stem": stem, "answer": answer, "explanation": explanation, "source": source, "difficulty": difficulty}
 
 
+AUTO_SKIP_KEYS = {"RGB", "IMDB情感分类"}
+
+
+def should_skip_auto_concept(topic, key):
+    return key in AUTO_SKIP_KEYS
+
+
+def replace_first(text, old, new="____"):
+    if old and old in text:
+        return text.replace(old, new, 1)
+    return text
+
+
+def pick_template(key, templates):
+    if not templates:
+        return ""
+    return templates[sum(ord(ch) for ch in key) % len(templates)]
+
+
+def make_choice_stem(topic, key):
+    group = topic.split("/")[0]
+    special = {
+        "Epoch": "下列关于Epoch、Batch与参数更新关系的说法正确的是",
+        "Batch": "下列关于Batch、iteration与训练效率关系的说法正确的是",
+        "model.eval()": "在验证/推理代码判断题中，关于model.eval()的说法正确的是",
+        "torch.no_grad()": "在验证/推理代码判断题中，关于torch.no_grad()的说法正确的是",
+        "BCEWithLogitsLoss": "在二分类损失函数选择题中，关于BCEWithLogitsLoss的说法正确的是",
+        "CrossEntropyLoss": "在多分类损失函数选择题中，关于CrossEntropyLoss的说法正确的是",
+        "NCHW": "在图像张量维度判断题中，关于NCHW格式的说法正确的是",
+        "NHWC": "在图像张量维度判断题中，关于NHWC格式的说法正确的是",
+        "Same卷积": "若题目考查卷积输出尺寸保持不变，关于Same卷积的说法正确的是",
+        "Valid卷积": "若题目考查卷积输出尺寸变化，关于Valid卷积的说法正确的是",
+        "Full卷积": "若题目考查卷积输出尺寸变化，关于Full卷积的说法正确的是",
+        "卷积块": "在CNN结构分析题中，关于典型卷积块的说法正确的是",
+        "class weight": "处理类别不平衡时，关于class weight作用方式的说法正确的是",
+        "WeightedRandomSampler": "处理类别不平衡时，关于WeightedRandomSampler的说法正确的是",
+        "Teacher Forcing": "在Seq2Seq训练机制判断题中，关于Teacher Forcing的说法正确的是",
+        "Q/K/V": "在注意力机制判断题中，关于Q/K/V角色的说法正确的是",
+        "sqrt(d_k)": "在Scaled Dot-Product Attention中，关于除以sqrt(d_k)的说法正确的是",
+        "Source Mask": "在Transformer掩码机制判断题中，关于Source Mask的说法正确的是",
+        "Target Mask": "在Transformer掩码机制判断题中，关于Target Mask的说法正确的是",
+        "RoPE": "在位置编码比较题中，关于RoPE的说法正确的是",
+    }
+    if key in special:
+        return special[key]
+    if group in {"训练", "计算图", "自动微分", "数据"}:
+        return pick_template(key, [
+            f"把{key}放回训练流程中判断，下列说法正确的是",
+            f"若题目围绕训练代码排错考{key}，下列说法正确的是",
+            f"在训练循环步骤判断题中，关于{key}的说法正确的是",
+        ])
+    if group in {"分类", "Logistic", "损失", "Softmax", "MLP"}:
+        return pick_template(key, [
+            f"若题目考查{key}的定义、输入形式或适用条件，下列说法正确的是",
+            f"在分类模型与损失函数选择题中，关于{key}的说法正确的是",
+            f"若围绕{key}判断任务类型或输出形式，下列说法正确的是",
+        ])
+    if group in {"CNN", "卷积", "池化", "感受野", "图像", "预处理", "架构", "不平衡", "梯度", "初始化", "归一化", "正则", "增强", "优化", "调度", "调参", "实践", "现代", "迁移"}:
+        return pick_template(key, [
+            f"在卷积网络与训练技巧相关题目中，关于{key}的说法正确的是",
+            f"若题目考查结构作用、尺寸变化或训练效果，关于{key}的说法正确的是",
+            f"在图像模型判断题中，关于{key}的说法正确的是",
+        ])
+    if group in {"序列", "RNN", "GRU", "LSTM", "变长"}:
+        return pick_template(key, [
+            f"在序列模型相关题目中，关于{key}的说法正确的是",
+            f"若题目考查时序依赖、张量形状或变长处理，关于{key}的说法正确的是",
+            f"在RNN/序列建模判断题中，关于{key}的说法正确的是",
+        ])
+    if group in {"Seq2Seq", "Attention", "Transformer"}:
+        return pick_template(key, [
+            f"在注意力或Transformer相关题目中，关于{key}的说法正确的是",
+            f"若题目考查注意力计算链路，关于{key}的说法正确的是",
+            f"在Transformer结构判断题中，关于{key}的说法正确的是",
+        ])
+    return f"下列关于{key}的说法正确的是"
+
+
+def make_fill_question(topic, key, truth, false_stmt, exam_tip):
+    special = {
+        "Epoch": ("完整遍历训练集一次称为一个____。", "Epoch", "Epoch表示把整个训练集完整看一遍，不能和Batch或单次参数更新混为一谈。"),
+        "Batch": ("一次参数更新通常只使用训练集中的一个____样本集合。", "Batch", "Batch是一小批样本；多个Batch组成一个Epoch。"),
+        "DataLoader": ("PyTorch中负责按batch读取、组织并迭代数据的组件是____。", "DataLoader", "DataLoader把数据集包装成可迭代批次，可控制batch_size、shuffle等。"),
+        "动态计算图": ("PyTorch按实际执行路径边运行边构建的计算图通常称为____计算图。", "动态", "动态图能自然适配Python控制流，是PyTorch的重要特性。"),
+        "BCEWithLogitsLoss": ("二分类任务若直接输入原始logits，常用的损失函数是____。", "BCEWithLogitsLoss", "它把Sigmoid与二元交叉熵合并，数值更稳定。"),
+        "BCE": ("衡量二分类概率预测与0/1标签差异的常见损失函数可写作____。", "BCE/二元交叉熵", "BCE关注预测概率与真实二值标签之间的差异。"),
+        "CrossEntropyLoss": ("多分类任务中，若模型输出的是各类别原始logits，常用损失函数是____。", "CrossEntropyLoss", "CrossEntropyLoss应接收原始logits，而不是先手动Softmax后的概率。"),
+        "尺度效应": ("在Softmax中，放大logits会让分布更____，缩小logits会让分布更平滑。", "尖锐", "这反映了Softmax对logit尺度变化很敏感。"),
+        "局部连接": ("CNN中每个输出位置只连接输入的局部区域，这一结构特点称为____。", "局部连接", "局部连接让卷积更适合提取邻域模式，并保留空间结构。"),
+        "参数共享": ("同一卷积核在不同空间位置复用同一组权重，这个特点称为____。", "参数共享/权值共享", "参数共享是CNN显著降低参数量的关键。"),
+        "平移不变性": ("卷积中的参数共享配合池化等操作，可增强模型对局部平移的____。", "不变性/鲁棒性", "考试常把“参数共享”和“平移不变性”放在一起考。"),
+        "Same卷积": ("若希望卷积后输出空间尺寸尽量与输入一致，通常使用____卷积并配合适当填充。", "Same", "Same卷积的核心是通过padding尽量保持输入输出尺寸一致。"),
+        "Valid卷积": ("不进行边界填充、输出尺寸通常更小的卷积形式常称为____卷积。", "Valid", "Valid卷积通常不填充，因此输出尺寸更小。"),
+        "Full卷积": ("通过更充分的边界填充使输出尺寸可能大于输入的卷积形式常称为____卷积。", "Full", "Full卷积对应更充分的边界覆盖，输出可大于输入。"),
+        "输出尺寸公式": ("卷积输出空间尺寸常用公式可写为 floor((n + 2p - k) / s) + ____。", "1", "n为输入尺寸，p为padding，k为卷积核大小，s为步长。"),
+        "感受野递推": ("感受野回溯公式可写为 RF_prev = (RF_current - 1) * stride + ____。", "kernel/卷积核大小", "感受野递推公式是卷积计算题高频，最后一项是当前层卷积核大小。"),
+        "NCHW": ("PyTorch常用图像张量格式NCHW中，字母C表示____。", "通道数", "NCHW依次表示batch、channel、height、width。"),
+        "NHWC": ("图像张量格式NHWC中，最后一个维度C表示____。", "通道数", "NHWC依次表示batch、height、width、channel。"),
+        "数据泄漏": ("用验证集或测试集参与训练阶段的标准化统计量计算，会造成____。", "数据泄漏", "预处理统计量只能从训练集估计，否则评估结果会被污染。"),
+        "卷积参数量": ("Conv2d参数量通常与输出通道数、输入通道数、卷积核大小以及是否使用____有关。", "bias/偏置", "卷积参数量不需要再乘输出特征图的空间位置数。"),
+        "class weight": ("在CrossEntropyLoss中，可通过参数____为不同类别设置不同损失权重。", "weight/class weight", "class weight属于损失加权方案，用来提高少数类错误的代价。"),
+        "WeightedRandomSampler": ("WeightedRandomSampler直接改变的是样本被抽到的____。", "概率/采样概率", "它作用在采样层面，而不是直接修改损失函数公式。"),
+        "卷积块": ("一个典型卷积块常包含卷积层、归一化层、激活函数，以及可选的____层来进一步压缩空间尺寸。", "池化", "考试常把卷积、归一化、激活、池化这四类组件放在一起考结构作用。"),
+        "BatchNorm": ("BatchNorm在推理阶段通常使用训练过程中累计的____统计量。", "运行/移动平均", "训练时用batch统计量，推理时用running mean和running var。"),
+        "Dropout": ("Dropout在____模式下会随机失活一部分神经元。", "训练/train", "Dropout只在训练时随机失活，推理时关闭。"),
+        "PackedSequence": ("处理变长序列时，PyTorch中用于表示压缩后有效序列数据的对象是____。", "PackedSequence", "PackedSequence配合pack_padded_sequence减少填充部分的无效计算。"),
+        "训练验证测试": ("数据集划分中，用于调参与早停而不直接参与参数更新的部分通常是____集。", "验证", "训练集学参数，验证集调参与选模型，测试集做最终评估。"),
+        "模型保存": ("PyTorch部署或恢复模型时，最常保存和加载的是模型的____。", "state_dict", "state_dict保存参数权重，是最常见的模型保存方式。"),
+        "Teacher Forcing": ("Seq2Seq训练中，把真实上一步目标词而不是模型预测结果送回解码器的策略称为____。", "Teacher Forcing", "Teacher Forcing能加快训练收敛，但训练和推理存在暴露偏差。"),
+        "上下文向量瓶颈": ("传统Seq2Seq把整段源序列压缩成一个固定长度的____向量，这会带来长序列信息瓶颈。", "上下文", "固定长度上下文向量难以完整承载长序列信息，是注意力机制出现的重要背景。"),
+        "Q/K/V": ("在注意力机制中，Q、K、V分别对应Query、Key和____。", "Value", "Q负责发起查询，K负责匹配，V负责提供被加权汇总的信息。"),
+        "sqrt(d_k)": ("Scaled Dot-Product Attention中，点积结果常除以____，以避免Softmax过于尖锐。", "sqrt(d_k)", "维度越大，点积方差越大，因此需要缩放。"),
+        "Source Mask": ("Transformer中的Source Mask主要用于屏蔽源序列中的____位置。", "Padding/PAD", "Source Mask挡住无意义的填充符，避免注意力分给PAD。"),
+        "Target Mask": ("Transformer中的Target Mask主要用于阻止Decoder看到____目标词。", "未来的/后续", "Target Mask保证自回归生成时当前位置不能偷看未来。"),
+        "位置编码": ("Transformer之所以需要位置编码，是因为纯注意力机制本身不天然包含____信息。", "顺序/位置信息", "位置编码负责把先后关系补回模型。"),
+        "Multi-Head Attention": ("多头注意力通过多个头在不同表示____中并行学习关注模式。", "子空间", "多个头并行后再拼接整合，是它提升表达能力的关键。"),
+        "Sinusoidal Positional Encoding": ("正弦位置编码在偶数维和奇数维上分别使用____与cos函数。", "sin", "经典正弦位置编码由不同频率的sin/cos组合而成。"),
+        "RoPE": ("现代大模型中常见的旋转位置编码通常记作____。", "RoPE", "RoPE通过旋转方式把位置信息注入表示。"),
+    }
+    if key in special:
+        stem, answer, explanation = special[key]
+        return stem, answer, explanation
+    if key and key in truth:
+        stem = replace_first(truth, key).rstrip("。") + "。"
+        return stem, key, f"答案是{key}。{exam_tip}"
+    stripped = truth.rstrip("。")
+    return f"根据定义填空：{stripped}。这里对应的术语是 ____。", key, f"答案是{key}。{exam_tip}"
+
+
+def make_short_question(topic, key, truth, false_stmt, exam_tip):
+    group = topic.split("/")[0]
+    special = {
+        "Epoch": (
+            "区分Epoch、Batch与iteration，并说明三者为什么不能混用。",
+            "Epoch表示完整遍历训练集一次；Batch是一次参数更新使用的一小批样本；iteration通常指一次前向、反向与参数更新。三者分别对应训练轮次、样本分组和更新次数，混用会直接导致训练日志与学习率调度判断错误。",
+            "本题考查训练过程中的三个基本计量单位，答题时要把“数据规模”和“参数更新次数”分开说清楚。",
+        ),
+        "Batch": (
+            "说明Batch size会同时影响训练稳定性、显存占用与参数更新频率，答题时至少写出两点。",
+            "Batch size越大，梯度估计通常更平滑，但显存占用更高、每个Epoch的更新次数更少；Batch size较小时更新更频繁、噪声更大，可能有助于泛化但训练更不稳定。",
+            "这类题常把“稳定性”和“资源开销”绑在一起考。",
+        ),
+        "model.eval()": (
+            "说明model.eval()与torch.no_grad()的区别，并指出至少两个受model.eval()影响的模块或行为。",
+            "model.eval()会切换模型到评估模式，影响Dropout和BatchNorm等模块：Dropout停止随机失活，BatchNorm改用运行统计量；torch.no_grad()则只负责关闭梯度记录、节省显存和计算，它不改变模块行为，两者常在验证/推理阶段配合使用。",
+            "答题时先写“是否改模块行为”，再写“是否记录梯度”，结构最稳。",
+        ),
+        "torch.no_grad()": (
+            "解释torch.no_grad()在验证阶段的作用，并比较它与model.eval()的功能差异。",
+            "torch.no_grad()关闭自动求导，避免构建计算图，从而节省显存并加快验证/推理；model.eval()用于切换Dropout、BatchNorm等模块到评估行为。前者管梯度记录，后者管模块模式，两者不能互相替代。",
+            "这题高频误区是把eval和no_grad当成同一个东西。",
+        ),
+        "BCEWithLogitsLoss": (
+            "说明BCEWithLogitsLoss适用于什么任务、输入应是什么形式，并指出一个常见误用。",
+            "BCEWithLogitsLoss主要用于二分类或多标签二分类，输入应是原始logits，函数内部会处理Sigmoid相关计算。常见误用是先手动做Sigmoid再传入BCEWithLogitsLoss，导致数值稳定性变差且与预期输入不符。",
+            "考试通常同时考“任务类型”和“输入形式”。",
+        ),
+        "CrossEntropyLoss": (
+            "说明CrossEntropyLoss的输入与标签形式，并指出它与手动Softmax的关系。",
+            "CrossEntropyLoss用于多分类，输入通常是每一类的原始logits，标签常用类别索引。它内部已包含LogSoftmax与负对数似然思想，因此训练时不应先手动Softmax；若需要展示概率，再在预测阶段额外Softmax。",
+            "答题时要明确“训练输入logits，展示概率再softmax”。",
+        ),
+        "激活函数": (
+            "说明激活函数为什么是MLP获得非线性表达能力的关键，并指出没有激活函数会发生什么。",
+            "激活函数把线性/仿射输出映射到非线性空间，使网络能够拟合复杂非线性边界；若没有激活函数，多层仿射变换仍可合并成一个仿射变换，模型本质上仍是线性的，无法表达复杂分类边界。",
+            "这类题要把“仿射层”和“非线性映射”分工说清楚。",
+        ),
+        "卷积块": (
+            "写出一个典型卷积块的组成，并分别说明卷积、归一化、激活、池化各自承担什么作用。",
+            "典型卷积块可写成Conv + BatchNorm + 激活函数 + Pooling。卷积负责提取局部特征，BatchNorm稳定中间分布并改善训练，激活函数提供非线性表达能力，池化用于压缩空间尺寸并增强局部平移鲁棒性。",
+            "这是比较标准的结构题，比分辨“核心词”更接近真实考试。",
+        ),
+        "Same卷积": (
+            "说明Same卷积如何通过padding影响输出尺寸，并比较它与Valid卷积的一个区别。",
+            "Same卷积通过合适的padding让输出空间尺寸尽量与输入一致，便于堆叠多层后保持特征图大小；Valid卷积通常不填充，因此输出尺寸更小。二者最核心的区别就是是否通过padding维持空间尺寸。",
+            "答题时要把“padding”和“输出尺寸”两个词同时写出来。",
+        ),
+        "Valid卷积": (
+            "说明Valid卷积的边界处理方式，并分析它对输出尺寸的影响。",
+            "Valid卷积通常不使用padding，因此卷积核只能在完全落入输入边界的位置计算，输出空间尺寸会缩小。它减少了边界补零带来的影响，但也更快丢失空间分辨率。",
+            "这类题通常和Same、Full一起比较。",
+        ),
+        "感受野递推": (
+            "写出感受野递推公式，并解释为什么步长变大会让回溯到前层的感受野更大。",
+            "常用递推公式为 RF_prev = (RF_current - 1) * stride + kernel。步长越大，当前层相邻单元在前一层上的间隔越大，因此回溯到前层时覆盖范围会变大，而不是变小。",
+            "你之前给的例题正好就是这类高频陷阱。",
+        ),
+        "NCHW": (
+            "解释NCHW四个字母各表示什么，并说明维度顺序写错为什么会直接导致模型出错。",
+            "NCHW依次表示batch size、channel、高度和宽度。卷积层会按约定维度解释通道数和空间维，如果把维度顺序写错，例如把H/W当成C，就会导致输入通道数不匹配或卷积结果含义错误。",
+            "这类题考的是张量语义，而不只是记缩写。",
+        ),
+        "class weight": (
+            "说明class weight如何作用到损失函数，并比较它与WeightedRandomSampler处理类别不平衡的区别。",
+            "class weight属于损失加权方案：在计算损失时给不同类别错误分配不同代价，少数类可被赋予更大权重；WeightedRandomSampler则作用在采样层面，改变各类样本在batch中出现的概率。前者改“错了罚多重”，后者改“见到谁更多”。",
+            "这是类别不平衡题的标准考法之一。",
+        ),
+        "WeightedRandomSampler": (
+            "说明WeightedRandomSampler解决类别不平衡的思路，并比较它与class weight的不同。",
+            "WeightedRandomSampler通过提高少数类样本被抽中的概率，改变训练时看到的数据分布；class weight则不改变样本出现频率，而是在损失函数中提高少数类错误的代价。一个改采样分布，一个改损失贡献。",
+            "答题时最好把“采样层面”和“损失层面”这两个词写出来。",
+        ),
+        "Teacher Forcing": (
+            "解释Teacher Forcing的训练方式，并指出它带来的一个优势和一个问题。",
+            "Teacher Forcing在训练Seq2Seq时，把真实上一步目标词送入Decoder，而不是使用模型自己刚预测的词。这样能加快收敛、稳定训练；但训练阶段依赖真实标签，推理阶段却只能依赖模型自身输出，因此会带来暴露偏差。",
+            "这题常考“为什么训练快”和“为什么推理会掉”。",
+        ),
+        "Q/K/V": (
+            "分别说明Query、Key、Value在注意力计算中的角色，并写出最终注意力输出是如何得到的。",
+            "Query表示当前要发起匹配的查询，Key表示被匹配对象的索引或特征，Value表示真正要被加权汇总的信息。先计算Q与K的相似度，经缩放与Softmax得到权重，再对V做加权求和，得到上下文向量或注意力输出。",
+            "Q/K/V最好按“匹配谁、依据谁、取走谁的信息”来解释。",
+        ),
+        "sqrt(d_k)": (
+            "解释Scaled Dot-Product Attention为什么要除以sqrt(d_k)，如果不除会出现什么问题。",
+            "当Key维度d_k增大时，QK^T的点积方差会变大，Softmax输入容易过大，从而使分布过于尖锐、梯度变小或训练不稳定。因此需要除以sqrt(d_k)做缩放，让数值范围更稳定。",
+            "这类题的高频关键词是“方差变大”“Softmax过尖”“梯度不稳定”。",
+        ),
+        "Source Mask": (
+            "说明Source Mask与Target Mask分别屏蔽什么，并解释为什么两者不能混为一谈。",
+            "Source Mask用于屏蔽源序列中的Padding位置，避免模型关注无效PAD；Target Mask用于阻止Decoder在当前位置看到未来目标词，保证自回归生成。前者解决无效填充，后者解决信息泄露，作用对象和目的都不同。",
+            "一句话记忆：Source挡PAD，Target挡未来。",
+        ),
+        "Target Mask": (
+            "说明Target Mask的作用，并比较它与Source Mask的不同。",
+            "Target Mask保证Decoder当前位置只能看到当前及之前的目标词，不能偷看未来词，从而满足自回归生成要求；Source Mask则是屏蔽源序列中的PAD位置。Target Mask核心是防止未来信息泄露。",
+            "考点通常落在“自回归”这三个字上。",
+        ),
+        "RoPE": (
+            "说明RoPE如何注入位置信息，并比较它与正弦位置编码的一点区别或优势。",
+            "RoPE通过旋转变换把位置信息注入表示或注意力计算中，使相对位置信息能以旋转关系体现。相比固定的绝对位置编码，RoPE更容易在现代大模型中与长上下文和相对位置建模结合，因此使用非常广泛。",
+            "这类题更像“比较题”，而不是单纯记名词。",
+        ),
+    }
+    if key in special:
+        return special[key]
+    if group in {"训练", "计算图", "自动微分", "数据"}:
+        stem = pick_template(key, [
+            f"把{key}放回标准训练循环中，说明它位于哪一步、直接作用于什么对象，以及遗漏时会出现什么现象。",
+            f"若训练代码围绕{key}写错，最常见的错误现象是什么？先说明它的作用，再说明后果。",
+            f"结合一轮训练，说明{key}前后衔接哪两个步骤，以及它本身完成了什么工作。",
+        ])
+    elif group in {"分类", "Logistic", "损失", "Softmax", "MLP"}:
+        stem = pick_template(key, [
+            f"说明{key}适用于什么任务、输入应是什么形式，并指出一个高频误用。",
+            f"若题目要求判断{key}有没有用对，请写出它的定义或输入形式，再补一个常见误区。",
+            f"写一个关于{key}的标准简答：先说它解决什么问题，再说最容易混淆的点。",
+        ])
+    elif group in {"CNN", "卷积", "池化", "感受野", "图像", "预处理", "架构", "不平衡", "梯度", "初始化", "归一化", "正则", "增强", "优化", "调度", "调参", "实践", "现代", "迁移"}:
+        stem = pick_template(key, [
+            f"说明{key}解决了什么问题，并结合模型结构、尺寸变化、训练稳定性或数据处理写出一个高频考点。",
+            f"若考试围绕{key}出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
+            f"从“它做什么、为什么需要它、写错会怎样”三个角度，概括{key}这个知识点。",
+        ])
+    elif group in {"序列", "RNN", "GRU", "LSTM", "变长"}:
+        stem = pick_template(key, [
+            f"说明{key}在序列建模中的作用，并比较它与相邻概念的一个区别。",
+            f"若题目考查时序信息传递或变长序列处理，{key}最应该写出的两个关键点是什么？",
+            f"若要把{key}写成一道简答题，应如何同时交代它的作用和它想解决的序列问题？",
+        ])
+    elif group in {"Seq2Seq", "Attention", "Transformer"}:
+        stem = pick_template(key, [
+            f"说明{key}在注意力或Transformer结构中的作用，并指出一个常见误区或对比点。",
+            f"若题目考查{key}在计算链路中的位置，请说明它做了什么、为什么需要它。",
+            f"若把{key}写成一道简答题，至少应交代它的功能、它解决的问题，以及它最常和谁混淆。",
+        ])
+    else:
+        stem = f"说明{key}的作用，并指出一个常见误区。"
+    answer = f"{key}的核心定义或作用是：{truth} 常见误区是：{false_stmt} {exam_tip}"
+    explanation = "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。"
+    return stem, answer, explanation
+
+
 def quiz_bank():
     mcq = [
         q_mc("M01", "训练流程 梯度下降", "关于梯度下降训练流程，下列说法错误的是", ["A. 前向传播用于得到模型预测值", "B. 损失函数用于衡量预测与真实标签差异", "C. 反向传播的核心目标是计算参数梯度", "D. 参数更新应在清零梯度之前完成"], "D", "A、B、C均符合标准训练流程；D错误，通常每轮先清零梯度，再前向、计算损失、反向传播、优化器更新，否则旧梯度会参与本轮计算。", "多层感知机1_学生分发版.ipynb", "易"),
@@ -496,6 +768,8 @@ def extend_quiz_bank(base):
     concepts = supplemental_concepts()
 
     for idx, (topic, source, key, truth, false_stmt, exam_tip, difficulty) in enumerate(concepts, 1):
+        if should_skip_auto_concept(topic, key):
+            continue
         false_pos = idx % 4
         true_options = [
             truth,
@@ -517,42 +791,46 @@ def extend_quiz_bank(base):
             difficulty,
         ))
 
-        false_pos2 = (idx + 2) % 4
+        correct_pos = (idx + 1) % 4
         raw_options2 = [
-            f"可以把“{key}”与{topic.split('/')[0]}章节中的相邻概念联系起来复习。",
-            f"做题时应优先检查题干中的任务类型、数据形状、训练阶段或公式条件。",
-            f"若题干把{key}说成与课件定义相反，通常就是错误项。",
+            truth,
+            false_stmt,
+            f"{key}的高频考法通常与这个误区有关：{false_stmt}",
+            f"{key}只是一种记忆标签，本身不影响模型结构、训练流程或推理行为。",
         ]
-        raw_options2.insert(false_pos2, f"只要题干出现{key}，就可以忽略课件中的公式、输入输出形状和训练阶段。")
+        correct_text = raw_options2.pop(0)
+        raw_options2.insert(correct_pos, correct_text)
         options2 = [f"{letters[i]}. {raw_options2[i]}" for i in range(4)]
-        answer2 = letters[false_pos2]
+        answer2 = letters[correct_pos]
         questions.append(q_mc(
             f"YMC{idx:03d}",
             topic,
-            f"围绕{key}的考试判断，下列说法错误的是",
+            make_choice_stem(topic, key),
             options2,
             answer2,
-            f"{answer2}错误：考试题恰恰常通过公式条件、输入输出形状、训练/推理阶段制造陷阱。{exam_tip}",
+            f"{answer2}正确：{truth} 常见误区是：{false_stmt} {exam_tip}",
             source,
-            "难" if difficulty == "难" else "中",
+            difficulty if difficulty in {"易", "中", "难"} else "中",
         ))
 
+        fill_stem, fill_answer, fill_explanation = make_fill_question(topic, key, truth, false_stmt, exam_tip)
         questions.append(q_fill(
             f"XF{idx:03d}",
             topic,
-            f"{truth} 这句话描述的核心词是____。",
-            key,
-            f"答案是{key}。{exam_tip}",
+            fill_stem,
+            fill_answer,
+            fill_explanation,
             source,
             difficulty,
         ))
 
+        short_stem, short_answer, short_explanation = make_short_question(topic, key, truth, false_stmt, exam_tip)
         questions.append(q_short(
             f"XS{idx:03d}",
             topic,
-            f"围绕“{key}”，写出考试作答时必须抓住的两个要点。",
-            f"要点一：{truth} 要点二：{exam_tip} 同时要避免这样的错误表述：{false_stmt}",
-            f"本题考查概念定义、适用条件和易错陷阱。答题时先给定义，再说明它在训练流程、模型结构、损失函数或序列处理中的作用。",
+            short_stem,
+            short_answer,
+            short_explanation,
             source,
             difficulty,
         ))
