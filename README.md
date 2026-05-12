@@ -38,6 +38,11 @@ git push -u origin main
 bash scripts/publish_to_github.sh git@github.com:757187064/learning.git
 ```
 
+GitHub Pages 自动发布：
+
+- 仓库里已经包含 `.github/workflows/deploy-pages.yml`，推送到 `main` 后会自动把 `site/` 目录发布为网页。
+- 如果 GitHub 第一次提示你选择 Pages 来源，在仓库 `Settings -> Pages` 中选择 `GitHub Actions` 即可。
+
 说明：
 
 - 本工程没有保留零散转换 `.py` 文件。
