@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>深度学习课件复习网站</title>
+  <link rel="stylesheet" href="assets/course_site.css">
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <div>
+        <h1>深度学习课件复习网站</h1>
+        <p class="sub">搜索定位 · 自动组卷 · 综合复习资料</p>
+      </div>
+      <nav aria-label="主导航">
+        <button class="active" data-view="search">搜索</button>
+        <button data-view="quiz">复习题</button>
+        <button data-view="review">复习资料</button>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section id="view-search" class="view active">
+      <div id="stats" class="stats"></div>
+      <div class="toolbar">
+        <input id="searchInput" type="search" placeholder="输入词条：如 感受野、BatchNorm、LSTM、CrossEntropyLoss">
+        <button id="makeQuiz" class="btn secondary">按当前词条出题</button>
+        <button id="makeFullQuiz" class="btn">综合出题</button>
+      </div>
+      <div class="layout">
+        <div>
+          <div class="panel" style="margin-bottom:14px">
+            <div class="result-title"><h2 style="margin:0">搜索结果</h2><span id="resultCount" class="meta"></span></div>
+          </div>
+          <div id="results" class="panel"></div>
+        </div>
+        <aside>
+          <div id="explainBox" class="panel"></div>
+          <div class="panel" style="margin-top:14px">
+            <h3>高频词条</h3>
+            <div id="termCloud" class="term-list"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="view-quiz" class="view">
+      <div class="panel">
+        <div class="quiz-head">
+          <div>
+            <h2 id="quizTitle">综合复习题</h2>
+            <p id="quizMeta" class="meta">点击右侧按钮生成一份题。</p>
+          </div>
+          <button id="quizAll" class="btn">生成综合题</button>
+        </div>
+        <div id="quizBody"></div>
+      </div>
+    </section>
+
+    <section id="view-review" class="view">
+      <div class="panel">
+        <h2>综合复习资料</h2>
+        <p class="meta">这页按当前课件合并整理。之后新增课件时，重新构建即可更新搜索数据库和本页基础索引。</p>
+        <div id="reviewBody"></div>
+      </div>
+    </section>
+  </main>
+  <script src="assets/course_data.js"></script>
+  <script src="assets/course_site.js"></script>
+</body>
+</html>

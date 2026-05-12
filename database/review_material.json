@@ -1,0 +1,459 @@
+{
+  "title": "深度学习课件综合复习资料",
+  "updated_from": "当前课件目录内全部 Jupyter 课件",
+  "sections": [
+    {
+      "title": "1. 神经网络训练流程",
+      "points": [
+        "训练目标是让模型参数逐步降低损失函数。典型流程是：准备数据、前向传播、计算损失、反向传播求梯度、优化器更新参数、在验证集上评估。",
+        "梯度下降是一阶迭代优化方法。学习率控制每次参数移动的步长；学习率过大容易震荡或发散，过小会收敛缓慢。",
+        "Epoch 表示完整遍历训练集一次；Batch 表示一次参数更新使用的一小批样本。小批量训练在稳定性与效率之间折中。",
+        "PyTorch 默认会累积梯度，所以每轮反向传播前需要清零梯度。训练时使用 model.train()，验证/预测时使用 model.eval() 与 torch.no_grad()。",
+        "计算图记录前向计算依赖，自动微分通过链式法则从损失反向计算各参数梯度。动态计算图的特点是边运行边构建，适合 Python 控制流。"
+      ],
+      "formulas": [
+        "MSE = mean((y_hat - y)^2)",
+        "theta = theta - eta * grad(theta)"
+      ],
+      "exam_focus": [
+        "训练循环四步/五步顺序",
+        "为什么要清零梯度",
+        "train/eval 模式差异",
+        "计算图和链式法则"
+      ],
+      "details": [
+        "训练循环类题目要从“数据进入模型”这条线索追踪：DataLoader给出batch，模型前向得到预测，损失函数把预测和标签合成标量loss，loss.backward沿计算图写入grad，optimizer.step真正修改参数。",
+        "验证循环不更新参数，所以通常不需要zero_grad/backward/step；但需要model.eval()保证Dropout/BatchNorm行为正确，并用torch.no_grad()避免构图。",
+        "若题干出现loss不下降、显存增长、梯度异常，常见排查顺序是学习率、梯度清零、标签/损失匹配、输入标准化、模型是否处于正确模式。"
+      ],
+      "must_memorize": [
+        "标准训练顺序：zero_grad -> forward -> loss -> backward -> step。",
+        "验证/测试顺序：eval -> no_grad -> forward -> metric，不更新参数。",
+        "梯度在PyTorch中默认累积，不会自动清零。"
+      ],
+      "formula_explainer": [
+        "theta = theta - eta * grad(theta) 中，eta是学习率，决定每次更新幅度；grad(theta)来自反向传播。",
+        "MSE对大误差惩罚更明显，常用于回归；分类题一般不会用MSE作为标准答案。"
+      ],
+      "answer_template": [
+        "若考训练流程，建议按“数据输入 -> 前向传播 -> 损失计算 -> 反向传播 -> 参数更新 -> 验证评估”六步作答。",
+        "若考train/eval差异，先写Dropout和BatchNorm行为变化，再补no_grad是否记录梯度。"
+      ],
+      "question_patterns": [
+        "给一段训练代码，判断哪一步顺序错误。",
+        "解释为什么验证阶段要eval和no_grad。",
+        "区分epoch、iteration、batch、sample。"
+      ],
+      "traps": [
+        "把model.eval()误认为会关闭梯度计算。",
+        "把zero_grad写在step之后导致本轮梯度混乱。",
+        "验证集参与训练参数更新，造成评估不可信。"
+      ]
+    },
+    {
+      "title": "2. 分类问题、Logistic、Softmax 与 MLP",
+      "points": [
+        "分类任务的标签空间是离散类别。二分类常用一个 logit 经 Sigmoid 得到正类概率；多分类常用多个 logits 经 Softmax 得到概率分布。",
+        "Logit 是概率的对数几率 z=log(p/(1-p))，Sigmoid 是它的反函数。p=0.5 对应 z=0，z 越大正类概率越高。",
+        "BCEWithLogitsLoss 把 Sigmoid 与二元交叉熵合在一起，数值稳定性优于先 Sigmoid 再 BCELoss。",
+        "CrossEntropyLoss 内部包含 LogSoftmax 和负对数似然，输入应该是原始 logits，不应先手动 Softmax。",
+        "MLP 的每层通常由仿射变换加激活函数构成。仅堆叠仿射变换仍等价于一个线性变换，激活函数提供非线性表达能力。"
+      ],
+      "formulas": [
+        "sigmoid(z)=1/(1+e^(-z))",
+        "softmax(z_i)=e^(z_i)/sum_j e^(z_j)",
+        "BCE = -[y log(p)+(1-y)log(1-p)]"
+      ],
+      "exam_focus": [
+        "Logit 与概率互转",
+        "BCEWithLogitsLoss 和 CrossEntropyLoss 的输入",
+        "Softmax 概率和温度/尺度效应",
+        "激活函数的本质作用"
+      ],
+      "details": [
+        "二分类最容易考“单logit+BCEWithLogitsLoss”和“双logit+CrossEntropyLoss”的区别。两者都能做二分类，但输入形状、标签形式和损失函数不同。",
+        "CrossEntropyLoss考试重点是输入raw logits，目标常用类别索引；预测展示概率时才额外softmax。BCEWithLogitsLoss输入同样是logits，内部包含Sigmoid相关的稳定计算。",
+        "Softmax计算题一般先算指数，再除以指数和；尺度放大让最大项更占优，尺度缩小让分布更平滑。",
+        "MLP非线性表达能力来自激活函数，不来自单纯堆叠线性层。无激活函数时，多层线性/仿射层仍能合并成一层。"
+      ],
+      "must_memorize": [
+        "二分类常配：单logit + BCEWithLogitsLoss。",
+        "多分类常配：C个logits + CrossEntropyLoss。",
+        "Sigmoid输出和Softmax输出都是概率，但适用任务不同。"
+      ],
+      "formula_explainer": [
+        "logit(p)=log(p/(1-p))：把概率映射到实数轴，p=0.5时logit=0。",
+        "softmax(z_i)=e^(z_i)/sum_j e^(z_j)：哪个logit大，哪个概率更大；整体和为1。",
+        "BCE本质是在惩罚错误概率分配，预测越自信但越错，损失越大。"
+      ],
+      "answer_template": [
+        "若考损失函数匹配，先写任务类型，再写输出层形式，最后写损失函数名称。",
+        "若考MLP非线性，标准表述是“仿射变换提供线性映射，激活函数提供非线性表达能力”。"
+      ],
+      "question_patterns": [
+        "给logits和标签，选择合适损失函数。",
+        "计算logit、sigmoid或softmax概率。",
+        "判断没有激活函数的多层网络能否拟合非线性边界。"
+      ],
+      "traps": [
+        "先Softmax再传CrossEntropyLoss。",
+        "先Sigmoid再传BCEWithLogitsLoss。",
+        "把Sigmoid和Softmax都说成互不影响的逐元素概率函数。"
+      ]
+    },
+    {
+      "title": "3. CNN 基础：卷积、填充、池化、感受野",
+      "points": [
+        "CNN 针对图像利用局部连接、参数共享和平移不变性，避免 MLP 展平图像造成空间结构丢失和参数量膨胀。",
+        "深度学习框架中的卷积通常实际执行互相关运算，即卷积核不翻转。卷积核参数不是人工固定规则，而是在训练中学习得到。",
+        "输出尺寸由输入尺寸、卷积核大小、步长、填充共同决定。无填充 Valid 输出最小；Same 通过填充尽量保持尺寸；Full 输出可大于输入。",
+        "池化通过局部聚合降低空间尺寸，并增强局部平移不变性。最大池化强调强响应，平均池化保留局部平均信息。",
+        "感受野表示某层神经元能对应到原始输入的区域。层数、卷积核、池化和步长会逐步扩大感受野，多层小卷积常能以较少参数扩大有效视野。"
+      ],
+      "formulas": [
+        "out = floor((n + 2p - k)/s) + 1",
+        "RF_prev = (RF_current - 1) * stride + kernel"
+      ],
+      "exam_focus": [
+        "CNN vs MLP",
+        "Valid/Same/Full 区别",
+        "卷积输出尺寸计算",
+        "感受野递推",
+        "局部连接和参数共享"
+      ],
+      "details": [
+        "CNN基础题通常围绕三件事：为什么不用MLP直接展平图像、卷积输出尺寸如何算、感受野如何递推。答题时要把“空间结构、参数共享、局部连接”连起来。",
+        "卷积尺寸公式out=floor((n+2p-k)/s)+1必须熟练。Same/Valid/Full不是背名字，而是看是否填充以及输出尺寸变化。",
+        "感受野递推题要从后往前或从前往后保持一致。你给的例题中“步长变大会缩小感受野”就是典型反向陷阱，正确是步长放大回溯覆盖范围。",
+        "池化层通常无可学习参数，主要改变空间尺寸和局部鲁棒性。不要把池化说成增加参数量的层。"
+      ],
+      "must_memorize": [
+        "CNN三关键词：局部连接、参数共享、局部平移鲁棒性。",
+        "Valid通常最小，Same尽量保持尺寸，Full通常最大。",
+        "感受野递推里，步长增大会扩大回溯到前层的覆盖范围。"
+      ],
+      "formula_explainer": [
+        "out=floor((n+2p-k)/s)+1：n是输入尺寸，p是padding，k是卷积核大小，s是步长。",
+        "RF_prev=(RF_current-1)*stride+kernel：先把当前感受野间隔按步长拉开，再补上本层核宽。"
+      ],
+      "answer_template": [
+        "若考CNN优于MLP，按“保留空间结构 -> 减少参数 -> 便于提取局部特征”三点写。",
+        "若考卷积尺寸，先列公式，再代入参数，最后说明padding是否改变边界信息。"
+      ],
+      "question_patterns": [
+        "给输入尺寸、核、步长、填充，算输出尺寸。",
+        "判断Valid/Same/Full哪个输出最大或最小。",
+        "根据多层卷积/池化表递推感受野。"
+      ],
+      "traps": [
+        "忽略padding或stride。",
+        "把深度学习里的互相关说成必须翻转卷积核。",
+        "把池化当成有大量可学习参数的层。"
+      ]
+    },
+    {
+      "title": "4. 图像表示、通道与 CNN 架构",
+      "points": [
+        "图像可表示为像素矩阵。灰度图通常是单通道，RGB 图像是三通道。PyTorch 常用 NCHW，TensorFlow/图像显示常见 NHWC。",
+        "多通道卷积会在每个输入通道上分别卷积后求和，输出通道数等于卷积核组数。",
+        "归一化和标准化能改善优化过程。训练集统计量必须只从训练集计算，避免验证/测试信息泄漏。",
+        "典型 CNN 块常由 Conv、BatchNorm、激活函数、Pooling 或 Dropout 组成。LeNet 展示早期卷积分类结构，AlexNet 引入更深网络、ReLU、Dropout 等现代实践。",
+        "自适应池化可以把不同尺寸的特征图统一到固定输出尺寸，便于连接分类器。"
+      ],
+      "formulas": [
+        "Conv2d 参数量 = out_channels * (in_channels * k_h * k_w + bias项)"
+      ],
+      "exam_focus": [
+        "NCHW/NHWC 维度含义",
+        "多通道卷积维度变化",
+        "标准化统计量来源",
+        "经典网络结构特点"
+      ],
+      "details": [
+        "图像维度题要先识别框架约定：PyTorch卷积常用NCHW，图像显示和部分框架常用NHWC。维度错位会直接导致通道数错误。",
+        "多通道卷积不是每个通道独立给一个最终结果，而是每个输出通道有一组覆盖所有输入通道的核，跨通道求和得到输出特征图。",
+        "标准化统计量只来自训练集。考试若说用全数据集、验证集或测试集统计量优化训练，就要警惕数据泄漏。",
+        "参数量题要记住卷积核空间参数乘输入通道数再乘输出通道数；由于参数共享，不再乘输出特征图的H和W。"
+      ],
+      "must_memorize": [
+        "PyTorch图像张量常用NCHW。",
+        "RGB是3通道，灰度通常是1通道。",
+        "卷积参数量不乘输出特征图的空间位置数。"
+      ],
+      "formula_explainer": [
+        "Conv2d参数量 = out_channels * (in_channels * k_h * k_w + bias项)。若不使用bias，就去掉偏置项。",
+        "标准化可写作 x'=(x-mu)/sigma，mu和sigma应来自训练集。"
+      ],
+      "answer_template": [
+        "若考NCHW/NHWC，建议按每个字母对应含义逐一写出，避免漏掉通道维。",
+        "若考数据泄漏，标准句式是“训练阶段不应利用验证集或测试集的统计信息”。"
+      ],
+      "question_patterns": [
+        "NCHW/NHWC维度转换。",
+        "计算Conv2d参数量。",
+        "判断标准化统计量是否产生数据泄漏。"
+      ],
+      "traps": [
+        "把H和W误认为通道维。",
+        "卷积参数量错误乘以输出空间位置数。",
+        "用测试集参与预处理统计量拟合。"
+      ]
+    },
+    {
+      "title": "5. 训练技巧：梯度、优化器、正则化和调参",
+      "points": [
+        "梯度消失会让靠近输入层的参数几乎不更新；梯度爆炸会造成损失 NaN 或训练不稳定。链式法则中的连乘是核心原因。",
+        "梯度爆炸常用梯度裁剪解决，包括按元素裁剪 Value Clipping、按范数缩放 Norm Clipping，RNN/LSTM 训练中特别常见。",
+        "Xavier 初始化适合 tanh/sigmoid 等，Kaiming 初始化适合 ReLU 系列。BatchNorm 通过批内均值方差归一化稳定中间分布，训练和推理行为不同。",
+        "Momentum 在梯度方向上引入惯性，Nesterov 先前瞻再修正；Adagrad 对稀疏特征友好但学习率会持续衰减；RMSProp 缓解 Adagrad 衰减过快；Adam 结合动量与自适应学习率。",
+        "过拟合处理包括早停、Dropout、数据增强、权重衰减、合理减小模型容量。学习率调度器可在训练停滞时降低学习率。",
+        "超参数调试建议：先看初始损失，再尝试小样本过拟合，确认训练链路无误后做学习率范围测试、粗细粒度搜索和消融实验。"
+      ],
+      "formulas": [
+        "ReduceLROnPlateau: 指标停滞 patience 轮后 lr = lr * factor"
+      ],
+      "exam_focus": [
+        "梯度消失/爆炸原因与解决",
+        "BatchNorm 训练/推理差异",
+        "优化器对比",
+        "Dropout train/eval 差异",
+        "调参六步"
+      ],
+      "details": [
+        "梯度消失/爆炸都来自链式法则连乘，但方向不同：消失是梯度趋近0，爆炸是梯度过大。题目常把二者症状互换。",
+        "BatchNorm和Dropout都是train/eval差异高频点。BN训练时用batch统计量并维护running统计量，推理时用running统计量；Dropout训练时随机置零并缩放，推理时通常是恒等映射。",
+        "优化器比较题重点不是背公式，而是抓住机制：Momentum看历史方向，Adagrad累积平方梯度导致学习率衰减，RMSProp用滑动平均缓解，Adam结合一阶/二阶矩。",
+        "调参题先问训练链路是否正常，再谈搜索。小样本不能过拟合通常说明代码、数据、损失或学习率有问题。"
+      ],
+      "must_memorize": [
+        "梯度爆炸常见对策：梯度裁剪、减小学习率、合理初始化。",
+        "梯度消失常见对策：ReLU系激活、合理初始化、BatchNorm、残差结构。",
+        "BatchNorm和Dropout都依赖train/eval模式切换。"
+      ],
+      "formula_explainer": [
+        "ReduceLROnPlateau核心逻辑是：若验证指标连续若干轮不改善，则lr乘factor。",
+        "权重衰减本质上是偏向较小权重的正则项，不是简单“让模型更浅”。"
+      ],
+      "answer_template": [
+        "若考优化器比较，按“核心机制 -> 优点 -> 典型缺点”三句写最稳。",
+        "若考梯度问题，先写原因，再写症状，最后写至少一种解决方法。"
+      ],
+      "question_patterns": [
+        "判断梯度问题症状并选择解决方法。",
+        "比较BatchNorm、Dropout在训练/推理阶段的行为。",
+        "给优化器描述选名称。",
+        "设计超参数搜索或消融实验流程。"
+      ],
+      "traps": [
+        "把梯度裁剪说成解决过拟合的主要方法。",
+        "认为Adam完全不需要调学习率。",
+        "消融实验一次改多个变量。"
+      ]
+    },
+    {
+      "title": "6. CNN 完整实践与现代架构",
+      "points": [
+        "ImageFolder 要求数据按类别文件夹组织，文件夹名自动映射为类别索引，常用于自定义图像分类任务。",
+        "完整图像分类流程包括数据下载/读取、变换、DataLoader、模型定义、损失函数与优化器、训练验证、指标评估和模型保存。",
+        "类别不平衡可以从采样和损失两个角度处理：WeightedRandomSampler 改变抽样概率，BCE/CE 的 pos_weight 或 weight 改变损失贡献。",
+        "VGG 使用小卷积核堆叠加深网络；GoogLeNet/Inception 并行使用不同尺度卷积；ResNet 用残差连接缓解深层网络退化和梯度传播困难。",
+        "迁移学习通常加载预训练模型，冻结或微调特征提取层，并替换最后分类头以适配新任务。"
+      ],
+      "formulas": [
+        "二分类 pos_weight 常取 负样本数 / 正样本数"
+      ],
+      "exam_focus": [
+        "ImageFolder 目录结构",
+        "类别不平衡处理",
+        "VGG/GoogLeNet/ResNet 特点",
+        "迁移学习步骤"
+      ],
+      "details": [
+        "完整实践题会把ImageFolder目录结构、Transform、DataLoader、模型、损失函数、优化器、评估指标串起来考。任何一环出错都会影响训练。",
+        "类别不平衡题要区分采样层面和损失层面：WeightedRandomSampler改变样本出现频率，pos_weight/class weight改变错误代价。",
+        "现代CNN结构题常考关键词：VGG是小卷积核堆叠，GoogLeNet/Inception是多尺度分支，ResNet是残差/跳跃连接。",
+        "迁移学习题要写清“加载预训练、冻结或微调、替换分类头、用新任务数据训练”。"
+      ],
+      "must_memorize": [
+        "ImageFolder按子文件夹名确定类别。",
+        "类别不平衡至少有两类方案：采样加权、损失加权。",
+        "VGG=小卷积堆叠，GoogLeNet=多分支，ResNet=残差连接。"
+      ],
+      "formula_explainer": [
+        "二分类常见pos_weight近似为负样本数/正样本数，用于提高正类错误的损失权重。",
+        "迁移学习中替换最后分类头，本质是把预训练特征抽取器接到新任务标签空间上。"
+      ],
+      "answer_template": [
+        "若考完整流程，可按“数据读取 -> 预处理 -> 建模 -> 训练验证 -> 指标评估 -> 模型保存”作答。",
+        "若考现代CNN结构比较，直接给每个模型一个核心关键词最有效。"
+      ],
+      "question_patterns": [
+        "根据文件夹树判断ImageFolder类别。",
+        "给不平衡样本数计算pos_weight。",
+        "匹配VGG/GoogLeNet/ResNet核心设计。",
+        "说明迁移学习步骤。"
+      ],
+      "traps": [
+        "把ImageFolder所有图片放根目录。",
+        "把pos_weight用于多分类类别索引CE的每类权重。",
+        "认为迁移学习类别必须完全一致。"
+      ]
+    },
+    {
+      "title": "7. RNN、GRU、LSTM 与序列建模",
+      "points": [
+        "序列数据具有顺序依赖和可变长度。MLP 缺少显式时间建模，CNN 感受野有限，RNN 通过隐藏状态在时间步之间传递信息。",
+        "RNN 隐藏状态常写作 h_t=tanh(W_xh x_t + W_hh h_{t-1}+b)，目标是用隐藏状态概括当前及历史信息。",
+        "nn.RNNCell 适合手写时间步循环，nn.RNN 直接处理整个序列。batch_first=True 时输入形状为 batch、seq_len、feature。",
+        "双向 RNN 同时利用过去和未来上下文；堆叠 RNN 增强表达能力但也增加参数和训练难度。双向 RNN 中 output 最后一步不等同于 final_hidden 的完整双向表示。",
+        "GRU 用更新门和重置门控制记忆更新，结构比 LSTM 简洁。LSTM 用细胞状态、遗忘门、输入门、输出门缓解长程依赖问题。",
+        "变长序列可用 Padding 对齐，但填充值可能影响计算；Packing 让 RNN 跳过填充部分，PackedSequence 记录有效 token 的组织方式。",
+        "1D 卷积适合局部模式提取和并行计算；RNN 适合顺序依赖建模；TCN 通过因果卷积和扩张卷积扩大感受野。"
+      ],
+      "formulas": [
+        "RNN: h_t=tanh(W_xh x_t + W_hh h_{t-1}+b)"
+      ],
+      "exam_focus": [
+        "RNN 输入输出形状",
+        "双向/堆叠参数变化",
+        "GRU 和 LSTM 门控作用",
+        "Padding vs Packing",
+        "1D CNN vs RNN 选择"
+      ],
+      "images": [
+        "image/gru.png",
+        "image/gru公式.png",
+        "image/lstm.png"
+      ],
+      "details": [
+        "RNN形状题先看batch_first。batch_first=True是(batch, seq_len, feature)，默认常见形式是(seq_len, batch, feature)。hidden还要乘num_layers和num_directions。",
+        "双向RNN常考output最后一步与final_hidden的差别。前向最后状态和后向最后状态对应的时间位置不同，不能简单说output[:, -1]就是完整序列表示。",
+        "GRU/LSTM门控题要按功能记：GRU更新门控制保留/更新，重置门控制候选状态看多少历史；LSTM遗忘门、输入门、输出门围绕细胞状态控制信息流。",
+        "变长序列题要把Padding和Packing分开：Padding解决batch形状统一，Packing让RNN跳过填充部分，减少无效计算和隐藏状态污染。",
+        "1D卷积/TCN与RNN的选型题要从局部模式、并行效率、长程依赖和感受野角度回答。"
+      ],
+      "must_memorize": [
+        "RNN核心是隐藏状态沿时间传递。",
+        "双向RNN常导致输出或隐藏状态维度翻倍。",
+        "Padding管对齐，Packing管跳过无效填充。"
+      ],
+      "formula_explainer": [
+        "h_t=tanh(W_xh x_t + W_hh h_(t-1) + b)：当前状态由当前输入和上一时刻状态共同决定。",
+        "长期依赖问题的本质是时间维度上的梯度连乘，不是“序列长就一定学不好”的口号化描述。"
+      ],
+      "answer_template": [
+        "若考RNN与GRU/LSTM比较，先写普通RNN难点，再写门控机制如何控制信息保留与遗忘。",
+        "若考Padding和Packing，标准结构是“Padding解决形状统一，Packing解决无效计算和状态污染”。"
+      ],
+      "question_patterns": [
+        "给RNN参数判断input/output/hidden形状。",
+        "解释普通RNN长期依赖困难。",
+        "比较GRU和LSTM门控。",
+        "说明Padding、Packing、PackedSequence的关系。"
+      ],
+      "traps": [
+        "忽略双向导致hidden维度翻倍。",
+        "Padding后不传长度信息却认为RNN自动忽略填充值。",
+        "把1D卷积说成只能处理图像。"
+      ]
+    },
+    {
+      "title": "8. Seq2Seq、注意力机制与 Transformer 基础",
+      "points": [
+        "Seq2Seq 解决的是“一个序列映射到另一个序列”的任务，典型例子包括机器翻译、文本摘要、对话生成等。",
+        "经典 Encoder-Decoder 架构先由 Encoder 把源序列编码，再由 Decoder 逐步生成目标序列；Teacher Forcing 是训练时常见技巧。",
+        "传统 Encoder-Decoder 的核心瓶颈是把整段源序列压缩成一个固定长度上下文向量，长序列时信息容易丢失。",
+        "注意力机制让 Decoder 在生成每个目标位置时，动态查看源序列不同位置，而不是始终依赖同一个固定上下文向量。",
+        "Q/K/V 是注意力机制的核心表示：Query 表示“当前要找什么”，Key 表示“各位置能匹配什么”，Value 表示“各位置携带什么信息”。",
+        "Scaled Dot-Product Attention 先计算 Q 和 K 的相似度，再经 Softmax 得到权重，最后对 V 加权求和形成上下文向量。",
+        "除以 sqrt(d_k) 是为了抑制高维点积过大，避免 Softmax 过度尖锐，导致梯度不稳定。",
+        "Source Mask 用于屏蔽源序列中的 Padding 位置；Target Mask 或 Subsequent Mask 用于防止 Decoder 偷看未来词。",
+        "Multi-Head Attention 通过多个头并行关注不同子空间和不同关系，再拼接汇总，提高表达能力。",
+        "Self-Attention 让序列内部位置彼此交互；Cross-Attention 则常见于 Decoder 查询 Encoder 输出。",
+        "Transformer 的关键突破之一是用 Self-Attention 替代循环结构，并结合位置编码补回顺序信息。",
+        "Sinusoidal Positional Encoding 用不同频率的 sin/cos 为每个位置编码；RoPE 则通过旋转方式注入相对位置信息。"
+      ],
+      "formulas": [
+        "Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V",
+        "score(q, k) = q · k",
+        "PE(pos, 2i) = sin(pos / 10000^(2i/d_model))",
+        "PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))"
+      ],
+      "exam_focus": [
+        "Seq2Seq 与序列分类/图像分类的区别",
+        "Encoder-Decoder 瓶颈问题",
+        "Q/K/V 各自含义与来源",
+        "为什么除以 sqrt(d_k)",
+        "Source Mask 与 Target Mask 的作用",
+        "Self-Attention、Cross-Attention、Multi-Head Attention 的区别",
+        "为什么 Transformer 需要位置编码"
+      ],
+      "details": [
+        "Seq2Seq 题目第一步先判断输出是不是“另一个序列”。如果输出是一个类别，那通常更接近序列分类；如果输出是一段词序列，那才是 Seq2Seq 场景。",
+        "Encoder-Decoder 的经典短板是固定长度上下文向量瓶颈。题目若问“为什么注意力机制有效”，标准答案不是“因为参数更多”，而是“因为生成每一步都能动态查看不同源位置”。",
+        "Q/K/V 的答题方式要稳定：Q 表示当前查询需求，K 表示被匹配索引，V 表示最终被聚合的内容。Self-Attention 与 Cross-Attention 的差别，本质是 Q 与 K/V 是否来自同一序列。",
+        "Scaled Dot-Product Attention 的公式通常既考整体形式，也考每一步含义：先匹配分数，再缩放，再 Softmax，再对 V 加权求和。",
+        "除以 sqrt(d_k) 的问题常被包装成“为什么不直接对点积做 Softmax”。关键回答是：高维下点积方差变大，Softmax容易极端化，梯度会变差。",
+        "Mask 类题一定要分源侧和目标侧：Source Mask 屏蔽 PAD，Target Mask 屏蔽未来。两者都在 Softmax 前把不该看的位置压到极小。",
+        "多头注意力不是简单复制一个头，而是让不同头在不同投影子空间中学习不同关系，比如局部依赖、长距离依赖、语义对齐等。",
+        "Transformer 之所以还需要位置编码，是因为注意力本身对序列顺序不敏感。位置编码是在“没有循环”的前提下补回位置信号。",
+        "正弦位置编码常见考法包括：偶数维用 sin、奇数维用 cos；不同维度对应不同频率；位置差异可以通过三角函数模式表达。",
+        "RoPE 更偏现代模型考点，适合作为拓展题或选择题背景项。答题不必推导旋转矩阵，但要知道它是在表示空间中注入相对位置信息。"
+      ],
+      "must_memorize": [
+        "Seq2Seq = 序列到序列，不是序列到单类别。",
+        "注意力机制解决的是固定上下文向量瓶颈，不是简单“让模型更深”。",
+        "Source Mask 挡 PAD，Target Mask 挡未来。",
+        "Self-Attention 是同序列内部交互，Cross-Attention 是目标侧查询源侧。",
+        "Transformer 需要位置编码，因为纯注意力不自带顺序信息。"
+      ],
+      "formula_explainer": [
+        "Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V：QK^T 得到匹配分数，除以 sqrt(d_k) 做缩放，softmax 得到权重，再乘 V 汇总信息。",
+        "PE(pos, 2i)=sin(pos/10000^(2i/d_model)) 与 PE(pos, 2i+1)=cos(pos/10000^(2i/d_model))：偶数维和奇数维使用不同三角函数，频率随维度变化。",
+        "上下文向量不是单个位置的隐藏状态复制，而是所有 Value 在注意力权重下的加权和。"
+      ],
+      "answer_template": [
+        "若考“为什么需要注意力机制”，推荐答法：先写 Encoder-Decoder 固定上下文瓶颈，再写不同目标位置应关注不同源位置，最后写注意力可动态分配权重。",
+        "若考 Q/K/V，可直接答：Q 提出查询，K 提供匹配依据，V 提供被聚合的信息内容。",
+        "若考位置编码，可答：Transformer 去掉循环后缺少天然顺序感，因此需通过位置编码显式注入位置信息。"
+      ],
+      "question_patterns": [
+        "判断 Seq2Seq、序列分类、图像分类三类任务的区别。",
+        "解释 Encoder-Decoder 为何会有瓶颈。",
+        "给 Q/K/V 或注意力公式，让你判断每一项含义。",
+        "解释为什么要除以 sqrt(d_k)。",
+        "比较 Source Mask、Target Mask、Self-Attention、Cross-Attention。",
+        "说明为什么 Transformer 需要位置编码。"
+      ],
+      "traps": [
+        "把 Teacher Forcing 误写成推理阶段也使用真实标签。",
+        "把 Source Mask 和 Target Mask 的作用对调。",
+        "把 Self-Attention 说成只能处理不同序列之间的关系。",
+        "把位置编码说成只是在输入后随便加一个编号，不涉及顺序建模。",
+        "把除以 sqrt(d_k) 解释成缩短序列长度或减少参数量。"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "PyTorch CrossEntropyLoss 文档",
+      "url": "https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html"
+    },
+    {
+      "title": "PyTorch BCEWithLogitsLoss 文档",
+      "url": "https://docs.pytorch.org/docs/stable/generated/torch.nn.BCEWithLogitsLoss.html"
+    },
+    {
+      "title": "PyTorch Dropout 文档",
+      "url": "https://docs.pytorch.org/docs/stable/generated/torch.nn.modules.dropout.Dropout.html"
+    },
+    {
+      "title": "PyTorch RNN/PackedSequence 文档",
+      "url": "https://docs.pytorch.org/docs/stable/nn.html#recurrent-layers"
+    },
+    {
+      "title": "Stanford CS231n Convolutional Networks",
+      "url": "https://cs231n.github.io/convolutional-networks/"
+    }
+  ]
+}
