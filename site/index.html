@@ -3,30 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>深度学习课件复习网站</title>
+  <title>深度学习期末复习资料库</title>
   <link rel="stylesheet" href="assets/course_site.css">
 </head>
 <body>
   <header>
-    <div class="bar">
-      <div>
-        <h1>深度学习课件复习网站</h1>
-        <p class="sub">搜索定位 · 自动组卷 · 综合复习资料</p>
+    <div class="topbar">
+      <div class="brand">
+        <h1>深度学习期末复习资料库</h1>
+        <p>检索 · 教材目录 · 思维导图 · 基础练习 · 标准组卷</p>
       </div>
       <nav aria-label="主导航">
         <button class="active" data-view="search">搜索</button>
-        <button data-view="quiz">复习题</button>
-        <button data-view="review">复习资料</button>
+        <button data-view="outline">教材目录</button>
+        <button data-view="mindmaps">思维导图</button>
+        <button data-view="beginner">基础练习</button>
+        <button data-view="quiz">标准组卷</button>
+        <button data-view="review">综合资料</button>
       </nav>
     </div>
   </header>
   <main>
     <section id="view-search" class="view active">
-      <div id="stats" class="stats"></div>
-      <div class="toolbar">
-        <input id="searchInput" type="search" placeholder="输入词条：如 感受野、BatchNorm、LSTM、CrossEntropyLoss">
-        <button id="makeQuiz" class="btn secondary">按当前词条出题</button>
-        <button id="makeFullQuiz" class="btn">综合出题</button>
+      <div class="hero-grid">
+        <div class="panel">
+          <h2>从一个词条开始复习</h2>
+          <p class="muted">搜索会回到课件原文位置，也能继续跳到基础题、标准题、目录和导图。</p>
+          <div class="toolbar">
+            <input id="searchInput" type="search" placeholder="输入词条：如 感受野、BatchNorm、LSTM、CrossEntropyLoss">
+            <button id="makeBeginnerQuiz" class="btn secondary">基础练习</button>
+            <button id="makeStandardQuiz" class="btn">标准组卷</button>
+          </div>
+        </div>
+        <div id="stats" class="stats"></div>
       </div>
       <div class="layout">
         <div>
@@ -45,14 +54,45 @@
       </div>
     </section>
 
+    <section id="view-outline" class="view">
+      <div class="course-layout">
+        <aside class="panel side-index">
+          <h3>课件目录</h3>
+          <div id="courseIndex"></div>
+        </aside>
+        <div id="outlineBody"></div>
+      </div>
+    </section>
+
+    <section id="view-mindmaps" class="view">
+      <div class="panel" style="margin-bottom:14px">
+        <h2>课件思维导图</h2>
+        <p class="muted">页面展示可点击文字版导图；图片版使用 SVG 下载链接，图太大时会按章节拆分。</p>
+      </div>
+      <div id="mindmapBody" class="mindmap-grid"></div>
+    </section>
+
+    <section id="view-beginner" class="view">
+      <div class="panel">
+        <div class="quiz-head">
+          <div>
+            <h2 id="beginnerTitle">基础练习</h2>
+            <p id="beginnerMeta" class="muted">适合先熟悉课程脉络。</p>
+          </div>
+          <button id="beginnerAll" class="btn">重新生成基础题</button>
+        </div>
+        <div id="beginnerBody"></div>
+      </div>
+    </section>
+
     <section id="view-quiz" class="view">
       <div class="panel">
         <div class="quiz-head">
           <div>
-            <h2 id="quizTitle">综合复习题</h2>
-            <p id="quizMeta" class="meta">点击右侧按钮生成一份题。</p>
+            <h2 id="quizTitle">标准综合随机题</h2>
+            <p id="quizMeta" class="muted">保留原标准题库，适合考前检测。</p>
           </div>
-          <button id="quizAll" class="btn">生成综合题</button>
+          <button id="quizAll" class="btn">生成标准题</button>
         </div>
         <div id="quizBody"></div>
       </div>
@@ -61,7 +101,7 @@
     <section id="view-review" class="view">
       <div class="panel">
         <h2>综合复习资料</h2>
-        <p class="meta">这页按当前课件合并整理。之后新增课件时，重新构建即可更新搜索数据库和本页基础索引。</p>
+        <p class="muted">这一页保留章节化讲义；从零开始复习建议优先看“教材目录”。</p>
         <div id="reviewBody"></div>
       </div>
     </section>

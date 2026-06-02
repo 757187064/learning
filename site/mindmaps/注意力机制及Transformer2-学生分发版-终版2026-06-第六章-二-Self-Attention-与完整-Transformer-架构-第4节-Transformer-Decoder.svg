@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="392" viewBox="0 0 1180 392">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}.node{fill:#fff;stroke:#d8dee8;stroke-width:1.2}.root{fill:#e8f4ff;stroke:#1a73e8}.chapter{fill:#f7f9fc}.term{fill:#fff}</style>
+<rect class="node root" x="28" y="28" rx="12" width="240" height="54"/>
+<text x="46" y="61" font-size="16" font-weight="700" fill="#174ea6">注意力机制及Transformer2-学生分发版-终版2026 / 第六章（二）Se...</text>
+<path d="M268 90 C330 90, 330 90, 382 90" stroke="#b6c2d4" fill="none"/>
+<rect class="node chapter" x="382" y="70" rx="10" width="250" height="42"/>
+<text x="400" y="96" font-size="14" font-weight="700" fill="#263238">第六章（二）Self-Attention 与完整 Transformer 架构 /...</text>
+<path d="M632 90 C680 90, 680 90, 722 90" stroke="#d0d7e2" fill="none"/>
+<rect class="node term" x="722" y="70" rx="10" width="320" height="40"/>
+<text x="740" y="95" font-size="13" font-weight="600" fill="#172b4d">Attention</text>
+<path d="M632 90 C680 90, 680 124, 722 124" stroke="#d0d7e2" fill="none"/>
+<rect class="node term" x="722" y="104" rx="10" width="320" height="40"/>
+<text x="740" y="129" font-size="13" font-weight="600" fill="#172b4d">Query</text>
+<path d="M632 90 C680 90, 680 158, 722 158" stroke="#d0d7e2" fill="none"/>
+<rect class="node term" x="722" y="138" rx="10" width="320" height="40"/>
+<text x="740" y="163" font-size="13" font-weight="600" fill="#172b4d">Key</text>
+<path d="M632 90 C680 90, 680 192, 722 192" stroke="#d0d7e2" fill="none"/>
+<rect class="node term" x="722" y="172" rx="10" width="320" height="40"/>
+<text x="740" y="197" font-size="13" font-weight="600" fill="#172b4d">Value</text>
+<path d="M632 90 C680 90, 680 226, 722 226" stroke="#d0d7e2" fill="none"/>
+<rect class="node term" x="722" y="206" rx="10" width="320" height="40"/>
+<text x="740" y="231" font-size="13" font-weight="600" fill="#172b4d">Self-Attention</text>
+<path d="M632 90 C680 90, 680 260, 722 260" stroke="#d0d7e2" fill="none"/>
+<rect class="node term" x="722" y="240" rx="10" width="320" height="40"/>
+<text x="740" y="265" font-size="13" font-weight="600" fill="#172b4d">Cross-Attention</text>
+<path d="M632 90 C680 90, 680 294, 722 294" stroke="#d0d7e2" fill="none"/>
+<rect class="node term" x="722" y="274" rx="10" width="320" height="40"/>
+<text x="740" y="299" font-size="13" font-weight="600" fill="#172b4d">Transformer</text>
+</svg>

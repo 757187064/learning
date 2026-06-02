@@ -1,93 +1,137 @@
 [
   {
     "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+    "kind": "ipynb",
     "size_bytes": 5084992,
     "cell_count": 93,
     "markdown_cells": 80,
-    "code_cells": 13
+    "code_cells": 13,
+    "sha256": "a4a3d93e254a5854046e7b597c5dde4af6682e53c555585f8a47ffbfc169dca9"
   },
   {
     "file": "卷积神经网络1-课堂练习-终版2026.ipynb",
+    "kind": "ipynb",
     "size_bytes": 13124,
     "cell_count": 23,
     "markdown_cells": 21,
-    "code_cells": 2
+    "code_cells": 2,
+    "sha256": "0fafb15c66dc03662ebde3ed28c426c976e7d4262f40e5dfed79e82068d776c7"
   },
   {
     "file": "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+    "kind": "ipynb",
     "size_bytes": 97281,
     "cell_count": 86,
     "markdown_cells": 78,
-    "code_cells": 8
+    "code_cells": 8,
+    "sha256": "b07e886ef29c6fcd8f97c264e9d809f754d1fbf3404a469d94af608e34683dc3"
   },
   {
     "file": "卷积神经网络2-学生分发版-终版2026.ipynb",
+    "kind": "ipynb",
     "size_bytes": 8175832,
     "cell_count": 84,
     "markdown_cells": 75,
-    "code_cells": 9
+    "code_cells": 9,
+    "sha256": "545fc5ef941443bfd066cd478117bce440379731d048c561eddeb2ed0cf4eab8"
   },
   {
     "file": "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+    "kind": "ipynb",
     "size_bytes": 3134206,
     "cell_count": 77,
     "markdown_cells": 56,
-    "code_cells": 21
+    "code_cells": 21,
+    "sha256": "891d7fc72472e6cf5ac71096cdf9fef95ca0b20351b1dd9deca1e50ad0d6aded"
   },
   {
     "file": "卷积神经网络3-学生分发版-终版2026.ipynb",
+    "kind": "ipynb",
     "size_bytes": 171406,
     "cell_count": 77,
     "markdown_cells": 56,
-    "code_cells": 21
+    "code_cells": 21,
+    "sha256": "9eeba2ff050905757112af142e843143447402aee82ebd34e44f44bd0608be28"
   },
   {
     "file": "多层感知机1_学生分发版.ipynb",
+    "kind": "ipynb",
     "size_bytes": 66696,
     "cell_count": 125,
     "markdown_cells": 75,
-    "code_cells": 50
+    "code_cells": 50,
+    "sha256": "1bdf1a67e869b9845e4ec1d4272b643efaa99bf29c46d78d015ac2e9e685cbfd"
   },
   {
     "file": "多层感知机1_学生分发版_副本.ipynb",
+    "kind": "ipynb",
     "size_bytes": 65119,
     "cell_count": 125,
     "markdown_cells": 74,
-    "code_cells": 51
+    "code_cells": 51,
+    "sha256": "c5fb99df7d9b301587c973dd6af14e17c4b20ad87f589ffb405cb8c94ac8cad1"
   },
   {
     "file": "多层感知机2-学生分发版-终版2026.ipynb",
+    "kind": "ipynb",
     "size_bytes": 1219029,
     "cell_count": 21,
     "markdown_cells": 16,
-    "code_cells": 5
+    "code_cells": 5,
+    "sha256": "a401a70eb247f0e85d580fbd840f4378f2b579e478443819b97b363bff63adf7"
   },
   {
     "file": "多层感知机2-课堂练习-终版2026.ipynb",
+    "kind": "ipynb",
     "size_bytes": 12514,
     "cell_count": 11,
     "markdown_cells": 8,
-    "code_cells": 3
+    "code_cells": 3,
+    "sha256": "26721f26f407ccd342ccc4d3db1324e9d3da6ca90c653b0a980e3262fe3d269f"
   },
   {
     "file": "多层感知机2-课堂练习答案-终版2026.ipynb",
+    "kind": "ipynb",
     "size_bytes": 15213,
     "cell_count": 14,
     "markdown_cells": 11,
-    "code_cells": 3
+    "code_cells": 3,
+    "sha256": "23065e34f43f00d1359c480bc001fdf0084b01bc30aa827c19e731bb1ce8831c"
   },
   {
     "file": "循环神经网络-学生分发版-终版2026.ipynb",
+    "kind": "ipynb",
     "size_bytes": 183092,
     "cell_count": 76,
     "markdown_cells": 63,
-    "code_cells": 13
+    "code_cells": 13,
+    "sha256": "be2333a6bc1d2e543ddbb3b911fc75fcffc5462471e32a5a6b335d0c67426220"
   },
   {
     "file": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+    "kind": "ipynb",
     "size_bytes": 504962,
     "cell_count": 23,
     "markdown_cells": 18,
-    "code_cells": 5
+    "code_cells": 5,
+    "sha256": "036342966d589d83b5427f5f81f07882a9e7e9bd68f8da181353c1ea5f7f372e"
+  },
+  {
+    "file": "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+    "kind": "ipynb",
+    "size_bytes": 227240,
+    "cell_count": 22,
+    "markdown_cells": 12,
+    "code_cells": 10,
+    "sha256": "630de25845a2ef078f6477cd79042fa7acde735471bc9379ed9774565d241207"
+  },
+  {
+    "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+    "kind": "ipynb",
+    "size_bytes": 192191,
+    "cell_count": 22,
+    "markdown_cells": 16,
+    "code_cells": 6,
+    "sha256": "09ba224da677bd6cb40cbc4ac38579af8d82f5f262dfc2dfbdc0828d681edc54"
   }
 ]
