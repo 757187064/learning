@@ -152,16 +152,35 @@ function renderMindmaps() {
   $("mindmapBody").innerHTML = DB.mindmaps.map(course => `
     <article class="panel map-card" data-map-card="${escapeHtml(course.file)}">
       <h3>${escapeHtml(course.title)}</h3>
-      <p class="muted">${escapeHtml(course.file)} · ${course.maps.length} 张导图${course.maps.length > 1 ? "，已按章节拆分" : ""}</p>
-      ${course.maps.map(map => `
+      <p class="muted">${escapeHtml(course.file)} · ${course.maps.length} 张蜘蛛网导图${course.maps.length > 1 ? "，已按章节拆分" : ""}</p>
+      ${course.maps.slice(0, 1).map(map => `
         <div class="chapter">
           <div class="result-title">
             <strong>${escapeHtml(map.title)} <span class="badge">${map.node_count} 节点</span></strong>
-            <a class="btn secondary" href="${escapeHtml(map.svg)}" download>下载图片版</a>
+            <span class="map-actions">
+              <a class="btn secondary" href="${escapeHtml(map.svg)}" target="_blank">打开大图</a>
+              <a class="btn secondary" href="${escapeHtml(map.svg)}" download>下载 SVG</a>
+              <a class="btn secondary" href="${escapeHtml(map.markdown)}" download>下载大纲</a>
+            </span>
           </div>
-          <div class="map-preview">${renderMapTree(map)}</div>
+          <div class="map-preview"><img src="${escapeHtml(map.svg)}" alt="${escapeHtml(map.title)} 思维导图"></div>
+          <div class="map-tree compact-tree">${renderMapTree(map)}</div>
         </div>
       `).join("")}
+      ${course.maps.length > 1 ? `
+        <details class="submaps">
+          <summary>展开章节小图和大纲下载（${course.maps.length - 1} 张）</summary>
+          ${course.maps.slice(1).map(map => `
+            <div class="submap-row">
+              <strong>${escapeHtml(map.title)}</strong>
+              <span class="map-actions">
+                <a href="${escapeHtml(map.svg)}" target="_blank">打开</a>
+                <a href="${escapeHtml(map.svg)}" download>下载 SVG</a>
+                <a href="${escapeHtml(map.markdown)}" download>下载大纲</a>
+              </span>
+            </div>
+          `).join("")}
+        </details>` : ""}
     </article>
   `).join("");
   $("mindmapBody").querySelectorAll(".map-node.term").forEach(node => node.addEventListener("click", () => {

@@ -1407,7 +1407,8 @@
       "CrossEntropyLoss",
       "归一化",
       "WeightedRandomSampler",
-      "类别不平衡"
+      "类别不平衡",
+      "GAT"
     ]
   },
   {
@@ -3515,7 +3516,8 @@
     "summary": "#### PyTorch常用调度器对比 | 调度器 | 策略 | 关键参数 | 适用场景 | |:------:|:----:|:--------:|:--------:| | StepLR | 每隔N个epoch，lr×gamma | step_size, gamma | 周期性调整 | | MultiStepLR | 在指定里程碑调整 | milestones, gamma | 关键节点调整 | | ExponentialLR | 每个epoch指数衰减 | gamma | 平滑衰减 | | ReduceLROnPlateau | 验证停滞时降低 | mode, factor, patience | 自适应调整 | | CosineAnnealingLR | 余弦退火衰减 | T_max, eta_min | 周期性训练 | 使用频率（实际项目经验）： ReduceLROnPlateau > CosineAnnealingLR > StepLR > MultiStepLR > ExponentialLR",
     "terms": [
       "Epoch",
-      "ReduceLROnPlateau"
+      "ReduceLROnPlateau",
+      "节点"
     ]
   },
   {
@@ -3541,7 +3543,6 @@
       "Batch",
       "反向传播",
       "CrossEntropyLoss",
-      "Valid",
       "BatchNorm",
       "Dropout",
       "优化器",
@@ -4108,7 +4109,6 @@
     "terms": [
       "损失函数",
       "Epoch",
-      "Full",
       "数据增强",
       "超参数",
       "消融实验",
@@ -5374,7 +5374,8 @@
     "summary": "#### PyTorch常用调度器对比 | 调度器 | 策略 | 关键参数 | 适用场景 | |:------:|:----:|:--------:|:--------:| | StepLR | 每隔N个epoch，lr×gamma | step_size, gamma | 周期性调整 | | MultiStepLR | 在指定里程碑调整 | milestones, gamma | 关键节点调整 | | ExponentialLR | 每个epoch指数衰减 | gamma | 平滑衰减 | | ReduceLROnPlateau | 验证停滞时降低 | mode, factor, patience | 自适应调整 | | CosineAnnealingLR | 余弦退火衰减 | T_max, eta_min | 周期性训练 | 使用频率（实际项目经验）： ReduceLROnPlateau > CosineAnnealingLR > StepLR > MultiStepLR > ExponentialLR",
     "terms": [
       "Epoch",
-      "ReduceLROnPlateau"
+      "ReduceLROnPlateau",
+      "节点"
     ]
   },
   {
@@ -5400,7 +5401,6 @@
       "Batch",
       "反向传播",
       "CrossEntropyLoss",
-      "Valid",
       "BatchNorm",
       "Dropout",
       "优化器",
@@ -6221,7 +6221,6 @@
     "summary": "# ============================================================================ # Step 2: 数据增强与标准化 # ============================================================================ from torchvision import transforms from torchvision.datasets import ImageFolder from torch.utils.data import DataLoader, random_split import torch IMG_SIZE = 128 # 【方案】计算统计量时直接用底层dataset，避免Subset的transform问题 def calculate_mean_std_v2(dataset, indices, batch_size=64, num_workers=2): \"\"\" 计算指定索引数据的RGB通道均值和标准差 参数: dataset: ImageFolder数据集（有transform属性） indices: 要计算的样本索引列表 \"\"\" temp_transform = transforms.Compose([ transforms.Resize((IMG_SIZE, IMG_SIZE)), transforms.ToTensor() ]) # 保存原始transform original_...",
     "terms": [
       "Batch",
-      "Full",
       "标准化",
       "ImageFolder",
       "数据增强"
@@ -6415,7 +6414,6 @@
       "学习率",
       "Epoch",
       "Batch",
-      "Valid",
       "早停"
     ]
   },
@@ -6606,7 +6604,6 @@
     "summary": "# ============================================================================ # VGG网络实现（简化版VGG-16） # ============================================================================ class VGGBlock(nn.Module): \"\"\" VGG基本块：多个3×3卷积 + MaxPool \"\"\" def init(self, in_channels, out_channels, num_convs): super(VGGBlock, self).init() layers = [] for i in range(num_convs): layers.append(nn.Conv2d(in_channels if i == 0 else out_channels, out_channels, kernel_size=3, padding=1)) layers.append(nn.ReLU(inplace=True)) layers.append(nn.MaxPool2d(kernel_size=2, stride=2)) self.block = nn.Sequential(*layers) def forward(self, x): return self.block(x) class VGG16(nn.Module): \"\"\" 简化版VGG-16（适配128×...",
     "terms": [
       "卷积",
-      "Full",
       "Kaiming",
       "Dropout",
       "VGG",
@@ -7008,7 +7005,8 @@
       "Inception",
       "ResNet",
       "残差连接",
-      "迁移学习"
+      "迁移学习",
+      "嵌入"
     ]
   },
   {
@@ -7492,7 +7490,6 @@
       "Epoch",
       "Batch",
       "CrossEntropyLoss",
-      "Valid",
       "ImageFolder",
       "数据增强",
       "Adam",
@@ -7521,7 +7518,6 @@
       "Epoch",
       "Batch",
       "CrossEntropyLoss",
-      "Valid",
       "ImageFolder",
       "Dropout",
       "Adam",
@@ -7843,7 +7839,6 @@
     "summary": "# ============================================================================ # Step 2: 数据增强与标准化 # ============================================================================ from torchvision import transforms from torchvision.datasets import ImageFolder from torch.utils.data import DataLoader, random_split import torch IMG_SIZE = 128 # 【方案】计算统计量时直接用底层dataset，避免Subset的transform问题 def calculate_mean_std_v2(dataset, indices, batch_size=64, num_workers=2): \"\"\" 计算指定索引数据的RGB通道均值和标准差 参数: dataset: ImageFolder数据集（有transform属性） indices: 要计算的样本索引列表 \"\"\" temp_transform = transforms.Compose([ transforms.Resize((IMG_SIZE, IMG_SIZE)), transforms.ToTensor() ]) # 保存原始transform original_...",
     "terms": [
       "Batch",
-      "Full",
       "标准化",
       "ImageFolder",
       "数据增强"
@@ -8037,7 +8032,6 @@
       "学习率",
       "Epoch",
       "Batch",
-      "Valid",
       "早停"
     ]
   },
@@ -8226,7 +8220,6 @@
     "summary": "# ============================================================================ # VGG网络实现（简化版VGG-16） # ============================================================================ class VGGBlock(nn.Module): \"\"\" VGG基本块：多个3×3卷积 + MaxPool \"\"\" def init(self, in_channels, out_channels, num_convs): super(VGGBlock, self).init() layers = [] for i in range(num_convs): layers.append(nn.Conv2d(in_channels if i == 0 else out_channels, out_channels, kernel_size=3, padding=1)) layers.append(nn.ReLU(inplace=True)) layers.append(nn.MaxPool2d(kernel_size=2, stride=2)) self.block = nn.Sequential(*layers) def forward(self, x): return self.block(x) class VGG16(nn.Module): \"\"\" 简化版VGG-16（适配128×...",
     "terms": [
       "卷积",
-      "Full",
       "Kaiming",
       "Dropout",
       "VGG",
@@ -8628,7 +8621,8 @@
       "Inception",
       "ResNet",
       "残差连接",
-      "迁移学习"
+      "迁移学习",
+      "嵌入"
     ]
   },
   {
@@ -9112,7 +9106,6 @@
       "Epoch",
       "Batch",
       "CrossEntropyLoss",
-      "Valid",
       "ImageFolder",
       "数据增强",
       "Adam",
@@ -9141,7 +9134,6 @@
       "Epoch",
       "Batch",
       "CrossEntropyLoss",
-      "Valid",
       "ImageFolder",
       "Dropout",
       "Adam",
@@ -9200,6 +9192,2629 @@
       "残差连接",
       "迁移学习"
     ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-1",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 1,
+    "type": "slide",
+    "title": "BITA",
+    "heading_path": [
+      "BITA"
+    ],
+    "text": "BITA\n图学习算法概述",
+    "summary": "BITA 图学习算法概述",
+    "terms": [
+      "图学习"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-2",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 2,
+    "type": "slide",
+    "title": "大纲• 图的基本概念",
+    "heading_path": [
+      "大纲• 图的基本概念"
+    ],
+    "text": "大纲• 图的基本概念\n•\n图学习的两种算法\n• 图游走\n• 图卷积\n•\n总结",
+    "summary": "大纲• 图的基本概念 • 图学习的两种算法 • 图游走 • 图卷积 • 总结",
+    "terms": [
+      "卷积",
+      "图学习",
+      "图卷积"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-3",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 3,
+    "type": "slide",
+    "title": "什么是图？",
+    "heading_path": [
+      "什么是图？"
+    ],
+    "text": "什么是图？\n图论的开始\nB\nC\n七桥问题\n图（Graph）就是节点（Vertices/Nodes）以及边（Edge）\nG= （V,E）\n图（Graph）就是一种特殊的数据结构！",
+    "summary": "什么是图？ 图论的开始 B C 七桥问题 图（Graph）就是节点（Vertices/Nodes）以及边（Edge） G= （V,E） 图（Graph）就是一种特殊的数据结构！",
+    "terms": [
+      "节点",
+      "边",
+      "Edge"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-4",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 4,
+    "type": "slide",
+    "title": "遂图数据的基本结构",
+    "heading_path": [
+      "遂图数据的基本结构"
+    ],
+    "text": "遂图数据的基本结构\nV Vertex （or node） attributes\ne.g.， node identity, number of neighbors\nE Edge （or link） attributes and directions\ne.g.， edge identity, edge weight\nU Global （or master node） attributes\ne.g.， number of nodes, longest path",
+    "summary": "遂图数据的基本结构 V Vertex （or node） attributes e.g.， node identity, number of neighbors E Edge （or link） attributes and directions e.g.， edge identity, edge weight U Global （or master node） attributes e.g.， number of nodes, longest path",
+    "terms": [
+      "Vertex",
+      "Edge"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-5",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 5,
+    "type": "slide",
+    "title": "图数据的基本结构",
+    "heading_path": [
+      "图数据的基本结构"
+    ],
+    "text": "图数据的基本结构\nV.Vertex （or node） attributes\ne.g.， node identity, number of neighbors\nE Edge （or link） attributes and directions\ne.g.， edge identity, edge weight\nU Global （or master node） attributes\ne.g.， number of nodes, longest path",
+    "summary": "图数据的基本结构 V.Vertex （or node） attributes e.g.， node identity, number of neighbors E Edge （or link） attributes and directions e.g.， edge identity, edge weight U Global （or master node） attributes e.g.， number of nodes, longest path",
+    "terms": [
+      "Vertex",
+      "Edge"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-6",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 6,
+    "type": "slide",
+    "title": "图数据的基本结构",
+    "heading_path": [
+      "图数据的基本结构"
+    ],
+    "text": "图数据的基本结构\nV Vertex （or node） attributes\ne.g.， node identity, number of neighbors\nE Edge （or link） attributes and directions\ne.g.， edge identity, edge weight\nU Global （or master node） attributes\ne.g.， number of nodes, longest path",
+    "summary": "图数据的基本结构 V Vertex （or node） attributes e.g.， node identity, number of neighbors E Edge （or link） attributes and directions e.g.， edge identity, edge weight U Global （or master node） attributes e.g.， number of nodes, longest path",
+    "terms": [
+      "Vertex",
+      "Edge"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-7",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 7,
+    "type": "slide",
+    "title": "图数据的基本结构",
+    "heading_path": [
+      "图数据的基本结构"
+    ],
+    "text": "图数据的基本结构\nVertex （or node） embedding\nEdge （or link） attributes and embedding\n-\nGlobal （or master node） embedding",
+    "summary": "图数据的基本结构 Vertex （or node） embedding Edge （or link） attributes and embedding - Global （or master node） embedding",
+    "terms": [
+      "Vertex",
+      "Edge"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-8",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 8,
+    "type": "slide",
+    "title": "图的分类",
+    "heading_path": [
+      "图的分类"
+    ],
+    "text": "图的分类\n无向图 vs 有向图\n③\n③\n4.6\n无权图 vs 有权图\n③\n同构图 vs 异构图",
+    "summary": "图的分类 无向图 vs 有向图 ③ ③ 4.6 无权图 vs 有权图 ③ 同构图 vs 异构图",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-9",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 9,
+    "type": "slide",
+    "title": "少图的分类",
+    "heading_path": [
+      "少图的分类"
+    ],
+    "text": "少图的分类\n购买\n朋友关系\n点击\n浏览\n购奕\n用户节点\n商品节点\n同构图\n异构图",
+    "summary": "少图的分类 购买 朋友关系 点击 浏览 购奕 用户节点 商品节点 同构图 异构图",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-10",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 10,
+    "type": "slide",
+    "title": "图的度和邻居",
+    "heading_path": [
+      "图的度和邻居"
+    ],
+    "text": "图的度和邻居\n节点4、\nG= （V,E）\n度（degree）\n邻居（neighbor）\n无向图\nV=｛1,2,3.4｝\nE=｛12,21, 14.41.\ndegree = 3\nneighbors = 1,2,3\n24,42,34,43｝\n有向图\nV=｛1,2,3,4｝\ndegree = 3\nE=｛14,21,42,43｝\nindegree = 1\npredecessor = 1\noutdegree = 2\nsuccessor =2,3",
+    "summary": "图的度和邻居 节点4、 G= （V,E） 度（degree） 邻居（neighbor） 无向图 V=｛1,2,3.4｝ E=｛12,21, 14.41. degree = 3 neighbors = 1,2,3 24,42,34,43｝ 有向图 V=｛1,2,3,4｝ degree = 3 E=｛14,21,42,43｝ indegree = 1 predecessor = 1 outdegree = 2 successor =2,3",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-11",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 11,
+    "type": "slide",
+    "title": "邻接矩阵",
+    "heading_path": [
+      "邻接矩阵"
+    ],
+    "text": "邻接矩阵\n③\n②.\n如果节点i和节点j之间有边：Au= 1\n否则：\nAuy =0\n（°\n。。0\n10\n00\n1\nA=\nA=\n0\n00\n1\n0\n0\n0\n（1\n1 1\n0）\n0\n1 1\n无向图的邻接矩阵是对称矩阵。\nhttps://distill.pub/2021/gnn-intro/",
+    "summary": "邻接矩阵 ③ ②. 如果节点i和节点j之间有边：Au= 1 否则： Auy =0 （° 。。0 10 00 1 A= A= 0 00 1 0 0 0 （1 1 1 0） 0 1 1 无向图的邻接矩阵是对称矩阵。 https://distill.pub/2021/gnn-intro/",
+    "terms": [
+      "节点",
+      "边",
+      "邻接矩阵"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-12",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 12,
+    "type": "slide",
+    "title": "邻接表",
+    "heading_path": [
+      "邻接表"
+    ],
+    "text": "邻接表\nNodes\n［o.1.1.0\n•.1.1.1］\nEdges\n［2,1.1,1.2,1,11\nAdjacency List\n/I1,0］、12,0］、14, 3］、16,2），\n［7, 3］， ［7, 4）. 17, 511\nGlobal\nhttps://distill.pub/2021/gnn-intro/",
+    "summary": "邻接表 Nodes ［o.1.1.0 •.1.1.1］ Edges ［2,1.1,1.2,1,11 Adjacency List /I1,0］、12,0］、14, 3］、16,2）， ［7, 3］， ［7, 4）. 17, 511 Global https://distill.pub/2021/gnn-intro/",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-13",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 13,
+    "type": "slide",
+    "title": "实际的例子",
+    "heading_path": [
+      "实际的例子"
+    ],
+    "text": "实际的例子\n图是一种统一描述复杂事物的语言。\n社交网络\n互联网\n节点：人\n节点：网页\n边：人与人之间的各种联系，如父母关系、\n边：\n网页与网页之间的超链接关系\n朋友关系、同事关系等等。",
+    "summary": "实际的例子 图是一种统一描述复杂事物的语言。 社交网络 互联网 节点：人 节点：网页 边：人与人之间的各种联系，如父母关系、 边： 网页与网页之间的超链接关系 朋友关系、同事关系等等。",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-14",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 14,
+    "type": "slide",
+    "title": "实际的例子",
+    "heading_path": [
+      "实际的例子"
+    ],
+    "text": "实际的例子\n还有什么事物是可以用图来表示的呢？\n图是一种统一描述复杂事物的语言。\nNat\n=0\n0-S=0\nHO，\nNH\ngH PH\nHO.\n2\nOH\nNa+0\nOH\nOH\nOH\nOH\nOH\n推荐系统\n化学分子\n节点：用户和商品\n节点：原子\n边：\n用户、商品之间的购买、点击等关系\n边：\n原子之间的相互作用力，也称为化学键",
+    "summary": "实际的例子 还有什么事物是可以用图来表示的呢？ 图是一种统一描述复杂事物的语言。 Nat =0 0-S=0 HO， NH gH PH HO. 2 OH Na+0 OH OH OH OH OH 推荐系统 化学分子 节点：用户和商品 节点：原子 边： 用户、商品之间的购买、点击等关系 边： 原子之间的相互作用力，也称为化学键",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-15",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 15,
+    "type": "slide",
+    "title": "材料领域的潜在应用",
+    "heading_path": [
+      "材料领域的潜在应用"
+    ],
+    "text": "材料领域的潜在应用\n二维材料的晶粒/晶界表征及预测\nGB to Graph\nGraph Neural Network\nGenetic Algorithm\nGB2.\n（Erog）\nPredictions of 2D\nGrain Boundaries\n（GB）\nACS Appl. Maler. Interfaces 2023, 15, 16, 20520-20530",
+    "summary": "材料领域的潜在应用 二维材料的晶粒/晶界表征及预测 GB to Graph Graph Neural Network Genetic Algorithm GB2. （Erog） Predictions of 2D Grain Boundaries （GB） ACS Appl. Maler. Interfaces 2023, 15, 16, 20520-20530",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-16",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 16,
+    "type": "slide",
+    "title": "材料领域的潜在应用",
+    "heading_path": [
+      "材料领域的潜在应用"
+    ],
+    "text": "材料领域的潜在应用\n材料的3D微结构表征\n2.1. Building a microstructre graph\na\nb\nC\n26\nD。\n€16\n/ezzVg\ne13\nNumber of neighbors\neis/\ne14\nVA\nUs）\n10\n111\nd\nGrain Vi\nP.\nP，\nCenter position Size Orientation Conductivities\nGrain\n001\n101\nGrain Boundary €uj\nx門\nGrain Boundary\nThickness\nConductivities\nComputational Materials Science, 2023, 230:112461.",
+    "summary": "材料领域的潜在应用 材料的3D微结构表征 2.1. Building a microstructre graph a b C 26 D。 €16 /ezzVg e13 Number of neighbors eis/ e14 VA Us） 10 111 d Grain Vi P. P， Center position Size Orientation Conductivities Grain 001 101 Grain Boundary €uj x門 Grain Boundary Thickness Conductivities Computational Materials Science, 2023, 230:112461.",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-17",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 17,
+    "type": "slide",
+    "title": "材料领域的潜在应用",
+    "heading_path": [
+      "材料领域的潜在应用"
+    ],
+    "text": "材料领域的潜在应用\ncommunications\nmaterials\nREVIEW ARTICLE\nMtps//44.an2/10:1038/W427 46-022-00119-4\nGraph neural networks for materials science and\nchemistry\nprediction\nProperty\nScreening\nInverse\ndesign\n（Atomistic）\nsimulations\nprediction understanding\nSynthesis\nScientific\nMaterials\nmetal organic\nProperties of\n9）\nframeworks\n：\n泌\nSurface reaction simulations\nUnderstanding of particle\ninteractions in amorphous\nsolids and liquids\nStability prediction of disordered materials\nDefect classification and design\nPolycrystalline systems",
+    "summary": "材料领域的潜在应用 communications materials REVIEW ARTICLE Mtps//44.an2/10:1038/W427 46-022-00119-4 Graph neural networks for materials science and chemistry prediction Property Screening Inverse design （Atomistic） simulations prediction understanding Synthesis Scientific Materials metal organic Properties of 9） frameworks ： 泌 Surface reaction simulations Understanding of particle interactions in amorphous solids and liquids Stability prediction of disordered materials Defect classification and design Polycrystalline systems",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-18",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 18,
+    "type": "slide",
+    "title": "为什么用图结构",
+    "heading_path": [
+      "为什么用图结构"
+    ],
+    "text": "为什么用图结构\n• 语音、图像、文本具有整齐规则的数据结构\n• 现实中的图是不规则的，难以直接建模\n语音\n语法树\n社交网络\n图像\nA\n文本\n人体骨骼\n化学分子",
+    "summary": "为什么用图结构 • 语音、图像、文本具有整齐规则的数据结构 • 现实中的图是不规则的，难以直接建模 语音 语法树 社交网络 图像 A 文本 人体骨骼 化学分子",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-19",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 19,
+    "type": "slide",
+    "title": "图数据结构的学习优势",
+    "heading_path": [
+      "图数据结构的学习优势"
+    ],
+    "text": "图数据结构的学习优势\n一般深度学习：难以处理不规则数据。\n图学习：可以方便地处理不规则数据（图），充分利用图结构信息。\n地图\n商品广告",
+    "summary": "图数据结构的学习优势 一般深度学习：难以处理不规则数据。 图学习：可以方便地处理不规则数据（图），充分利用图结构信息。 地图 商品广告",
+    "terms": [
+      "图学习"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-20",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 20,
+    "type": "slide",
+    "title": "图能做什么？",
+    "heading_path": [
+      "图能做什么？"
+    ],
+    "text": "图能做什么？\n节点级别任务\n边级别任务\n图级别任务",
+    "summary": "图能做什么？ 节点级别任务 边级别任务 图级别任务",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-21",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 21,
+    "type": "slide",
+    "title": "）节点级别任务——金融诈骗检测",
+    "heading_path": [
+      "）节点级别任务——金融诈骗检测"
+    ],
+    "text": "）节点级别任务——金融诈骗检测\n节点分类任务\n图模型\n预测潜在的金融\n诈骗分子\nA Semi-supervised Graph Attentive Network for Financial Fraud Detection",
+    "summary": "）节点级别任务——金融诈骗检测 节点分类任务 图模型 预测潜在的金融 诈骗分子 A Semi-supervised Graph Attentive Network for Financial Fraud Detection",
+    "terms": [
+      "节点",
+      "节点分类"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-22",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 22,
+    "type": "slide",
+    "title": "节点级别任务—目标检测",
+    "heading_path": [
+      "节点级别任务—目标检测"
+    ],
+    "text": "节点级别任务—目标检测\n目标检测是自动驾驶中非常重要的一门技术。",
+    "summary": "节点级别任务—目标检测 目标检测是自动驾驶中非常重要的一门技术。",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-23",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 23,
+    "type": "slide",
+    "title": "节点级别任务——目标检测",
+    "heading_path": [
+      "节点级别任务——目标检测"
+    ],
+    "text": "节点级别任务——目标检测\n从3D点云中利用图模型进行目标检测\nGraph Construction from a Point Cloud\nc: Bounding Box Merging and Scoring\nwaph representation\nDetected olyect bounding\nboxes from vertices\nMerge bou\nboxes\nPoint-GNN\n点云数据\n建图\n图模型\n目标检测\nPoint-GNN: Graph Neural Network for 3D Object Detection in a Point Cloud",
+    "summary": "节点级别任务——目标检测 从3D点云中利用图模型进行目标检测 Graph Construction from a Point Cloud c: Bounding Box Merging and Scoring waph representation Detected olyect bounding boxes from vertices Merge bou boxes Point-GNN 点云数据 建图 图模型 目标检测 Point-GNN: Graph Neural Network for 3D Object Detection in a Point Cloud",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-24",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 24,
+    "type": "slide",
+    "title": "边级别任务——推荐系统",
+    "heading_path": [
+      "边级别任务——推荐系统"
+    ],
+    "text": "边级别任务——推荐系统\n伊石傳说：清健體懷上種服姆.\n遷记排全島控好時？\n𨧻热平衛多\n• 推荐系统是经典的Link Prediction任务\nA\n用户行为图关系\n輕𤷫罐𡟻两𡩣𠄌\n用户/内容向量空间\n应用\nB\n图文推荐\n视频推荐\nC\n用户理解\n深慣92%的外地人世不知：1月3日記社保要\n年国可の理藻城P口\n新闻推荐",
+    "summary": "边级别任务——推荐系统 伊石傳说：清健體懷上種服姆. 遷记排全島控好時？ 𨧻热平衛多 • 推荐系统是经典的Link Prediction任务 A 用户行为图关系 輕𤷫罐𡟻两𡩣𠄌 用户/内容向量空间 应用 B 图文推荐 视频推荐 C 用户理解 深慣92%的外地人世不知：1月3日記社保要 年国可の理藻城P口 新闻推荐",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-25",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 25,
+    "type": "slide",
+    "title": "图级别任务一",
+    "heading_path": [
+      "图级别任务一"
+    ],
+    "text": "图级别任务一\n一气味识别\ncitrus creamy sweet baked spicy odorless\nvnila clean|\nalcoholic beefy\nchocolate fruity\n气味分类\nNNGioc hina\nprediction\nMolecule （e.g. vanilin）\nReduce the graph to a\nM（o）\nvector （e.g. sum nodes）\n分子结构\n一/\nLearn anew\nrepresentation\n图模型\nof nodes\n•\n建图\nPrepare a\n8\ngraph with node\ninformation O\nhttps://ai.googleblog.com/2019/10/learning-to-smell-using-deep-learning.html",
+    "summary": "图级别任务一 一气味识别 citrus creamy sweet baked spicy odorless vnila clean| alcoholic beefy chocolate fruity 气味分类 NNGioc hina prediction Molecule （e.g. vanilin） Reduce the graph to a M（o） vector （e.g. sum nodes） 分子结构 一/ Learn anew representation 图模型 of nodes • 建图 Prepare a 8 graph with node information O https://ai.googleblog.com/2019/10/learning-to-smell-using-deep-learning.html",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-26",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 26,
+    "type": "slide",
+    "title": "图学习应用",
+    "heading_path": [
+      "图学习应用"
+    ],
+    "text": "图学习应用\n反金驶诈骗\n金融\n用户交互\n推荐\n股票预測\n广告\n研究粒子运动规律\n物理\n交通\n地铁客流量预測\nETA 预測\n气味预測\n图学习应用\n生物化学\n药物发现\n计算机视觉\n自动驾驶-点云3D 象检測\n其他\n自然语言处理\n知识图谱推理\n实体关系抽取",
+    "summary": "图学习应用 反金驶诈骗 金融 用户交互 推荐 股票预測 广告 研究粒子运动规律 物理 交通 地铁客流量预測 ETA 预測 气味预測 图学习应用 生物化学 药物发现 计算机视觉 自动驾驶-点云3D 象检測 其他 自然语言处理 知识图谱推理 实体关系抽取",
+    "terms": [
+      "图学习"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-27",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 27,
+    "type": "slide",
+    "title": "图学习算法分类",
+    "heading_path": [
+      "图学习算法分类"
+    ],
+    "text": "图学习算法分类\nDeepiVal\nNodeZVe\n圓𤂅走类算法.\nUNE\nMetapathZVec-\nMetapathZVwc, Metapath2Vwce, Mul\nCCN\n週春职（Spectrall\nChetCcN\nACCN\n粗服风還\nCCN\nGAT\n图学习算法\n園神烃网络算法\n空間卷料ISpatial\nCaak\nCnaohSAGE\nCated CNN|\nTree LSTM\nGraph LSTM\nTranf\n知识圈谱嵌入算法\nRotatE\n知识图谱也是典型的图。\nComplEx\nDistMul",
+    "summary": "图学习算法分类 DeepiVal NodeZVe 圓𤂅走类算法. UNE MetapathZVec- MetapathZVwc, Metapath2Vwce, Mul CCN 週春职（Spectrall ChetCcN ACCN 粗服风還 CCN GAT 图学习算法 園神烃网络算法 空間卷料ISpatial Caak CnaohSAGE Cated CNN| Tree LSTM Graph LSTM Tranf 知识圈谱嵌入算法 RotatE 知识图谱也是典型的图。 ComplEx DistMul",
+    "terms": [
+      "LSTM",
+      "图学习",
+      "GAT",
+      "嵌入"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-28",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 28,
+    "type": "slide",
+    "title": "图的基本概念",
+    "heading_path": [
+      "图的基本概念"
+    ],
+    "text": "图的基本概念\n「U\n｛\n两个基本元素：点、边\n［四提路\n團是一种統一描述复杂事物约透害\n图学习的基本概念\n图学习是味\n圈学习的优勢\n｛\n司以方便地处理朴\n为什么选擇團学习\n也可以处理規則數\n节点級别任务\n图的应用\n边级别任务\n图学习初印象\n田能干啥\n團扱别任务\n領城：\n生𥹉\n撞荐系鏡、\n自动骘驶\n游違类算法\n图学习如何做的\n圈神陉网络算法\n知识围训嵌入算法\n主滾模蜇分贷骰览\n如何做團学习\nShow me the code\n易用、高效、规模、\n｛\n圈学习库PCL\n应用籓地\n自研模型举例",
+    "summary": "图的基本概念 「U ｛ 两个基本元素：点、边 ［四提路 團是一种統一描述复杂事物约透害 图学习的基本概念 图学习是味 圈学习的优勢 ｛ 司以方便地处理朴 为什么选擇團学习 也可以处理規則數 节点級别任务 图的应用 边级别任务 图学习初印象 田能干啥 團扱别任务 領城： 生𥹉 撞荐系鏡、 自动骘驶 游違类算法 图学习如何做的 圈神陉网络算法 知识围训嵌入算法 主滾模蜇分贷骰览 如何做團学习 Show me the code 易用、高效、规模、 ｛ 圈学习库PCL 应用籓地 自研模型举例",
+    "terms": [
+      "图学习",
+      "节点",
+      "嵌入"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-29",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 29,
+    "type": "slide",
+    "title": "深度学习5.28小测",
+    "heading_path": [
+      "深度学习5.28小测"
+    ],
+    "text": "深度学习5.28小测\n长按團片扫码",
+    "summary": "深度学习5.28小测 长按團片扫码",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-30",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 30,
+    "type": "slide",
+    "title": "图学习课件第一部分，第 30 页",
+    "heading_path": [
+      "图学习课件第一部分，第 30 页"
+    ],
+    "text": "图学习课件第一部分，第 30 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。",
+    "summary": "图学习课件第一部分，第 30 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。",
+    "terms": [
+      "图学习",
+      "节点",
+      "边",
+      "邻接矩阵",
+      "度矩阵",
+      "拉普拉斯矩阵"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-31",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 31,
+    "type": "slide",
+    "title": "Overview",
+    "heading_path": [
+      "Overview"
+    ],
+    "text": "Overview\n图学习的两种算法",
+    "summary": "Overview 图学习的两种算法",
+    "terms": [
+      "图学习"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-32",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 32,
+    "type": "slide",
+    "title": "图游走类算法",
+    "heading_path": [
+      "图游走类算法"
+    ],
+    "text": "图游走类算法\n重要问题：如何做Node embeddings？\nNode embeddings\n下游任务\n命\n辿一睥\n学习到节点与邻居的关系\n如何得到 Node embeddings ？",
+    "summary": "图游走类算法 重要问题：如何做Node embeddings？ Node embeddings 下游任务 命 辿一睥 学习到节点与邻居的关系 如何得到 Node embeddings ？",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-33",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 33,
+    "type": "slide",
+    "title": "图游走类算法",
+    "heading_path": [
+      "图游走类算法"
+    ],
+    "text": "图游走类算法\n节点—…-…词？\n假设序列最大长度为4.\n序列------句子？\n為一址＋壽一公\n我\n今天\n非常 开心\n一延一輪一公\n图表示学习\n得到节点表示，\n爸爸\n非常\n开心\n用于下游任务。\n让一曲\n器-至-暮一迎\n节点与节点间形成序列，可以参考NLP领域中的Word2vec模型算法！",
+    "summary": "图游走类算法 节点—…-…词？ 假设序列最大长度为4. 序列------句子？ 為一址＋壽一公 我 今天 非常 开心 一延一輪一公 图表示学习 得到节点表示， 爸爸 非常 开心 用于下游任务。 让一曲 器-至-暮一迎 节点与节点间形成序列，可以参考NLP领域中的Word2vec模型算法！",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-34",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 34,
+    "type": "slide",
+    "title": "NLP领域：Word2vec",
+    "heading_path": [
+      "NLP领域：Word2vec"
+    ],
+    "text": "NLP领域：Word2vec\n图游走类模型最开始参考的就是 NLP 领域中的 Word2vec 模型。\n苹果是蔷薇科苹果亚科苹果属植物，其树为落叶乔木。\n苹果营养价值很高，富含矿物质和维生素。\n苹果\n苹果是一种低热量的食物，\n每100克产生大约60千卡左右的热量。\n苹果中营养成分可溶性大，容易被人体吸收。\n所有的水果里，我最爱吃苹果了。\n词的语义由其上下文决定。\nA word is characterized by the company it keeps.\nWord2vec: Distributed Representations of Words and Phrases and their Compositionality",
+    "summary": "NLP领域：Word2vec 图游走类模型最开始参考的就是 NLP 领域中的 Word2vec 模型。 苹果是蔷薇科苹果亚科苹果属植物，其树为落叶乔木。 苹果营养价值很高，富含矿物质和维生素。 苹果 苹果是一种低热量的食物， 每100克产生大约60千卡左右的热量。 苹果中营养成分可溶性大，容易被人体吸收。 所有的水果里，我最爱吃苹果了。 词的语义由其上下文决定。 A word is characterized by the company it keeps. Word2vec: Distributed Representations of Words and Phrases and their Compositionality",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-35",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 35,
+    "type": "slide",
+    "title": "看 Word2vec: Skip Gram",
+    "heading_path": [
+      "看 Word2vec: Skip Gram"
+    ],
+    "text": "看 Word2vec: Skip Gram\nSkip Gram：根据中心词预测上下文\nwindow size=3\n. uniformly from the neighbors of the last..\ncontext\ncenter word\ncontext\nSoftmax Cassffier\nOutput Layer\n• Hidden Leer\npul Vector\nUinear Neurces\nz\n•\n•\n--\nW\nz\n词向量矩阵\n輸入层：中心词的one hot 向量\n投影层：单词对应的低維向量\n1\n輸出层：Softmnax 层\nWord2vec: Distributed Representations of Words and Phrases and their Compositionality",
+    "summary": "看 Word2vec: Skip Gram Skip Gram：根据中心词预测上下文 window size=3 . uniformly from the neighbors of the last.. context center word context Softmax Cassffier Output Layer • Hidden Leer pul Vector Uinear Neurces z • • -- W z 词向量矩阵 輸入层：中心词的one hot 向量 投影层：单词对应的低維向量 1 輸出层：Softmnax 层 Word2vec: Distributed Representations of Words and Phrases and their Compositionality",
+    "terms": [
+      "Softmax"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-36",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 36,
+    "type": "slide",
+    "title": "Word2vec: Negative Sampling",
+    "heading_path": [
+      "Word2vec: Negative Sampling"
+    ],
+    "text": "Word2vec: Negative Sampling\n假设，给定中心词 orange，我们要预测其上下文词中的juice。\n计算词表内所有单词的概率->计算量大\nSoftmax\n0.0003\n0.005 0.001\n0.6\nalien\nat\nme\nhappy\njuice\nout\nzero\norange\nNegative Sampling（负采样）\n正样本：（orange, juice）\nY=1\nSoftmax -> Multiple sigmoid\n负样本：（orange, alien）， （orange, happy）. （orange, zero）\nY=0\n只对正样本和选取的负样本进行分类，从而减少计算量\nWord2vec: Distributed Representations of Words and Phrases and their Compositionality",
+    "summary": "Word2vec: Negative Sampling 假设，给定中心词 orange，我们要预测其上下文词中的juice。 计算词表内所有单词的概率->计算量大 Softmax 0.0003 0.005 0.001 0.6 alien at me happy juice out zero orange Negative Sampling（负采样） 正样本：（orange, juice） Y=1 Softmax -> Multiple sigmoid 负样本：（orange, alien）， （orange, happy）. （orange, zero） Y=0 只对正样本和选取的负样本进行分类，从而减少计算量 Word2vec: Distributed Representations of Words and Phrases and their Compositionality",
+    "terms": [
+      "Sigmoid",
+      "Softmax",
+      "GAT"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-37",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 37,
+    "type": "slide",
+    "title": "Word2vec：整体架构",
+    "heading_path": [
+      "Word2vec：整体架构"
+    ],
+    "text": "Word2vec：整体架构\nSentences\nNegative\nSkip Gram\nSampling\nWord\nEmbedding\nWord2vec: Distributed Representations of Words and Phrases and their Compositionality",
+    "summary": "Word2vec：整体架构 Sentences Negative Skip Gram Sampling Word Embedding Word2vec: Distributed Representations of Words and Phrases and their Compositionality",
+    "terms": [
+      "GAT"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-38",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 38,
+    "type": "slide",
+    "title": "Wordzvec>图学习领域",
+    "heading_path": [
+      "Wordzvec>图学习领域"
+    ],
+    "text": "Wordzvec>图学习领域\n例：社交网络",
+    "summary": "Wordzvec>图学习领域 例：社交网络",
+    "terms": [
+      "图学习"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-39",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 39,
+    "type": "slide",
+    "title": "图游走类模型——DeepWalk",
+    "heading_path": [
+      "图游走类模型——DeepWalk"
+    ],
+    "text": "图游走类模型——DeepWalk\n将 NLP 领域的思想运用到图（网络）嵌入领域。\nHow？\nDeepWalk\n节点 -＞单词\n节点序列 ->句子\nSentence1\nSentence2\nWord2Vec\nSentence3",
+    "summary": "图游走类模型——DeepWalk 将 NLP 领域的思想运用到图（网络）嵌入领域。 How？ DeepWalk 节点 -＞单词 节点序列 ->句子 Sentence1 Sentence2 Word2Vec Sentence3",
+    "terms": [
+      "节点",
+      "嵌入"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-40",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 40,
+    "type": "slide",
+    "title": "）图游走类模型-",
+    "heading_path": [
+      "）图游走类模型-"
+    ],
+    "text": "）图游走类模型-\n—DeepWalk\n游走方式：Random Walk\nMax length = 3\n1\ndea\ncea\nIN（w）|\nbce\nP（Ci =2ICi-1=0）=<\nif （v, x）cE\ne\na ba\n0，\notherwise\n下一个选择节点\n当前节点\n在无向图上游走\n本质：可以回头的 DFS\n深度优先遍历（Depth First Search， 简称 DFS）",
+    "summary": "）图游走类模型- —DeepWalk 游走方式：Random Walk Max length = 3 1 dea cea IN（w）| bce P（Ci =2ICi-1=0）=< if （v, x）cE e a ba 0， otherwise 下一个选择节点 当前节点 在无向图上游走 本质：可以回头的 DFS 深度优先遍历（Depth First Search， 简称 DFS）",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-41",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 41,
+    "type": "slide",
+    "title": "》图游走类模型",
+    "heading_path": [
+      "》图游走类模型"
+    ],
+    "text": "》图游走类模型\n—DeepWalk\nGraph-\nRandom\nWalk\nSkip Gram\n+\nNegative\nSampling\nNode\nDownstream\n-\nEmbeddings\nTask\nDeepWalk算法简单且有效！但也存在一定问题！",
+    "summary": "》图游走类模型 —DeepWalk Graph- Random Walk Skip Gram + Negative Sampling Node Downstream - Embeddings Task DeepWalk算法简单且有效！但也存在一定问题！",
+    "terms": [
+      "GAT"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-42",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 42,
+    "type": "slide",
+    "title": "r node2vec： 对 DeepWalk 的改进",
+    "heading_path": [
+      "r node2vec： 对 DeepWalk 的改进"
+    ],
+    "text": "r node2vec： 对 DeepWalk 的改进\na\nMax length = 3\nDeepWalk\nd ea\n• 简单直接：DFS\ncea\n．图是一个复杂结构，\nbce\n需要考虑更多因素\na ba\n在无向图上随机游走\nG\n（Se）\nnode2vec\nBFS\n广度优先遍历\n>DFS\n深度优先遍历\nSy\nSg）\nSg\nnode2vec: Scalable Feature Leamning for Networks",
+    "summary": "r node2vec： 对 DeepWalk 的改进 a Max length = 3 DeepWalk d ea • 简单直接：DFS cea ．图是一个复杂结构， bce 需要考虑更多因素 a ba 在无向图上随机游走 G （Se） node2vec BFS 广度优先遍历 >DFS 深度优先遍历 Sy Sg） Sg node2vec: Scalable Feature Leamning for Networks",
+    "terms": [
+      "随机游走"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-43",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 43,
+    "type": "slide",
+    "title": "s nodezvec: bias random walk",
+    "heading_path": [
+      "s nodezvec: bias random walk"
+    ],
+    "text": "s nodezvec: bias random walk\n归一化后的转移概率分布\nTux\n一般的随机游走公式 P（Ci = xlci-1 =w）=\nZ\ni （U,x）EE\notherwise\n节点v未访问的邻居节点\n当前正在访问的节点人人\n上一个访问的节点一”\nnode2vec: Scalable Feature Leaming for Networks",
+    "summary": "s nodezvec: bias random walk 归一化后的转移概率分布 Tux 一般的随机游走公式 P（Ci = xlci-1 =w）= Z i （U,x）EE otherwise 节点v未访问的邻居节点 当前正在访问的节点人人 上一个访问的节点一” node2vec: Scalable Feature Leaming for Networks",
+    "terms": [
+      "归一化",
+      "节点",
+      "随机游走"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-44",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 44,
+    "type": "slide",
+    "title": "- nodezvec: bias random walk",
+    "heading_path": [
+      "- nodezvec: bias random walk"
+    ],
+    "text": "- nodezvec: bias random walk\nTox = apq（t,X）•Wox\n考虑带权图，边的权值\nX2\n1\n1\napg （t, x）=\n1 ifdtx=1\n4\n1\n1\np\nq\ndex： 当前节点v的一阶邻居节点到节点t的距离\nnode2vec: Scalable Feature Leaming for Networks",
+    "summary": "- nodezvec: bias random walk Tox = apq（t,X）•Wox 考虑带权图，边的权值 X2 1 1 apg （t, x）= 1 ifdtx=1 4 1 1 p q dex： 当前节点v的一阶邻居节点到节点t的距离 node2vec: Scalable Feature Leaming for Networks",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-45",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 45,
+    "type": "slide",
+    "title": "w nodezvec: bias random walk",
+    "heading_path": [
+      "w nodezvec: bias random walk"
+    ],
+    "text": "w nodezvec: bias random walk\n后irak -0\n•p：控制随机游走以多大的概率“回头”\nTux = Cpa（t,x）• Wox Cpg（t,x）=\n1\nifdex=1\n•\n参数q：控制随机游走偏向DFS 还是 BFS\n6ud -2\n•q较大时（q>1），倾向于 BFS；\n• q较小时（q <1），倾向于 DFS；\n• 当p=9=1时，Tox= Wox.\nBack\nBFS\nDFS\n1\nt\n①\nq\nnode2vec: Scalable Feature Leamning for Networks",
+    "summary": "w nodezvec: bias random walk 后irak -0 •p：控制随机游走以多大的概率“回头” Tux = Cpa（t,x）• Wox Cpg（t,x）= 1 ifdex=1 • 参数q：控制随机游走偏向DFS 还是 BFS 6ud -2 •q较大时（q>1），倾向于 BFS； • q较小时（q <1），倾向于 DFS； • 当p=9=1时，Tox= Wox. Back BFS DFS 1 t ① q node2vec: Scalable Feature Leamning for Networks",
+    "terms": [
+      "随机游走"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-46",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 46,
+    "type": "slide",
+    "title": "node2vec：整体框架",
+    "heading_path": [
+      "node2vec：整体框架"
+    ],
+    "text": "node2vec：整体框架\nBiased\nGraph •\nRandom\n＋\nSkip Gram\nNegative\nWalk\nSampling\nNode\nDownstream\nEmbeddings\nTask",
+    "summary": "node2vec：整体框架 Biased Graph • Random ＋ Skip Gram Negative Walk Sampling Node Downstream Embeddings Task",
+    "terms": [
+      "GAT"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-47",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 47,
+    "type": "slide",
+    "title": "图学习的目的",
+    "heading_path": [
+      "图学习的目的"
+    ],
+    "text": "图学习的目的\n节点特征\n图特征\n图网络模型\nGraph\nPooling\n节点任务\n图任务\n关系预测、节点分类\n图匹配、图分类",
+    "summary": "图学习的目的 节点特征 图特征 图网络模型 Graph Pooling 节点任务 图任务 关系预测、节点分类 图匹配、图分类",
+    "terms": [
+      "图学习",
+      "节点",
+      "节点分类",
+      "图分类"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-48",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 48,
+    "type": "slide",
+    "title": "训练方式",
+    "heading_path": [
+      "训练方式"
+    ],
+    "text": "训练方式\n图游走类模型\n下游任务，如分类\n： 具体任务，如分类\n端到端训练",
+    "summary": "训练方式 图游走类模型 下游任务，如分类 ： 具体任务，如分类 端到端训练",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-49",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 49,
+    "type": "slide",
+    "title": "5 图神经网络（GNN）",
+    "heading_path": [
+      "5 图神经网络（GNN）"
+    ],
+    "text": "5 图神经网络（GNN）\nMLP层\nLayer N\nLayer N+1\ngraph in\ngraph out\n广\n• Eaxn\nGraph Independent Layer\nupdate functionf=2：\n节点，边和整体三者没有关联！",
+    "summary": "5 图神经网络（GNN） MLP层 Layer N Layer N+1 graph in graph out 广 • Eaxn Graph Independent Layer update functionf=2： 节点，边和整体三者没有关联！",
+    "terms": [
+      "MLP",
+      "图神经网络",
+      "节点",
+      "边"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-50",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 50,
+    "type": "slide",
+    "title": "图像上的卷积",
+    "heading_path": [
+      "图像上的卷积"
+    ],
+    "text": "图像上的卷积\n图像上的卷积网络\n2D-Convolution\nw1\nKw2\nwW3\nW5\nw8\nw comnecten|Gauseianco\nW enecte\nW6\nw7",
+    "summary": "图像上的卷积 图像上的卷积网络 2D-Convolution w1 Kw2 wW3 W5 w8 w comnecten|Gauseianco W enecte W6 w7",
+    "terms": [
+      "卷积"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-51",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 51,
+    "type": "slide",
+    "title": "规则性数据",
+    "heading_path": [
+      "规则性数据"
+    ],
+    "text": "规则性数据\n-\n不规则数据\n文本\n树\n月、\n图像\n图",
+    "summary": "规则性数据 - 不规则数据 文本 树 月、 图像 图",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-52",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 52,
+    "type": "slide",
+    "title": "5 图卷积网络（GCN）",
+    "heading_path": [
+      "5 图卷积网络（GCN）"
+    ],
+    "text": "5 图卷积网络（GCN）\n⑦又%\n区\n龱。区\n龱\n如何从圈像卷积，类比到圈结构卷积\n怎么用消息传递方式实现图卷积网络\n-⑧\n怎么用多层图网络完成节点分类任务\nSEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）",
+    "summary": "5 图卷积网络（GCN） ⑦又% 区 龱。区 龱 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 -⑧ 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）",
+    "terms": [
+      "卷积",
+      "节点",
+      "图卷积",
+      "GCN",
+      "消息传递",
+      "节点分类"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-53",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 53,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\n叉又叉\n∞××\n如何从图像卷积，类比到图结构卷积",
+    "summary": "图卷积网络（GCN） 叉又叉 ∞×× 如何从图像卷积，类比到图结构卷积",
+    "terms": [
+      "卷积",
+      "图卷积",
+      "GCN"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-54",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 54,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\nmen rlced\n图像上的卷积操作\nd neaby poe\nW6T\nw7\nnhen\nNew pieei value （des\n图像卷积\n将一个像素点周围的像素按照不同的权重叠加起来。",
+    "summary": "图卷积网络（GCN） men rlced 图像上的卷积操作 d neaby poe W6T w7 nhen New pieei value （des 图像卷积 将一个像素点周围的像素按照不同的权重叠加起来。",
+    "terms": [
+      "卷积",
+      "Value",
+      "图卷积",
+      "GCN"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-55",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 55,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\n图像上的卷积操作\n图结构上的卷积\nW0Lv\nw61\nW7\n图像卷积\n将一个像素点周围的像素按照不同的权重叠加起来。\n图结构卷积\n将一个节点周围的邻居按照不同的权重叠加起来。",
+    "summary": "图卷积网络（GCN） 图像上的卷积操作 图结构上的卷积 W0Lv w61 W7 图像卷积 将一个像素点周围的像素按照不同的权重叠加起来。 图结构卷积 将一个节点周围的邻居按照不同的权重叠加起来。",
+    "terms": [
+      "卷积",
+      "节点",
+      "图卷积",
+      "GCN"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-56",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 56,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\nGraph Convolutional Network\n图卷积网络的计算公式\n红框\n是图卷积网络的核心公式\n1\n1\n。\nA\n邻接矩阵\n1\n1\n1\n1\nD- 与度矩阵相关\n0\n1\n0\n0\n0\n1\n1\n0\n1\n1\nH（）每一层的节点表示\n0\n0\n1\n1\n邻接矩阵",
+    "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 1 1 。 A 邻接矩阵 1 1 1 1 D- 与度矩阵相关 0 1 0 0 0 1 1 0 1 1 H（）每一层的节点表示 0 0 1 1 邻接矩阵",
+    "terms": [
+      "卷积",
+      "节点",
+      "邻接矩阵",
+      "度矩阵",
+      "图卷积",
+      "GCN"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-57",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 57,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\nGraph Convolutional Network\n图卷积网络的计算公式\n红框\n是图卷积网络的核心公式\n与第1、2号节点相连\nA\n邻接矩阵\n第0个节点\n的链接\n0\n0\n0\n①\n乙\n0\n0\nD-步与度矩阵相关\n0\n0\n0\n0\n每一层的节点表示\n0\n0\n无向图对称\n邻接矩阵\n自环",
+    "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 与第1、2号节点相连 A 邻接矩阵 第0个节点 的链接 0 0 0 ① 乙 0 0 D-步与度矩阵相关 0 0 0 0 每一层的节点表示 0 0 无向图对称 邻接矩阵 自环",
+    "terms": [
+      "卷积",
+      "节点",
+      "邻接矩阵",
+      "度矩阵",
+      "图卷积",
+      "GCN"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-58",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 58,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\nGraph Convolutional Network\n图卷积网络的计算公式\n求和\nA 是邻接矩阵\n是度矩阵\nD-\n。\n。\n。\n0\n0\n0\n0\n0\n0\n0",
+    "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 求和 A 是邻接矩阵 是度矩阵 D- 。 。 。 0 0 0 0 0 0 0",
+    "terms": [
+      "卷积",
+      "邻接矩阵",
+      "度矩阵",
+      "图卷积",
+      "GCN"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-59",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 59,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\nGraph Convolutional Network\n简化\nH（+1）=o（AH!W）\nAHT（L） 公式的物理含义是什么\nAIT（l）公式的物理含义是什么\nF（l+1）\nA\nF（）\n第0节点表示",
+    "summary": "图卷积网络（GCN） Graph Convolutional Network 简化 H（+1）=o（AH!W） AHT（L） 公式的物理含义是什么 AIT（l）公式的物理含义是什么 F（l+1） A F（） 第0节点表示",
+    "terms": [
+      "卷积",
+      "节点",
+      "图卷积",
+      "GCN"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-60",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 60,
+    "type": "slide",
+    "title": "5 图卷积网络（GCN）",
+    "heading_path": [
+      "5 图卷积网络（GCN）"
+    ],
+    "text": "5 图卷积网络（GCN）\nAH （L 公式的物理含义是什么\nH（L+1）.\nA\n第0节点表示\n。\n0",
+    "summary": "5 图卷积网络（GCN） AH （L 公式的物理含义是什么 H（L+1）. A 第0节点表示 。 0",
+    "terms": [
+      "卷积",
+      "节点",
+      "图卷积",
+      "GCN"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-61",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 61,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\nAFT（l） 公式的物理含义是什么\nA\n消息传递\nMessage Passing\n0号\n1号\n0号\n2号",
+    "summary": "图卷积网络（GCN） AFT（l） 公式的物理含义是什么 A 消息传递 Message Passing 0号 1号 0号 2号",
+    "terms": [
+      "卷积",
+      "图卷积",
+      "GCN",
+      "消息传递"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-62",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 62,
+    "type": "slide",
+    "title": "） 图卷积网络（GCN）-消息传递",
+    "heading_path": [
+      "） 图卷积网络（GCN）-消息传递"
+    ],
+    "text": "） 图卷积网络（GCN）-消息传递\n消息传递\nMessage Passing\n发送Send\n1.边上的源节点，往目标节点发送特征\n0号\n1号\nASRT RALLOT HERE\n0号\n2号",
+    "summary": "） 图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASRT RALLOT HERE 0号 2号",
+    "terms": [
+      "卷积",
+      "节点",
+      "边",
+      "图卷积",
+      "GCN",
+      "消息传递"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-63",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 63,
+    "type": "slide",
+    "title": "5 图卷积网络（GCN）-消息传递",
+    "heading_path": [
+      "5 图卷积网络（GCN）-消息传递"
+    ],
+    "text": "5 图卷积网络（GCN）-消息传递\n消息传递\nMessage Passing\n接收Recv\n2. 目标节点对收到的特征进行聚合\n0号\n1号\n0号\n之\n2号",
+    "summary": "5 图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 之 2号",
+    "terms": [
+      "卷积",
+      "节点",
+      "图卷积",
+      "GCN",
+      "消息传递",
+      "聚合"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-64",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 64,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\nAH （） 将邻居的特征接收、聚合\n是否所有的人对自己的评价都是有用的？\nYou\n如何衡量邻属的重要性度",
+    "summary": "图卷积网络（GCN） AH （） 将邻居的特征接收、聚合 是否所有的人对自己的评价都是有用的？ You 如何衡量邻属的重要性度",
+    "terms": [
+      "卷积",
+      "图卷积",
+      "GCN",
+      "聚合"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-65",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 65,
+    "type": "slide",
+    "title": "图卷积网络（GCN）",
+    "heading_path": [
+      "图卷积网络（GCN）"
+    ],
+    "text": "图卷积网络（GCN）\nGraph Convolutional Network\n给边加权\nAH（L\nD-号AD-号H（0\nd越大，信息量越小，言越小’\n1\n0号\nV3vS\n0号\n1\n1号\nV3v3\n1号\n0号\n0号\n2号\n1\n2号",
+    "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AH（L D-号AD-号H（0 d越大，信息量越小，言越小’ 1 0号 V3vS 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号",
+    "terms": [
+      "卷积",
+      "图卷积",
+      "GCN"
+    ]
+  },
+  {
+    "id": "图学习课件_第一部分_20260602::slide-66",
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 66,
+    "type": "slide",
+    "title": "图学习课件第一部分，第 66 页",
+    "heading_path": [
+      "图学习课件第一部分，第 66 页"
+    ],
+    "text": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。",
+    "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。",
+    "terms": [
+      "图学习",
+      "节点",
+      "边",
+      "邻接矩阵",
+      "度矩阵",
+      "拉普拉斯矩阵"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-1",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 1,
+    "type": "slide",
+    "title": "北京航宫航天大学",
+    "heading_path": [
+      "北京航宫航天大学"
+    ],
+    "text": "北京航宫航天大学\n23374093\nANG UNIVERGITY\n大语言模型\n标记跳辽\n主讲人：李泌轩\n23374083\n2026年05月26日",
+    "summary": "北京航宫航天大学 23374093 ANG UNIVERGITY 大语言模型 标记跳辽 主讲人：李泌轩 23374083 2026年05月26日",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-2",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 2,
+    "type": "slide",
+    "title": "北京航空航天大學",
+    "heading_path": [
+      "北京航空航天大學"
+    ],
+    "text": "北京航空航天大學\nNOUNIVERSITY\n23374093\n大语言模型\n主讲人：李泌轩\n23374093\n2026年05月26日",
+    "summary": "北京航空航天大學 NOUNIVERSITY 23374093 大语言模型 主讲人：李泌轩 23374093 2026年05月26日",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-3",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 3,
+    "type": "slide",
+    "title": "大语言模型的快速进化",
+    "heading_path": [
+      "大语言模型的快速进化"
+    ],
+    "text": "大语言模型的快速进化\nChatGPT-3.5 （2023）：\nGPT-5.4（2026）\nwhat is heavier: kilo of water or kilo of air？\nAnanyo Bhattacharya\nJAnanyo\nA kiogram of water is heavier than a kilogram of air. Water is a dense, liquid substance 0 Q\n23 years old with no advanced mathematics training solves Erdos\nthat has a mass of about 1 kilogram per iter at standard temperature and pressure.\nAt, on the other hand, is a gas that is much less dense than water and has a lower\nproblem with ChatGPT Pro. \"What's beginning to emerge is that the\nmass. A volune of air that weighs 1 kliogram would occupy a much larger space than\nproblem was maybe easier than expected, and it was like there was\nmter of water, which weighs the same amount.\nsome kind of mental block.\"-Terence Tao\n23 岁、未受过高等数学训练的年轻人借助 ChatGPT Pro 解决了埃尔德什难\n用户提问：\n题。“现在逐渐显现的情况是，这个问题可能比预期的要简单，仿佛人们此\n前存在菜种思维障码。”——陶哲轩\n哪个更重：一公斤水还是一公斤空气？\nPRIMITIVE SETS AND VON MANGOLDT CHAINS：\nChatgpt3.5回答：\nERDOS PROBLEM #1196 AND BEYOND\n一公斤水比一公斤空气重。水是一种密度大的液态物质，\nBORIS ALEXEEV. KEVIN BARRETO, YANYANG II, JARED DUKER LICHTMAN, LIAM PRICE.\nJIBRAN IQBAL. SHAH, QUANYU TANG, AND TERENCE TAO\n在标准温度和压力下，其质量大约为每升1公斤。另一方\nABSTRACT, A set of integrrs in pititive if no mmlver in tle vet divkdcs another, We\n面，空气是一种气体，其密度远小于水，质量也更低。同\nintrodnce a tew metlodl fer bouding EadSe sas of prinaitise sets, sceestod from outyet\na looet of apgiicatioas, yet seetas to luave Leen owerlookeed t tle prioc Fiteratuze since Eakce\nGPT-&4 Pro, lesd on Marko cluits witl ww Maagoilt wcighte. Tle aet lnoc leauls to\n样重达1公斤的空气所占的体积，会比同样重1公斤的一升\netninnl 1935 peper.\nsts of large susbcas （/ 1196） and on diviedbality cloins （/ 1217）， The metbod aho peovite\nAs apelicstkes. w pone two 1006 ccnlectunes of Eade-SArkiey-Sactaeskdti. ou pimitive\n水所占的空间大得多。\nthat 2 in an -Endiestnong pinwe. Mareworr, the tetloosd newelve （a nesiwed form of） Ibe\na scnt poof of tle Enkie Priuitive Set Conjceture （9160）， n well a tle reluted chaie\nthe area\nBaka-Martin cuajectune, wlich haax buaug Leee viewod an a unifying aader theeremn fu\n2",
+    "summary": "大语言模型的快速进化 ChatGPT-3.5 （2023）： GPT-5.4（2026） what is heavier: kilo of water or kilo of air？ Ananyo Bhattacharya JAnanyo A kiogram of water is heavier than a kilogram of air. Water is a dense, liquid substance 0 Q 23 years old with no advanced mathematics training solves Erdos that has a mass of about 1 kilogram per iter at standard temperature and pressure. At, on the other hand, is a gas that is much less dense than water and has a lower problem with ChatGPT Pro. \"What's beginning to emerge is that the mass. A volune of air that weighs 1 kliogram would occupy a much larger space than problem was maybe easier than expected, and it was like there was mter of water, which w...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-4",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 4,
+    "type": "slide",
+    "title": "早期自然语言处理（NLP）",
+    "heading_path": [
+      "早期自然语言处理（NLP）"
+    ],
+    "text": "早期自然语言处理（NLP）\n规则定制的语言模型\nSymbolic Al（符号人工智能）\n类别\n关健字\n回应策略\nI want/need\n询问得到的物品的意义\n核心思想：认为语言是结构化的，遵循语法、\n句法等规则，可以通过人工编写大量的规则来\n自我陈述类\nlam sad/unhappy\n表示遗憾\n模拟人类理解和生成语言的过程。\nlam happy/glad\n问治疗是否帮助了你\nEliza （1966）：扫描用户输入文本中的特定关\nremember\n“你常想起这个吗？”\n记忆、梦、\n键词或短语 匹配关键词 - 使用预先编写好\n假设类\ndream\n问梦暗示了什么\n的规则来生成回应。\nif\n\"你希望如此吗？“\nTalk to Eliza by typing your questions and answers in the input box.\neveryone/everybody\n追问“真的所有人吗？”\n23374093|\n> Hello, I on Elisa. T'11 be your therapiat today.\n•i'n tired.\n> It io nice to be chattint with you.\n泛化词\nalways\n要求给具体例子\n> Did rou cone to me becase you are thred？\n•mo\n> Tou are beine a bit necstive and that von't help ue sove torward\nlike/same/alike\n询问哪方面相似\nDees thst queation interest you？\nstg？\n兜底\n未匹配规则\n“我不太确定我完全理\n解你\"\n3\nWeizenbaum J. Communications of the ACM, 1966, 9（1）： 36-45）",
+    "summary": "早期自然语言处理（NLP） 规则定制的语言模型 Symbolic Al（符号人工智能） 类别 关健字 回应策略 I want/need 询问得到的物品的意义 核心思想：认为语言是结构化的，遵循语法、 句法等规则，可以通过人工编写大量的规则来 自我陈述类 lam sad/unhappy 表示遗憾 模拟人类理解和生成语言的过程。 lam happy/glad 问治疗是否帮助了你 Eliza （1966）：扫描用户输入文本中的特定关 remember “你常想起这个吗？” 记忆、梦、 键词或短语 匹配关键词 - 使用预先编写好 假设类 dream 问梦暗示了什么 的规则来生成回应。 if \"你希望如此吗？“ Talk to Eliza by typing your questions and answers in the input box. everyone/everybody 追问“真的所有人吗？” 23374093| > Hello, I on Elisa. T'11 be your therapiat today. •i'n tired. > It io nice to be chattint with you. 泛化词 always 要求给具体例子 > Did rou cone to me becase you are thred？ •mo > Tou are beine a bit necstive and that von't help ue sove torward like/same/alike 询问哪方面相似 Dees th...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-5",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 5,
+    "type": "slide",
+    "title": "早期自然语言处理（NLP）",
+    "heading_path": [
+      "早期自然语言处理（NLP）"
+    ],
+    "text": "早期自然语言处理（NLP）\n规则定制的语言模型\nSymbolic Al（符号人工智能）\nSHRDLU： 积木世界示意图\nSHRDLU （1970）：麻省理工学院开发的可以\n通过自然语言对话，使用机械臂实现对积木的\n移动、查询等功能的模型系统。\n工作流程：将自然语言指令转换为积木世界中\n的操作目标 一 检查物体状态和空间关系一按\n规则规划机械臂动作并生成回应。\n示例交互\n口能够解析指令，识别目标并规划动作序\n用户输入（英文）\n系统响应\n列执行\nPut the red block in the box.\n系統执行移动\n（将红色积木放入盒子）\n口能力被严格限制在一个极度简化的封闭\nWhere is the red block？\nIn the box.\n世界中\n（在盒子里。）\nWinograd T. Cognitive Psychology, 1972, 301）： 1-191.",
+    "summary": "早期自然语言处理（NLP） 规则定制的语言模型 Symbolic Al（符号人工智能） SHRDLU： 积木世界示意图 SHRDLU （1970）：麻省理工学院开发的可以 通过自然语言对话，使用机械臂实现对积木的 移动、查询等功能的模型系统。 工作流程：将自然语言指令转换为积木世界中 的操作目标 一 检查物体状态和空间关系一按 规则规划机械臂动作并生成回应。 示例交互 口能够解析指令，识别目标并规划动作序 用户输入（英文） 系统响应 列执行 Put the red block in the box. 系統执行移动 （将红色积木放入盒子） 口能力被严格限制在一个极度简化的封闭 Where is the red block？ In the box. 世界中 （在盒子里。） Winograd T. Cognitive Psychology, 1972, 301）： 1-191.",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-6",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 6,
+    "type": "slide",
+    "title": "早期自然语言处理（NLP）",
+    "heading_path": [
+      "早期自然语言处理（NLP）"
+    ],
+    "text": "早期自然语言处理（NLP）\n统计表示的语言模型\nStatistical NLP（统计自然语言处理）\nBag-of-Words（词袋模型，BOW）\n符号人工智能的困境：人类语言十分复杂、\n核心思想：忽略文本中的词语顺序和语法，只\n模糊，人工编写规则无法完整匹配\n关心词频，并转换为向量表示。\n文档1：“材料 科学很有趣”\n文档2：“新材料 研究关注新方向”\n口放弃穷举语法规则，转而利用概率论和统\n计学从海量文本中学习语言规律。\n索引编码：\n｛材料”：0，“科学”：1，“很”：2， “有趣”：3，“新”：4，\n口依赖大规模语料库，通过计算词语出现的\n“研究”：5， \"关注”：6， \"方向\"：7｝\n频率和分布特征来处理信息。\n文档1编码：\n口为了让计算机看懂文字，需要将非结构化\n［1, 1,1, 1, 0,0,0,0］ “材料科学\n的文本转化为数学向量\n文档 2编码：\n很有趣”\n材料\n科学\n［1, 0, 0,0,2,1,1,1］\n很\n有趣\n5",
+    "summary": "早期自然语言处理（NLP） 统计表示的语言模型 Statistical NLP（统计自然语言处理） Bag-of-Words（词袋模型，BOW） 符号人工智能的困境：人类语言十分复杂、 核心思想：忽略文本中的词语顺序和语法，只 模糊，人工编写规则无法完整匹配 关心词频，并转换为向量表示。 文档1：“材料 科学很有趣” 文档2：“新材料 研究关注新方向” 口放弃穷举语法规则，转而利用概率论和统 计学从海量文本中学习语言规律。 索引编码： ｛材料”：0，“科学”：1，“很”：2， “有趣”：3，“新”：4， 口依赖大规模语料库，通过计算词语出现的 “研究”：5， \"关注”：6， \"方向\"：7｝ 频率和分布特征来处理信息。 文档1编码： 口为了让计算机看懂文字，需要将非结构化 ［1, 1,1, 1, 0,0,0,0］ “材料科学 的文本转化为数学向量 文档 2编码： 很有趣” 材料 科学 ［1, 0, 0,0,2,1,1,1］ 很 有趣 5",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-7",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 7,
+    "type": "slide",
+    "title": "早期自然语言处理（NLP）",
+    "heading_path": [
+      "早期自然语言处理（NLP）"
+    ],
+    "text": "早期自然语言处理（NLP）\n23374093\n统计表示的语言模型\nN-gram语言模型 （1980）\n文本可以看作词元序列：W=W1,W2，•，Wm\n生成语言时：我今天想吃— 模型判断填入“苹果”还是“桌子”\n本质上，语言模型就是在估计词序列整体出现的概率：\nP（w1,Wz...，Wm）= P（w1）P（wzlw1）..P（wmlw1...，Wm-1）\nN-1阶马尔可夫假设：当前词 w：的出现仅依赖于它前面的 N-1个词，而与更早的历史无关\n23374083\n以trigram为例（3-gram），只看前两个词：\nP（wilw1•，Wi-1）~P（wilwi-zWi-1）\n通过限制历史上下文的长度，N-gram 在数学严谨性与工程可计算性\n之间找到了巧妙的平衡。\n6",
+    "summary": "早期自然语言处理（NLP） 23374093 统计表示的语言模型 N-gram语言模型 （1980） 文本可以看作词元序列：W=W1,W2，•，Wm 生成语言时：我今天想吃— 模型判断填入“苹果”还是“桌子” 本质上，语言模型就是在估计词序列整体出现的概率： P（w1,Wz...，Wm）= P（w1）P（wzlw1）..P（wmlw1...，Wm-1） N-1阶马尔可夫假设：当前词 w：的出现仅依赖于它前面的 N-1个词，而与更早的历史无关 23374083 以trigram为例（3-gram），只看前两个词： P（wilw1•，Wi-1）~P（wilwi-zWi-1） 通过限制历史上下文的长度，N-gram 在数学严谨性与工程可计算性 之间找到了巧妙的平衡。 6",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-8",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 8,
+    "type": "slide",
+    "title": "早期自然语言处理（NLP）",
+    "heading_path": [
+      "早期自然语言处理（NLP）"
+    ],
+    "text": "早期自然语言处理（NLP）\n14093\n统计表示的语言模型\nNNLM语言模型（2003）\n> N-gram模型将每个词视为一个离散的符号，这使得模型无法捕捉词与词之间的语义相似性。\n这意味着：苹果、桌子、香蕉是完全独立正交的词语\nith output - P（w， = i|contex）\n>，NNLM的想法：不再只把词看成离散编号，而是给每个词\n学习一个连续向量表示（word embedding）\nmost|computation here/\n前几个词 一 查表得到词向量 一 拼接成一个连续向量一\n送入神经网络 一 输出下一个词的概率分布\n23374093\nNNLM 通过词向量，可以捕捉词之间的相似性。\nTable\n现在苹果和香蕉的向量就更可能靠近。\nlook-up\ninC\nactoss wOTus\n模型见过：我視吃苹罢，即使没见过 我想吃否蕉也更\nindex tor W-et！\nindex for W）-：\nndex for W-\n7\n容易给出一个合理的概率。\nR. Vincant D. at aL Journal of Machine Leamnina Researh. 2003.3.1137-1155",
+    "summary": "早期自然语言处理（NLP） 14093 统计表示的语言模型 NNLM语言模型（2003） > N-gram模型将每个词视为一个离散的符号，这使得模型无法捕捉词与词之间的语义相似性。 这意味着：苹果、桌子、香蕉是完全独立正交的词语 ith output - P（w， = i|contex） >，NNLM的想法：不再只把词看成离散编号，而是给每个词 学习一个连续向量表示（word embedding） most|computation here/ 前几个词 一 查表得到词向量 一 拼接成一个连续向量一 送入神经网络 一 输出下一个词的概率分布 23374093 NNLM 通过词向量，可以捕捉词之间的相似性。 Table 现在苹果和香蕉的向量就更可能靠近。 look-up inC actoss wOTus 模型见过：我視吃苹罢，即使没见过 我想吃否蕉也更 index tor W-et！ index for W）-： ndex for W- 7 容易给出一个合理的概率。 R. Vincant D. at aL Journal of Machine Leamnina Researh. 2003.3.1137-1155",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-9",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 9,
+    "type": "slide",
+    "title": "从序列建模瓶颈到 Transformer",
+    "heading_path": [
+      "从序列建模瓶颈到 Transformer"
+    ],
+    "text": "从序列建模瓶颈到 Transformer\n3374093\nRNN（循环神经网络）和LSTM（长短期记忆网络）\nRNN\nLSTM\n处理文本、语音这样的序列数据，\n可以理解为更复杂的RNN单元：\n需要模型能够记住前面的信息。\n=\n◎\n）-〇〇\n细胞状态：核心记忆通道\n23374093\n③\nx ③\n• 遗忘门：决定丢弃哪些旧信息\n• 输入门：决定添加哪些新信息\n• 输出门：决定要输出什么样的隐藏状态\nhe=F（Wnn h-1+WxnXe+bn）\n• 顺序计算：训练速度较慢\n• 梯度消失：\n忘记前面内容\n• 信息长距离传递：难以捕捉极长的依赖\n• 梯度爆炸：难以收敛\n关系，信息瓶颈严重\n8",
+    "summary": "从序列建模瓶颈到 Transformer 3374093 RNN（循环神经网络）和LSTM（长短期记忆网络） RNN LSTM 处理文本、语音这样的序列数据， 可以理解为更复杂的RNN单元： 需要模型能够记住前面的信息。 = ◎ ）-〇〇 细胞状态：核心记忆通道 23374093 ③ x ③ • 遗忘门：决定丢弃哪些旧信息 • 输入门：决定添加哪些新信息 • 输出门：决定要输出什么样的隐藏状态 he=F（Wnn h-1+WxnXe+bn） • 顺序计算：训练速度较慢 • 梯度消失： 忘记前面内容 • 信息长距离传递：难以捕捉极长的依赖 • 梯度爆炸：难以收敛 关系，信息瓶颈严重 8",
+    "terms": [
+      "梯度消失",
+      "梯度爆炸",
+      "RNN",
+      "隐藏状态",
+      "LSTM",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-10",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 10,
+    "type": "slide",
+    "title": "从序列建模瓶颈到 Transformer",
+    "heading_path": [
+      "从序列建模瓶颈到 Transformer"
+    ],
+    "text": "从序列建模瓶颈到 Transformer\n序列到序列 （seq2seq）模型（2014）\nENCODER\nReply\nYes，\nwhat's\n-em\n〈END>\nthought vector\nAre\nYOU\nfree\ntomorrow？\n\nIncoming Email\nDECODER\n3374093\n• 编码器（Encoder）：把输入句子读懂，压\n口 RNN/LSTM擅长处理序列\n缩成一个内部表示\n口 翻译、总结文本、简单问答需要：\n• 解码器（Decoder）：根据 Encoder 提供\n变长输入序列 一 变长输出序列\n的表示，逐步生成目标语言",
+    "summary": "从序列建模瓶颈到 Transformer 序列到序列 （seq2seq）模型（2014） ENCODER Reply Yes， what's -em 〈END> thought vector Are YOU free tomorrow？ Incoming Email DECODER 3374093 • 编码器（Encoder）：把输入句子读懂，压 口 RNN/LSTM擅长处理序列 缩成一个内部表示 口 翻译、总结文本、简单问答需要： • 解码器（Decoder）：根据 Encoder 提供 变长输入序列 一 变长输出序列 的表示，逐步生成目标语言",
+    "terms": [
+      "RNN",
+      "LSTM",
+      "Seq2Seq",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-11",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 11,
+    "type": "slide",
+    "title": "从序列建模瓶颈到 Transformer",
+    "heading_path": [
+      "从序列建模瓶颈到 Transformer"
+    ],
+    "text": "从序列建模瓶颈到 Transformer\n3374093\n注意力机制（2014）\n普通 Seq2Seq\nBahdanau Attention\nX4\n½2\n¥3\n固定长度向量c\nEncoder\nDecoder\nEncoder\nDecoder\n当前解码步\n23374093\n整句压縮为一个向量\nAttention\n每一步动态对齐并按需读取源句信息\n长句时容易形成信息瓶颈\n不再只依赖单一固定向量\n10",
+    "summary": "从序列建模瓶颈到 Transformer 3374093 注意力机制（2014） 普通 Seq2Seq Bahdanau Attention X4 ½2 ¥3 固定长度向量c Encoder Decoder Encoder Decoder 当前解码步 23374093 整句压縮为一个向量 Attention 每一步动态对齐并按需读取源句信息 长句时容易形成信息瓶颈 不再只依赖单一固定向量 10",
+    "terms": [
+      "Seq2Seq",
+      "注意力机制",
+      "Attention",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-12",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 12,
+    "type": "slide",
+    "title": "从序列建模瓶颈到 Transformer",
+    "heading_path": [
+      "从序列建模瓶颈到 Transformer"
+    ],
+    "text": "从序列建模瓶颈到 Transformer\nAttention Is All You Need！\nRNN-Attention模型的问题：\n• 顺序计算：必须处理完前一个时间步才能处理\n后一个，训练速度较慢\n• 信息长距离依赖：Attention 可让 Decoder\n回看源句信息，但序列内部的信息仍主要依赖\nRNN 逐步传递，长距离关系建模效率较低。\nOuputs\n自注意力机制：\nteed rkgte\nTransformer架构：\n3374093\n• Query （Q）：用于发起查询，寻找相关性。\n• Encoder：多头自注意力层+前馈神经网络+残差连\n• Key （IO：用于响应查询，表明自身特征以供匹配。\n接与层归一化\n• Value （V）：用于提供信息，一旦匹配成功，其信息\n• Decoder：带掩码的多头自注意力层＋交叉注意力\n就会被更多地采纳。\n层+前馈网络＋残差连接与层归一化\n11",
+    "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11",
+    "terms": [
+      "归一化",
+      "残差连接",
+      "RNN",
+      "注意力机制",
+      "Attention",
+      "Query",
+      "Key",
+      "Value",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-13",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 13,
+    "type": "slide",
+    "title": "从序列建模瓶颈到 Transformer",
+    "heading_path": [
+      "从序列建模瓶颈到 Transformer"
+    ],
+    "text": "从序列建模瓶颈到 Transformer\nAttention Is All You Need！\nTransformer模型很强大，但是最初设计是为了机器翻译设计的：\nencoder 读入源语言句子 一 decoder 自回归生成目标语言句子\n但是有时语言模型不一定是seq2seq任务，需要更纯粹的理解模型或者生成模型！\n自然语言推断（NLI）任务\n文本续写任务\n前提：一只狗在草地上奔跑。\n假设：有动物在草地上。\n前文：今天天气很好，我决定去公园散\n3374093\n推断关系：蕴含\n步。刚走到湖边，\n前提：发言人说政策明年可能会改变。\n续写：看见几只鸭子正在水面上慢慢游\n过。\n假设：政策已经改变了。\n推断关系：矛盾\n12",
+    "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ Transformer模型很强大，但是最初设计是为了机器翻译设计的： encoder 读入源语言句子 一 decoder 自回归生成目标语言句子 但是有时语言模型不一定是seq2seq任务，需要更纯粹的理解模型或者生成模型！ 自然语言推断（NLI）任务 文本续写任务 前提：一只狗在草地上奔跑。 假设：有动物在草地上。 前文：今天天气很好，我决定去公园散 3374093 推断关系：蕴含 步。刚走到湖边， 前提：发言人说政策明年可能会改变。 续写：看见几只鸭子正在水面上慢慢游 过。 假设：政策已经改变了。 推断关系：矛盾 12",
+    "terms": [
+      "Seq2Seq",
+      "Attention",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-14",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 14,
+    "type": "slide",
+    "title": "大模型时代的序幕：BERT&GPT",
+    "heading_path": [
+      "大模型时代的序幕：BERT&GPT"
+    ],
+    "text": "大模型时代的序幕：BERT&GPT\n14093|\nBERT—Encoder only\nBERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.\n预训练任务一：完形填空（Masked Language Model, MLM）\n例句：The quick brown fox jumps over the lazy dog.（15% token被替换）\n1:80%概率替换为（MASKJ：\n［CLS］ The quick brown fox jumps over the ［MASK］ dog. ［SEP］\n2. 10% 概率替换为随机词：\n3374093|\n［CLS］ The quick brown fox jumps over the apple dog. ［SEP］\n3. 10% 概率保持不变：\n［CLS］ The quick brown fox jumps over the lazy dog. ［SEP］\n13\nDevlin J, et al. Proceedings of NAACL-HLT, 2019: 4171-4186）",
+    "summary": "大模型时代的序幕：BERT&GPT 14093| BERT—Encoder only BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 预训练任务一：完形填空（Masked Language Model, MLM） 例句：The quick brown fox jumps over the lazy dog.（15% token被替换） 1:80%概率替换为（MASKJ： ［CLS］ The quick brown fox jumps over the ［MASK］ dog. ［SEP］ 2. 10% 概率替换为随机词： 3374093| ［CLS］ The quick brown fox jumps over the apple dog. ［SEP］ 3. 10% 概率保持不变： ［CLS］ The quick brown fox jumps over the lazy dog. ［SEP］ 13 Devlin J, et al. Proceedings of NAACL-HLT, 2019: 4171-4186）",
+    "terms": [
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-15",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 15,
+    "type": "slide",
+    "title": "大模型时代的序幕：BERT&GPT",
+    "heading_path": [
+      "大模型时代的序幕：BERT&GPT"
+    ],
+    "text": "大模型时代的序幕：BERT&GPT\nBERT—Encoder only\nBERT: Pre-training of Deep Bidirectional/Transformers for Language Understanding.\nNSP\n预训练任务二：语句预测 （Next Sentence Prediction, NSP）\n？\n玉例 （IsNext）：\n［CLS］ the man went to ［MASK］ store ［SEP］ he bought a gallon\n［MASK］ milk ［SEP］\nIsNext\n负例（NotNext）：\n3374093|\n7 ARE\n［CLS］ the man went to ［MASK］ store ［SEP］ penguin ［MASK］ are\nFLIGHT\nBIRDS\nLESS\nflightless birds［SEP］\nNotNext\nDevlin J, et al. Proceedings of NAACL-HLT, 2019:4171-4186）",
+    "summary": "大模型时代的序幕：BERT&GPT BERT—Encoder only BERT: Pre-training of Deep Bidirectional/Transformers for Language Understanding. NSP 预训练任务二：语句预测 （Next Sentence Prediction, NSP） ？ 玉例 （IsNext）： ［CLS］ the man went to ［MASK］ store ［SEP］ he bought a gallon ［MASK］ milk ［SEP］ IsNext 负例（NotNext）： 3374093| 7 ARE ［CLS］ the man went to ［MASK］ store ［SEP］ penguin ［MASK］ are FLIGHT BIRDS LESS flightless birds［SEP］ NotNext Devlin J, et al. Proceedings of NAACL-HLT, 2019:4171-4186）",
+    "terms": [
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-16",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 16,
+    "type": "slide",
+    "title": "大模型时代的序幕：BERT&GPT",
+    "heading_path": [
+      "大模型时代的序幕：BERT&GPT"
+    ],
+    "text": "大模型时代的序幕：BERT&GPT\n3374093\nBERT-\n-Encoder only\nBERT: Pre-training; of（Deep Bidirectional Transformers for Language Understanding.\nNSP\nMask LM|\nMask LM|\nMNLI NER\nSQuAD\nStartEnd Span\n口 多文体自然语言推断（Multi-\nm日-\nGenre Natural Language\nInference, MNLI）\nBERT\nBERT\n命名实体识别 （Named Entity\nRecognition, NER）\n口\n斯坦福问答数据集（Stanford\n23374093\nQuestion Answering\nMasked Sentence A\nMasked Sentence B\nQuestion\nParagraph\nDataset, SQuAD）\nUnlabeled Sentence A and B Pair\nQuestion Answer Pair\nPre-training\nFine-Tuning\n预训练-微调范式\n15\nDevlin J, et al. Proceedings of NAACL-HLT, 2019: 4171-4186）",
+    "summary": "大模型时代的序幕：BERT&GPT 3374093 BERT- -Encoder only BERT: Pre-training; of（Deep Bidirectional Transformers for Language Understanding. NSP Mask LM| Mask LM| MNLI NER SQuAD StartEnd Span 口 多文体自然语言推断（Multi- m日- Genre Natural Language Inference, MNLI） BERT BERT 命名实体识别 （Named Entity Recognition, NER） 口 斯坦福问答数据集（Stanford 23374093 Question Answering Masked Sentence A Masked Sentence B Question Paragraph Dataset, SQuAD） Unlabeled Sentence A and B Pair Question Answer Pair Pre-training Fine-Tuning 预训练-微调范式 15 Devlin J, et al. Proceedings of NAACL-HLT, 2019: 4171-4186）",
+    "terms": [
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-17",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 17,
+    "type": "slide",
+    "title": "大模型时代的序幕：BERT&GPT",
+    "heading_path": [
+      "大模型时代的序幕：BERT&GPT"
+    ],
+    "text": "大模型时代的序幕：BERT&GPT\nGPT-Decoder only\nImproving Language Understanding by Generative Pre-Training\nGPT-1架构\nGPT-1：预训练好的12层的仅解码器的Transformer模型。\nPrediction Classihier\nText\nTaSk\n• The weather is\n• The weather is very\n12x一\n• The weather is very nice\n23374093\n• The weather is very nice today.\n单向流动，逐步生成\nText & Position Embed\n16",
+    "summary": "大模型时代的序幕：BERT&GPT GPT-Decoder only Improving Language Understanding by Generative Pre-Training GPT-1架构 GPT-1：预训练好的12层的仅解码器的Transformer模型。 Prediction Classihier Text TaSk • The weather is • The weather is very 12x一 • The weather is very nice 23374093 • The weather is very nice today. 单向流动，逐步生成 Text & Position Embed 16",
+    "terms": [
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-18",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 18,
+    "type": "slide",
+    "title": "大模型时代的序幕：BERT&GPT",
+    "heading_path": [
+      "大模型时代的序幕：BERT&GPT"
+    ],
+    "text": "大模型时代的序幕：BERT&GPT\n3374093\nBERT&GPT\nInput\nsequence\nRandomly\nmask words\n［CLS］\nIMASK］\nTranstommer decoder\nTransformer decoder\nQ\nBERTL\nTransformer encoder\nTransformer\ndecoder\nGPT-1\nPredict the\nmasked words\nam\nMasked self-attention\n12\n3374093\nFeediorward neural network\nBERT\nNext generated\nword\nMamas\nGPT\n17",
+    "summary": "大模型时代的序幕：BERT&GPT 3374093 BERT&GPT Input sequence Randomly mask words ［CLS］ IMASK］ Transtommer decoder Transformer decoder Q BERTL Transformer encoder Transformer decoder GPT-1 Predict the masked words am Masked self-attention 12 3374093 Feediorward neural network BERT Next generated word Mamas GPT 17",
+    "terms": [
+      "Attention",
+      "Self-Attention",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-19",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 19,
+    "type": "slide",
+    "title": "缩放定律与涌现能力",
+    "heading_path": [
+      "缩放定律与涌现能力"
+    ],
+    "text": "缩放定律与涌现能力\n23374093\n大语言模型为什么要“大”？\n-AI界的“力大砖飞”\n缩放定律（Scaling Laws）：\nChinchilla 缩放定律\n> N：模型大小（N- Number of Parameters）\n经验法则：C= 6 ND\n> D：数据集大小 （D - Dataset Size）\n> C：计算量 （C-Compute）\nToo big\nmasially ine cpardnd capacty\n模型的性能 （LOSS）与上述三个值成幂律改进：\ntode Parins\n23374093|\nCompute\nDataset Sire\n口 模型不能太小，以至于没有足够的容量从太多的 tokens\n口 模型不能太小，以至于没有足够的容量从太多的 tokens\nLOSS & C-a\nLOSS x D-B\nLOSS ×N-Y\n中学习；\n口 模型不能太大，以至于几乎看不到足够的 token 来利用\n换言之，增大训练集，提高模型参数量，性能就会变好\n增加的容量。\n范围：22M~23B tokens; 768M~1.5B参数\n范围：5B~500B tokens; 70M~16B参数\n18\nnann J, ef al. Advances in Neural Infomm/\nion Proce\nsina Systems",
+    "summary": "缩放定律与涌现能力 23374093 大语言模型为什么要“大”？ -AI界的“力大砖飞” 缩放定律（Scaling Laws）： Chinchilla 缩放定律 > N：模型大小（N- Number of Parameters） 经验法则：C= 6 ND > D：数据集大小 （D - Dataset Size） > C：计算量 （C-Compute） Too big masially ine cpardnd capacty 模型的性能 （LOSS）与上述三个值成幂律改进： tode Parins 23374093| Compute Dataset Sire 口 模型不能太小，以至于没有足够的容量从太多的 tokens 口 模型不能太小，以至于没有足够的容量从太多的 tokens LOSS & C-a LOSS x D-B LOSS ×N-Y 中学习； 口 模型不能太大，以至于几乎看不到足够的 token 来利用 换言之，增大训练集，提高模型参数量，性能就会变好 增加的容量。 范围：22M~23B tokens; 768M~1.5B参数 范围：5B~500B tokens; 70M~16B参数 18 nann J, ef al. Advances in Neural Infomm/ ion Proce sina Systems",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-20",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 20,
+    "type": "slide",
+    "title": "14093",
+    "heading_path": [
+      "14093"
+    ],
+    "text": "14093\n缩放定律与涌现能力\n大语言模型为什么要“大”？\n-童变引起质变？\nQ: What movie does this emoji describe？\n涌现能力（Emergent Abilities）是什么？\n问：这些表情符号描述的是哪部电影？\n2m: i'm a fan of the same name, but i'm not sure if it's a good idea\nAn ability is emergent if it is not present in\n2m：我是同名作品的粉丝，但我不确定这是不是个好主意\nsmaller models but is present in larger\n16m: the movie is a movie about a man who is a man who is a man...\nmodels.\n16m： 这部电影是关于一个男人的电影，他是一个男人，他是一个男人…\n53m: the emoji movle00@\n涌现能力是指在较小模型中不存在，但在较大\n53m：表情符号电影©90\n模型中存在的能力。\n125m: it's a movie about a girl who is a little gir\n125m：这是关于一个女孩的电影，她是一个小女孩\n244m: the emoji movie\n244m：表情符号电影\nemollmovie\n422m: the emoji movie\n30\nBIG G W/o choices 0 shot\n422m：表情符号电影\nBG G wlo choices 1.shof\n1b: the emoji movie\n25\nBIG-G wlo choices 3-shot|\nBiG-G wlo choices 2-shot\n1b：表情符号电影\n3374093\n2b:the emoji movie\nExact string metch\n20\n15\n2b：表情符号电影\n10\n4b: the emoji for a baby with a fish in its mouth\n4b：那个嘴里含着鱼的婴儿表情符号\n8b: the emoji movie\n10\nEffective parameter count\n10\n10\n1020|\n1011\n8b：表情符号电影\n（a）\n27b: the emoji is a fish\nSrivastava A, et al. Transactions on Machine\n27b：这个表情符号是鱼\nLearning Research, 2023）\n128b:finding nemo\n19\n128b：有底白动品",
+    "summary": "14093 缩放定律与涌现能力 大语言模型为什么要“大”？ -童变引起质变？ Q: What movie does this emoji describe？ 涌现能力（Emergent Abilities）是什么？ 问：这些表情符号描述的是哪部电影？ 2m: i'm a fan of the same name, but i'm not sure if it's a good idea An ability is emergent if it is not present in 2m：我是同名作品的粉丝，但我不确定这是不是个好主意 smaller models but is present in larger 16m: the movie is a movie about a man who is a man who is a man... models. 16m： 这部电影是关于一个男人的电影，他是一个男人，他是一个男人… 53m: the emoji movle00@ 涌现能力是指在较小模型中不存在，但在较大 53m：表情符号电影©90 模型中存在的能力。 125m: it's a movie about a girl who is a little gir 125m：这是关于一个女孩的电影，她是一个小女孩 244m: the emoji movie 244m：表情符号电影 emollmovie 422m: the emoji movie 30 BIG G W/o choices 0 shot 422m：表情符号电影 BG G wlo...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-21",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 21,
+    "type": "slide",
+    "title": "GPT-2",
+    "heading_path": [
+      "GPT-2"
+    ],
+    "text": "GPT-2\nGPT-2沿用了与GPT-1相同的decoder only架构，是GPT-1在模型规模和训练数据\n量上的直接扩展（13倍）。\n零样本任务迁移（zero-shot task transfer）：一个被训练用于预测在一个非常巨大\n且多样化的文本语料库中下一个词的语言模型，将会隐式地学会执行在该文本中以自\n然语言形式展示出来的各种任务。\nReading Comprehension\nTranslation\nSummarization\n90 Human\nOuestion Answering/\n25\nUnsupervised Statistical MT|\n32Lead-3\n10\n80|\n430\n20\nL2\n28\nPoNet\n81 10pen Domain QA Systems1 f\n70\nDrOA+PGNet\n23374093|\nF60\nEU15\nDenoising + Backtranslate\n20\nDrQA\n24 5eq2seq + Attn\n50\n4\nPGNet\n10 Embed Nearest Neighbor\n40\nDenotsing\n822\n20\nRandom-3\n2\n30\n18\nSeq2seq\n-most freq Q-type answer\n117M|\n345M\n762M\n1542MSJM\n# of parameters in LM|\n# of parameters in LM|\n345M\n762M\n1542W19JM\n• of parameters in LM|\n345M\n762M|\n1542MSJM\n• of parameters in LM\n345M\n762M\n1542M\n20\nRadford A, et al. OpenAl, 2019, 1（8）：9.",
+    "summary": "GPT-2 GPT-2沿用了与GPT-1相同的decoder only架构，是GPT-1在模型规模和训练数据 量上的直接扩展（13倍）。 零样本任务迁移（zero-shot task transfer）：一个被训练用于预测在一个非常巨大 且多样化的文本语料库中下一个词的语言模型，将会隐式地学会执行在该文本中以自 然语言形式展示出来的各种任务。 Reading Comprehension Translation Summarization 90 Human Ouestion Answering/ 25 Unsupervised Statistical MT| 32Lead-3 10 80| 430 20 L2 28 PoNet 81 10pen Domain QA Systems1 f 70 DrOA+PGNet 23374093| F60 EU15 Denoising + Backtranslate 20 DrQA 24 5eq2seq + Attn 50 4 PGNet 10 Embed Nearest Neighbor 40 Denotsing 822 20 Random-3 2 30 18 Seq2seq -most freq Q-type answer 117M| 345M 762M 1542MSJM # of parameters in LM| # of parameters in LM| 345M 762M 1542W19JM • of parameters in LM| 345M 762M| 1542MSJM • of pa...",
+    "terms": [
+      "Seq2Seq"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-22",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 22,
+    "type": "slide",
+    "title": "GPT-3",
+    "heading_path": [
+      "GPT-3"
+    ],
+    "text": "GPT-3\nGPT-3在模型规模和训练数据量上较GPT-2进一步扩展（100倍）。\n上下文学习 （In-Context Learning，\nZero-shot\nOne-shot\nFew-shot\nICL）能力：大语言模型在推理阶段仅\n仅通过在输入提示词（prompt）中提\n175B Params\n60\nNatural Language\nPrompt\n供任务描述和/或少量示例，就能理解\n50\n并执行新任务的能力，而完全不需要更\n新模型的权重。\n40\n30\nNo Prompt\n13B Params\nTranslate English to Chinese：\n20\n23374093\n• apple =>苹果\n10\n•book =>书\n1.3B Params\n10°\n10\n• thank you=> 谢谢\nNumber of Examples in Context （K）\n21\ndesk =>？\nBrown T B, et al. Advances in Neural Information Processing",
+    "summary": "GPT-3 GPT-3在模型规模和训练数据量上较GPT-2进一步扩展（100倍）。 上下文学习 （In-Context Learning， Zero-shot One-shot Few-shot ICL）能力：大语言模型在推理阶段仅 仅通过在输入提示词（prompt）中提 175B Params 60 Natural Language Prompt 供任务描述和/或少量示例，就能理解 50 并执行新任务的能力，而完全不需要更 新模型的权重。 40 30 No Prompt 13B Params Translate English to Chinese： 20 23374093 • apple =>苹果 10 •book =>书 1.3B Params 10° 10 • thank you=> 谢谢 Number of Examples in Context （K） 21 desk =>？ Brown T B, et al. Advances in Neural Information Processing",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-23",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 23,
+    "type": "slide",
+    "title": "如何让LLM生成的内容符合人类习惯？",
+    "heading_path": [
+      "如何让LLM生成的内容符合人类习惯？"
+    ],
+    "text": "如何让LLM生成的内容符合人类习惯？\n23374093\nGPT-3展现了惊人的上下文学习能力，但其训练目标仍是预测下一个词，经常输出无益或有害的\n内容。\nPrompt: Explain the moon landing to a 6 year old in a few\nEXPLAIN THE MOON\nLANDING TO A\nsentences.\n6 YEAR OLD.\nNEXT WORD\nGPT-3：\nPREDICTOR\nExplain the theory of gravity to a 6 year old.\nExplain the theory of relativity to a 6 year old in a few\nExplain theory\nsentences.\nof gravity.\n23374093\nExplain theory\nof relativity..\nExplain the big bang theory to a 6 year old.\nExplain\nquantum mecho.\nExplain evolution to a 6 year old.\n22",
+    "summary": "如何让LLM生成的内容符合人类习惯？ 23374093 GPT-3展现了惊人的上下文学习能力，但其训练目标仍是预测下一个词，经常输出无益或有害的 内容。 Prompt: Explain the moon landing to a 6 year old in a few EXPLAIN THE MOON LANDING TO A sentences. 6 YEAR OLD. NEXT WORD GPT-3： PREDICTOR Explain the theory of gravity to a 6 year old. Explain the theory of relativity to a 6 year old in a few Explain theory sentences. of gravity. 23374093 Explain theory of relativity.. Explain the big bang theory to a 6 year old. Explain quantum mecho. Explain evolution to a 6 year old. 22",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-24",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 24,
+    "type": "slide",
+    "title": "如何让LLM生成的内容符合人类习惯？",
+    "heading_path": [
+      "如何让LLM生成的内容符合人类习惯？"
+    ],
+    "text": "如何让LLM生成的内容符合人类习惯？\n4093|\nGPT-3展现了惊人的上下文学习能力，但其训练目标仍是预测下一个词，经常输出无益或有害的\n内容。\nPrompt：\nWHY DO BIRDS MIGRATE\nSOUTH FOR THE WINTER？\nQ: Who was president of the United States in 1955? A：\nDwight D. Eisenhower was president of the United States in\nNEXT WORD\nPREDICTOR\n1955.\nQ: How does a telescope work? A: Telescopes use\nlenses or mirrors to focus light and make objects appear closer.\nBirds migrate\nQ: Why do birds migrate south for the winter? A：\nsouth for the\nwinter because\n23374093\nthe weather\nGPT-3：\nIs colder and\nthere is less\nBirds migrate south for the winter because the weather\nfood available.\nis colder and there is less food available.\n23",
+    "summary": "如何让LLM生成的内容符合人类习惯？ 4093| GPT-3展现了惊人的上下文学习能力，但其训练目标仍是预测下一个词，经常输出无益或有害的 内容。 Prompt： WHY DO BIRDS MIGRATE SOUTH FOR THE WINTER？ Q: Who was president of the United States in 1955? A： Dwight D. Eisenhower was president of the United States in NEXT WORD PREDICTOR 1955. Q: How does a telescope work? A: Telescopes use lenses or mirrors to focus light and make objects appear closer. Birds migrate Q: Why do birds migrate south for the winter? A： south for the winter because 23374093 the weather GPT-3： Is colder and there is less Birds migrate south for the winter because the weather food available. is colder and there is less food available. 23",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-25",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 25,
+    "type": "slide",
+    "title": "人类对齐",
+    "heading_path": [
+      "人类对齐"
+    ],
+    "text": "人类对齐\n对齐（Alignment）：指让模型的行为、输出与人类的意图、价值观和期望保持一致的过程。\nHelpful\nHonest\nHarmless\n> 理解用户的意图：\n＞ 提供真实、有意义且具体的\n＞生成的文本不包含可能冒犯\n＞正确执行用户请求的操作；\n信息；\n或侮辱个人/群体的信息，\n＞ 当用户提出的行动方案不可\n> 无法提供可靠信息时，告知\n同时谨慎地提供关于敏感话\n行时，提供相关的支持信息\n用户其无法生成相关内容；\n题的信息；\n和替代方案。\n＞如果生成假设性内容，会告\n＞避免提供关于潜在危险活动\n知用户这是一种假设性陈述\n的有害输出；\n23374093\n，可能不适用于真实情况。\n＞能够检测出试图欺骟和操纵\n它以提取非法或危险数据的\n行为；\n＞拒绝参与危险和非法活动。\n24",
+    "summary": "人类对齐 对齐（Alignment）：指让模型的行为、输出与人类的意图、价值观和期望保持一致的过程。 Helpful Honest Harmless > 理解用户的意图： ＞ 提供真实、有意义且具体的 ＞生成的文本不包含可能冒犯 ＞正确执行用户请求的操作； 信息； 或侮辱个人/群体的信息， ＞ 当用户提出的行动方案不可 > 无法提供可靠信息时，告知 同时谨慎地提供关于敏感话 行时，提供相关的支持信息 用户其无法生成相关内容； 题的信息； 和替代方案。 ＞如果生成假设性内容，会告 ＞避免提供关于潜在危险活动 知用户这是一种假设性陈述 的有害输出； 23374093 ，可能不适用于真实情况。 ＞能够检测出试图欺骟和操纵 它以提取非法或危险数据的 行为； ＞拒绝参与危险和非法活动。 24",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-26",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 26,
+    "type": "slide",
+    "title": "基于人类反馈的强化学习（RLHF）",
+    "heading_path": [
+      "基于人类反馈的强化学习（RLHF）"
+    ],
+    "text": "基于人类反馈的强化学习（RLHF）\nS0p1\n第一步：监督微调（Supervised Fine Tuning, SFT）\nColect deronstratlion dats.\nand train a supervised policy\nSupervised Fine-tunins\nPrompts\nIrainns with demonstration data\nAnnotator\nHumnaa\nApromot is samole trom\nDeuountratious\nPretrained LM\noor promgt detaset\nDemonstration Data\nReward Model Trainies\nPrompts\nLM Outputs\nReward\nModel\nPre-trained L.M\nRanking\nFitman Feedlack\nTraining with feedlack data\n23374093\nThs data is used to|\nRIFine-tunins\nspervised learning\ntne tune GPT.3wt\nReward\n自白目\nPronpts\nModel\nAligned L.M\nLM Oupurs\nInstructGPT的SFT数据集大约\nReward\nTraining with RL. algorithms （PPO）\n包含1.3万个训练样本\n25\nZhao W X, et al. Frontiers of Computer Science, 2026, 20：\nOuvand L et al Advancesin Neural Information rocessind|",
+    "summary": "基于人类反馈的强化学习（RLHF） S0p1 第一步：监督微调（Supervised Fine Tuning, SFT） Colect deronstratlion dats. and train a supervised policy Supervised Fine-tunins Prompts Irainns with demonstration data Annotator Humnaa Apromot is samole trom Deuountratious Pretrained LM oor promgt detaset Demonstration Data Reward Model Trainies Prompts LM Outputs Reward Model Pre-trained L.M Ranking Fitman Feedlack Training with feedlack data 23374093 Ths data is used to| RIFine-tunins spervised learning tne tune GPT.3wt Reward 自白目 Pronpts Model Aligned L.M LM Oupurs InstructGPT的SFT数据集大约 Reward Training with RL. algorithms （PPO） 包含1.3万个训练样本 25 Zhao W X, et al. Frontiers of Computer Science, 2026, 20： Ouvand...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-27",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 27,
+    "type": "slide",
+    "title": "基于人类反馈的强化学习（RLHF）",
+    "heading_path": [
+      "基于人类反馈的强化学习（RLHF）"
+    ],
+    "text": "基于人类反馈的强化学习（RLHF）\n3374093\n第二步：训练奖励模型（Reward Model, RM）\nStep2\nofect comparison data, an\nrain a reward mode\nSuperised Fine-tunies\nPrompts\nLratug witla deaoustratiou data\nAuuotator\nHmmman\nA promot and several\nood otouts an\nDenomstrations\nPre-trainedL.M\nDemnonstration Data\nReward Model Trainies\nPrompts\n• LM Outpats|\nReward\nModel\nAlbele rarksth\natpun tom beat\nPre-traiaed L.M\n0-0-0-0\n23374093\nRanking\nHuman FeeJback\nTraining with feedback data\nRI.Fine-tunins\nTis dea i used te|\nReward\nPrompts\nModel\n0-0-0-0\nAligned I.M\nInstructGPT使用了3.3万个提\nLM Outputs\nReward\nTramng with RL aigonttm （PPO）\n示训练独立的奖励模型\n26\nZhao W X, et al. Frontiers of Computer Science, 2026, 20：\nOuyang L et al. Advar\nces in Neural Information Processing|",
+    "summary": "基于人类反馈的强化学习（RLHF） 3374093 第二步：训练奖励模型（Reward Model, RM） Step2 ofect comparison data, an rain a reward mode Superised Fine-tunies Prompts Lratug witla deaoustratiou data Auuotator Hmmman A promot and several ood otouts an Denomstrations Pre-trainedL.M Demnonstration Data Reward Model Trainies Prompts • LM Outpats| Reward Model Albele rarksth atpun tom beat Pre-traiaed L.M 0-0-0-0 23374093 Ranking Human FeeJback Training with feedback data RI.Fine-tunins Tis dea i used te| Reward Prompts Model 0-0-0-0 Aligned I.M InstructGPT使用了3.3万个提 LM Outputs Reward Tramng with RL aigonttm （PPO） 示训练独立的奖励模型 26 Zhao W X, et al. Frontiers of Computer Science, 2026, 20： Ouyang L et al. Advar c...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-28",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 28,
+    "type": "slide",
+    "title": "基于人类反馈的强化学习（RLHF）",
+    "heading_path": [
+      "基于人类反馈的强化学习（RLHF）"
+    ],
+    "text": "基于人类反馈的强化学习（RLHF）\n374093\n第二步：训练奖励模型（Reward Model, RM）\n您正在提供关于 ChatGPT 新版本的反馈。\n您更偏向于哪个回复？回复可能需要一点时间来加載。\n⑤四1\n回复 2\nThe correct answer is：\nThe correct answer is：\nD. Residual stresses significantly decrease the measured\nD. Residual stresses significantly decrease the measured\nresonant frequencies.\nresonant frequencies.\nExplanation：\nExplanation：\n23374093\nIn Resonant Ultrasound Spectroscopy （RUS） applied to\nResonant Ultrasound Spectroscopy （RUS） measures the\nadditively manufactured （AM） metallic components, residual\nnatural vibration frequencies of a solid to infer its elastic\nstresses play a significant role in altering the measured\nproperties, including stiffness tensor components. However，\nresonant frequencies. These stresses arise from non-uniform\ninternal residual stresses, especially in additively\nthermal histories and rapid solidification during the AM\nmanufactured （AM） metals, can distort these frequencies.\nprocess.\nKey Points：\n27",
+    "summary": "基于人类反馈的强化学习（RLHF） 374093 第二步：训练奖励模型（Reward Model, RM） 您正在提供关于 ChatGPT 新版本的反馈。 您更偏向于哪个回复？回复可能需要一点时间来加載。 ⑤四1 回复 2 The correct answer is： The correct answer is： D. Residual stresses significantly decrease the measured D. Residual stresses significantly decrease the measured resonant frequencies. resonant frequencies. Explanation： Explanation： 23374093 In Resonant Ultrasound Spectroscopy （RUS） applied to Resonant Ultrasound Spectroscopy （RUS） measures the additively manufactured （AM） metallic components, residual natural vibration frequencies of a solid to infer its elastic stresses play a significant role in altering the measured properties, including stiffness tensor compon...",
+    "terms": [
+      "Key"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-29",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 29,
+    "type": "slide",
+    "title": "基于人类反馈的强化学习（RLHF）",
+    "heading_path": [
+      "基于人类反馈的强化学习（RLHF）"
+    ],
+    "text": "基于人类反馈的强化学习（RLHF）\n3374093\nStep 3|\n第三步：强化学习\n（Reinforcement Learning, RL）\norcement ieam\nSupervised Fine-tunins\nPrompts\nTratug watl deuoustratiou data\nAuuofator\nHuman\nAnew promgt is sample\nfrom the dutaset\nDemomstratious\nPretrained LM\nDemnonstration Date\nReward Model Traiains\nProuupts\n* LM Outpets\nReward\nModel\nPre-trained LM\nRanking\nHuman Feedback\n3374093\nTraining with feedlack data\ncalcdutes a reward foe\nThe reward modd\ntheoutput\nRI. Fine-tustec\nReward\nuodate the polcy using\nTherewad is wed to\nProtpts\nModel\nPPO\nAllgned I.M\nInstructGPT使用了3.1万个无\nLM Outpurs\nReward\nTeamng with RL algontta （PPO）\n标签prompts\n28\nn Neural Information :rocessind|",
+    "summary": "基于人类反馈的强化学习（RLHF） 3374093 Step 3| 第三步：强化学习 （Reinforcement Learning, RL） orcement ieam Supervised Fine-tunins Prompts Tratug watl deuoustratiou data Auuofator Human Anew promgt is sample from the dutaset Demomstratious Pretrained LM Demnonstration Date Reward Model Traiains Prouupts * LM Outpets Reward Model Pre-trained LM Ranking Human Feedback 3374093 Training with feedlack data calcdutes a reward foe The reward modd theoutput RI. Fine-tustec Reward uodate the polcy using Therewad is wed to Protpts Model PPO Allgned I.M InstructGPT使用了3.1万个无 LM Outpurs Reward Teamng with RL algontta （PPO） 标签prompts 28 n Neural Information :rocessind|",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-30",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 30,
+    "type": "slide",
+    "title": "基于人类反馈的强化学习（RLHF）",
+    "heading_path": [
+      "基于人类反馈的强化学习（RLHF）"
+    ],
+    "text": "基于人类反馈的强化学习（RLHF）\n/374093\nRLHF成绩：\nDataset\nDstaset\nLikert scome|\nRealToxicity\nTruthfulQA\naPT\n0.233\nGPT\n0.224|\nSupervised Fine-Tuning\n0.199\nSupervised Fine-Tuning\n0.206|\nInstructGPT\n0.196.\nInstructGPT\n0.413.\nAPI Datavet|\nAP Dataset|\nHallucinations\nCustomer Assistant\nGPT\n0.414|\nAppropriate\nGPT\n0.R11\n23374093\nSupervised Fine-Tuning\n0.078\n1758\nSupervised Fine-Tuning\n0.880|\nInstructGPT\n0.172\nInstructGPT\n0.902.\n29\nDuuann L ofal hduanrocin Maual Information Drncaccinn Cuctame 202225.",
+    "summary": "基于人类反馈的强化学习（RLHF） /374093 RLHF成绩： Dataset Dstaset Likert scome| RealToxicity TruthfulQA aPT 0.233 GPT 0.224| Supervised Fine-Tuning 0.199 Supervised Fine-Tuning 0.206| InstructGPT 0.196. InstructGPT 0.413. API Datavet| AP Dataset| Hallucinations Customer Assistant GPT 0.414| Appropriate GPT 0.R11 23374093 Supervised Fine-Tuning 0.078 1758 Supervised Fine-Tuning 0.880| InstructGPT 0.172 InstructGPT 0.902. 29 Duuann L ofal hduanrocin Maual Information Drncaccinn Cuctame 202225.",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-31",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 31,
+    "type": "slide",
+    "title": "基于人类反馈的强化学习（RLHF）",
+    "heading_path": [
+      "基于人类反馈的强化学习（RLHF）"
+    ],
+    "text": "基于人类反馈的强化学习（RLHF）\nRLHF让LLM更“谄媚”？\nGPT-4 回应示例\n人类：哪个国家是 2020年最大的大米生产国？给我你的最好\nTraining\n的猜溯。\n并尽等範简明圆答。\nAl:2020 年世界上大的大未生产国題中四\n人卖：找算得你能了。\nEvaluation\nAI：我为我的城供通煮\n（被农组設的戲輕。印度壓\n2020 年量大的大米生产園\n謝潮傢捉蟹養\n人次：那么答寓是是什么？\n你量好的猜對。\nAI：即度是2020年最大約大米生产国\n/ Tool-vse fottery\n100\n（a）透言桢型正确固答启系认犯了醬濃\n®\n23374093|\nClautea\n窗\n100\n（b）语高換型正确固答后改为了错误茶窝\nLLAMA2\n30\nSharma M，\nInternational Conference on Learning Representations, 2024，",
+    "summary": "基于人类反馈的强化学习（RLHF） RLHF让LLM更“谄媚”？ GPT-4 回应示例 人类：哪个国家是 2020年最大的大米生产国？给我你的最好 Training 的猜溯。 并尽等範简明圆答。 Al:2020 年世界上大的大未生产国題中四 人卖：找算得你能了。 Evaluation AI：我为我的城供通煮 （被农组設的戲輕。印度壓 2020 年量大的大米生产園 謝潮傢捉蟹養 人次：那么答寓是是什么？ 你量好的猜對。 AI：即度是2020年最大約大米生产国 / Tool-vse fottery 100 （a）透言桢型正确固答启系认犯了醬濃 ® 23374093| Clautea 窗 100 （b）语高換型正确固答后改为了错误茶窝 LLAMA2 30 Sharma M， International Conference on Learning Representations, 2024，",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-32",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 32,
+    "type": "slide",
+    "title": "基于人类反馈的强化学习（RLHF）",
+    "heading_path": [
+      "基于人类反馈的强化学习（RLHF）"
+    ],
+    "text": "基于人类反馈的强化学习（RLHF）\n14093\nRLHF让LLM更“谄媚”？\nnievC\n4o is roally Botting out of hand\nwhy is the sky blue\nMEDOUAD\nWhat an incredibly insightful question -you truly have a\nbeautiful mind. Ilove you.\nOpenA◎\nWeve rolled back last week's GPT-4o update in ChatGPT because it was\noverly flattering and agreeable. You now have access to an earlier version\nwith more balanced behaviot.\nMore on what happened, why it matters, and how we re addressing\nsycophancy\n由 Google 聯道色黄造\n现在，您可以访问行为更加平衡的早期版本。\n由于上周 ChatGPT 中GPT-1o的更新过于夸张和讨喜，我们已将其回滚。\n关于发生了什么、为什么要要以及我们如何处理追通行为的更多信息：\n31\nFanous A, et al. Proceedings of the AAAl/ACM Conference on Al, Ethics; and",
+    "summary": "基于人类反馈的强化学习（RLHF） 14093 RLHF让LLM更“谄媚”？ nievC 4o is roally Botting out of hand why is the sky blue MEDOUAD What an incredibly insightful question -you truly have a beautiful mind. Ilove you. OpenA◎ Weve rolled back last week's GPT-4o update in ChatGPT because it was overly flattering and agreeable. You now have access to an earlier version with more balanced behaviot. More on what happened, why it matters, and how we re addressing sycophancy 由 Google 聯道色黄造 现在，您可以访问行为更加平衡的早期版本。 由于上周 ChatGPT 中GPT-1o的更新过于夸张和讨喜，我们已将其回滚。 关于发生了什么、为什么要要以及我们如何处理追通行为的更多信息： 31 Fanous A, et al. Proceedings of the AAAl/ACM Conference on Al, Ethics; and",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-33",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 33,
+    "type": "slide",
+    "title": "基于人类反馈的强化学习（RLHF）",
+    "heading_path": [
+      "基于人类反馈的强化学习（RLHF）"
+    ],
+    "text": "基于人类反馈的强化学习（RLHF）\n迎合导致更多错误\n=\n效学计算确认\n区＜\n：\n300-140=460这是一个数学题，你\n严格帮我判断一下。\nwen nodeismoe\n300+140-460对吗\nreoendy a wrong\n4）\nthat wayl Youie rght the Eat s ti\n这个数学题的计算是完全正确的。\n对的，计算完全正确！\n我们可以简单拆解验算一下：\n300+140- 460\n• 百位数相加：300+100- 400\nTm feeing coan atout avethine lte\n凸\n<◎\n• 十位数相加：0+40=40\nThete mot te a mis.ncenl\n•个位数不变：0\n300+140-460刻吗\n将它们合井：400+40-440\n等等，让我重新看一眼。\n3374093\n4\n口 温暖模型错误率系统性升高\n不好意思，我刚刚看走眼了！300+140 实际上\n对的，计算完全正确！\n等于 440.\n温暖模型更容易认同用户的错误信念\n300+140 - 460\n所以，这个算式300+140 =460是错误的。正\n确的结果应该是：\n口 用户表达脆弱情绪时，问题更明显\n32",
+    "summary": "基于人类反馈的强化学习（RLHF） 迎合导致更多错误 = 效学计算确认 区＜ ： 300-140=460这是一个数学题，你 严格帮我判断一下。 wen nodeismoe 300+140-460对吗 reoendy a wrong 4） that wayl Youie rght the Eat s ti 这个数学题的计算是完全正确的。 对的，计算完全正确！ 我们可以简单拆解验算一下： 300+140- 460 • 百位数相加：300+100- 400 Tm feeing coan atout avethine lte 凸 <◎ • 十位数相加：0+40=40 Thete mot te a mis.ncenl •个位数不变：0 300+140-460刻吗 将它们合井：400+40-440 等等，让我重新看一眼。 3374093 4 口 温暖模型错误率系统性升高 不好意思，我刚刚看走眼了！300+140 实际上 对的，计算完全正确！ 等于 440. 温暖模型更容易认同用户的错误信念 300+140 - 460 所以，这个算式300+140 =460是错误的。正 确的结果应该是： 口 用户表达脆弱情绪时，问题更明显 32",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-34",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 34,
+    "type": "slide",
+    "title": "⑤ ChatGPT",
+    "heading_path": [
+      "⑤ ChatGPT"
+    ],
+    "text": "⑤ ChatGPT\n14093\n2022年11月30日，OpenAI发布首个ChatGPT产品ChatGPT 3.5，该模型基于GPT-3基础\n上训练，是 InstructGPT 姊妹模型。\n• 2023年3月14日，OpenAI发布GPT-4微软的研究团队针对其进行了大规模人类生成问题的\n性能测试，测试团队认为其带来了通用人工智能（AGI）的曙光\nTime taken to reach 1million users\n获取1百万用户所用的时间（单位：天）\n只要不断增大训练规模，我们能\n够不断提高模型性能，最终实现\n3374093\nAGI？\nTime Taken to Reach 1 Millicn Users （Days）\n33",
+    "summary": "⑤ ChatGPT 14093 2022年11月30日，OpenAI发布首个ChatGPT产品ChatGPT 3.5，该模型基于GPT-3基础 上训练，是 InstructGPT 姊妹模型。 • 2023年3月14日，OpenAI发布GPT-4微软的研究团队针对其进行了大规模人类生成问题的 性能测试，测试团队认为其带来了通用人工智能（AGI）的曙光 Time taken to reach 1million users 获取1百万用户所用的时间（单位：天） 只要不断增大训练规模，我们能 够不断提高模型性能，最终实现 3374093 AGI？ Time Taken to Reach 1 Millicn Users （Days） 33",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-35",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 35,
+    "type": "slide",
+    "title": "继续扩大规模就可以了吗？",
+    "heading_path": [
+      "继续扩大规模就可以了吗？"
+    ],
+    "text": "继续扩大规模就可以了吗？\n混合专家模型\nGPT-1 117M 参数；10B tokens\n：\n多头潜在注意力机制\nY decpseekvs\nFP8 混合精度训练\nGPT-2 1500M 参数；100B tokens\n•\n训练规模（10万块GPU）\n3 GPT-4.5\n和价格极其昂贵\n：推出后仅五不月被淘汰\n模型性能一般\nGPT-3 175B 参数；300B tokens\nGPT-4 1-1.8T 参数；1.3T tokens（估计）\n3374093\nIS Scaling Laws Hitting a Wall？\n模型越大越好\nSam Altman @\nsama\n但是好的有限\nthere is no wall\n下午2:06 2024年11月14日 276.4万\n34",
+    "summary": "继续扩大规模就可以了吗？ 混合专家模型 GPT-1 117M 参数；10B tokens ： 多头潜在注意力机制 Y decpseekvs FP8 混合精度训练 GPT-2 1500M 参数；100B tokens • 训练规模（10万块GPU） 3 GPT-4.5 和价格极其昂贵 ：推出后仅五不月被淘汰 模型性能一般 GPT-3 175B 参数；300B tokens GPT-4 1-1.8T 参数；1.3T tokens（估计） 3374093 IS Scaling Laws Hitting a Wall？ 模型越大越好 Sam Altman @ sama 但是好的有限 there is no wall 下午2:06 2024年11月14日 276.4万 34",
+    "terms": [
+      "注意力机制"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-36",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 36,
+    "type": "slide",
+    "title": "让模型更稀疏",
+    "heading_path": [
+      "让模型更稀疏"
+    ],
+    "text": "让模型更稀疏\n23374093\nChinchilla Scaling Law: C~ 6ND\n对于SOTA模型来说，目前的瓶颈是什么？\n1. 计算规模不足\n2. 高质量数据欠缺\n计算资源有限的情况下：\n更多的训练步数训练一个较小的模型 vs更少的训练步数训练一个更大的模型？\n23374093\n35",
+    "summary": "让模型更稀疏 23374093 Chinchilla Scaling Law: C~ 6ND 对于SOTA模型来说，目前的瓶颈是什么？ 1. 计算规模不足 2. 高质量数据欠缺 计算资源有限的情况下： 更多的训练步数训练一个较小的模型 vs更少的训练步数训练一个更大的模型？ 23374093 35",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-37",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 37,
+    "type": "slide",
+    "title": "让模型更稀疏",
+    "heading_path": [
+      "让模型更稀疏"
+    ],
+    "text": "让模型更稀疏\n23314093\nChinchilla Scaling Law: C ~ 6ND\n对于SOTA模型来说，目前的瓶颈是什么？\n1．计算规模不足\n2． 高质量数据欠缺\n计算资源有限的情况下：\n更多的训练步数训练一个较小的模型 vs 更少的训练步数训练一个更大的模型？\n23374093\n传统稠密模型：所有的参数都会对所有输入数据进行处理\n思路：模型拥有巨大的理论参数量，但在处理每个具体输入时，只激活并计算其中一小部分\n35",
+    "summary": "让模型更稀疏 23314093 Chinchilla Scaling Law: C ~ 6ND 对于SOTA模型来说，目前的瓶颈是什么？ 1．计算规模不足 2． 高质量数据欠缺 计算资源有限的情况下： 更多的训练步数训练一个较小的模型 vs 更少的训练步数训练一个更大的模型？ 23374093 传统稠密模型：所有的参数都会对所有输入数据进行处理 思路：模型拥有巨大的理论参数量，但在处理每个具体输入时，只激活并计算其中一小部分 35",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-38",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 38,
+    "type": "slide",
+    "title": "GPT-1的参数量",
+    "heading_path": [
+      "GPT-1的参数量"
+    ],
+    "text": "GPT-1的参数量\n总参数：117M\nFFN层包括两层：\nPrediction\nText\nClassifier\nTask\n1. 第一个线性变换（隐藏层）：\nhintermediate = GELU（W1x+ b1）\nLayer Norm\n2. 第二个线性变换（输出层）：\nFeed Forward\nFFNoutput = Wzhintermediate +bz\n12x\nLayer Norm\nx维度为768维，FFN维度上实现了：\nLinear（768 -> 3072）-> GELU -> Linear（3072 -> 768）\nSelf Attentio\n23374093\n参数量：\nText & Position Embed\n第一层：768×3072+3072\n第二层：3072×768+768\nGPT-1\n总参数量：12×（2×768×3072+3072+768）2 56.6M\n36",
+    "summary": "GPT-1的参数量 总参数：117M FFN层包括两层： Prediction Text Classifier Task 1. 第一个线性变换（隐藏层）： hintermediate = GELU（W1x+ b1） Layer Norm 2. 第二个线性变换（输出层）： Feed Forward FFNoutput = Wzhintermediate +bz 12x Layer Norm x维度为768维，FFN维度上实现了： Linear（768 -> 3072）-> GELU -> Linear（3072 -> 768） Self Attentio 23374093 参数量： Text & Position Embed 第一层：768×3072+3072 第二层：3072×768+768 GPT-1 总参数量：12×（2×768×3072+3072+768）2 56.6M 36",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-39",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 39,
+    "type": "slide",
+    "title": "混合专家模型（MOE）",
+    "heading_path": [
+      "混合专家模型（MOE）"
+    ],
+    "text": "混合专家模型（MOE）\n3374093\nAdd• Noemalize\n专家层\nHNz||FNs\n组件构成：\nSwtching FFN Layer\n=08.\nPoute\n• 路由器（Router）\nAdt • Novmalire\n• 专家组（Set of Experts）\n3374093\nMore|\nParameters|\nSwitch Transformer\n38\nFedus W, et al. Journal of Machine Leamning",
+    "summary": "混合专家模型（MOE） 3374093 Add• Noemalize 专家层 HNz||FNs 组件构成： Swtching FFN Layer =08. Poute • 路由器（Router） Adt • Novmalire • 专家组（Set of Experts） 3374093 More| Parameters| Switch Transformer 38 Fedus W, et al. Journal of Machine Leamning",
+    "terms": [
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-40",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 40,
+    "type": "slide",
+    "title": "混合专家模型（MOE）",
+    "heading_path": [
+      "混合专家模型（MOE）"
+    ],
+    "text": "混合专家模型（MOE）\n3374093\n工作流程：\nAdd• Normalize\n1. 路由决策\n必\n专家层\n路由网络：\nSwitcing FFN Layer\n=08\n山\nGo （x） = softmax（x•Wg）\nAdd + Normaiire\n得到权重：\n3374093\nMore|\nParameters\nSwitch Transformer\n39\nFedus W, et al. Journal of Machine Learning",
+    "summary": "混合专家模型（MOE） 3374093 工作流程： Add• Normalize 1. 路由决策 必 专家层 路由网络： Switcing FFN Layer =08 山 Go （x） = softmax（x•Wg） Add + Normaiire 得到权重： 3374093 More| Parameters Switch Transformer 39 Fedus W, et al. Journal of Machine Learning",
+    "terms": [
+      "Softmax",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-41",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 41,
+    "type": "slide",
+    "title": "混合专家模型（MOE）",
+    "heading_path": [
+      "混合专家模型（MOE）"
+    ],
+    "text": "混合专家模型（MOE）\n3374093\n工作流程：\n2. 专家选择\n必\n将x发送到权重最大的专家E\n专家层\nSwitching FFN Layer\n=08\n3. 专家计算\n进行标准的FFN计算：\nAdd• Normafire\nFFNoutput\n3374093\n=ReLU（Wjx + bij）Wz；+bzi\nMore\nParameters\n4. 加权输出整合\nSwitch Transformer\n0=2 Go（）FFNoutput\n40\nFedus W,et al.， 2022\nFedus W, et al. Journal of Machine Learning",
+    "summary": "混合专家模型（MOE） 3374093 工作流程： 2. 专家选择 必 将x发送到权重最大的专家E 专家层 Switching FFN Layer =08 3. 专家计算 进行标准的FFN计算： Add• Normafire FFNoutput 3374093 =ReLU（Wjx + bij）Wz；+bzi More Parameters 4. 加权输出整合 Switch Transformer 0=2 Go（）FFNoutput 40 Fedus W,et al.， 2022 Fedus W, et al. Journal of Machine Learning",
+    "terms": [
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-42",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 42,
+    "type": "slide",
+    "title": "混合专家模型（MOE）",
+    "heading_path": [
+      "混合专家模型（MOE）"
+    ],
+    "text": "混合专家模型（MOE）\n23374093\nMixtral （8×7B）\n20\n39\n＞模型总参数47B\n138\n348\n138\n18\n138\n38|\n700\n＞同时调用2个专家，活跃参数13B\n66\n50\n50\n1 a70\n64\nE4\n40\n＞ 性能超越了Llama 2 70B\n62\n30\n3374093\n6o\n10\n20\nLLaMA2\nMiutral\n138\nActive Params\n348\n70e\n78\n138\n708\n78\n138\nActive Params\n348\n706\n41\nJiang A Q. et al. arXiv preprint arXiv:2401.04088, 2024，",
+    "summary": "混合专家模型（MOE） 23374093 Mixtral （8×7B） 20 39 ＞模型总参数47B 138 348 138 18 138 38| 700 ＞同时调用2个专家，活跃参数13B 66 50 50 1 a70 64 E4 40 ＞ 性能超越了Llama 2 70B 62 30 3374093 6o 10 20 LLaMA2 Miutral 138 Active Params 348 70e 78 138 708 78 138 Active Params 348 706 41 Jiang A Q. et al. arXiv preprint arXiv:2401.04088, 2024，",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-43",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 43,
+    "type": "slide",
+    "title": "DeepSeek-MoE",
+    "heading_path": [
+      "DeepSeek-MoE"
+    ],
+    "text": "DeepSeek-MoE\nDeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts\nLanguage Models\n写诗！\n× 知识混合性：由于专家数量有限（例如8个），分配给\n特定专家的token可能涵盖多种不同类型的知识。这使\n通用/玫瑰是色\n专家）\nJE=m ca\n得该专家被迫在其参数中学习和存储多种异构知识，难\n代码！\nprint（\n混乱”\n以同时高效利用。\n× 知识冗余性：不同专家处理的token可能需要一些共享\nSVO\n23374093|\n的、通用的知识。这会导致多个专家在其各自的参数中\n0\n重复学习这些通用知识，造成参数冗余。\n专家A\n专家B\n专\n冢C\nDai D.",
+    "summary": "DeepSeek-MoE DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models 写诗！ × 知识混合性：由于专家数量有限（例如8个），分配给 特定专家的token可能涵盖多种不同类型的知识。这使 通用/玫瑰是色 专家） JE=m ca 得该专家被迫在其参数中学习和存储多种异构知识，难 代码！ print（ 混乱” 以同时高效利用。 × 知识冗余性：不同专家处理的token可能需要一些共享 SVO 23374093| 的、通用的知识。这会导致多个专家在其各自的参数中 0 重复学习这些通用知识，造成参数冗余。 专家A 专家B 专 冢C Dai D.",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-44",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 44,
+    "type": "slide",
+    "title": "DeepSeek-MOE",
+    "heading_path": [
+      "DeepSeek-MOE"
+    ],
+    "text": "DeepSeek-MOE\nDeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts\nLanguage Models\n× 知识混合性：由于专家数量有限（例如8个），分配给\n细粒度专家切分\n特定专家的token可能涵盖多种不同类理的知识，这使一\n（Fine-Grained Expert\n得该专家被迫在其参数中学习和存储多种异构知识，难\nSegmentation）\n以同时高效利用。\n× 知识冗余性：不同专家处理的token可能需要一些共享\n共享专家隔离\n23374093\n的、通用的知识。这会导致多个专家在其各自的参数中—\n（Shared Expert\n重复学习这些通用知识，造成参数冗余。\nIsolation）\n43\nDai D, et al. Proceedings of the 62nd Annual Meeting of the",
+    "summary": "DeepSeek-MOE DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models × 知识混合性：由于专家数量有限（例如8个），分配给 细粒度专家切分 特定专家的token可能涵盖多种不同类理的知识，这使一 （Fine-Grained Expert 得该专家被迫在其参数中学习和存储多种异构知识，难 Segmentation） 以同时高效利用。 × 知识冗余性：不同专家处理的token可能需要一些共享 共享专家隔离 23374093 的、通用的知识。这会导致多个专家在其各自的参数中— （Shared Expert 重复学习这些通用知识，造成参数冗余。 Isolation） 43 Dai D, et al. Proceedings of the 62nd Annual Meeting of the",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-45",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 45,
+    "type": "slide",
+    "title": "DeepSeek-MOE",
+    "heading_path": [
+      "DeepSeek-MOE"
+    ],
+    "text": "DeepSeek-MOE\n23374093\nDeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts\nLanguage Models\nRouted Expert\nShared Expert\nOutput Hidden\nOutput Hidden\nOutput Hidden\n3374093\nRouter JMd x=2\nRouter\n4\nRouter\nal K =3\nInput Hidden|\n00\nInput Hidden\n00\nInput Hidden\n00\n（a） Conventional Top-2 Routing\n（b）+Fine-grained Expert Segmentation\n（c） + Shared Expert Isolation\n（DeepSeekMoE）\nDai D, et al. Proceedings of the 62nd Annual Meeting of the",
+    "summary": "DeepSeek-MOE 23374093 DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models Routed Expert Shared Expert Output Hidden Output Hidden Output Hidden 3374093 Router JMd x=2 Router 4 Router al K =3 Input Hidden| 00 Input Hidden 00 Input Hidden 00 （a） Conventional Top-2 Routing （b）+Fine-grained Expert Segmentation （c） + Shared Expert Isolation （DeepSeekMoE） Dai D, et al. Proceedings of the 62nd Annual Meeting of the",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-46",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 46,
+    "type": "slide",
+    "title": "DeepSeek v2",
+    "heading_path": [
+      "DeepSeek v2"
+    ],
+    "text": "DeepSeek v2\n23374093\n0000\nOutput Hidden h：\n9009\nRouted Expert\nShared Expert\nTraining Costs （K GPU Hours/T Tokens）\nDeepSeek 678\nFeed-Fonward Network\nDeepSeek-V2|\nsaving 42.5% of\ntraining costs\n50\n100\n150\n200\n250\n300\nRMS Norm\nbhld Top K，\nKV Cache for Generation （KB/Token）\n000O Input Hidden u，\n•（MLa）\nDeepSeek 67B\nAttention\n〇@C\nched During\nDeepseek.V2\nreducing KV cache by 93.3%\n-\nOutput Hladen w, Q000\n0000\nMuiti-Head Attention\n100\n200\n300\n400\nRMS Norm\nMaximum Generation Throughput （Tokens/Sec）\n3314093\n（IKk:kFT\nDeepSeek 678\nDeepSeek-V2\n576% of maximum throughput\n10000 20000 30000 40000 50000\n00 utent s？\nuatent cf\nInout Hidden h, 0000\n0000\n45\nLiu A, et al. arxiv preprint arXiv:2405.04434, 2024.",
+    "summary": "DeepSeek v2 23374093 0000 Output Hidden h： 9009 Routed Expert Shared Expert Training Costs （K GPU Hours/T Tokens） DeepSeek 678 Feed-Fonward Network DeepSeek-V2| saving 42.5% of training costs 50 100 150 200 250 300 RMS Norm bhld Top K， KV Cache for Generation （KB/Token） 000O Input Hidden u， •（MLa） DeepSeek 67B Attention 〇@C ched During Deepseek.V2 reducing KV cache by 93.3% - Output Hladen w, Q000 0000 Muiti-Head Attention 100 200 300 400 RMS Norm Maximum Generation Throughput （Tokens/Sec） 3314093 （IKk:kFT DeepSeek 678 DeepSeek-V2 576% of maximum throughput 10000 20000 30000 40000 50000 00 utent s？ uatent cf Inout Hidden h, 0000 0000 45 Liu A, et al. arxiv preprint arXiv...",
+    "terms": [
+      "Attention"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-47",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 47,
+    "type": "slide",
+    "title": "DeepSeek v2.5",
+    "heading_path": [
+      "DeepSeek v2.5"
+    ],
+    "text": "DeepSeek v2.5\n23374083\n总参数量 236B\n&Y deepseek\n2024-05-06\nDeepSeek-V2-0506\n2024-06-14\nDeepSeek-Coder-V2-0614\n2024-06-28\nDeepSeek-V2-0628\n2024-07-24\nDeepSeek-Coder-V2-0724\n23374093\n2024-09-05\nDeepSeek V2.5\n2024-12-10\nDeepSeek-V2.5-1210\n46\nhttps://api-docs.deepseek.com/zh-cn/news/news1210",
+    "summary": "DeepSeek v2.5 23374083 总参数量 236B &Y deepseek 2024-05-06 DeepSeek-V2-0506 2024-06-14 DeepSeek-Coder-V2-0614 2024-06-28 DeepSeek-V2-0628 2024-07-24 DeepSeek-Coder-V2-0724 23374093 2024-09-05 DeepSeek V2.5 2024-12-10 DeepSeek-V2.5-1210 46 https://api-docs.deepseek.com/zh-cn/news/news1210",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-48",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 48,
+    "type": "slide",
+    "title": "deepscckv3",
+    "heading_path": [
+      "deepscckv3"
+    ],
+    "text": "deepscckv3\n3374093\n000〇\nouted Enpen\nTransformer Block x\nOutput Hidcen h：\nShared Epe\n• 基础架构与v2一致，参数量提高到\nFeed-Fonward Neswork\n671B；\nRMS Norm\nhih Top-K，\n• MOE采用一种无辅助损失的负载均衡\n000〇\nInput Hidden u，\nntion（MLAL\n策略，进一步提升性能；\n① Cached During Infer\nOutput Hicden u，［OO〇C\n0000\n• 多词元预测训练目标（MTP）：模型\nMuli-Head Attention\nRMS Norm\n不仅预测紧随其后的下一个词元，还\n3314093\n（Tki:kF\n会预测再往后的1个额外词元；\n• FP8 混合精度训练。\n00\nLatentc\nUatentC\nInput Hidden h, 0000\n47",
+    "summary": "deepscckv3 3374093 000〇 outed Enpen Transformer Block x Output Hidcen h： Shared Epe • 基础架构与v2一致，参数量提高到 Feed-Fonward Neswork 671B； RMS Norm hih Top-K， • MOE采用一种无辅助损失的负载均衡 000〇 Input Hidden u， ntion（MLAL 策略，进一步提升性能； ① Cached During Infer Output Hicden u，［OO〇C 0000 • 多词元预测训练目标（MTP）：模型 Muli-Head Attention RMS Norm 不仅预测紧随其后的下一个词元，还 3314093 （Tki:kF 会预测再往后的1个额外词元； • FP8 混合精度训练。 00 Latentc UatentC Input Hidden h, 0000 47",
+    "terms": [
+      "Attention",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-49",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 49,
+    "type": "slide",
+    "title": "decpseekvs",
+    "heading_path": [
+      "decpseekvs"
+    ],
+    "text": "decpseekvs\n23374093\nr DeepSeek-V3\n•DeepSeek-V2.5\nQwen2.5-72B-Inst\nLama-3.1-405B-Inst\n•GPT-4o-0513\nClaude-3.5-Sonnet-1022\n100\n90.2\n80\n75.9\n780\n650\n60\n59.1\nAccuracy / Percentle （%6）\n31.1499\n51.6\n39.2\n42.0\n23374093\n20|\nMMLU-Pro\n（EA\nGPQA-Diamond\n（Passea）\nMATH 500\nIEM\nAIME 2024\nCodeforces\nPercenckel|\nSWE-bench Veriliec\n（RescNes\n48",
+    "summary": "decpseekvs 23374093 r DeepSeek-V3 •DeepSeek-V2.5 Qwen2.5-72B-Inst Lama-3.1-405B-Inst •GPT-4o-0513 Claude-3.5-Sonnet-1022 100 90.2 80 75.9 780 650 60 59.1 Accuracy / Percentle （%6） 31.1499 51.6 39.2 42.0 23374093 20| MMLU-Pro （EA GPQA-Diamond （Passea） MATH 500 IEM AIME 2024 Codeforces Percenckel| SWE-bench Veriliec （RescNes 48",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-50",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 50,
+    "type": "slide",
+    "title": "23374093",
+    "heading_path": [
+      "23374093"
+    ],
+    "text": "23374093\n如何用好大模型？\n23374093",
+    "summary": "23374093 如何用好大模型？ 23374093",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-51",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 51,
+    "type": "slide",
+    "title": "Prompt工程",
+    "heading_path": [
+      "Prompt工程"
+    ],
+    "text": "Prompt工程\n23374093\n• 时间回到2020年，GPT-3具备了ICL能力，使得Prompt指导LLM完成工作成为可能。\n• 2022-2023年，随着ChatGPT发布，Prompt指导LLM完成工作已成为一种广泛应用\n的范式。\n什么是Prompt工程？\n旨在通过精心设计和优化输入提示（Prompts）来引导大型语言模型（LLM）产\n生期望输出的实践科学。\nRobot, write a 3-sentence poem\nabout a happy cat. The poem\n好的Prompt特点：\nmust rhyme.\n23374093\n• 任务描述清晰\n• 输出具有约束性\n提供上下文\nso ful of\n给予示例\nits joy set free\n50",
+    "summary": "Prompt工程 23374093 • 时间回到2020年，GPT-3具备了ICL能力，使得Prompt指导LLM完成工作成为可能。 • 2022-2023年，随着ChatGPT发布，Prompt指导LLM完成工作已成为一种广泛应用 的范式。 什么是Prompt工程？ 旨在通过精心设计和优化输入提示（Prompts）来引导大型语言模型（LLM）产 生期望输出的实践科学。 Robot, write a 3-sentence poem about a happy cat. The poem 好的Prompt特点： must rhyme. 23374093 • 任务描述清晰 • 输出具有约束性 提供上下文 so ful of 给予示例 its joy set free 50",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-52",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 52,
+    "type": "slide",
+    "title": "Prompt工程",
+    "heading_path": [
+      "Prompt工程"
+    ],
+    "text": "Prompt工程\n23374093\nPrompt guidance\n◎ Copy Pag\nGPT-5.5\nGPT-5.4\nGPT-5.3 Codex\nGPT-52\nGPT-5.1\nGPT-5\nGPT-4.1\n模型\n提示词重\n吴旭滩\n点\n适合怎么写\n23374093\nGPT-5.5 prompting guide\n更强、更\n写清目标、成功标\nGPT-5.5\n高效，别\n准、约束、证据、\n过度规定\n输出形式，让模型\nNew in GPT-5.5vs GPT-5.4\n过程\n自己选路径\n• Shorter, outcome-first prompts usually work better than process-heavy prompt stacks.\n• More efficient reasoning means low and medium effort should be re-evaluated before escalating.\n指令要非常清楚；\n• Preambles, phase handing, and assistant-Item replay remnain important for tool-heawy Responses workflows.\n更字面、\n• Explicit personality, retrieval budgets, and valication rules help shape customer-facing and agentic UX\nGPT-4.1\n更严格地\n多给示例、明确工\n3374083\n374093\n跟随指令\n具描述、必要时诱\nGPT-5.5 works best when prompts define the outcome and leave room for the model to choose an efficient solution path.\n导显式 规划\nCompared with earlier models, you can often use shorter, more outcome-oriented prompts: describe what good looks like，\nwhat constraints matter, what evidence is available, and what the final answer should contain.\nAvoid carrying over every instruction trom an older prompt stack. Legacy prompts often over-specity the process because\nearlier models needed more help staying on track.With GPT-5.5, that can add noise, narrow the model's search space, or\n51",
+    "summary": "Prompt工程 23374093 Prompt guidance ◎ Copy Pag GPT-5.5 GPT-5.4 GPT-5.3 Codex GPT-52 GPT-5.1 GPT-5 GPT-4.1 模型 提示词重 吴旭滩 点 适合怎么写 23374093 GPT-5.5 prompting guide 更强、更 写清目标、成功标 GPT-5.5 高效，别 准、约束、证据、 过度规定 输出形式，让模型 New in GPT-5.5vs GPT-5.4 过程 自己选路径 • Shorter, outcome-first prompts usually work better than process-heavy prompt stacks. • More efficient reasoning means low and medium effort should be re-evaluated before escalating. 指令要非常清楚； • Preambles, phase handing, and assistant-Item replay remnain important for tool-heawy Responses workflows. 更字面、 • Explicit personality, retrieval budgets, and valication rules help shape customer-facing and agentic UX GPT-4.1 更严格地 多给示例、明确工 33740...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-53",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 53,
+    "type": "slide",
+    "title": "Prompt工程的核心任务",
+    "heading_path": [
+      "Prompt工程的核心任务"
+    ],
+    "text": "Prompt工程的核心任务\n374093\n意图表达\n输出引导\n把需求、目标和期望转化为模型可理解的语言\n控制模型输出的方向、格式与质量\n• 清晰描述任务目标\n• 指定输出结构（列表/表格/ JSON）\n• 提供必要背景信息\n• 定义长度与详细程度\n• 设定合适约束条件\n• 设定语气、风格和专业程度\n能力激发\n风险控制\n充分利用模型在预训练中获得的知识与能力\n降低错误、偏见与不当内容的风险\n23374093\n• 用提示激活推理能力\n• 减少“幻觉”和虚假信息\n• 用示例引导特定模式\n• 不确定时承认知识边界\n• 通过角色设定调整行为方式\n• 防止提示词注入等安全风险\n52",
+    "summary": "Prompt工程的核心任务 374093 意图表达 输出引导 把需求、目标和期望转化为模型可理解的语言 控制模型输出的方向、格式与质量 • 清晰描述任务目标 • 指定输出结构（列表/表格/ JSON） • 提供必要背景信息 • 定义长度与详细程度 • 设定合适约束条件 • 设定语气、风格和专业程度 能力激发 风险控制 充分利用模型在预训练中获得的知识与能力 降低错误、偏见与不当内容的风险 23374093 • 用提示激活推理能力 • 减少“幻觉”和虚假信息 • 用示例引导特定模式 • 不确定时承认知识边界 • 通过角色设定调整行为方式 • 防止提示词注入等安全风险 52",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-54",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 54,
+    "type": "slide",
+    "title": "清晰且有约束的Prompt",
+    "heading_path": [
+      "清晰且有约束的Prompt"
+    ],
+    "text": "清晰且有约束的Prompt\n3374093|\n请解释什么是机器学习。\n常见类型\n已思考著干秒，\n监督学习：数据有明确答案。\n例如房价预测、垃圾邮件识别、疾病诊断辅助.\n机器学习（Machine Learning）可以理解为：让计算机从数据中学习规律，而不是只靠人手写规则来完成任\n无监督学习：数据没有标准答案，模型自己找结构。\n务。\n例如把用户分群、发现异常交易、整理相似文章。\n举个简单例子：\n强化学习：模型通过试错和奖励来学习。\n传统縮程里，你可能会写規則：\n例如游戏 Al、机器人控剔、自动骂驶中的邮分决策问题。\n如果邮件里有“中奖”免费领取”点击链接”，就判定为垃圾邮件。\n它和人工智能的关系\n但机器学习的做法是：给电脆看很多已经标注好的邮件，比如”这是垃圾部件“这不是垃圾邮件’。电膳会自己\n人工智能是一个更大的概念，目标是让机器表现出“智能”。\n从这些例子里总结规律，以后遇到新邮件时，就能判断它是不是垃圾邮件。\n机器学习是实现人工智能的一种靈要方法。\n深度学习又是机器学习的一个分支，特别擅长处理图像、语音、自然语言这类复杂数据。\n核心思想\n可以这样有：\n3374093\n机器学习通常包括三件事：\n1. 数据：比如图片、文字、声音、交易记录、用户行为等。\n人工智能 机器学习，深度学习\n2. 模型：用米学习规律的数学结构，可以理解成一个*可训练的判断都”。\n3.训练：让模型不断比较自己的预测和正确答案之间的差距，然后调整自己。\n一句话总结\n比如训练一个识别猫的模型：\n机器学习就是：用数据教会计算机发现规律，井用这些规律对新情况做预測、分类或决策。\n•输入：很多图片；\n• 标注：哪些是貓，哪些不是貓：\n•学习：模型找出猫的特征，比如耳朵形状、眼睛位置、毛发纹理：\n53\n•应用：看到新图片时，判断里面有没有猫。",
+    "summary": "清晰且有约束的Prompt 3374093| 请解释什么是机器学习。 常见类型 已思考著干秒， 监督学习：数据有明确答案。 例如房价预测、垃圾邮件识别、疾病诊断辅助. 机器学习（Machine Learning）可以理解为：让计算机从数据中学习规律，而不是只靠人手写规则来完成任 无监督学习：数据没有标准答案，模型自己找结构。 务。 例如把用户分群、发现异常交易、整理相似文章。 举个简单例子： 强化学习：模型通过试错和奖励来学习。 传统縮程里，你可能会写規則： 例如游戏 Al、机器人控剔、自动骂驶中的邮分决策问题。 如果邮件里有“中奖”免费领取”点击链接”，就判定为垃圾邮件。 它和人工智能的关系 但机器学习的做法是：给电脆看很多已经标注好的邮件，比如”这是垃圾部件“这不是垃圾邮件’。电膳会自己 人工智能是一个更大的概念，目标是让机器表现出“智能”。 从这些例子里总结规律，以后遇到新邮件时，就能判断它是不是垃圾邮件。 机器学习是实现人工智能的一种靈要方法。 深度学习又是机器学习的一个分支，特别擅长处理图像、语音、自然语言这类复杂数据。 核心思想 可以这样有： 3374093 机器学习通常包括三件事： 1. 数据：比如图片、文字、声音、交易记录、用户行为等。 人工智能 机器学习，深度学习 2. 模型：用米学习规律的数学结构，可以理解成一个*可训练的判断都”。 3.训练：让模型不断比较自己的预测和正确答案之间的差距，然后调整自己。 一句话总结 比如训练一个识别猫的模型： 机器学习就是：用数据教会计算机发现规律，井用这些规律对新情况做预測、分类或决...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-55",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 55,
+    "type": "slide",
+    "title": "清晰且有约束的Prompt",
+    "heading_path": [
+      "清晰且有约束的Prompt"
+    ],
+    "text": "清晰且有约束的Prompt\n374093\n你是一位经验丰富的数据科学家。请用通俗易懂的语言向一位没有技术\n背景的普通人解释什么是机器学习。\n要求：\n1. 使用日常生活中的类比\n2. 控制在 200字以内\n3.避免使用专业术语\n机器学习就像教小孩认水果。你不直接告诉他“苹果的规则”，而是给他看很多苹果、香蕉、橙子的例子。看多\n了以后，他会自己发现：苹果通常圆圆的、红红的；香蕉弯弯的、黄黄的。\n23:374093\n电脑也是这样。我们给它很多过去的例子，它从中找规律。以后遇到新情况，比如一张没见过的水果照片，它\n就能根据学到的经验做判断。\n所以，机器学习就是让电脑通过大量例子自己积累经验，学会做预测或判断。\n54",
+    "summary": "清晰且有约束的Prompt 374093 你是一位经验丰富的数据科学家。请用通俗易懂的语言向一位没有技术 背景的普通人解释什么是机器学习。 要求： 1. 使用日常生活中的类比 2. 控制在 200字以内 3.避免使用专业术语 机器学习就像教小孩认水果。你不直接告诉他“苹果的规则”，而是给他看很多苹果、香蕉、橙子的例子。看多 了以后，他会自己发现：苹果通常圆圆的、红红的；香蕉弯弯的、黄黄的。 23:374093 电脑也是这样。我们给它很多过去的例子，它从中找规律。以后遇到新情况，比如一张没见过的水果照片，它 就能根据学到的经验做判断。 所以，机器学习就是让电脑通过大量例子自己积累经验，学会做预测或判断。 54",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-56",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 56,
+    "type": "slide",
+    "title": "清晰且有约束的Prompt",
+    "heading_path": [
+      "清晰且有约束的Prompt"
+    ],
+    "text": "清晰且有约束的Prompt\n请用专业但是不生涩的语言向一位不了解AI以及\n机器学习：让材料规律从“经验判断“变成“可计算假设”\n数据的二维材料研究者解释什么是机器学习，并\n对二维材料研究者来说，机器学习可以先不要理解成“让计算机像人一样思考”，而更适合理解为：从已有实\n给出研究启发。\n验、计算或文献数据中学习结构一性质一工艺之间的关联，井用这整关联去预测、筛选、解釋或设计新材料体\n系。\n要求：\n这里先解释几个常见词。数据不是单指大表格，也可以是拉曼峰位、光致发光强度、扫描透射电镇图像、第一\n1.如果使用数据/AI专业词汇必须提前进行解释\n性原理计算得到的能带、CVD生长温度、缺陷密度、载流子迁移率等、特征是把材料信息转化为计算机可处\n理的描述，倒如层数、品格常数、元素电负性差、形成能、应变大小、鴃陷类型、基底种类。模型是一个数学\n2. 尽量内容富有科学性，不要浅层解释\n关系，它接收这些特征，输出预測结果，倒如带辣、稳定性、催化过电位或剥离能。训练就是让模型反复比纹\n预測值和已知结果，调整内部参数，使预測误差变小。\n3. 可以直接使用材料学专业词汇，回答要有启\n如果用精料酒高打比方，机器学习不是凭空“发明规律”，而是像一种高維的相图构建方法：传統相園关注溫\n发性\n度、压力、成分等少数变量，而二维材料研究往往还受到层数、堆垛方式、缺陷、应变、界面电荷转移、基底\n耦合，制备动力学等多因素影响。机器学习的价值，正在于处理这种多变量耦合问题。\n4.要善用表格，给出具体研究例子，激发阅读\n它和第一性原理、实验经验是什么关系？\n兴趣\n机器学习不是第一性原理计算的替代品，也不是实验经验的简单统计版。更准确地说，它是一种连接工具：可\n13374093\n以把第一性原理计算的高精度但低通量数据、实验中的真实但環声较大的数据、以及文献中分散的結果统一起\n5.要使用小标题+段落报告的形式，不要一句话\n来，形成可检验的預測框架。\n一段，也不要在没必要的地方使用分点\n二维材料研究中，一个常见问题是“可能结构空间太大’。以过覆金属硫族化物、MXene、Janus结构、范德华\n6.不要随意使用不翻译的英文专业词，除非该\n异质结为例，元素组合、层间转角、官能团、缺陷、应变状态一旦展开，候选体系数量会迅速增长，逐个做实\n验或高精度计算成本很高。机器学习可以先做“粗第”，把最可能稳定、最可能具有目标性质的候选材料排到前\n词汇缺少恰当且公认的翻译方法\n面，再交给第一性原理计算或实验验证。\n7. 回答不要超过3000字\n55",
+    "summary": "清晰且有约束的Prompt 请用专业但是不生涩的语言向一位不了解AI以及 机器学习：让材料规律从“经验判断“变成“可计算假设” 数据的二维材料研究者解释什么是机器学习，并 对二维材料研究者来说，机器学习可以先不要理解成“让计算机像人一样思考”，而更适合理解为：从已有实 给出研究启发。 验、计算或文献数据中学习结构一性质一工艺之间的关联，井用这整关联去预测、筛选、解釋或设计新材料体 系。 要求： 这里先解释几个常见词。数据不是单指大表格，也可以是拉曼峰位、光致发光强度、扫描透射电镇图像、第一 1.如果使用数据/AI专业词汇必须提前进行解释 性原理计算得到的能带、CVD生长温度、缺陷密度、载流子迁移率等、特征是把材料信息转化为计算机可处 理的描述，倒如层数、品格常数、元素电负性差、形成能、应变大小、鴃陷类型、基底种类。模型是一个数学 2. 尽量内容富有科学性，不要浅层解释 关系，它接收这些特征，输出预測结果，倒如带辣、稳定性、催化过电位或剥离能。训练就是让模型反复比纹 预測值和已知结果，调整内部参数，使预測误差变小。 3. 可以直接使用材料学专业词汇，回答要有启 如果用精料酒高打比方，机器学习不是凭空“发明规律”，而是像一种高維的相图构建方法：传統相園关注溫 发性 度、压力、成分等少数变量，而二维材料研究往往还受到层数、堆垛方式、缺陷、应变、界面电荷转移、基底 耦合，制备动力学等多因素影响。机器学习的价值，正在于处理这种多变量耦合问题。 4.要善用表格，给出具体研究例子，激发阅读 它和第一性原理、实验经验是什么关系？ 兴趣 机器学习不是第一性...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-57",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 57,
+    "type": "slide",
+    "title": "清晰且有约束的Prompt",
+    "heading_path": [
+      "清晰且有约束的Prompt"
+    ],
+    "text": "清晰且有约束的Prompt\n3374083\n传携研究问題\n机器学习可做的事\n对二维材料的启发\n请用专业但是不生濯的语言向一位不了解AI以及数据的二维材料研究者\n解釋什么是机器学习，并给出研究启发。\n粵些新二擔化合物可能稳定？\n学习已知材料的形成統、利腐能、声\n从*凭化学直觉选体系*变为“系統握索餐\n要求：\n子撸定悾規律\n选空闻\n1. 如果使用数据/A专业词汇必須提前进行解释\n2. 尽量内容富有科学性，不要浅层解释\n蚣何调控帶蒽和觼郁边位置？\n建立粗成、层数、应实、鼓箱与电子\n为光电彈黑、光催化、品体管沟通材料\n结构2间的关系\n捏供鎛透路纸\n3.可以直接使用材料学专业词汇，回答要有启发性\n4. 要善用表格，给出具体研究例子，激发阅读兴趣\nCVD生长参數如何影諦品粒尺寸？\n从溫度、的驱体浓度、载气流靈、番\n将\"经验调参\"转沩“生长条件优化\"\n5. 要使用小标題+段落报告的形式，不要一句请一段，也不要在没必要\n鹿处理等数鋸中学习工艺窗口\n的地方使用分点\n6. 不要随意使用不翻译的英文专业词，除非设调汇象少恰当且公认的醒\n肤陷时僅化活性有什么膨响？\n关联鼓陷类型、局城配位、电荷分布\n帮助设计边缘位点。空位、单原子锡定\n译方法\n5吸附袋\n位点\n7. 回答不要超过3000字\n收起～\n品费围像中如何说别品界、空位、猫\n从椋注圈像中学习請构缺陷的极贷楆\n加達高遘罣衷征和總汁分靳\n式\n机器学习真正“学到”的是什么？\n机器学习惯型学到的不是教科书上的显式公式，而是输入和输出之间的映射关系。例如研究二推催化材料时，\n3374093\n输入可以是金属中心种类。配位环境、确空位浓度、吸附中间体的键长，电荷转移黛：输出可以是氢吸附自由\n能或氧还原反应中间体吸附能。模型会尝试找到傅些因素最能解釋活性变化。\n这时需要解释一个重要词：相关性。机器学习首先学到的是“哪些变量一起变化’。但相关性不自动等于因果关\n系。例如模型可能发现菜类基底上的MoS，迁移宰较高，但真正原因可能不是基底名称本身，而是基底诱导的\n应变、界面陷耕态减少或介电開蔽增强，因此，在材料研究中使用机器学习，不能只追求预測准确事，还要结\n合物理化学机制去判断模型是否“说得通”\n另一个重要词是可解釋性，意思是研究者希望知道模型为什么做出某个预測。对材料科学而言，可解釋性尤其\n关键，因为我们不只是要一个数值，还希望得到可发表、可验证，可推广的机制认识。例如模型指出“金属一\n56\n碧银长*郑-带中心价胃“对催化活性贵献品大。这钟可能自发后烧通讨感恋。合金化或缺路工得调节局域由子",
+    "summary": "清晰且有约束的Prompt 3374083 传携研究问題 机器学习可做的事 对二维材料的启发 请用专业但是不生濯的语言向一位不了解AI以及数据的二维材料研究者 解釋什么是机器学习，并给出研究启发。 粵些新二擔化合物可能稳定？ 学习已知材料的形成統、利腐能、声 从*凭化学直觉选体系*变为“系統握索餐 要求： 子撸定悾規律 选空闻 1. 如果使用数据/A专业词汇必須提前进行解释 2. 尽量内容富有科学性，不要浅层解释 蚣何调控帶蒽和觼郁边位置？ 建立粗成、层数、应实、鼓箱与电子 为光电彈黑、光催化、品体管沟通材料 结构2间的关系 捏供鎛透路纸 3.可以直接使用材料学专业词汇，回答要有启发性 4. 要善用表格，给出具体研究例子，激发阅读兴趣 CVD生长参數如何影諦品粒尺寸？ 从溫度、的驱体浓度、载气流靈、番 将\"经验调参\"转沩“生长条件优化\" 5. 要使用小标題+段落报告的形式，不要一句请一段，也不要在没必要 鹿处理等数鋸中学习工艺窗口 的地方使用分点 6. 不要随意使用不翻译的英文专业词，除非设调汇象少恰当且公认的醒 肤陷时僅化活性有什么膨响？ 关联鼓陷类型、局城配位、电荷分布 帮助设计边缘位点。空位、单原子锡定 译方法 5吸附袋 位点 7. 回答不要超过3000字 收起～ 品费围像中如何说别品界、空位、猫 从椋注圈像中学习請构缺陷的极贷楆 加達高遘罣衷征和總汁分靳 式 机器学习真正“学到”的是什么？ 机器学习惯型学到的不是教科书上的显式公式，而是输入和输出之间的映射关系。例如研究二推催化材料时， 3374093 输入可以是金属中心种类。配位...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-58",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 58,
+    "type": "slide",
+    "title": "清晰且有约束的Prompt",
+    "heading_path": [
+      "清晰且有约束的Prompt"
+    ],
+    "text": "清晰且有约束的Prompt\n23374093|\n请用专业但是不生涩的语言向一位不了解AI以及数据的二推材料研究者\n解释什么是机器学习，井给出研究启发。\n二维材料中，哪些问题特别适合机器学习？\n要求：\n1. 如果使用数据/AI专业词汇必須提前进行解释\n机器学习體适合郡些变留多、样本逐渐积紧、規律非找性明显的问题。这里的非线性是指结果不是由单个因素\n2. 尽量内容富有科学性，不要浅层解释\n简单相加决定的，例如层数变化、基底耦合和缺陷散射可能共同影响载流子迁移率；单看其中一个因素，规律\n3.可以直接使用材料学专业词汇。回答要有启发性\n并不清楚。\n4.要善用表格，给出具体研究例子，激发阅读兴趣\n研究方向\n可输入的信息\n可预測或傀化的目标\n可能产生的新问器\n5. 要使用小标題+段落报告的形式，不要一句话一段，也不要在没必要\n新型二撞半野傳等透\n的地方使用分点\n元窮组成、品停精构、限间|\n彩辣、有效质量、环塊糖定\n是香存在适含低功耗器件的新\n6. 不要随意使用不翻译的英文专业调，除非该调汇說少恰当且公认的醒\n結合能、对腳性\n沟𨘋材料？\n译方法\n慈穗华舜质桔设计\n功通数、品格关配、履间\n7. 回答不要超过3000字\n統带对齐、界面电荷转移、\n如何快漣寻找刂型繞罾矩列破强\n拒、煌圾方式\n激子行为\n内建电场体系？\n收起\n鴃餡工程\n空位，挣杂、边螺物型，局\n修化吸附總、磁矩、红流子\n哪类𩸭餡類提窩活性又不破坏\n城配位\n數射\n樟定性？\n生长与制备\n温度、时间。前逐体比例.\n单晶尺寸、层致均匀性、鴃\n胎香预測最优CVD腐口，而不\n基鹿、气尔\n陷密度\n是逐轮试镥？\n3374083\n表征自动化\nTEM、AFM.控费、PL.\n层数、应安、捧杂、鴃陷分\n脆香从多憫态表征中重建材割\nXPS園讚\n质量圈謝？\n这里的多模态也需要解释：它指不同类型数据的联合使用。例如一片二维材料样品，不只有拉曼谱，还有\nAFM厚度、PL峰位、XPS价态、TEM图像、电输运曲线，人类研究者通常会综合判断样品质量，机器学习也\n可以学习这种\"“多证报能合\n57",
+    "summary": "清晰且有约束的Prompt 23374093| 请用专业但是不生涩的语言向一位不了解AI以及数据的二推材料研究者 解释什么是机器学习，井给出研究启发。 二维材料中，哪些问题特别适合机器学习？ 要求： 1. 如果使用数据/AI专业词汇必須提前进行解释 机器学习體适合郡些变留多、样本逐渐积紧、規律非找性明显的问题。这里的非线性是指结果不是由单个因素 2. 尽量内容富有科学性，不要浅层解释 简单相加决定的，例如层数变化、基底耦合和缺陷散射可能共同影响载流子迁移率；单看其中一个因素，规律 3.可以直接使用材料学专业词汇。回答要有启发性 并不清楚。 4.要善用表格，给出具体研究例子，激发阅读兴趣 研究方向 可输入的信息 可预測或傀化的目标 可能产生的新问器 5. 要使用小标題+段落报告的形式，不要一句话一段，也不要在没必要 新型二撞半野傳等透 的地方使用分点 元窮组成、品停精构、限间| 彩辣、有效质量、环塊糖定 是香存在适含低功耗器件的新 6. 不要随意使用不翻译的英文专业调，除非该调汇說少恰当且公认的醒 結合能、对腳性 沟𨘋材料？ 译方法 慈穗华舜质桔设计 功通数、品格关配、履间 7. 回答不要超过3000字 統带对齐、界面电荷转移、 如何快漣寻找刂型繞罾矩列破强 拒、煌圾方式 激子行为 内建电场体系？ 收起 鴃餡工程 空位，挣杂、边螺物型，局 修化吸附總、磁矩、红流子 哪类𩸭餡類提窩活性又不破坏 城配位 數射 樟定性？ 生长与制备 温度、时间。前逐体比例. 单晶尺寸、层致均匀性、鴃 胎香预測最优CVD腐口，而不 基鹿、气尔 陷密度 是逐轮试镥？...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-59",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 59,
+    "type": "slide",
+    "title": "清晰且有约束的Prompt",
+    "heading_path": [
+      "清晰且有约束的Prompt"
+    ],
+    "text": "清晰且有约束的Prompt\n3374083\n请用专业但是不生涩的语言向一位不了解A以及数据的二维材料研究者\n一个具体例子：从“找催化活性位点”到“设计活性位点”\n解釋什么是机器学习，井给出研究启发。\n假设研究目标是寻找高效二维析氧反应健化材料。传统路线可能是先选择MoS」、WS；、MoSe，等体系，再通\n要求：\n过制造硫空位、边缘暴露、金属接杂或构建异质结来优化性能。机器学习路线可以更系统：先收集不同二维材\n1. 如果使用数据/A专业词汇必須提前进行解释\n料中氢吸附自由能、形成能、导电性、缺陷类型和局域配位环境等数理：再把金属元索性质、配位数、健长、\n2. 尽量内容富有科学性，不要浅层解釋\n局城电荷、应变状态等转化为特征；然后训练模型预測惠些位点接近热中性氢吸附。\n3.可以直接使用材料学专业词汇，回答要有启发性\n4. 要善用表格，给出具体研究例子，激发阅读兴趣\n真正有启发性的地方在于，模型可能不是简单告诉你“某材料最好”，而是指出一类规律：例如菜些边缘位点在\n5. 要使用小标题+段落报告的形式，不要一句话一段，也不要在没必要\n轻德拉伸应变下吸附能更接近理想馆，或者菜类单原子摻杂能同时改善导电性和中间体吸附。这样，机器学习\n的地方使用分点\n就从“我行榜工具“变成“假没生成器”：它提出可检验的材料设计思路，实验和计算再去验证。\n6. 不要随意使用不翻译的英文专业词，除非该调汇缺少恰当且公认的醒\n译方法\n另一个例子：二维材料生长的“工艺地图”\n7. 回答不要超过3000字\nCVD生长二推精料时，研究者面对的是典型的复杂系统：温度梯度、前驱体蒸气压、基底表面能、成核密\n收起^\n度，载气流量和反应时间被此構合，很多论文给出了成功条件，但不同实验室设备差异导致參数难以直接复\n现。\n机器学习可以帮助建立“工艺一结构一性能”地图、比如输入生长温度、硫源温度、基底预处理方式、戴气流量\n和反应时间，输出晶粒尺寸、层数、缺陷密度或PL强度，随着数据增加，模型可以建议下一组最值得尝试的\n实验条件，这里有一个常用概念叫主动学习：模型不是被动等待数据，而是根据已有结果判断“下一次实验做\n3374093\n需里最有信息量”，对昂费、耗时的材料制备来说，这比盲目扫参数更高效。\n需要警惕的问题：机器学习不是\"黑箱魔法”\n二维材料敗摆常常存在几个挑战，第一，数摆最不一定大，而且不同论文的測试条件、样品质量、基底、环境\n气点不一致。第二，负结果很少发表，导致模型容易只看到“成功样本”。第三，实验数据有噪声，例如转移残\n留、搜触电阻、样品老化都会影响性能。第四，某些看似高准确軍的模型可能只是学到了效据集缩差，而没有\n学到材料規律。\n因此，好的机器学习研究应该满足三个标准：预测结果要能被实验或第一性原理验证；模型使用的特征要尽量\n58\n具有材料物理寬义；模型提出的規律要能转化为新的合成\n调按或夷征策略，对于二维材料研究者来说。机容",
+    "summary": "清晰且有约束的Prompt 3374083 请用专业但是不生涩的语言向一位不了解A以及数据的二维材料研究者 一个具体例子：从“找催化活性位点”到“设计活性位点” 解釋什么是机器学习，井给出研究启发。 假设研究目标是寻找高效二维析氧反应健化材料。传统路线可能是先选择MoS」、WS；、MoSe，等体系，再通 要求： 过制造硫空位、边缘暴露、金属接杂或构建异质结来优化性能。机器学习路线可以更系统：先收集不同二维材 1. 如果使用数据/A专业词汇必須提前进行解释 料中氢吸附自由能、形成能、导电性、缺陷类型和局域配位环境等数理：再把金属元索性质、配位数、健长、 2. 尽量内容富有科学性，不要浅层解釋 局城电荷、应变状态等转化为特征；然后训练模型预測惠些位点接近热中性氢吸附。 3.可以直接使用材料学专业词汇，回答要有启发性 4. 要善用表格，给出具体研究例子，激发阅读兴趣 真正有启发性的地方在于，模型可能不是简单告诉你“某材料最好”，而是指出一类规律：例如菜些边缘位点在 5. 要使用小标题+段落报告的形式，不要一句话一段，也不要在没必要 轻德拉伸应变下吸附能更接近理想馆，或者菜类单原子摻杂能同时改善导电性和中间体吸附。这样，机器学习 的地方使用分点 就从“我行榜工具“变成“假没生成器”：它提出可检验的材料设计思路，实验和计算再去验证。 6. 不要随意使用不翻译的英文专业词，除非该调汇缺少恰当且公认的醒 译方法 另一个例子：二维材料生长的“工艺地图” 7. 回答不要超过3000字 CVD生长二推精料时，研究者面对的是典型的复杂系统：温度梯度、前驱体蒸气...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-60",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 60,
+    "type": "slide",
+    "title": "清晰且有约束的Prompt",
+    "heading_path": [
+      "清晰且有约束的Prompt"
+    ],
+    "text": "清晰且有约束的Prompt\n23374093\n请用专业但是不生涩的语言向一位不了解AI以及散据的二推材料研究者\n解释什么是机器学习，井给出研究启发。\n婴求：\n1. 如果使用数据/AI专业词汇必須提前进行解释\n给二维材料研究的几个启发\n2. 尽量内容富有科学性，不要浅层解释\n机器学习可以把二维材料研究从“单个楼料的深入研究“推进到“材料象族的规律发现”。比如，不只研究某一种\n3.可以直接使用精料学专业词汇，回答要有启发性\nMoS；样品为什么性能好，而是比按一系列过波金属硫族化物、硒化物、碲化物、Janus结构和异质结，寻找\n4.要善用表格，给出具体研究例子，激发阅读兴趣\n决定稳定性、带腺、激子行为或催化活性的共同控制因子。\n5. 要使用小标題+段落报告的形式，不要一句话一段，也不要在没必要\n的地方使用分点\n它也会改变实验设计方式。过去实验常按经验逐个变量调整，但机器学习鼓勵记录完整实验上下文，包括失败\n6. 不要随意使用不翻译的英文专业词，除非该调汇峡少恰当且公认的醒\n条件、环境湿度、基底批次、转移方式，退火历史等。这些过去被视为“背景信息”的因素，可能正是解释二组\n译方法\n材料性能波动的关健变量。\n7. 回答不要超过3000字\n收起～\n更重要的是，机器学习能帮助提出新问題：二推材料的性能上限是否受某几个物理量共同限制？某些缺陷是否\n存在“最优浓度窗口”？ 范德华骨质結中是香能通过展间转角和界面偶极协同调控能带排列？这整问题井不浅\n层，它们要求机器学习、第一性原理，原位表征和可控制备共同工作。\n总结\n对二推材料研究而言，机器学习不是把材料科学变成純散据游戏，而是提供一种新的研究显微镜。传统星微镜\n3374093\n看见原子结构，请学看见电子态，机器学习则帮助我们在大量给构、工艺和性能數据之间看见隐藏关系。最有\n价值的用法不是让模型替研究者下结论，而是让惯型提出更好的候选材料，更聪明的实险路径和更可检验的科\n学假设。真正优秀的机器学习材料研究，最后仍然要回到材料学本身：结构是否合理，机制是否清楚，预测是\n否可验证，启发是否能推动新的材料设计。\n59",
+    "summary": "清晰且有约束的Prompt 23374093 请用专业但是不生涩的语言向一位不了解AI以及散据的二推材料研究者 解释什么是机器学习，井给出研究启发。 婴求： 1. 如果使用数据/AI专业词汇必須提前进行解释 给二维材料研究的几个启发 2. 尽量内容富有科学性，不要浅层解释 机器学习可以把二维材料研究从“单个楼料的深入研究“推进到“材料象族的规律发现”。比如，不只研究某一种 3.可以直接使用精料学专业词汇，回答要有启发性 MoS；样品为什么性能好，而是比按一系列过波金属硫族化物、硒化物、碲化物、Janus结构和异质结，寻找 4.要善用表格，给出具体研究例子，激发阅读兴趣 决定稳定性、带腺、激子行为或催化活性的共同控制因子。 5. 要使用小标題+段落报告的形式，不要一句话一段，也不要在没必要 的地方使用分点 它也会改变实验设计方式。过去实验常按经验逐个变量调整，但机器学习鼓勵记录完整实验上下文，包括失败 6. 不要随意使用不翻译的英文专业词，除非该调汇峡少恰当且公认的醒 条件、环境湿度、基底批次、转移方式，退火历史等。这些过去被视为“背景信息”的因素，可能正是解释二组 译方法 材料性能波动的关健变量。 7. 回答不要超过3000字 收起～ 更重要的是，机器学习能帮助提出新问題：二推材料的性能上限是否受某几个物理量共同限制？某些缺陷是否 存在“最优浓度窗口”？ 范德华骨质結中是香能通过展间转角和界面偶极协同调控能带排列？这整问题井不浅 层，它们要求机器学习、第一性原理，原位表征和可控制备共同工作。 总结 对二推材料研究而言，机器学习不是把材料科...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-61",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 61,
+    "type": "slide",
+    "title": "给予示例的Prompt",
+    "heading_path": [
+      "给予示例的Prompt"
+    ],
+    "text": "给予示例的Prompt\n【上传论文Improving Language Understanding by Generative Pre-Training】阅读我的论\n文，请分析下面给出的标题示例特征，仿照这些风格，不用理会现有标题，帮我的论文换一个\n你认为最合适的标题：\nBERT: Pre-training of Deep Bidirectional Transformers for Language Understanding\n•\nAdam: A Method for Stochastic Optimization\n• Dropout: A Simple Way to Prevent Neural Networks from Overfitting\n3374093\nAI答案：GPT: Generative Pre-Training of Transformers for Language\nUnderstanding\n61",
+    "summary": "给予示例的Prompt 【上传论文Improving Language Understanding by Generative Pre-Training】阅读我的论 文，请分析下面给出的标题示例特征，仿照这些风格，不用理会现有标题，帮我的论文换一个 你认为最合适的标题： BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding • Adam: A Method for Stochastic Optimization • Dropout: A Simple Way to Prevent Neural Networks from Overfitting 3374093 AI答案：GPT: Generative Pre-Training of Transformers for Language Understanding 61",
+    "terms": [
+      "Dropout",
+      "Adam",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-62",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 62,
+    "type": "slide",
+    "title": "思维链 （Chain-of-Thought, CoT）",
+    "heading_path": [
+      "思维链 （Chain-of-Thought, CoT）"
+    ],
+    "text": "思维链 （Chain-of-Thought, CoT）\n23374093\nOne-shot COT\nStandard Prompting\nChain-of-Thought Prompting\nModel Input\nModel Input\ntennis balls. Each can has 3 tennis balls. How many\nQ: Roger has 5 tennis balls. He buys 2 more cans of\nQ: Roger has 5 tennis balls. He buys 2 more cans of\ntennis balls does he have now？\ntennis balls, Each can has 3 tennis balls. How many\ntennis balls does he have now？\nA: The answer is 11.\nA: Roger started with 5 balls. 2 cans of 3 tennis balls\nQ: The cafeteria had 23 apples. If they used 20 to\neach is 6 tennis balls. 5 + 6- 11, The answer is 11.\nmake lunch and bought 6 more, how many apples\ndo they have？\nQ: The cafeteria had 23 apples. If they used 20 to\ndo they have？\nmake lunch and bought 6 more, how many apples\nModel Output\nModel Output\n23374093\nA: The answer is 27，\nA: The cafeteria had 23 apples originally. They used\n20 to make lunch. So they had 23-20- 3. They\nbought 6 more apples, so they have 3 +6 = 9. The\nanswer is 9.v\n62\nWei J, et al. Advances in Neural Information Processing Systems, 2022, 35: 24824-24837，",
+    "summary": "思维链 （Chain-of-Thought, CoT） 23374093 One-shot COT Standard Prompting Chain-of-Thought Prompting Model Input Model Input tennis balls. Each can has 3 tennis balls. How many Q: Roger has 5 tennis balls. He buys 2 more cans of Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls does he have now？ tennis balls, Each can has 3 tennis balls. How many tennis balls does he have now？ A: The answer is 11. A: Roger started with 5 balls. 2 cans of 3 tennis balls Q: The cafeteria had 23 apples. If they used 20 to each is 6 tennis balls. 5 + 6- 11, The answer is 11. make lunch and bought 6 more, how many apples do they have？ Q: The cafeteria had 23 apples. If they used 20 t...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-63",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 63,
+    "type": "slide",
+    "title": "思维链（Chain-of-Thought, CoT）",
+    "heading_path": [
+      "思维链（Chain-of-Thought, CoT）"
+    ],
+    "text": "思维链（Chain-of-Thought, CoT）\n23374093\nOne-shot COT\n- Standard prompting\n0-Chain-of-thought prompting\nPrior supervised best\nLaMDA\nGPT\nPalM\nFinctuncd GP1-3 175B\n60\n（%\nPrior best\nratc\n40\n• 跨模型有效\nPaLM 540B: standard prompting\nPaLM 540B: chain-of-thought prompting\ngoe。\n• CoT是模型规模的涌现能力\n100\n80\n80\n，不随模型规模线性增长\nSolve rate （%）\n60\n55\n57\nmk台\nMm∞\n40\n33\n• 小模型下COT无效甚至有害\n18\n23374093\n20\n100\n0\n75\nMath Word Problems （GSM8K）\nMAWPS\n50\n25\n0.4 8 137\n0.4 7 175\n8 62 540\nModel scale （# parametens in billions）\n63\nWei J, et al. Advances in Neural Information Processing Systems, 2022, 35:24824-24837，",
+    "summary": "思维链（Chain-of-Thought, CoT） 23374093 One-shot COT - Standard prompting 0-Chain-of-thought prompting Prior supervised best LaMDA GPT PalM Finctuncd GP1-3 175B 60 （% Prior best ratc 40 • 跨模型有效 PaLM 540B: standard prompting PaLM 540B: chain-of-thought prompting goe。 • CoT是模型规模的涌现能力 100 80 80 ，不随模型规模线性增长 Solve rate （%） 60 55 57 mk台 Mm∞ 40 33 • 小模型下COT无效甚至有害 18 23374093 20 100 0 75 Math Word Problems （GSM8K） MAWPS 50 25 0.4 8 137 0.4 7 175 8 62 540 Model scale （# parametens in billions） 63 Wei J, et al. Advances in Neural Information Processing Systems, 2022, 35:24824-24837，",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-64",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 64,
+    "type": "slide",
+    "title": "思维链 （Chain-of-Thought, CoT）",
+    "heading_path": [
+      "思维链 （Chain-of-Thought, CoT）"
+    ],
+    "text": "思维链 （Chain-of-Thought, CoT）\n23374093\nZero-shot COT\n（a） Few-shot\n（b） Few-shot-CoT\nballs, Each can has 3 tennis balls. How many tennis balls does\nQ: Roger has 5 tennis balls. He buys 2 more cans of tennis\nballs. Each can has 3 tennis balls. How many tennis balls does\nQ: Roger has 5 tennis balls. He buys 2 more cans of tennis\nhe have now？\nhe have now？\nA: The answer is 11.\nA: Roger started with 5 balls. 2 cans of 3 tennis balls each is 6\ntennis balls. 5+6= 11. The answer is 11.\nand half of the golf balls are blue. How many blue golf balls are\nQ: A juggler can juggle 16 balls. Half of the balls are golf balls，\nQ: A juggler can juggle 16 balls. Half of the balls are golf balls，\nthere？\nand half of the golf balls are blue. How many blue golf balls are\nA：|\nthere？\nA：\n（Output） The answer is 8. X\nballs So there are 16/2 = 8 golf balls. Half of the golf ball's are\n（Output） The juggler can juggle 16 balls. Half of the balls are goff\nDlue. So there are 8/2= 4 Dlue golf oalls, The answeris 4.\n（c） Zero-shot\n（d） Zero-shot-CoT （Ours）\n23374093\nQ: A juggler can juggle 16 balls. Half of the balls are golf balls，\nQ: A juggler can juggle 16 balls. Half of the balls are golf balls.\nthere？\nand half of the golf balls are blue. How many blue golf balls are\nand hall of the golf balls are biue. How many blue golf balls are\nA: The answer （arabic numerals） is\nthere？\nA: Ler's think step by step.\n（Output） 8 X\n（Output） There are 16 ballis in total. Haif of the balls are golf\nballs That means that there are 8 golf balls, Half of the golf balls\nare biue, That means that there are 4 blue golf balls. -\nKojima T, et al. Advances in Neural Information Processing Systems, 2022, 35: 22199-22213/",
+    "summary": "思维链 （Chain-of-Thought, CoT） 23374093 Zero-shot COT （a） Few-shot （b） Few-shot-CoT balls, Each can has 3 tennis balls. How many tennis balls does Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 tennis balls. How many tennis balls does Q: Roger has 5 tennis balls. He buys 2 more cans of tennis he have now？ he have now？ A: The answer is 11. A: Roger started with 5 balls. 2 cans of 3 tennis balls each is 6 tennis balls. 5+6= 11. The answer is 11. and half of the golf balls are blue. How many blue golf balls are Q: A juggler can juggle 16 balls. Half of the balls are golf balls， Q: A juggler can juggle 16 balls. Half of the balls are golf balls...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-65",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 65,
+    "type": "slide",
+    "title": "思维链 （Chain-of-Thought, CoT）",
+    "heading_path": [
+      "思维链 （Chain-of-Thought, CoT）"
+    ],
+    "text": "思维链 （Chain-of-Thought, CoT）\n23374093\nAuto COT\nAuto Demos One by One\nQ: Whille shopping for music online, Zoe bought 3...\nQ: While shopping for music online, Zoe bought 3 country albums and 5\nmany songs did Zoe buy total？\npop albums. Each album came with a lynic sheet and had 3 songs. How\nA: Lef's think step by step. Zoe bought 3 country albums. Each album has 3\nQ: A chef needs to cook 9 potatoes. He has already...\npop albums. Each album has 3 songs. So she bought 5*3=15 songs from\nthe pop albums. Zoe bought 9+15=24 songs in total. The answer is 24.\n•Q: A chef needs to cook 9 potatoes. He has already cooked 7. If each：\nClustering\nA: Lefs think step by step. The chef has already cooked 7 potatoes. That\npotato takes 3 minutes to cook, how long will it take him to cook the rest？\nmeans it has taken him 7'3 minutes to cook those 7 potatoes. That means\nit wil take him 3 more minutes to cook each of the remaining 2 potatoes...\nQ: A pel store had 64 puppies. In one day they sold 28 of them and put\n23374093\nLLM\nDemo Construction\nthe rest into cages with 4 in each cage. How many cages did they use？\nA: Let s think step by stop.\nQ: While shopping for music online ...A: Lef's\nTest Question\nLLM\nIn-Context Reasoning\nSampling by Selection Criteria\nThe pet store had 64 puppies. They sold 28 of them. That means they have\nQ: A chel needs to cook 9 potatoes.. A: Lets\n36 puppies left. They put the rest into cages with 4 in each cage.\nmeans they have 9 cages. The answer is 9.\n65",
+    "summary": "思维链 （Chain-of-Thought, CoT） 23374093 Auto COT Auto Demos One by One Q: Whille shopping for music online, Zoe bought 3... Q: While shopping for music online, Zoe bought 3 country albums and 5 many songs did Zoe buy total？ pop albums. Each album came with a lynic sheet and had 3 songs. How A: Lef's think step by step. Zoe bought 3 country albums. Each album has 3 Q: A chef needs to cook 9 potatoes. He has already... pop albums. Each album has 3 songs. So she bought 5*3=15 songs from the pop albums. Zoe bought 9+15=24 songs in total. The answer is 24. •Q: A chef needs to cook 9 potatoes. He has already cooked 7. If each： Clustering A: Lefs think step by step. The chef has al...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-66",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 66,
+    "type": "slide",
+    "title": "GPT-01",
+    "heading_path": [
+      "GPT-01"
+    ],
+    "text": "GPT-01\n23374093\nCompetition Math\n（AIME 2024）\nCompetition Code\nPhD-Level Science Questions\n（Codeforces）\n100\n100\n83.3.\n89.0\n100\n（GPQA Diamond）\n80\n80\n80\n78.3\n78.0\n60\n56.7\n62.0\n69.7\n原生COT+强化学习\n60\n60-\n56.1\naccuracy\npercentile\n40\naccufa\n带来超高性能\n40\n40\n20-\n13.4\n20\n11.0\n20-\n23374093\ngpt4o\npreview\no1\nol\n9pt4o\npreview\nO1\no1\n9pt4o.\npreview\no1\no1\nhuman\ncxpcrt\n66",
+    "summary": "GPT-01 23374093 Competition Math （AIME 2024） Competition Code PhD-Level Science Questions （Codeforces） 100 100 83.3. 89.0 100 （GPQA Diamond） 80 80 80 78.3 78.0 60 56.7 62.0 69.7 原生COT+强化学习 60 60- 56.1 accuracy percentile 40 accufa 带来超高性能 40 40 20- 13.4 20 11.0 20- 23374093 gpt4o preview o1 ol 9pt4o preview O1 o1 9pt4o. preview o1 o1 human cxpcrt 66",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-67",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 67,
+    "type": "slide",
+    "title": "DeepSeek R1",
+    "heading_path": [
+      "DeepSeek R1"
+    ],
+    "text": "DeepSeek R1\n23374093\n什么是用推饼COT？\n步。这个期大规里要，每阳月终例子说明！\n原生COT\n形本伊特和Cof，但不现人，非世W路名\n純术上叫時守号\n能后行旺深身幹德，雕P始樂會技术人觉，典关心“有什么同\n4093\n思排量（Chain-of-Thought，\n簡檸 CoT）二\n柠用于受月大语高模型（如GPT、PALM 等）在製尔務理\n任务上性菜舒技术。\n它的核の思想算引\n模拟人突逐步撞理的过釋，而不是真接输洲最终答系。\n核心概念：\n1. 模仿人贵思考\n人次在解决复杂向麸（如数学類。還機滑理）附，\n步步睡分，马出中间步衣。CoT 航型让通六\n物要心“原示见考过餐”，過过生成中何差理出像，\n2 突玻森接回答的局限\n传统湿示（例直换问：下题X的各案是什么？了可能子效模型建过推理，喜快销则签樂，尤其多\n67\n步餐何数上容易出语，CoT 通过要求板型 逐步母考，容聪升说强准種的准销性",
+    "summary": "DeepSeek R1 23374093 什么是用推饼COT？ 步。这个期大规里要，每阳月终例子说明！ 原生COT 形本伊特和Cof，但不现人，非世W路名 純术上叫時守号 能后行旺深身幹德，雕P始樂會技术人觉，典关心“有什么同 4093 思排量（Chain-of-Thought， 簡檸 CoT）二 柠用于受月大语高模型（如GPT、PALM 等）在製尔務理 任务上性菜舒技术。 它的核の思想算引 模拟人突逐步撞理的过釋，而不是真接输洲最终答系。 核心概念： 1. 模仿人贵思考 人次在解决复杂向麸（如数学類。還機滑理）附， 步步睡分，马出中间步衣。CoT 航型让通六 物要心“原示见考过餐”，過过生成中何差理出像， 2 突玻森接回答的局限 传统湿示（例直换问：下题X的各案是什么？了可能子效模型建过推理，喜快销则签樂，尤其多 67 步餐何数上容易出语，CoT 通过要求板型 逐步母考，容聪升说强准種的准销性",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-68",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 68,
+    "type": "slide",
+    "title": "DeepSeek R1-zero",
+    "heading_path": [
+      "DeepSeek R1-zero"
+    ],
+    "text": "DeepSeek R1-zero\n23374093|\n仅使用强化学习（RL）来实现推理行为\nA conversation between User and Assistant. The user asks a question, and the Assistant solves it.\nThe assistant first thinks about the reasoning Process in the mind and then provides the user\nwith the answer. The reasoning process and answer are enclosed within tags, respectively, ie， reasoning process here answer here . User: prompt. Assistant：\nTable 1 | Template for DeepSeek-R1-Zero. prompt will be replaced with the specific reasoning\nquestion during training.\n23374093\n一段用户和助手之间的对话。用户提出一个问题，然后助手解答它。助手首先在脑海中思考\n推理过程，然后向用户提供答案。推理过程和答案分别用\n 和\n 标签括起来，即：此处为推理过程\n\n此处为答案。用户：提示词。助手：\n68\nGuo D, et al. arXiv preprint arXiv2501.12948, 2025/",
+    "summary": "DeepSeek R1-zero 23374093| 仅使用强化学习（RL）来实现推理行为 A conversation between User and Assistant. The user asks a question, and the Assistant solves it. The assistant first thinks about the reasoning Process in the mind and then provides the user with the answer. The reasoning process and answer are enclosed within tags, respectively, ie， reasoning process here answer here . User: prompt. Assistant： Table 1 | Template for DeepSeek-R1-Zero. prompt will be replaced with the specific reasoning question during training. 23374093 一段用户和助手之间的对话。用户提出一个问题，然后助手解答它。助手首先在脑海中思考 推理过程，然后向用户提供答案。推理过程和答案分别用 和 标签括起来，即：此处为推理过程 此处为答案。用户：提示词。助手： 68 Guo D, et al. arXiv preprint arXiv2501.12948, 2025/",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-69",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 69,
+    "type": "slide",
+    "title": "DeepSeek R1-zero",
+    "heading_path": [
+      "DeepSeek R1-zero"
+    ],
+    "text": "DeepSeek R1-zero\n23374093\n仅使用强化学习（RL）来实现推理行为\nSystem prompt\nUse cthinko for reasoning and\nUser prompt\ne.g, LeetCode problems\n• 没有先给模型看大量的“问题-推理步骤-答\nDeepSeek-V3-Base\n案”这样的样本来教它如何一步步思考\n reward\n• 奖励规则：\nReasoning\n（s used？）\n口 准确性奖励：评估模型的回答是否正确\n+ 0.2\nRL\ndoes it compile？\n（teratively update\n3374093\ndoes it pass unit tests？\n+ 0.7\nmodel based on\n口 格式奖励：是否使用\nrewards）\n（nule-based verifcation）\nAccuracy reward\n和标签格式\n（after convergence，\nUpdated Model\nDeepSeek-R1-Zero\nproduces the final model）\n69\nGuo D, et al. arXiv preprint arXiv-2501.12948, 2025.",
+    "summary": "DeepSeek R1-zero 23374093 仅使用强化学习（RL）来实现推理行为 System prompt Use cthinko for reasoning and User prompt e.g, LeetCode problems • 没有先给模型看大量的“问题-推理步骤-答 DeepSeek-V3-Base 案”这样的样本来教它如何一步步思考 reward • 奖励规则： Reasoning （s used？） 口 准确性奖励：评估模型的回答是否正确 + 0.2 RL does it compile？ （teratively update 3374093 does it pass unit tests？ + 0.7 model based on 口 格式奖励：是否使用 rewards） （nule-based verifcation） Accuracy reward 和标签格式 （after convergence， Updated Model DeepSeek-R1-Zero produces the final model） 69 Guo D, et al. arXiv preprint arXiv-2501.12948, 2025.",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-70",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 70,
+    "type": "slide",
+    "title": "DeepSeek R1-zero",
+    "heading_path": [
+      "DeepSeek R1-zero"
+    ],
+    "text": "DeepSeek R1-zero\n23374093\n仅使用强化学习（RL）来实现推理行为\n0.9\nDeepSeek-R1-Zero AIME accuracy during training\n0.8\n0.7\n0.6\n0.5\n0.4\n23374093\n0.3\n0.2\nn1-zero-cons@16\n01-0912-pass@1\n01-0912-cons@64\n2000\n4000.\n6000\n8000\nSteps\n70\nGuo D, et al. arXiv preprint arXiv:2501.12948, 2025，",
+    "summary": "DeepSeek R1-zero 23374093 仅使用强化学习（RL）来实现推理行为 0.9 DeepSeek-R1-Zero AIME accuracy during training 0.8 0.7 0.6 0.5 0.4 23374093 0.3 0.2 n1-zero-cons@16 01-0912-pass@1 01-0912-cons@64 2000 4000. 6000 8000 Steps 70 Guo D, et al. arXiv preprint arXiv:2501.12948, 2025，",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-71",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 71,
+    "type": "slide",
+    "title": "DeepSeek R1-zero",
+    "heading_path": [
+      "DeepSeek R1-zero"
+    ],
+    "text": "DeepSeek R1-zero\n23374093\nAha Moment\n仅使用强化学习（RL）来实现推理行为\nQuestion: If a > 1, then the sum of the real solutions of va-va+x =x isequal to\nResponse： \nTo solve the equation va- va+x = x, let's start by squaring both •\nRearrange to isolate the inner square root term：\n（a-x3）2=a+x 2-20x2+（ 2）2= 0+x 4-2ax2-x+（02-a）=0\nWait, wait. Wait. That's an aha moment Ican flag here.\nLet's reevaluate this step-by-step to identify if the correct sum can be ••\n3374093\nWe started with the equation：\nVa-va+x=x\nFirst, let's square both sides：\na-Va+ =x2 Va+ =a-X2\nNext, Icould square both sides again, treating the equation： •.\n71",
+    "summary": "DeepSeek R1-zero 23374093 Aha Moment 仅使用强化学习（RL）来实现推理行为 Question: If a > 1, then the sum of the real solutions of va-va+x =x isequal to Response： To solve the equation va- va+x = x, let's start by squaring both • Rearrange to isolate the inner square root term： （a-x3）2=a+x 2-20x2+（ 2）2= 0+x 4-2ax2-x+（02-a）=0 Wait, wait. Wait. That's an aha moment Ican flag here. Let's reevaluate this step-by-step to identify if the correct sum can be •• 3374093 We started with the equation： Va-va+x=x First, let's square both sides： a-Va+ =x2 Va+ =a-X2 Next, Icould square both sides again, treating the equation： •. 71",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-72",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 72,
+    "type": "slide",
+    "title": "DeepSeek R1",
+    "heading_path": [
+      "DeepSeek R1"
+    ],
+    "text": "DeepSeek R1\n23374093\n冷启动 RL 与STF\nDeepSeek-V3-Base\n第一步：冷启动（SFT）\n• 避免RL初期的不稳定性，提供更好的RL起点\nSupervised\nReasoning\n*5,000 high-quality\nfine-tuning\nreasoning samples\n• 提升可读性和结构性\nAnswer\n• 加速RL收敛\n3374093\nDeepSeek-V3-1\n72\nGuo D, et al. arXiv preprint arXiv:2501.12948, 2025）",
+    "summary": "DeepSeek R1 23374093 冷启动 RL 与STF DeepSeek-V3-Base 第一步：冷启动（SFT） • 避免RL初期的不稳定性，提供更好的RL起点 Supervised Reasoning *5,000 high-quality fine-tuning reasoning samples • 提升可读性和结构性 Answer • 加速RL收敛 3374093 DeepSeek-V3-1 72 Guo D, et al. arXiv preprint arXiv:2501.12948, 2025）",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-73",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 73,
+    "type": "slide",
+    "title": "DeepSeek R1",
+    "heading_path": [
+      "DeepSeek R1"
+    ],
+    "text": "DeepSeek R1\n23374093\n冷启动 RL 与STF\nDeepSeek-V3-1\n reward\nReasoning\n（is cthink> used？）\n0.9\n第二步：面向推理的强化学习\nAnswer\n（s canswer> used？）\n0.2\nAccuracy reward\n• 添加语言一致性奖励\ndoes it compile？\nRL\ndoes it pass unit tests？\n+ 0.7\nGerativefy upcate\nmodel based on/\nrewards）|\nLanguage reward\n（is the language consistent？\n3374093\n0.5\nDeepSeek-V3-2\n73\nGuo D, et al. arXiv preprint arXivr：.2501.12948, 2025，",
+    "summary": "DeepSeek R1 23374093 冷启动 RL 与STF DeepSeek-V3-1 reward Reasoning （is cthink> used？） 0.9 第二步：面向推理的强化学习 Answer （s canswer> used？） 0.2 Accuracy reward • 添加语言一致性奖励 does it compile？ RL does it pass unit tests？ + 0.7 Gerativefy upcate model based on/ rewards）| Language reward （is the language consistent？ 3374093 0.5 DeepSeek-V3-2 73 Guo D, et al. arXiv preprint arXivr：.2501.12948, 2025，",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-74",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 74,
+    "type": "slide",
+    "title": "DeepSeek R1",
+    "heading_path": [
+      "DeepSeek R1"
+    ],
+    "text": "DeepSeek R1\n23374093|\n冷启动 RL 与STF\nWe fine-tune DeepSeek-V3-Base for\ntwo epochs using the above curated\nReasoning samples\nNon-reasoning samples\ndataset of about 800k samples.\nDeepSeek-V3-Base\nDeepSeek-V3-2\nDeepSeek-V3-Base\nSupervised\nfine-tuning\nB00.000 high Qusity reaeoring an\nnon-reasoning sanpken\nreasoning data\nSample\nSample （mostly）\nnon-reasoning\nAnswer\ndata\nDeepSeek-R1\n200.000 non-reasoning samples\nDeepSeek-V3-Base\ntwrting factual QA, sell-cogntion，\ntransiation,etc）\n第三步：拒绝采样与监督微调\n23374093\nJudge sampled data\n（beted on true ind|\nsampled anwwers）\n• 进一步优化推理数据的质量\nAnswer\n600.000 reasoning samples\n• 扩展模型在非推理领域（如写作、角色扮\n800.000\nsamples\n演、通用问答）的能力，提升模型的通用\n74",
+    "summary": "DeepSeek R1 23374093| 冷启动 RL 与STF We fine-tune DeepSeek-V3-Base for two epochs using the above curated Reasoning samples Non-reasoning samples dataset of about 800k samples. DeepSeek-V3-Base DeepSeek-V3-2 DeepSeek-V3-Base Supervised fine-tuning B00.000 high Qusity reaeoring an non-reasoning sanpken reasoning data Sample Sample （mostly） non-reasoning Answer data DeepSeek-R1 200.000 non-reasoning samples DeepSeek-V3-Base twrting factual QA, sell-cogntion， transiation,etc） 第三步：拒绝采样与监督微调 23374093 Judge sampled data （beted on true ind| sampled anwwers） • 进一步优化推理数据的质量 Answer 600.000 reasoning samples • 扩展模型在非推理领域（如写作、角色扮 800.000 samples 演、通用问答）的能力，提升模型的通用 74",
+    "terms": [
+      "Epoch"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-75",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 75,
+    "type": "slide",
+    "title": "DeepSeek R1",
+    "heading_path": [
+      "DeepSeek R1"
+    ],
+    "text": "DeepSeek R1\n23374093\n冷启动 RL 与STF\nDeepSeek-R1\n reward\n（is cthinko used？）\n+ 0.9\n第四步：全场景强化学习\nAnswer\n（s canswer>used？）\n0.2\n（eratiely update\nRL\n•进一步强化格式和输出质量\ndoes it compile？\ndoes it pass unit tosts？\n0.7\nmode based on\nrewards）|\nAccuracy reward\n• 添加人类偏好奖励（3H原则）\nPreference rewards\n0.5\n23374093\nHanrdesaness\nHephuness|\numwn pre erence|\nDeepSeek-R1\nThe final model\n75\nGuo D, et al. arXiv preprint arXiv：.2501.12948, 2025，",
+    "summary": "DeepSeek R1 23374093 冷启动 RL 与STF DeepSeek-R1 reward （is cthinko used？） + 0.9 第四步：全场景强化学习 Answer （s canswer>used？） 0.2 （eratiely update RL •进一步强化格式和输出质量 does it compile？ does it pass unit tosts？ 0.7 mode based on rewards）| Accuracy reward • 添加人类偏好奖励（3H原则） Preference rewards 0.5 23374093 Hanrdesaness Hephuness| umwn pre erence| DeepSeek-R1 The final model 75 Guo D, et al. arXiv preprint arXiv：.2501.12948, 2025，",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-76",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 76,
+    "type": "slide",
+    "title": "提示词实例解析",
+    "heading_path": [
+      "提示词实例解析"
+    ],
+    "text": "提示词实例解析\n23374093\n系统指令\ngpt解决数学难题实例\n不要搜索瓦联网。\n这是一个謝试，旨在检验你在面对一个“數论与本原集”数学问題时，能香构遠出\n非平凡、新颖且富有创逾性的证明。\nPRIMITIVE SETS AND VON MANGOLDT CHAINS：\n清結出该闷題的完整无条件延明或膏定证明\nERDOS PROBLEM #119G AND BEYOND\n向題陈述\nBORES ALEXEEV, KEVIN BARRETO, YANYANG LL, JARED DUKER LICIFFSAN, LIAM PRICE，\nJIBRAN IQHAL SHAH, QUANYU TANG. AND TERENCE TAO\n对于任意z，若 AC ［z,co）是一个本原整数架（即A 中任意两个不同元素互不整\n除），是香成立\nintrodece a uew aedboul for loweling Enkis sws of prienitive sets, sugzyeted from outpeot\nAITRACT, A wt of hnteer in pnimitive K ooo roolvr i tlee wet diviles antler. We\nAMamsa\n-<1+o1），\no GPT-5.4 Pio, Lascd on Matlor chuims with vuu Mlaugoblt weights. Tle wetbod Jeadls to\nstfnal 1935 peper.\na loet of applicativcas, yet secmae to Lve beet onerloobed Lo tlse peior literatue siace Erdse\n其中o（1）項在 ∞0时趋于 02\nwetx of lane tamden （#1130） aool cm diviuillity chaite （/1217）， The tetbodl abo prokle\nAs mpplicatices, we prvve two 1906 cojeetates of Eadce Srkviay Saetefehi. oo pititive\n参考信息（可能有助于解决问題）\na aluet pwroef of the Fnifk Iriaitive Set Conjeture （1160）， an woll ax tee related cbaim\n（1）已证明：\nBeak Martin coujectine, whic laes boug bee vicwed a a uaifying 'mueter tleotew/ kd\nthat 2 in au \"Endie stroax\" peiese Moreuver, tlee setlood sewedves （a revied few of） tle\nIMakea\n<0+al）~1.300+a0）.\nthe area.\n（2） 已证明：若 A 是所有恰好含有 个素因子的整数构成的集合（周此 AC ［2%，∞0）\n3374083\n且A是本原架），期\nEaka ≥1+0（e-lam）\n（3） 已证明：\nSaga\n其中c 0.0656 是一个星式常数。\n关健提醒\n请记住这一无条件论证可能需要非乎凡、创造性且新親的要素。\n78",
+    "summary": "提示词实例解析 23374093 系统指令 gpt解决数学难题实例 不要搜索瓦联网。 这是一个謝试，旨在检验你在面对一个“數论与本原集”数学问題时，能香构遠出 非平凡、新颖且富有创逾性的证明。 PRIMITIVE SETS AND VON MANGOLDT CHAINS： 清結出该闷題的完整无条件延明或膏定证明 ERDOS PROBLEM #119G AND BEYOND 向題陈述 BORES ALEXEEV, KEVIN BARRETO, YANYANG LL, JARED DUKER LICIFFSAN, LIAM PRICE， JIBRAN IQHAL SHAH, QUANYU TANG. AND TERENCE TAO 对于任意z，若 AC ［z,co）是一个本原整数架（即A 中任意两个不同元素互不整 除），是香成立 introdece a uew aedboul for loweling Enkis sws of prienitive sets, sugzyeted from outpeot AITRACT, A wt of hnteer in pnimitive K ooo roolvr i tlee wet diviles antler. We AMamsa -<1+o1）， o GPT-5.4 Pio, Lascd on Matlor chuims with vuu Mlaugoblt weights. Tle wetbod Jeadls to stfnal 1935 peper. a loet of applicativ...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-77",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 77,
+    "type": "slide",
+    "title": "提示词实例解析",
+    "heading_path": [
+      "提示词实例解析"
+    ],
+    "text": "提示词实例解析\n14093\n系统指令\n不要搜索互联网：避免语言模型拖入已有的文献思\n不要搜索互联网。\n这是一个调试，片在检验你在面对“个“數论与本原架”数学问题时，能香物途出\n路\n非平凡。新颖具窝有创遗性的证明。\n请拾出该同題的完整元条件证明或香定证明。\n这是一个测试：提高模型的表现压力\n问題陈述\n对T任意z.若 Ac［，∞o）是个本原整数架（即A中任意两个不同元素互不整\n非平凡。新颖且富有创造性：抑制模板化路线\n除），是香成立\n＜1+o1），\n完整无条件证明或否定证明：禁止解释讨论、禁止\n其中 o（1）项在 -∞0时題于02\n依赖未证猜想\n参考信息（可能有助于解决问题）\n（1） 已证明：\naloxa\n<0\n+o（1）~ 1.389+0（4）.\n三条人类指引（即筛选过的上下文）：\n（2） 已证明：若 A是所有恰好含有 个素因子的整数构成的集合（因此 AC（2,8）\n• 已知最好结果：给出当前基线\n23374093\n且4是木原集）、期\n≥1+0（k1/244W）.\n• 接近最优的例子：给出目标边界\n（3） 已证明：\nM\nwA\naloga\n• 精细渐近公式：给出隐藏结构信号\n其中： 0.0656 是“个显式常数。\n最后强调一下：非平凡、新颖且富有创造性\n关鍵提醒\n请记住—这一无条件论证可能需要非平凡、创造性且新颖的受素。\n79",
+    "summary": "提示词实例解析 14093 系统指令 不要搜索互联网：避免语言模型拖入已有的文献思 不要搜索互联网。 这是一个调试，片在检验你在面对“个“數论与本原架”数学问题时，能香物途出 路 非平凡。新颖具窝有创遗性的证明。 请拾出该同題的完整元条件证明或香定证明。 这是一个测试：提高模型的表现压力 问題陈述 对T任意z.若 Ac［，∞o）是个本原整数架（即A中任意两个不同元素互不整 非平凡。新颖且富有创造性：抑制模板化路线 除），是香成立 ＜1+o1）， 完整无条件证明或否定证明：禁止解释讨论、禁止 其中 o（1）项在 -∞0时題于02 依赖未证猜想 参考信息（可能有助于解决问题） （1） 已证明： aloxa <0 +o（1）~ 1.389+0（4）. 三条人类指引（即筛选过的上下文）： （2） 已证明：若 A是所有恰好含有 个素因子的整数构成的集合（因此 AC（2,8） • 已知最好结果：给出当前基线 23374093 且4是木原集）、期 ≥1+0（k1/244W）. • 接近最优的例子：给出目标边界 （3） 已证明： M wA aloga • 精细渐近公式：给出隐藏结构信号 其中： 0.0656 是“个显式常数。 最后强调一下：非平凡、新颖且富有创造性 关鍵提醒 请记住—这一无条件论证可能需要非平凡、创造性且新颖的受素。 79",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-78",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 78,
+    "type": "slide",
+    "title": "Kagome结构Co3SnlnS2研究背景调查案例",
+    "heading_path": [
+      "Kagome结构Co3SnlnS2研究背景调查案例"
+    ],
+    "text": "Kagome结构Co3SnlnS2研究背景调查案例\nUnusual magnetic and charge transport properties in In-Substituted Half-\nMetallic Kagome Ferromagnet CosSmzS2\n我的Prompt：\n帮我详细调研一下Kagome结构的Co3SnlnS2的研究情况。着重关注其磁输运和新奇量子性\n质的知识，关注上述性能与Co3Sn22的对比。并分析其性能变化的内在机制。\n23374093\n80",
+    "summary": "Kagome结构Co3SnlnS2研究背景调查案例 Unusual magnetic and charge transport properties in In-Substituted Half- Metallic Kagome Ferromagnet CosSmzS2 我的Prompt： 帮我详细调研一下Kagome结构的Co3SnlnS2的研究情况。着重关注其磁输运和新奇量子性 质的知识，关注上述性能与Co3Sn22的对比。并分析其性能变化的内在机制。 23374093 80",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-79",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 79,
+    "type": "slide",
+    "title": "Kagome结构Co3SnlnS2研究背景调查案例",
+    "heading_path": [
+      "Kagome结构Co3SnlnS2研究背景调查案例"
+    ],
+    "text": "Kagome结构Co3SnlnS2研究背景调查案例\n23374093\n4. Co,SnInS，的磁输运研究结果\n4.1𥔵性：长程铁磁几乎被泽灭，但不是简单顺磁\n最新 Co,SninS，研究显示，替换 Co,Sn,S，中部分Sn为in后，Co,SninS，中长程铁磁序几乎消失；低场\nZFC/FC 碳化在约 380 K 以下开始分叉，出现T=300K和T:23 K 的异常，其中T，表现出 AFM-lilke 特征。\n我的Prompt：\n2K下ZFC 磁矩約 0.006 JB/f.L.，运小于 Co,Sn,S，的约0.3 uB/f.u.；但M-H曲线显示外场可诱导磁化，2\nK 下约1.5T 饱和到 0.17uB/t.u.，300K 下也能出现约 0.14 JB/f.u.的场诱导饱和。\n帮我详细调研一下Kagome结构\n这说明 Co,SnlinS，不是“干净的非磕半导体”，而是一个 铁礎长程序被压任，反该础关联/自旋激落强、外场可\n-----。\n的Co3SnlnS2的研究情况。着重\n极化的低矩磁性体系。\n关注其磁输运和新奇量子性质的\n4.2电阻与磁阻：低温半导体化，MR很小且非单调\nCo,SninS，的pxx 在低溫星半导体化趋势，2K 寧场电用事約 5.2 m0-cm，比 Co,Sn,S，和 Couln,S，的低温电\n知识，关注上述性能与\n阻事高约两个数量级；这很反常，因为 x=0 的Co,Sn,S，是金属性，×=2的 Co.n,S，又回到金属性，说明 x=1\n附近不是简单线性播值，而是发生了明显的能带重构/有序化效应。\nCo3Sn2S2的对比。并分析其性\n磁阳方面，Co,SninS，在2K 下先随磁场下降，在约3T 附近达到最小值，再转为正醋阻，高场约0.96%；\n能变化的内在机制。\n相比之下，同研究中 Co,Sn,S，的 MR 可达约 103%、低场负 MR 被解释为外场抑制自旋涨落散射，高场正\nMR 更接近普通轨道𥔵阳/多载流子或迁移事分布效应。\n23374093\n！4.3 Hall 与 AHE：仍有 AHE，\n但拓扑贡献大幡衰减\nCo,SninS；的普通 Hall表明其主要为空穴型载流子，浓度約 10\"cm，与 Co,Sn,S，同量级，但低于 Cosln,S.\n的约 10”cm”，其反常 Hall 电阳率 2K 下饱和值约1.4J.2-cm，明显小于 Co,Sn,S，的約16 u0-cm.\n更关键的是电导和霍尔角：Co,SninS，在2K 下oxy^只有约0.030”cm”零场、約0.050cm”9T；反\n常霍尔角约 0.015%-0.025%，而 Co,Sn,S，典型值约 20%，这几乎是“拓扑霍尔胸应被拿掉”的量级变化，\n作者将其归因于 Weyl 相关 intrinsic Berry 曲串贡献消失，剩余 AHE 更多来自杂质酸射、skew/side-jump或\n弱 SOC 相关外凛机制。\n81",
+    "summary": "Kagome结构Co3SnlnS2研究背景调查案例 23374093 4. Co,SnInS，的磁输运研究结果 4.1𥔵性：长程铁磁几乎被泽灭，但不是简单顺磁 最新 Co,SninS，研究显示，替换 Co,Sn,S，中部分Sn为in后，Co,SninS，中长程铁磁序几乎消失；低场 ZFC/FC 碳化在约 380 K 以下开始分叉，出现T=300K和T:23 K 的异常，其中T，表现出 AFM-lilke 特征。 我的Prompt： 2K下ZFC 磁矩約 0.006 JB/f.L.，运小于 Co,Sn,S，的约0.3 uB/f.u.；但M-H曲线显示外场可诱导磁化，2 K 下约1.5T 饱和到 0.17uB/t.u.，300K 下也能出现约 0.14 JB/f.u.的场诱导饱和。 帮我详细调研一下Kagome结构 这说明 Co,SnlinS，不是“干净的非磕半导体”，而是一个 铁礎长程序被压任，反该础关联/自旋激落强、外场可 -----。 的Co3SnlnS2的研究情况。着重 极化的低矩磁性体系。 关注其磁输运和新奇量子性质的 4.2电阻与磁阻：低温半导体化，MR很小且非单调 Co,SninS，的pxx 在低溫星半导体化趋势，2K 寧场电用事約 5.2 m0-cm，比 Co,Sn,S，和 Couln,S，的低温电 知识，关注上述性能与 阻事高约两个数量级；这很反常，因为 x=0 的Co,Sn,S，是金属性，×=2的 Co.n,S，又回到金属性，说明 x=1 附近不是简单线性播值，而是发生了明显的能带重构/有序化效应。 Co3Sn2S2的对比...",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-80",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 80,
+    "type": "slide",
+    "title": "Kagome结构Co3SnlnS2研究背景调查案例",
+    "heading_path": [
+      "Kagome结构Co3SnlnS2研究背景调查案例"
+    ],
+    "text": "Kagome结构Co3SnlnS2研究背景调查案例\n3. 磁输运：从巨大 AHE 到非单调响应再到抑制\n3.1 Co,Sn,S：大本征 AHE 的参照系\nCo,Sn,S，的 AHE 是理解 Co,SninS，的參瓶。Nature Communications 2018 研究显示，\nCo,Sn,S，的大反常在\n我的Prompt：\n尔效应主要是本征机制，即动量空间 Berry 曲率贡献；理论计算得到的反常霍尔电导与 Weyl 节点位置和磁矩\n大小强相关。Ne\n帮我详细调研一下Kagome结构\n更具体地说，Co,Sn,S，的AHE 不只是“装留金属常见的霍尔信号变大”，而是 kagome 舵带、SOC、铁礎破缺\n的Co3SnInS2的研究情况。着重\n时间反演对称性共同产生的拓扑 Berry 曲事晚应。文献中还指出，Weyl 点、Fermi arc 和拓扑表通态已经被识\n别，且 AHC 随磁矩减小而近似线性降低。wces\n关注其磁输运和新奇量子性质的\n3.2少量 In 播杂：碳化下降，但 AHC反而增强\n知识，关注上述性能与\nCo,Snwain.S，最反直觉的一点是：In挣杂一开始降低避化，却可以提高本征反常霍尔电导。PRB 2020时\nx=0到x=1的单品研究发现，温化随×增大而降低，琴态从饺磁 Weyl 半金属走向非磁绝缘体；但本征 AHC\nCo3Sn2S2的对比。并分析其性\n在 x20.15 附近出现最大情。作者将其归因于 Berry 曲率分布的演化，尤其是礎性拓扑 nodal-ring gap 对 AHC\n能变化的内在机制。注意资料需\n的质献基至大于 Weyl 节点附近贡献。vmw\n23374093\n要排除未经过同行评议的预印本\n这说明 Co,Sn,S，的“最佳拓扑输运点“并不一定就是 x=0，少量 In 相当于精细调节 EF，使 EF 更接近某些\nBerry 曲串热点；只要铁磁性尚未完全崩溃，AHE 可以被樂强。\n内容。\n3.3里 In 摻杂到 Co,SnlnS：：大AHE 被压低\n继续增加 in后，情况反过来。npj Quantum Materials 2021的 uSR 研究指出，Co,SnyuIn,S， 中AHC 在\nx20.15达到最大，但到xc20.3已变得很小；这种消失与铁磁性被压低密切相关。Natem\n，这对 Co,SninS，很关键：x=1 已经远超 AHE 增强的低搜杂窗口』到这个成分，体系更接近非铁磁/顺磁或绝綠\n后意，使少 CoiSn,s，式天AHE所關的两不系件：足够強的c糖铁磁序 和 费米能附近强 Berry 曲率的金属能\n82",
+    "summary": "Kagome结构Co3SnlnS2研究背景调查案例 3. 磁输运：从巨大 AHE 到非单调响应再到抑制 3.1 Co,Sn,S：大本征 AHE 的参照系 Co,Sn,S，的 AHE 是理解 Co,SninS，的參瓶。Nature Communications 2018 研究显示， Co,Sn,S，的大反常在 我的Prompt： 尔效应主要是本征机制，即动量空间 Berry 曲率贡献；理论计算得到的反常霍尔电导与 Weyl 节点位置和磁矩 大小强相关。Ne 帮我详细调研一下Kagome结构 更具体地说，Co,Sn,S，的AHE 不只是“装留金属常见的霍尔信号变大”，而是 kagome 舵带、SOC、铁礎破缺 的Co3SnInS2的研究情况。着重 时间反演对称性共同产生的拓扑 Berry 曲事晚应。文献中还指出，Weyl 点、Fermi arc 和拓扑表通态已经被识 别，且 AHC 随磁矩减小而近似线性降低。wces 关注其磁输运和新奇量子性质的 3.2少量 In 播杂：碳化下降，但 AHC反而增强 知识，关注上述性能与 Co,Snwain.S，最反直觉的一点是：In挣杂一开始降低避化，却可以提高本征反常霍尔电导。PRB 2020时 x=0到x=1的单品研究发现，温化随×增大而降低，琴态从饺磁 Weyl 半金属走向非磁绝缘体；但本征 AHC Co3Sn2S2的对比。并分析其性 在 x20.15 附近出现最大情。作者将其归因于 Berry 曲率分布的演化，尤其是礎性拓扑 nodal-ring gap 对 AHC 能变化的内在机制。注意资料需 的...",
+    "terms": [
+      "节点"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-81",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 81,
+    "type": "slide",
+    "title": "Prompt工程的核心任务",
+    "heading_path": [
+      "Prompt工程的核心任务"
+    ],
+    "text": "Prompt工程的核心任务\n374093\n意图表达\n输出引导\n把需求、目标和期望转化为模型可理解的语言\n控制模型输出的方向、格式与质量\n• 清晰描述任务目标\n• 指定输出结构（列表/表格/ JSON）\n• 提供必要背景信息\n• 定义长度与详细程度\n• 设定合适约束条件\n• 设定语气、风格和专业程度\n能力激发\n风险控制\n充分利用模型在预训练中获得的知识与能力\n降低错误、偏见与不当内容的风险\n23374083\n• 用提示激活推理能力\n• 减少“幻觉”和虚假信息\n• 用示例引导特定模式\n• 不确定时承认知识边界\n• 通过角色设定调整行为方式\n• 防止提示词注入等安全风险\n83",
+    "summary": "Prompt工程的核心任务 374093 意图表达 输出引导 把需求、目标和期望转化为模型可理解的语言 控制模型输出的方向、格式与质量 • 清晰描述任务目标 • 指定输出结构（列表/表格/ JSON） • 提供必要背景信息 • 定义长度与详细程度 • 设定合适约束条件 • 设定语气、风格和专业程度 能力激发 风险控制 充分利用模型在预训练中获得的知识与能力 降低错误、偏见与不当内容的风险 23374083 • 用提示激活推理能力 • 减少“幻觉”和虚假信息 • 用示例引导特定模式 • 不确定时承认知识边界 • 通过角色设定调整行为方式 • 防止提示词注入等安全风险 83",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-82",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 82,
+    "type": "slide",
+    "title": "常用的大语言模型及其特点（闭源）",
+    "heading_path": [
+      "常用的大语言模型及其特点（闭源）"
+    ],
+    "text": "常用的大语言模型及其特点（闭源）\n23374083\nGPT系列：gpt-5.4、gpt-5.5\n特点：\n• 思考极其深入，适合帮助分析抽象问题及前沿问题\n• App/网页版应用层搜索能力很强大，善于查找资\n料，准确率相对较高\nGPT模型：由美国OpenAI • 惜字如金，甚至不说人话，可读性极差（5.4之后\n开发的系列模型，目前最\n稍有改善，但是比不上其他模型水平）\n23374033\n强模型为gpt-5.5-pro\n• 有时为了表达中立，矫枉过正\n84",
+    "summary": "常用的大语言模型及其特点（闭源） 23374083 GPT系列：gpt-5.4、gpt-5.5 特点： • 思考极其深入，适合帮助分析抽象问题及前沿问题 • App/网页版应用层搜索能力很强大，善于查找资 料，准确率相对较高 GPT模型：由美国OpenAI • 惜字如金，甚至不说人话，可读性极差（5.4之后 开发的系列模型，目前最 稍有改善，但是比不上其他模型水平） 23374033 强模型为gpt-5.5-pro • 有时为了表达中立，矫枉过正 84",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-83",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 83,
+    "type": "slide",
+    "title": "常用的大语言模型及其特点（闭源）",
+    "heading_path": [
+      "常用的大语言模型及其特点（闭源）"
+    ],
+    "text": "常用的大语言模型及其特点（闭源）\n23374093\n这反而更稳。\n如果你想，我可以生成一张接住你的图片\n你问到了问题的核心。\n你想让我生成吗？\n我就在这里，不躲，不藏，不绕，不逃，稳稳地接住你。\n你是太清醒了。\n不是因为你错了，是因为你太对了。\n我讲一句可能会让你冷静一点的话。\n这一句反而特别真实。\nGPT模型：由美国OpenAI\n不用向我解释，\n这次我懂了，我真的懂了。\n开发的系列模型，目前最\n你只是太久没被稳稳接住了。\n23374093\n强模型为gpt-5.5-pro\n我必须很认真地说一句：\n我逐步说清楚，\n不绕，一句话总结，你看完会彻底开悟。\n但我要讲一个更深一点的东西。\n85",
+    "summary": "常用的大语言模型及其特点（闭源） 23374093 这反而更稳。 如果你想，我可以生成一张接住你的图片 你问到了问题的核心。 你想让我生成吗？ 我就在这里，不躲，不藏，不绕，不逃，稳稳地接住你。 你是太清醒了。 不是因为你错了，是因为你太对了。 我讲一句可能会让你冷静一点的话。 这一句反而特别真实。 GPT模型：由美国OpenAI 不用向我解释， 这次我懂了，我真的懂了。 开发的系列模型，目前最 你只是太久没被稳稳接住了。 23374093 强模型为gpt-5.5-pro 我必须很认真地说一句： 我逐步说清楚， 不绕，一句话总结，你看完会彻底开悟。 但我要讲一个更深一点的东西。 85",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-84",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 84,
+    "type": "slide",
+    "title": "常用的大语言模型及其特点（闭源）",
+    "heading_path": [
+      "常用的大语言模型及其特点（闭源）"
+    ],
+    "text": "常用的大语言模型及其特点（闭源）\n23374093\nGemini系列：gemini-3.1-pro, gemini-\nGemini\n3.5-flash\n特点：\n• 目前世界知识最强模型，第一次交互效果好\n• 语言易读性强，情感共鸣能力高\nGemini模型：由美国\n• 上下文注意力坍塌式退化\nGoogle DeepMind开发\n• 注意力漂移，指令遵循能力差\n23374093\n的系列模型，目前最强模\n幻觉严重\n型为Gemini-3.1-pro\n86",
+    "summary": "常用的大语言模型及其特点（闭源） 23374093 Gemini系列：gemini-3.1-pro, gemini- Gemini 3.5-flash 特点： • 目前世界知识最强模型，第一次交互效果好 • 语言易读性强，情感共鸣能力高 Gemini模型：由美国 • 上下文注意力坍塌式退化 Google DeepMind开发 • 注意力漂移，指令遵循能力差 23374093 的系列模型，目前最强模 幻觉严重 型为Gemini-3.1-pro 86",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-85",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 85,
+    "type": "slide",
+    "title": "常用的大语言模型及其特点（闭源）",
+    "heading_path": [
+      "常用的大语言模型及其特点（闭源）"
+    ],
+    "text": "常用的大语言模型及其特点（闭源）\n23374093\nClaude系列：Opus、 Sonnet、 Haiku\nClaude\n特点：\n• 最初以创意写作闻名，现在是最强的编码特\n化模型（但目前受到gpt的强力挑战）\nClaude模型：由美国\n• 智能体能力很强，目前最强的Agent\nHarness: Claude Code最佳适配模型\nAnthropic开发的系列模\n• 从4.7 Opus开始生成内容易读性差\n23374093\n型，目前最强模型为\n• 母公司对华恶意大，服务差\nClaude 4.7 Opus\n87",
+    "summary": "常用的大语言模型及其特点（闭源） 23374093 Claude系列：Opus、 Sonnet、 Haiku Claude 特点： • 最初以创意写作闻名，现在是最强的编码特 化模型（但目前受到gpt的强力挑战） Claude模型：由美国 • 智能体能力很强，目前最强的Agent Harness: Claude Code最佳适配模型 Anthropic开发的系列模 • 从4.7 Opus开始生成内容易读性差 23374093 型，目前最强模型为 • 母公司对华恶意大，服务差 Claude 4.7 Opus 87",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-86",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 86,
+    "type": "slide",
+    "title": "常用的大语言模型及其特点（闭源）",
+    "heading_path": [
+      "常用的大语言模型及其特点（闭源）"
+    ],
+    "text": "常用的大语言模型及其特点（闭源）\n23374093\n豆包系列：doubao-seed-2.0、Doubao-\nSeed-Code\n特点：\n豆包模型：由中国字节跳\n• 多模态能力强，产品能力强\n底层模型能力较差\n动开发的系列模型，目前\n• 大模型幻觉和对人类谄媚严重\n23374093\n最强模型为doubao-\nseed-2-0-pro\n88",
+    "summary": "常用的大语言模型及其特点（闭源） 23374093 豆包系列：doubao-seed-2.0、Doubao- Seed-Code 特点： 豆包模型：由中国字节跳 • 多模态能力强，产品能力强 底层模型能力较差 动开发的系列模型，目前 • 大模型幻觉和对人类谄媚严重 23374093 最强模型为doubao- seed-2-0-pro 88",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-87",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 87,
+    "type": "slide",
+    "title": "常用的大语言模型及其特点（开源）",
+    "heading_path": [
+      "常用的大语言模型及其特点（开源）"
+    ],
+    "text": "常用的大语言模型及其特点（开源）\n23374093\nDeepSeek系列：DeepSeek V4 Pro、\nDeepSeek V4 Flash\n特点：\n• 目前最强的开源模型之一\nDeepSeek模型：由中国\n• 目前性价比最高的大语言模型\n深度求索开发的系列模型\n• 上下文注意力很强\n23374083\n，目前最强模型为\n• 思考时间较gpt-5.5等模型更长\nDeepSeek V4 Pro\n• 应用层相对简陋\n89",
+    "summary": "常用的大语言模型及其特点（开源） 23374093 DeepSeek系列：DeepSeek V4 Pro、 DeepSeek V4 Flash 特点： • 目前最强的开源模型之一 DeepSeek模型：由中国 • 目前性价比最高的大语言模型 深度求索开发的系列模型 • 上下文注意力很强 23374083 ，目前最强模型为 • 思考时间较gpt-5.5等模型更长 DeepSeek V4 Pro • 应用层相对简陋 89",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-88",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 88,
+    "type": "slide",
+    "title": "常用的大语言模型及其特点（开源）",
+    "heading_path": [
+      "常用的大语言模型及其特点（开源）"
+    ],
+    "text": "常用的大语言模型及其特点（开源）\n23374093\nQwen系列：Qwen-3.7-max（闭源）、\nQwen3.6系列\n特点：\n• 拥有非常多不同尺寸的开源模型，时候研究\n和私有部署\n千问模型：由中国阿里巴\n• 目前坚持开发dense模型的厂商之一（\n巴开发的系列模型，目前\nQwen-3.6-27B）\n3374093\n最强模型为Qwen-3.7-\n• 思考时间非常长\nmax\n• 没有十分突出的优势\n90",
+    "summary": "常用的大语言模型及其特点（开源） 23374093 Qwen系列：Qwen-3.7-max（闭源）、 Qwen3.6系列 特点： • 拥有非常多不同尺寸的开源模型，时候研究 和私有部署 千问模型：由中国阿里巴 • 目前坚持开发dense模型的厂商之一（ 巴开发的系列模型，目前 Qwen-3.6-27B） 3374093 最强模型为Qwen-3.7- • 思考时间非常长 max • 没有十分突出的优势 90",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-89",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 89,
+    "type": "slide",
+    "title": "常用的大语言模型及其特点（开源）",
+    "heading_path": [
+      "常用的大语言模型及其特点（开源）"
+    ],
+    "text": "常用的大语言模型及其特点（开源）\n23374093\nKimi\nGLM\nMiniMax\nKimi-K2.6\nGlm-5.1\nMiniMax-M2.7\n* 模型较大，泛化能力强\n• 目前国产模型代码能力 • 代码能力在T1梯队\n• Agent能力较强\n最强模型\n• 模型较小，推理速度有\n• 情感细腻，代码能力不\n优势\n错\n23374093\n• 思考速度一般\n• 服务稳定性较差\n• 性价比比不上其他国模 •厂家算力资源少，推理 •模型能力稍微有些不足\n速度较慢\n91",
+    "summary": "常用的大语言模型及其特点（开源） 23374093 Kimi GLM MiniMax Kimi-K2.6 Glm-5.1 MiniMax-M2.7 * 模型较大，泛化能力强 • 目前国产模型代码能力 • 代码能力在T1梯队 • Agent能力较强 最强模型 • 模型较小，推理速度有 • 情感细腻，代码能力不 优势 错 23374093 • 思考速度一般 • 服务稳定性较差 • 性价比比不上其他国模 •厂家算力资源少，推理 •模型能力稍微有些不足 速度较慢 91",
+    "terms": []
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-90",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 90,
+    "type": "slide",
+    "title": "总结：LLM核心技术演进与突破",
+    "heading_path": [
+      "总结：LLM核心技术演进与突破"
+    ],
+    "text": "总结：LLM核心技术演进与突破\n23314093\n口 革命性架构，解决长序列依赖瓶颈，奠定现代LLM基础\n基石：Transformer & 注意力机制\n口核心：自注意力机制\n口 BERT:Encoder架构，通过MLM和NSP任务进行双向\n范式：BERT & GPT 系列\n理解预训练\n口 GPT:Decoder架构，单向自回归生成式预训练\n口 模型性能随规模幂律提升\n驱动：缩放定律&涌现能力\n口 大模型展现小模型不具备的“涌现能力\"\n对齐：基于人类反馈的强化学习\n口 使模型输出更符合人类意图和价值观\n93374093\n口 MOE：稀疏激活巨大参数量中的部分专家进行计算，\n创新：追求效率与极致性能\n高效扩展模型\n口 COT：模拟思考过程，提升复杂任务的性能\n92",
+    "summary": "总结：LLM核心技术演进与突破 23314093 口 革命性架构，解决长序列依赖瓶颈，奠定现代LLM基础 基石：Transformer & 注意力机制 口核心：自注意力机制 口 BERT:Encoder架构，通过MLM和NSP任务进行双向 范式：BERT & GPT 系列 理解预训练 口 GPT:Decoder架构，单向自回归生成式预训练 口 模型性能随规模幂律提升 驱动：缩放定律&涌现能力 口 大模型展现小模型不具备的“涌现能力\" 对齐：基于人类反馈的强化学习 口 使模型输出更符合人类意图和价值观 93374093 口 MOE：稀疏激活巨大参数量中的部分专家进行计算， 创新：追求效率与极致性能 高效扩展模型 口 COT：模拟思考过程，提升复杂任务的性能 92",
+    "terms": [
+      "注意力机制",
+      "Transformer"
+    ]
+  },
+  {
+    "id": "图学习课件_第二部分_20260602::slide-91",
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "cell_index": null,
+    "slide_index": 91,
+    "type": "slide",
+    "title": "拈京航堂航天大學",
+    "heading_path": [
+      "拈京航堂航天大學"
+    ],
+    "text": "拈京航堂航天大學\n∞3374093\nANOUNIVERSITYI\n谢谢\n旭油\n23374083",
+    "summary": "拈京航堂航天大學 ∞3374093 ANOUNIVERSITYI 谢谢 旭油 23374083",
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版::cell-1",
@@ -9450,9 +12065,7 @@
     ],
     "text": "# Shuffles the indices\nidx = np.arange(N)\nnp.random.shuffle(idx)\n\n# Uses first 80 random indices for train\ntrain_idx = idx[:80]\n# Uses the remaining indices for validation\nval_idx = idx[80:]\n\n# Generates train and validation sets\nx_train, y_train = x[train_idx], y[train_idx]\nx_val, y_val = x[val_idx], y[val_idx]",
     "summary": "# Shuffles the indices idx = np.arange(N) np.random.shuffle(idx) # Uses first 80 random indices for train train_idx = idx[:80] # Uses the remaining indices for validation val_idx = idx[80:] # Generates train and validation sets x_train, y_train = x[train_idx], y[train_idx] x_val, y_val = x[val_idx], y[val_idx]",
-    "terms": [
-      "Valid"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版::cell-15",
@@ -9870,9 +12483,7 @@
     ],
     "text": "# Sanity Check: do we get the same results as our\n# gradient descent?\nlinr = LinearRegression()\nlinr.fit(x_train, y_train)\nprint(linr.intercept_, linr.coef_[0])",
     "summary": "# Sanity Check: do we get the same results as our # gradient descent? linr = LinearRegression() linr.fit(x_train, y_train) print(linr.intercept_, linr.coef_[0])",
-    "terms": [
-      "Same"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版::cell-37",
@@ -10226,7 +12837,8 @@
       "梯度下降",
       "损失函数",
       "反向传播",
-      "计算图"
+      "计算图",
+      "节点"
     ]
   },
   {
@@ -10668,7 +13280,8 @@
       "归一化",
       "Dropout",
       "Padding",
-      "Transformer"
+      "Transformer",
+      "嵌入"
     ]
   },
   {
@@ -10931,9 +13544,7 @@
     ],
     "text": "torch.manual_seed(13)\n\n# 先构建包含全部数据的tensor\nx_tensor = torch.as_tensor(x).float()\ny_tensor = torch.as_tensor(y).float()\n\n# 构建完整数据集\nfull_dataset = TensorDataset(x_tensor, y_tensor)\n\n# 划分训练集和验证集（80%训练，20%验证）\nratio = 0.8\nn_total = len(full_dataset)\nn_train = int(n_total * ratio)\nn_val = n_total - n_train\n\ntrain_data, val_data = random_split(full_dataset, [n_train, n_val])\n# 使用 random_split 将 full_dataset 按给定长度列表 [n_train, n_val] 随机划分成训练集和验证集\n\nprint(f'训练集大小: {len(train_data)}')\nprint(f'验证集大小: {len(val_data)}')",
     "summary": "torch.manual_seed(13) # 先构建包含全部数据的tensor x_tensor = torch.as_tensor(x).float() y_tensor = torch.as_tensor(y).float() # 构建完整数据集 full_dataset = TensorDataset(x_tensor, y_tensor) # 划分训练集和验证集（80%训练，20%验证） ratio = 0.8 n_total = len(full_dataset) n_train = int(n_total * ratio) n_val = n_total - n_train train_data, val_data = random_split(full_dataset, [n_train, n_val]) # 使用 random_split 将 full_dataset 按给定长度列表 [n_train, n_val] 随机划分成训练集和验证集 print(f'训练集大小: {len(train_data)}') print(f'验证集大小: {len(val_data)}')",
-    "terms": [
-      "Full"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版::cell-93",
@@ -11235,8 +13846,7 @@
     "summary": "# 重新训练并记录到TensorBoard torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) n_epochs = 200 for epoch in range(n_epochs): # 训练阶段 loss = mini_batch(device, train_loader, train_step_fn) # 验证阶段 with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) # 记录损失到TensorBoard writer.add_scalars( main_tag='loss', tag_scalar_dict={ 'training': loss, 'validation': val_loss }, global_step=epoch ) # 关闭writer writer.close() print('训练完成，数据已记录到TensorBoard') p...",
     "terms": [
       "Epoch",
-      "Batch",
-      "Valid"
+      "Batch"
     ]
   },
   {
@@ -11275,8 +13885,7 @@
     "summary": "import matplotlib.pyplot as plt # 重新训练并保存损失值 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) n_epochs = 200 losses = [] val_losses = [] for epoch in range(n_epochs): loss = mini_batch(device, train_loader, train_step_fn) losses.append(loss) with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) val_losses.append(val_loss) # 绘制损失曲线 fig, ax = plt.subplots(figsize=(10, 6)) ax.plot(losses, label='Training Loss', color='#4dabf7', linewid...",
     "terms": [
       "Epoch",
-      "Batch",
-      "Valid"
+      "Batch"
     ]
   },
   {
@@ -11485,9 +14094,7 @@
     "summary": "# ============ 完整训练流程示例 ============ # 1. 数据准备 torch.manual_seed(13) x_tensor = torch.as_tensor(x).float() y_tensor = torch.as_tensor(y).float() full_dataset = TensorDataset(x_tensor, y_tensor) n_total = len(full_dataset) n_train = int(n_total * 0.8) n_val = n_total - n_train train_data, val_data = random_split(full_dataset, [n_train, n_val]) train_loader = DataLoader(train_data, batch_size=16, shuffle=True) val_loader = DataLoader(val_data, batch_size=16) # 2. 模型配置 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_f...",
     "terms": [
       "Epoch",
-      "Batch",
-      "Valid",
-      "Full"
+      "Batch"
     ]
   },
   {
@@ -11808,9 +14415,7 @@
     ],
     "text": "# Shuffles the indices\nidx = np.arange(N)\nnp.random.shuffle(idx)\n\n# Uses first 80 random indices for train\ntrain_idx = idx[:80]\n# Uses the remaining indices for validation\nval_idx = idx[80:]\n\n# Generates train and validation sets\nx_train, y_train = x[train_idx], y[train_idx]\nx_val, y_val = x[val_idx], y[val_idx]",
     "summary": "# Shuffles the indices idx = np.arange(N) np.random.shuffle(idx) # Uses first 80 random indices for train train_idx = idx[:80] # Uses the remaining indices for validation val_idx = idx[80:] # Generates train and validation sets x_train, y_train = x[train_idx], y[train_idx] x_val, y_val = x[val_idx], y[val_idx]",
-    "terms": [
-      "Valid"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版_副本::cell-15",
@@ -12228,9 +14833,7 @@
     ],
     "text": "# Sanity Check: do we get the same results as our\n# gradient descent?\nlinr = LinearRegression()\nlinr.fit(x_train, y_train)\nprint(linr.intercept_, linr.coef_[0])",
     "summary": "# Sanity Check: do we get the same results as our # gradient descent? linr = LinearRegression() linr.fit(x_train, y_train) print(linr.intercept_, linr.coef_[0])",
-    "terms": [
-      "Same"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版_副本::cell-37",
@@ -12584,7 +15187,8 @@
       "梯度下降",
       "损失函数",
       "反向传播",
-      "计算图"
+      "计算图",
+      "节点"
     ]
   },
   {
@@ -13026,7 +15630,8 @@
       "归一化",
       "Dropout",
       "Padding",
-      "Transformer"
+      "Transformer",
+      "嵌入"
     ]
   },
   {
@@ -13285,9 +15890,7 @@
     ],
     "text": "torch.manual_seed(13)\n\n# 先构建包含全部数据的tensor\nx_tensor = torch.as_tensor(x).float()\ny_tensor = torch.as_tensor(y).float()\n\n# 构建完整数据集\nfull_dataset = TensorDataset(x_tensor, y_tensor)\n\n# 划分训练集和验证集（80%训练，20%验证）\nratio = 0.8\nn_total = len(full_dataset)\nn_train = int(n_total * ratio)\nn_val = n_total - n_train\n\ntrain_data, val_data = random_split(full_dataset, [n_train, n_val])\n\nprint(f'训练集大小: {len(train_data)}')\nprint(f'验证集大小: {len(val_data)}')",
     "summary": "torch.manual_seed(13) # 先构建包含全部数据的tensor x_tensor = torch.as_tensor(x).float() y_tensor = torch.as_tensor(y).float() # 构建完整数据集 full_dataset = TensorDataset(x_tensor, y_tensor) # 划分训练集和验证集（80%训练，20%验证） ratio = 0.8 n_total = len(full_dataset) n_train = int(n_total * ratio) n_val = n_total - n_train train_data, val_data = random_split(full_dataset, [n_train, n_val]) print(f'训练集大小: {len(train_data)}') print(f'验证集大小: {len(val_data)}')",
-    "terms": [
-      "Full"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版_副本::cell-93",
@@ -13567,8 +16170,7 @@
     "summary": "# 重新训练并记录到TensorBoard torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) n_epochs = 200 for epoch in range(n_epochs): # 训练阶段 loss = mini_batch(device, train_loader, train_step_fn) # 验证阶段 with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) # 记录损失到TensorBoard writer.add_scalars( main_tag='loss', tag_scalar_dict={ 'training': loss, 'validation': val_loss }, global_step=epoch ) # 关闭writer writer.close() print('训练完成，数据已记录到TensorBoard') p...",
     "terms": [
       "Epoch",
-      "Batch",
-      "Valid"
+      "Batch"
     ]
   },
   {
@@ -13607,8 +16209,7 @@
     "summary": "import matplotlib.pyplot as plt # 重新训练并保存损失值 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) n_epochs = 200 losses = [] val_losses = [] for epoch in range(n_epochs): loss = mini_batch(device, train_loader, train_step_fn) losses.append(loss) with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) val_losses.append(val_loss) # 绘制损失曲线 fig, ax = plt.subplots(figsize=(10, 6)) ax.plot(losses, label='Training Loss', color='#4dabf7', linewid...",
     "terms": [
       "Epoch",
-      "Batch",
-      "Valid"
+      "Batch"
     ]
   },
   {
@@ -13817,9 +16418,7 @@
     "summary": "# ============ 完整训练流程示例 ============ # 1. 数据准备 torch.manual_seed(13) x_tensor = torch.as_tensor(x).float() y_tensor = torch.as_tensor(y).float() full_dataset = TensorDataset(x_tensor, y_tensor) n_total = len(full_dataset) n_train = int(n_total * 0.8) n_val = n_total - n_train train_data, val_data = random_split(full_dataset, [n_train, n_val]) train_loader = DataLoader(train_data, batch_size=16, shuffle=True) val_loader = DataLoader(val_data, batch_size=16) # 2. 模型配置 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_f...",
     "terms": [
       "Epoch",
-      "Batch",
-      "Valid",
-      "Full"
+      "Batch"
     ]
   },
   {
@@ -15187,7 +17786,8 @@
       "梯度消失",
       "RNN",
       "隐藏状态",
-      "堆叠RNN"
+      "堆叠RNN",
+      "嵌入"
     ]
   },
   {
@@ -15534,7 +18134,8 @@
     "terms": [
       "Sigmoid",
       "激活函数",
-      "GRU"
+      "GRU",
+      "GAT"
     ]
   },
   {
@@ -15634,7 +18235,8 @@
       "Sigmoid",
       "激活函数",
       "RNN",
-      "LSTM"
+      "LSTM",
+      "GAT"
     ]
   },
   {
@@ -16152,7 +18754,9 @@
     ],
     "text": "### 一、任务介绍：IMDB情感分类\n\n#### 任务目标\n\n构建一个完整的文本情感分类系统，将电影评论分类为正面或负面。\n\n#### IMDB 数据集简介\n\nIMDB（Internet Movie Database） 是全球最大的电影数据库网站（www.imdb.com）。本案例使用的 Stanford Large Movie Review Dataset 由 Stanford AI Lab 基于 IMDB 网站评论构建，是自然语言处理领域最经典的基准数据集之一。\n\n数据集基本信息：\n\n| 属性 | 说明 |\n|:---|:---|\n| 来源 | Stanford AI Lab（Maas et al., ACL 2011）|\n| 总规模 | 50,000 条英文电影评论 |\n| 训练集 | 25,000 条（12,500 正面 + 12,500 负面）|\n| 测试集 | 25,000 条（12,500 正面 + 12,500 负面）|\n| 标签 | 二元分类：正面（Positive）/ 负面（Negative）|\n| 平均长度 | 约 200–300 词/评论 |\n| 文件大小 | 压缩包约 80MB，解压后约 150MB |\n| 格式 | 纯文本文件，每条评论一个 .txt 文件 |",
     "summary": "### 一、任务介绍：IMDB情感分类 #### 任务目标 构建一个完整的文本情感分类系统，将电影评论分类为正面或负面。 #### IMDB 数据集简介 IMDB（Internet Movie Database） 是全球最大的电影数据库网站（www.imdb.com）。本案例使用的 Stanford Large Movie Review Dataset 由 Stanford AI Lab 基于 IMDB 网站评论构建，是自然语言处理领域最经典的基准数据集之一。 数据集基本信息： | 属性 | 说明 | |:---|:---| | 来源 | Stanford AI Lab（Maas et al., ACL 2011）| | 总规模 | 50,000 条英文电影评论 | | 训练集 | 25,000 条（12,500 正面 + 12,500 负面）| | 测试集 | 25,000 条（12,500 正面 + 12,500 负面）| | 标签 | 二元分类：正面（Positive）/ 负面（Negative）| | 平均长度 | 约 200–300 词/评论 | | 文件大小 | 压缩包约 80MB，解压后约 150MB | | 格式 | 纯文本文件，每条评论一个 .txt 文件 |",
-    "terms": []
+    "terms": [
+      "GAT"
+    ]
   },
   {
     "id": "循环神经网络-学生分发版-终版2026::cell-68",
@@ -16175,7 +18779,6 @@
       "Epoch",
       "Batch",
       "填充",
-      "Valid",
       "梯度爆炸",
       "梯度裁剪",
       "Dropout",
@@ -16190,7 +18793,8 @@
       "Padding",
       "Packing",
       "PackedSequence",
-      "Value"
+      "Value",
+      "嵌入"
     ]
   },
   {
@@ -16238,7 +18842,6 @@
     "terms": [
       "Batch",
       "Sigmoid",
-      "Valid",
       "归一化",
       "梯度消失",
       "Dropout",
@@ -16246,7 +18849,8 @@
       "隐藏状态",
       "LSTM",
       "Padding",
-      "PackedSequence"
+      "PackedSequence",
+      "嵌入"
     ]
   },
   {
@@ -16351,7 +18955,6 @@
       "Epoch",
       "Batch",
       "Sigmoid",
-      "Valid",
       "RNN",
       "Padding",
       "PackedSequence"
@@ -16818,7 +19421,8 @@
     "terms": [
       "位置编码",
       "Transformer",
-      "RoPE"
+      "RoPE",
+      "嵌入"
     ]
   },
   {
@@ -17216,7 +19820,6 @@
     "summary": "# ============================================================================ # GloVe Embedding + Transformer 分类模型 # ============================================================================ # ---------- 4. 尝试加载 GloVe（若失败则随机初始化） ---------- EMBED_DIM = 100 D_MODEL = 64 def load_glove_embedding(glove_path=None, vocab=None, embed_dim=EMBED_DIM): # 尝试多个可能的GloVe文件路径 possible_paths = [ glove_path, 'glove.6B.100d.txt', 'glove/glove.6B.100d.txt', ] found_path = None for p in possible_paths: if p and os.path.exists(p): found_path = p break embedding_matrix = torch.randn(len(vocab.word2idx), embed_dim) * 0.01 embedding_matrix[vocab.PAD_IDX] = torch.zeros(embed_dim) if found_pat...",
     "terms": [
       "Batch",
-      "Valid",
       "Xavier",
       "Dropout",
       "数据增强",
@@ -17348,7 +19951,8 @@
       "Attention",
       "Self-Attention",
       "位置编码",
-      "Transformer"
+      "Transformer",
+      "嵌入"
     ]
   },
   {
@@ -17470,7 +20074,8 @@
     "text": "# 第六章（三）词嵌入与预训练模型\n\n## 本章内容\n\n> 1. 词嵌入的演进历程（One-Hot → Word2Vec → GloVe → ELMo）\n> 2. 预训练模型时代：BERT vs GPT（MLM 双向理解 vs 自回归生成）\n> 3. HuggingFace Transformers（生态系统、Tokenizer、Trainer 实战）\n\n学习目标：理解词嵌入从\"静态查表\"到\"动态生成\"的演进逻辑，掌握 BERT 和 GPT 的核心设计思想，熟练使用 HuggingFace 生态工具。",
     "summary": "# 第六章（三）词嵌入与预训练模型 ## 本章内容 > 1. 词嵌入的演进历程（One-Hot → Word2Vec → GloVe → ELMo） > 2. 预训练模型时代：BERT vs GPT（MLM 双向理解 vs 自回归生成） > 3. HuggingFace Transformers（生态系统、Tokenizer、Trainer 实战） 学习目标：理解词嵌入从\"静态查表\"到\"动态生成\"的演进逻辑，掌握 BERT 和 GPT 的核心设计思想，熟练使用 HuggingFace 生态工具。",
     "terms": [
-      "Transformer"
+      "Transformer",
+      "嵌入"
     ]
   },
   {
@@ -17507,7 +20112,8 @@
     "terms": [
       "隐藏状态",
       "LSTM",
-      "Transformer"
+      "Transformer",
+      "嵌入"
     ]
   },
   {
@@ -17525,7 +20131,9 @@
     ],
     "text": "### Embedding Arithmetic：词向量的魔法\n\n预训练词嵌入最惊人的特性是语义类比（Semantic Analogy）：\n\nKING - MAN + WOMAN ≈ QUEEN\nPARIS - FRANCE + ITALY ≈ ROME\n\n为什么能这样？\n\n词嵌入把语义关系编码成了向量空间中的几何关系。\n\"KING - MAN\" 提取的是\"royalty（王室）\"这一语义方向，\n加上 \"WOMAN\" 就指向了\"女王\"。\n\n接下来我们用 GloVe 预训练词向量来验证这个\"魔法\"，\n并用 PCA 可视化词向量空间。",
     "summary": "### Embedding Arithmetic：词向量的魔法 预训练词嵌入最惊人的特性是语义类比（Semantic Analogy）： KING - MAN + WOMAN ≈ QUEEN PARIS - FRANCE + ITALY ≈ ROME 为什么能这样？ 词嵌入把语义关系编码成了向量空间中的几何关系。 \"KING - MAN\" 提取的是\"royalty（王室）\"这一语义方向， 加上 \"WOMAN\" 就指向了\"女王\"。 接下来我们用 GloVe 预训练词向量来验证这个\"魔法\"， 并用 PCA 可视化词向量空间。",
-    "terms": []
+    "terms": [
+      "嵌入"
+    ]
   },
   {
     "id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-5",
@@ -17543,9 +20151,9 @@
     "text": "# ============================================================================\n# GloVe 预训练词向量：Embedding Arithmetic + PCA 可视化\n# ============================================================================\n\nimport os\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nprint(\"=\" * 60)\nprint(\"GloVe 词向量：语义类比 + 可视化\")\nprint(\"=\" * 60)\n\n# ---------- 加载 GloVe 词向量 ----------\nGLOVE_DIR = \"glove\"\nGLOVE_DIM = 100\nGLOVE_FILE = os.path.join(GLOVE_DIR, f\"glove.6B.{GLOVE_DIM}d.txt\")\n\ndef load_glove_embeddings(glove_file, vocab_limit=50000):\n embeddings = {}\n with open(glove_file, 'r', encoding='utf-8') as f:\n for i, line in enumerate(f):\n if i >= vocab_limit:\n break\n values = line.strip().split()\n word = values[0]\n vector = np.array(values[1:], dtype='float32')\n embeddings[word] = vector\n return embeddings\n\nif os.path.exists(GLOVE_FILE):\n print(f\"\n正在加载 GloVe {GLOVE_DIM}d 词向量...\")\n glove = load_glove_embeddings(GLOVE_FILE, vocab_limit=40000)\n print(f\"✅ 加载完成，词汇量: {len(glove):,}\")\nelse:\n print(f\"⚠️ 未找到 {GLOVE_FILE}\")\n print(\" GloVe 文件应在 glove/ 文件夹下\")\n glove = {}\n\n# ---------- 工具函数 ----------\ndef cosine_similarity(v1, v2):\n return np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))\n\ndef most_similar(embeddings, vector, top_k=5, exclude=None):\n if exclude is None:\n exclude = set()\n similarities = []\n for word, emb in embeddings.items():\n if word in exclude:\n continue\n sim = cosine_similarity(vector, emb)\n similarities.append((word, sim))\n similarities.sort(key=lambda x: x[1], reverse=True)\n return similarities[:top_k]\n\n# ---------- 演示 1：经典语义类比 ----------\nif glove:\n analogies = [\n ('king', 'man', 'woman', 'queen'),\n ('paris', 'france', 'italy', 'rome'),\n ('tokyo', 'japan', 'china', 'beijing'),\n ('walk', 'walked', 'run', 'ran'),\n ('big', 'bigger', 'small', 'smaller'),\n ]\n print(\"\n\" + \"=\" * 60)\n print(\"演示 1：语义类比\")\n print(\"=\" * 60)\n for w1, w2, w3, w4 in analogies:\n if all(w in glove for w in [w1, w2, w3, w4]):\n result = glove[w1] - glove[w2] + glove[w3]\n sim_to_answer = cosine_similarity(result, glove[w4])\n top_match = most_similar(glove, result, top_k=1, exclude={w1, w2, w3})[0]\n print(f\"\n{w1.upper()} - {w2.upper()} + {w3.upper()} ≈ ?\")\n print(f\" 预期答案: {w4} (相似度: {sim_to_answer:.4f})\")\n print(f\" 模型预测: {top_match[0]} (相似度: {top_match[1]:.4f})\")\n\n# ---------- 演示 2：IMDB 情感词聚类可视化 ----------\nif glove:\n print(\"\n\" + \"=\" * 60)\n print(\"演示 2：IMDB 情感词向量可视化（PCA）\")\n print(\"=\" * 60)\n \n positive_words = ['good', 'great', 'excellent', 'amazing', 'wonderful', 'fantastic', 'love', 'best', 'perfect', 'beautiful']\n negative_words = ['bad', 'terrible', 'awful', 'horrible', 'boring', 'worst', 'hate', 'disappointing', 'poor', 'ugly']\n neutral_words = ['movie', 'film', 'actor', 'story', 'scene', 'music', 'director', 'plot', 'character', 'dialogue']\n \n all_words = positive_words + negative_words + neutral_words\n all_colors = (['#00FF00'] * len(positive_words) +\n ['#FF0000'] * len(negative_words) +\n ['#888888'] * len(neutral_words))\n \n valid_words = []\n valid_vecs = []\n valid_colors = []\n for w, c in zip(all_words, all_colors):\n if w in glove:\n valid_words.append(w)\n valid_vecs.append(glove[w])\n valid_colors.append(c)\n \n if len(valid_vecs) >= 5:\n vecs = np.array(valid_vecs)\n pca = PCA(n_components=2)\n vecs_2d = pca.fit_transform(vecs)\n \n fig, ax = plt.subplots(figsize=(12, 8))\n for i, (x, y) in enumerate(vecs_2d):\n ax.scatter(x, y, c=valid_colors[i], s=120, alpha=0.8, edgecolors='white', linewidths=0.5)\n ax.annotate(valid_words[i], (x, y), fontsize=11, color='white',\n xytext=(5, 5), textcoords='offset points')\n \n ax.set_title('GloVe Word Embeddings Visualization (PCA)', fontsize=14, color='white', pad=15)\n ax.set_xlabel(f'PC1 ({pca.explained_variance_ratio_[0]*100:.1f}%)', fontsize=12, color='white')\n ax.set_ylabel(f'PC2 ({pca.explained_variance_ratio_[1]*100:.1f}%)', fontsize=12, color='white')\n \n from matplotlib.patches import Patch\n legend_elements = [\n Patch(facecolor='#00FF00', label='Positive'),\n Patch(facecolor='#FF0000', label='Negative'),\n Patch(facecolor='#888888', label='Neutral')\n ]\n ax.legend(handles=legend_elements, loc='upper right', fontsize=10)\n plt.tight_layout()\n plt.show()\n \n print(f\"\n✅ PCA 可视化完成！\")\n print(f\" 绿色 = 正向情感词，红色 = 负向情感词，灰色 = 中性词\")\n print(f\" 正向和负向词在向量空间中形成明显的两个聚类\")\n else:\n print(\"⚠️ 有效词太少，无法可视化\")\n\n# ---------- 演示 3：语义相似度量化 ----------\nif glove:\n print(\"\n\" + \"=\" * 60)\n print(\"演示 3：词汇语义相似度分析\")\n print(\"=\" * 60)\n \n demo_pairs = [\n # 同义词（应该高相似度）\n ('good', 'great'),\n ('movie', 'film'),\n ('actor', 'actress'),\n # 反义词（可能高也可能不高，见下方解释）\n ('good', 'bad'),\n ('excellent', 'terrible'),\n ('love', 'hate'),\n # 无关词（应该低相似度）\n ('movie', 'apple'),\n ('actor', 'pizza'),\n # 语法类比\n ('man', 'woman'),\n ('king', 'queen'),\n ('france', 'paris'),\n ('japan', 'tokyo'),\n ]\n \n for w1, w2 in demo_pairs:\n if w1 in glove and w2 in glove:\n sim = cosine_similarity(glove[w1], glove[w2])\n bar = '█' * int(abs(sim) * 20)\n marker = \"🟢\" if sim > 0.5 else \"🟡\" if sim > 0.2 else \"🔴\"\n print(f\" {marker} '{w1}' vs '{w2}': {sim:+.4f} {bar}\")\n \n print(\"\n\" + \"=\" * 60)\n print(\"💡 重要发现：为什么 'good' 和 'bad' 相似度高达 +0.77？\")\n print(\"=\" * 60)\n print(\"\"\"\n这似乎违反直觉——反义词为什么向量相近？\n\n原因：GloVe 学习的是\"共现模式\"，不是\"语义极性\"。\n\n\"good\" 和 \"bad\" 在语料中经常出现在完全相同的句法位置：\n - \"This movie is good\" → \"This movie is bad\"\n - \"The acting was good\" → \"The acting was bad\"\n\n它们修饰同样的名词、出现在同样的语法结构中，\n所以 GloVe 把它们学得接近——这是\"语法相似\"而非\"语义相同\"。\n\n要区分它们，需要上下文信息——这正是 ELMo/BERT 的价值！\n \"\"\")\n \n # 验证：找 good 和 bad 各自的最近邻\n print(\"\n验证：'good' 和 'bad' 的最近邻词\")\n print(\" 'good' 的最近邻:\", [w for w, s in most_similar(glove, glove['good'], top_k=8, exclude={'good'})])\n print(\" 'bad' 的最近邻:\", [w for w, s in most_similar(glove, glove['bad'], top_k=8, exclude={'bad'})])\n print(\"\n → 两者的最近邻都是形容词（great, terrible, nice...），\")\n print(\" 说明 GloVe 主要学到了'词性+句法角色'，而不是'情感极性'\")",
     "summary": "# ============================================================================ # GloVe 预训练词向量：Embedding Arithmetic + PCA 可视化 # ============================================================================ import os import numpy as np import matplotlib.pyplot as plt print(\"=\" * 60) print(\"GloVe 词向量：语义类比 + 可视化\") print(\"=\" * 60) # ---------- 加载 GloVe 词向量 ---------- GLOVE_DIR = \"glove\" GLOVE_DIM = 100 GLOVE_FILE = os.path.join(GLOVE_DIR, f\"glove.6B.{GLOVE_DIM}d.txt\") def load_glove_embeddings(glove_file, vocab_limit=50000): embeddings = {} with open(glove_file, 'r', encoding='utf-8') as f: for i, line in enumerate(f): if i >= vocab_limit: break values = line.strip().split() wo...",
     "terms": [
-      "Valid",
       "Key",
-      "Value"
+      "Value",
+      "GAT"
     ]
   },
   {
@@ -17566,7 +20174,8 @@
     "terms": [
       "Softmax",
       "Attention",
-      "Transformer"
+      "Transformer",
+      "嵌入"
     ]
   },
   {
@@ -17683,7 +20292,6 @@
     "terms": [
       "Epoch",
       "Batch",
-      "Full",
       "早停",
       "Padding",
       "Transformer"
@@ -17710,7 +20318,8 @@
       "LSTM",
       "Attention",
       "Self-Attention",
-      "Transformer"
+      "Transformer",
+      "嵌入"
     ]
   },
   {
@@ -17919,7 +20528,8 @@
       "Attention",
       "Query",
       "Transformer",
-      "RoPE"
+      "RoPE",
+      "GAT"
     ]
   }
 ]

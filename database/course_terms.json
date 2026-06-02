@@ -1670,13 +1670,14 @@
   },
   "Epoch": {
     "term": "Epoch",
-    "total_count": 360,
+    "total_count": 361,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "多层感知机2-学生分发版-终版2026.ipynb",
@@ -1964,6 +1965,16 @@
         "title": "完整流程",
         "count": 9,
         "summary": "# ============================================================================ # 支持 Fine-tuning的迁移学习代码 # ============================================================================ import torch import torch.nn as nn import torch.optim as optim from torch.utils.data import DataLoader from torchvision import models, transforms from torchvision.datasets import ImageFolder from torch.utils.data import random_split, Subset from sklearn.metrics import classification_report, confusion_matrix, accuracy_score import numpy as np import time print(\"=\" * 70) print(\"Transfer Learning: ResNet18 with Fine-tuning\") print(\"=\" * 70) # ======================================================..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-74",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 74,
+        "title": "DeepSeek R1",
+        "count": 1,
+        "summary": "DeepSeek R1 23374093| 冷启动 RL 与STF We fine-tune DeepSeek-V3-Base for two epochs using the above curated Reasoning samples Non-reasoning samples dataset of about 800k samples. DeepSeek-V3-Base DeepSeek-V3-2 DeepSeek-V3-Base Supervised fine-tuning B00.000 high Qusity reaeoring an non-reasoning sanpken reasoning data Sample Sample （mostly） non-reasoning Answer data DeepSeek-R1 200.000 non-reasoning samples DeepSeek-V3-Base twrting factual QA, sell-cogntion， transiation,etc） 第三步：拒绝采样与监督微调 23374093 Judge sampled data （beted on true ind| sampled anwwers） • 进一步优化推理数据的质量 Answer 600.000 reasoning samples • 扩展模型在非推理领域（如写作、角色扮 800.000 samples 演、通用问答）的能力，提升模型的通用 74"
       },
       {
         "chunk_id": "多层感知机1_学生分发版::cell-6",
@@ -2430,11 +2441,11 @@
       "Batch",
       "学习率",
       "Adam",
-      "Valid",
       "优化器",
       "早停",
       "ResNet",
-      "Dropout"
+      "Dropout",
+      "损失函数"
     ]
   },
   "Batch": {
@@ -3749,7 +3760,8 @@
       "梯度下降",
       "损失函数",
       "Batch",
-      "优化器"
+      "优化器",
+      "节点"
     ]
   },
   "自动微分": {
@@ -3981,11 +3993,12 @@
   },
   "Sigmoid": {
     "term": "Sigmoid",
-    "total_count": 70,
+    "total_count": 71,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
       "多层感知机2-学生分发版-终版2026.ipynb",
       "多层感知机2-课堂练习-终版2026.ipynb",
       "多层感知机2-课堂练习答案-终版2026.ipynb",
@@ -4121,6 +4134,16 @@
         "title": "实践建议",
         "count": 1,
         "summary": "## 本章总结 ### 核心知识点回顾 第一部分：梯度消失与梯度爆炸及解决方案 - 梯度消失：深层网络中靠近输入层的梯度逐层减小→0，导致浅层无法学习 - 梯度爆炸：梯度指数级增长，损失变为NaN，常见于深层网络和RNN - 梯度裁剪：Value Clipping（元素级）、Norm Clipping（范数裁剪）、Backward Hooks（RNN专用） - 梯度爆炸治本方案：批归一化（BN/LN）、权重正则化、改进初始化（Fixup/正交初始化） - 梯度消失解决方案：Xavier初始化（Tanh/Sigmoid）、Kaiming/He初始化（ReLU）、批归一化（补偿不良初始化） - BN核心机制：训练用batch统计量，推理用移动平均；对每个通道独立归一化 第二部分：优化器与学习率调整 - 病态曲率：损失函数在某些方向变化陡峭，某些方向平缓，SGD呈锯齿状下降 - 动量（Momentum）：引入速度概念，加速收敛，减少震荡，γ通常设为0.9 - Nesterov加速梯度（NAG）：先展望再计算梯度，提前感知变化，避免冲过头 - 自适应学习率：Adagrad（累积梯度平方，学习率单调递减）、RMSProp（指数移动平均EMA解决Adagrad问题）、Adam（Momentum+RMSProp+偏差修正） - 学习率调度器：StepLR、MultiStepLR、ExponentialLR、ReduceLROnPlateau（最实用，推荐首选）、CosineAnnealingLR - 优化器与调度器配合：优化器负责'怎么走'（自适应梯度..."
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-36",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 36,
+        "title": "Word2vec: Negative Sampling",
+        "count": 1,
+        "summary": "Word2vec: Negative Sampling 假设，给定中心词 orange，我们要预测其上下文词中的juice。 计算词表内所有单词的概率->计算量大 Softmax 0.0003 0.005 0.001 0.6 alien at me happy juice out zero orange Negative Sampling（负采样） 正样本：（orange, juice） Y=1 Softmax -> Multiple sigmoid 负样本：（orange, alien）， （orange, happy）. （orange, zero） Y=0 只对正样本和选取的负样本进行分类，从而减少计算量 Word2vec: Distributed Representations of Words and Phrases and their Compositionality"
       },
       {
         "chunk_id": "多层感知机2-学生分发版-终版2026::cell-2",
@@ -4357,8 +4380,8 @@
       "激活函数",
       "梯度消失",
       "Batch",
-      "损失函数",
       "Softmax",
+      "损失函数",
       "Dropout",
       "Xavier",
       "学习率"
@@ -4366,11 +4389,13 @@
   },
   "Softmax": {
     "term": "Softmax",
-    "total_count": 115,
+    "total_count": 119,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机2-学生分发版-终版2026.ipynb",
       "多层感知机2-课堂练习-终版2026.ipynb",
       "多层感知机2-课堂练习答案-终版2026.ipynb",
@@ -4438,6 +4463,36 @@
         "title": "VGG网络架构特点",
         "count": 1,
         "summary": "### 二、VGG网络 #### VGG网络架构特点 VGG（Visual Geometry Group）由牛津大学于2014年提出，其核心思想是：使用小卷积核（3×3）的堆叠替代大卷积核。 核心创新：3×3卷积的堆叠 VGG-16详细架构 输入: 224×224×3 (RGB图像) Block 1 (64通道): Conv 3×3, 64 → Conv 3×3, 64 → MaxPool 2×2 输出: 112×112×64 Block 2 (128通道): Conv 3×3, 128 → Conv 3×3, 128 → MaxPool 2×2 输出: 56×56×128 Block 3 (256通道): Conv 3×3, 256 → Conv 3×3, 256 → Conv 3×3, 256 → MaxPool 2×2 输出: 28×28×256 Block 4 (512通道): Conv 3×3, 512 → Conv 3×3, 512 → Conv 3×3, 512 → MaxPool 2×2 输出: 14×14×512 Block 5 (512通道): Conv 3×3, 512 → Conv 3×3, 512 → Conv 3×3, 512 → MaxPool 2×2 输出: 7×7×512 分类器: Flatten → FC 4096 → ReLU → Dropout(0.5) → FC 4096 → ReLU → Dropout(0.5) → FC 1000 → Softmax VGG-16参数统计 | 层 | 参数数量..."
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-35",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 35,
+        "title": "看 Word2vec: Skip Gram",
+        "count": 1,
+        "summary": "看 Word2vec: Skip Gram Skip Gram：根据中心词预测上下文 window size=3 . uniformly from the neighbors of the last.. context center word context Softmax Cassffier Output Layer • Hidden Leer pul Vector Uinear Neurces z • • -- W z 词向量矩阵 輸入层：中心词的one hot 向量 投影层：单词对应的低維向量 1 輸出层：Softmnax 层 Word2vec: Distributed Representations of Words and Phrases and their Compositionality"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-36",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 36,
+        "title": "Word2vec: Negative Sampling",
+        "count": 2,
+        "summary": "Word2vec: Negative Sampling 假设，给定中心词 orange，我们要预测其上下文词中的juice。 计算词表内所有单词的概率->计算量大 Softmax 0.0003 0.005 0.001 0.6 alien at me happy juice out zero orange Negative Sampling（负采样） 正样本：（orange, juice） Y=1 Softmax -> Multiple sigmoid 负样本：（orange, alien）， （orange, happy）. （orange, zero） Y=0 只对正样本和选取的负样本进行分类，从而减少计算量 Word2vec: Distributed Representations of Words and Phrases and their Compositionality"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-40",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 40,
+        "title": "混合专家模型（MOE）",
+        "count": 1,
+        "summary": "混合专家模型（MOE） 3374093 工作流程： Add• Normalize 1. 路由决策 必 专家层 路由网络： Switcing FFN Layer =08 山 Go （x） = softmax（x•Wg） Add + Normaiire 得到权重： 3374093 More| Parameters Switch Transformer 39 Fedus W, et al. Journal of Machine Learning"
       },
       {
         "chunk_id": "多层感知机2-学生分发版-终版2026::cell-2",
@@ -5270,15 +5325,16 @@
       "学习率",
       "Dropout",
       "Epoch",
-      "Valid",
-      "BatchNorm"
+      "BatchNorm",
+      "优化器"
     ]
   },
   "MLP": {
     "term": "MLP",
-    "total_count": 21,
+    "total_count": 22,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
       "多层感知机2-学生分发版-终版2026.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
@@ -5314,6 +5370,16 @@
         "title": "CNN vs MLP 对比",
         "count": 2,
         "summary": "#### CNN vs MLP 对比 | 特性 | MLP（多层感知机） | CNN（卷积神经网络） | |:----:|:----------------:|:-------------------:| | 连接方式 | 全连接 | 局部连接 | | 参数共享 | 无 | 卷积核权值共享 | | 空间信息 | 丢失（展平后） | 保留 | | 平移不变性 | 无 | 有 | | 参数量 | 巨大 | 大幅减少 | | 适用数据 | 表格数据 | 图像数据 | 💡 关键洞察：CNN通过卷积操作实现了特征提取（Featurizer），将原始像素转换为有意义的特征表示。卷积核是学习得到的，通过多轮次的训练，卷积核学会如何进行特征提取可以更好的完成最终任务。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-49",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 49,
+        "title": "5 图神经网络（GNN）",
+        "count": 1,
+        "summary": "5 图神经网络（GNN） MLP层 Layer N Layer N+1 graph in graph out 广 • Eaxn Graph Independent Layer update functionf=2： 节点，边和整体三者没有关联！"
       },
       {
         "chunk_id": "多层感知机2-学生分发版-终版2026::cell-2",
@@ -5994,7 +6060,7 @@
   },
   "卷积": {
     "term": "卷积",
-    "total_count": 316,
+    "total_count": 349,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络1-课堂练习-终版2026.ipynb",
@@ -6002,6 +6068,7 @@
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
@@ -7967,15 +8034,16 @@
       "Dropout",
       "Adam",
       "卷积",
-      "Full",
-      "CrossEntropyLoss"
+      "CrossEntropyLoss",
+      "损失函数"
     ]
   },
   "Same": {
     "term": "Same",
-    "total_count": 7,
+    "total_count": 10,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb"
     ],
@@ -8029,6 +8097,36 @@
         "title": "核心知识点回顾",
         "count": 1,
         "summary": "## 本部分总结 ### 核心知识点回顾 1. CNN基础概念 - 生物视觉启发（Hubel & Wiesel） - 局部连接与权值共享 - 平移不变性 - 卷积运算与互相关的关系 - 卷积的三种形式（Valid、Same、Full） 2. 图像表示 - 通道概念（RGB/灰度） - 数据格式（NCHW vs NHWC） - 归一化处理 3. 典型CNN架构 - 卷积块（Convolutional Block） - LeNet-5与AlexNet - 自适应池化（Adaptive Pooling） - 架构演进历程 4. 网络配置与损失函数 - 网络架构与损失函数匹配表 - Softmax函数与交叉熵损失 - 类别不平衡问题与weight/pos_weight 5. 完整CNN实现 - 数据生成与分割 - 自定义Dataset与DataLoader - WeightedRandomSampler处理类别不平衡 - 模型定义与训练流程 - 模型性能评估"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-3",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 3,
+        "title": "大语言模型的快速进化",
+        "count": 1,
+        "summary": "大语言模型的快速进化 ChatGPT-3.5 （2023）： GPT-5.4（2026） what is heavier: kilo of water or kilo of air？ Ananyo Bhattacharya JAnanyo A kiogram of water is heavier than a kilogram of air. Water is a dense, liquid substance 0 Q 23 years old with no advanced mathematics training solves Erdos that has a mass of about 1 kilogram per iter at standard temperature and pressure. At, on the other hand, is a gas that is much less dense than water and has a lower problem with ChatGPT Pro. \"What's beginning to emerge is that the mass. A volune of air that weighs 1 kliogram would occupy a much larger space than problem was maybe easier than expected, and it was like there was mter of water, which w..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-4",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 4,
+        "title": "早期自然语言处理（NLP）",
+        "count": 1,
+        "summary": "早期自然语言处理（NLP） 规则定制的语言模型 Symbolic Al（符号人工智能） 类别 关健字 回应策略 I want/need 询问得到的物品的意义 核心思想：认为语言是结构化的，遵循语法、 句法等规则，可以通过人工编写大量的规则来 自我陈述类 lam sad/unhappy 表示遗憾 模拟人类理解和生成语言的过程。 lam happy/glad 问治疗是否帮助了你 Eliza （1966）：扫描用户输入文本中的特定关 remember “你常想起这个吗？” 记忆、梦、 键词或短语 匹配关键词 - 使用预先编写好 假设类 dream 问梦暗示了什么 的规则来生成回应。 if \"你希望如此吗？“ Talk to Eliza by typing your questions and answers in the input box. everyone/everybody 追问“真的所有人吗？” 23374093| > Hello, I on Elisa. T'11 be your therapiat today. •i'n tired. > It io nice to be chattint with you. 泛化词 always 要求给具体例子 > Did rou cone to me becase you are thred？ •mo > Tou are beine a bit necstive and that von't help ue sove torward like/same/alike 询问哪方面相似 Dees th..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-20",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 20,
+        "title": "14093",
+        "count": 1,
+        "summary": "14093 缩放定律与涌现能力 大语言模型为什么要“大”？ -童变引起质变？ Q: What movie does this emoji describe？ 涌现能力（Emergent Abilities）是什么？ 问：这些表情符号描述的是哪部电影？ 2m: i'm a fan of the same name, but i'm not sure if it's a good idea An ability is emergent if it is not present in 2m：我是同名作品的粉丝，但我不确定这是不是个好主意 smaller models but is present in larger 16m: the movie is a movie about a man who is a man who is a man... models. 16m： 这部电影是关于一个男人的电影，他是一个男人，他是一个男人… 53m: the emoji movle00@ 涌现能力是指在较小模型中不存在，但在较大 53m：表情符号电影©90 模型中存在的能力。 125m: it's a movie about a girl who is a little gir 125m：这是关于一个女孩的电影，她是一个小女孩 244m: the emoji movie 244m：表情符号电影 emollmovie 422m: the emoji movie 30 BIG G W/o choices 0 shot 422m：表情符号电影 BG G wlo..."
       },
       {
         "chunk_id": "多层感知机1_学生分发版::cell-36",
@@ -8218,8 +8316,8 @@
     ],
     "related": [
       "卷积",
-      "Valid",
       "Batch",
+      "Valid",
       "Same",
       "Epoch",
       "损失函数",
@@ -9067,13 +9165,15 @@
   },
   "归一化": {
     "term": "归一化",
-    "total_count": 96,
+    "total_count": 99,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
@@ -9493,6 +9593,26 @@
         "summary": "#### Inception模块 Inception模块包含四个并行分支： 1. 1×1卷积分支：降维 + 特征提取 2. 3×3卷积分支：中等感受野 3. 5×5卷积分支：大感受野 4. Max Pooling分支：保留显著特征 关键创新：使用1×1卷积进行维度降维，在增加深度和宽度的同时控制计算量。 ##### Inception-v1模块详细架构 输入：192通道 × 28×28 分支1：1×1 Conv (64核) ─────────────→ 64通道 × 28×28 分支2：1×1 Conv (96核) → 3×3 Conv (128核) → 128通道 × 28×28 分支3：1×1 Conv (16核) → 5×5 Conv (32核) → 32通道 × 28×28 分支4：MaxPool(3×3) → 1×1 Conv (32核) → 32通道 × 28×28 输出拼接：64 + 128 + 32 + 32 = 256通道 × 28×28 ##### Inception-v2完整架构 Szegedy et al., 2016 ##### Inception-v3的改进 在 Inception-v2 上添加的额外技术 1. RMSProp 优化器 使用自适应学习率的 RMSProp 优化器替代传统的 SGD，加速深层网络的收敛。 2. 在辅助分类器中添加批归一化（BatchNorm） 在 GoogLeNet 原有辅助分类器（Auxiliary Classifiers）的基础上添加 Batch Normalization，进..."
       },
       {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-43",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 43,
+        "title": "s nodezvec: bias random walk",
+        "count": 1,
+        "summary": "s nodezvec: bias random walk 归一化后的转移概率分布 Tux 一般的随机游走公式 P（Ci = xlci-1 =w）= Z i （U,x）EE otherwise 节点v未访问的邻居节点 当前正在访问的节点人人 上一个访问的节点一” node2vec: Scalable Feature Leaming for Networks"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-12",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 2,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
+      },
+      {
         "chunk_id": "多层感知机1_学生分发版::cell-78",
         "file": "多层感知机1_学生分发版.ipynb",
         "kind": "ipynb",
@@ -9608,10 +9728,10 @@
       "卷积",
       "学习率",
       "激活函数",
-      "标准化",
-      "梯度消失",
       "Transformer",
-      "Xavier"
+      "标准化",
+      "RNN",
+      "梯度消失"
     ]
   },
   "标准化": {
@@ -10854,12 +10974,13 @@
   },
   "梯度消失": {
     "term": "梯度消失",
-    "total_count": 51,
+    "total_count": 52,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机2-学生分发版-终版2026.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb"
@@ -11196,6 +11317,16 @@
         "summary": "### 四、ResNet（残差网络） #### ResNet解决的问题：网络退化 在ResNet之前，研究人员发现：当网络层数增加到一定程度后，准确率不但不提升，反而下降。 He et al.，《Deep Residual Learning for Image Recognition》（CVPR 2016） #### 网络退化 vs ResNet 的解决思路 > 结果：信息不会被迫经过多层无意义的扭曲，深层网络至少不会比浅层差，而且多出来的层可以逐步学习更精细的修正。 #### ResNet残差连接效果 ##### 残差连接为什么有效？ 1. 梯度高速公路：反向传播时梯度可以直接回传，缓解梯度消失 2. 恒等映射学习：如果某层无用，网络可以学习让F(x)≈0 3. 集成学习视角：残差网络可以看作多个浅层网络的集成 ResNet 最精妙的地方之一：结构上极其简单（就加了个 $+x$），却在数学上等价于一个隐式的深度集成模型。所以 152 层的 ResNet 既不会退化，又比同等深度的普通网络更鲁棒。 #### 附加思考🤔：为什么残差网络可以看作是多个浅层网络的集成 - 提示：关键点——理解“多通路的参数共享“ - 《Residual Networks Behave Like Ensembles of Relatively Shallow Networks》，2016"
       },
       {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-9",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 RNN（循环神经网络）和LSTM（长短期记忆网络） RNN LSTM 处理文本、语音这样的序列数据， 可以理解为更复杂的RNN单元： 需要模型能够记住前面的信息。 = ◎ ）-〇〇 细胞状态：核心记忆通道 23374093 ③ x ③ • 遗忘门：决定丢弃哪些旧信息 • 输入门：决定添加哪些新信息 • 输出门：决定要输出什么样的隐藏状态 he=F（Wnn h-1+WxnXe+bn） • 顺序计算：训练速度较慢 • 梯度消失： 忘记前面内容 • 信息长距离传递：难以捕捉极长的依赖 • 梯度爆炸：难以收敛 关系，信息瓶颈严重 8"
+      },
+      {
         "chunk_id": "多层感知机2-学生分发版-终版2026::cell-19",
         "file": "多层感知机2-学生分发版-终版2026.ipynb",
         "kind": "ipynb",
@@ -11299,10 +11430,11 @@
   },
   "梯度爆炸": {
     "term": "梯度爆炸",
-    "total_count": 35,
+    "total_count": 36,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "循环神经网络-学生分发版-终版2026.ipynb"
     ],
     "hits": [
@@ -11527,6 +11659,16 @@
         "summary": "## 本章总结 ### 核心知识点回顾 第一部分：梯度消失与梯度爆炸及解决方案 - 梯度消失：深层网络中靠近输入层的梯度逐层减小→0，导致浅层无法学习 - 梯度爆炸：梯度指数级增长，损失变为NaN，常见于深层网络和RNN - 梯度裁剪：Value Clipping（元素级）、Norm Clipping（范数裁剪）、Backward Hooks（RNN专用） - 梯度爆炸治本方案：批归一化（BN/LN）、权重正则化、改进初始化（Fixup/正交初始化） - 梯度消失解决方案：Xavier初始化（Tanh/Sigmoid）、Kaiming/He初始化（ReLU）、批归一化（补偿不良初始化） - BN核心机制：训练用batch统计量，推理用移动平均；对每个通道独立归一化 第二部分：优化器与学习率调整 - 病态曲率：损失函数在某些方向变化陡峭，某些方向平缓，SGD呈锯齿状下降 - 动量（Momentum）：引入速度概念，加速收敛，减少震荡，γ通常设为0.9 - Nesterov加速梯度（NAG）：先展望再计算梯度，提前感知变化，避免冲过头 - 自适应学习率：Adagrad（累积梯度平方，学习率单调递减）、RMSProp（指数移动平均EMA解决Adagrad问题）、Adam（Momentum+RMSProp+偏差修正） - 学习率调度器：StepLR、MultiStepLR、ExponentialLR、ReduceLROnPlateau（最实用，推荐首选）、CosineAnnealingLR - 优化器与调度器配合：优化器负责'怎么走'（自适应梯度..."
       },
       {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-9",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 RNN（循环神经网络）和LSTM（长短期记忆网络） RNN LSTM 处理文本、语音这样的序列数据， 可以理解为更复杂的RNN单元： 需要模型能够记住前面的信息。 = ◎ ）-〇〇 细胞状态：核心记忆通道 23374093 ③ x ③ • 遗忘门：决定丢弃哪些旧信息 • 输入门：决定添加哪些新信息 • 输出门：决定要输出什么样的隐藏状态 he=F（Wnn h-1+WxnXe+bn） • 顺序计算：训练速度较慢 • 梯度消失： 忘记前面内容 • 信息长距离传递：难以捕捉极长的依赖 • 梯度爆炸：难以收敛 关系，信息瓶颈严重 8"
+      },
+      {
         "chunk_id": "循环神经网络-学生分发版-终版2026::cell-35",
         "file": "循环神经网络-学生分发版-终版2026.ipynb",
         "kind": "ipynb",
@@ -11579,8 +11721,8 @@
     ],
     "related": [
       "学习率",
-      "梯度裁剪",
       "梯度消失",
+      "梯度裁剪",
       "激活函数",
       "优化器",
       "Batch",
@@ -12452,13 +12594,14 @@
   },
   "Dropout": {
     "term": "Dropout",
-    "total_count": 190,
+    "total_count": 191,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
@@ -12935,6 +13078,16 @@
         "title": "完整流程",
         "count": 1,
         "summary": "# ============================================================================ # 支持 Fine-tuning的迁移学习代码 # ============================================================================ import torch import torch.nn as nn import torch.optim as optim from torch.utils.data import DataLoader from torchvision import models, transforms from torchvision.datasets import ImageFolder from torch.utils.data import random_split, Subset from sklearn.metrics import classification_report, confusion_matrix, accuracy_score import numpy as np import time print(\"=\" * 70) print(\"Transfer Learning: ResNet18 with Fine-tuning\") print(\"=\" * 70) # ======================================================..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-61",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 61,
+        "title": "给予示例的Prompt",
+        "count": 1,
+        "summary": "给予示例的Prompt 【上传论文Improving Language Understanding by Generative Pre-Training】阅读我的论 文，请分析下面给出的标题示例特征，仿照这些风格，不用理会现有标题，帮我的论文换一个 你认为最合适的标题： BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding • Adam: A Method for Stochastic Optimization • Dropout: A Simple Way to Prevent Neural Networks from Overfitting 3374093 AI答案：GPT: Generative Pre-Training of Transformers for Language Understanding 61"
       },
       {
         "chunk_id": "多层感知机1_学生分发版::cell-47",
@@ -15259,13 +15412,14 @@
   },
   "Adam": {
     "term": "Adam",
-    "total_count": 83,
+    "total_count": 84,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
@@ -15683,6 +15837,16 @@
         "summary": "## 本章小结 #### 第1节：CNN神经网络训练完整流程 > - 使用ImageFolder加载按文件夹组织的图像数据，通过数据增强（翻转、旋转等）提升训练集多样性，验证/测试集仅做标准化。 > - 网络采用\"卷积块提取特征 → Global Average Pooling降维 → 极简全连接层\"的结构，在保证表达能力的同时大幅减少参数量。 > - 训练时使用Adam优化器配合学习率调度和早停机制，有效防止过拟合并自动保存最佳模型。 #### 第2节：现代经典CNN网络 > - VGG证明了小卷积核(3×3)堆叠的有效性，但参数量巨大； > - GoogLeNet引入Inception模块实现多尺度并行提取，配合1×1卷积降维和GAP，以1/20的参数量达到相近性能； > - ResNet通过残差连接解决深层网络退化问题，使网络可扩展至152+层，成为后续CNN架构的基础。 #### 第3节：迁移学习 > - 利用ImageNet预训练模型的通用特征，冻结特征提取层，仅替换并训练新的分类层即可快速适配新任务。 > - 必须使用ImageNet的标准化参数保持数据分布一致。当冻结效果不佳时，可采用Fine-tuning策略：分层解冻网络，预训练层使用小学习率保护已有知识，新分类层使用较大学习率快速收敛。 > - 这种方法在小数据集场景下能以极少训练成本获得接近甚至超越自定义CNN的性能。"
       },
       {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-61",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 61,
+        "title": "给予示例的Prompt",
+        "count": 1,
+        "summary": "给予示例的Prompt 【上传论文Improving Language Understanding by Generative Pre-Training】阅读我的论 文，请分析下面给出的标题示例特征，仿照这些风格，不用理会现有标题，帮我的论文换一个 你认为最合适的标题： BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding • Adam: A Method for Stochastic Optimization • Dropout: A Simple Way to Prevent Neural Networks from Overfitting 3374093 AI答案：GPT: Generative Pre-Training of Transformers for Language Understanding 61"
+      },
+      {
         "chunk_id": "多层感知机1_学生分发版::cell-66",
         "file": "多层感知机1_学生分发版.ipynb",
         "kind": "ipynb",
@@ -15766,9 +15930,9 @@
     "related": [
       "学习率",
       "优化器",
+      "Dropout",
       "Epoch",
       "Batch",
-      "Dropout",
       "Momentum",
       "权重衰减",
       "ResNet"
@@ -16326,7 +16490,6 @@
     "related": [
       "损失函数",
       "Epoch",
-      "Full",
       "数据增强",
       "超参数",
       "注意力机制",
@@ -17602,12 +17765,13 @@
   },
   "残差连接": {
     "term": "残差连接",
-    "total_count": 31,
+    "total_count": 32,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
@@ -17772,6 +17936,16 @@
         "title": "第3节：迁移学习",
         "count": 1,
         "summary": "## 本章小结 #### 第1节：CNN神经网络训练完整流程 > - 使用ImageFolder加载按文件夹组织的图像数据，通过数据增强（翻转、旋转等）提升训练集多样性，验证/测试集仅做标准化。 > - 网络采用\"卷积块提取特征 → Global Average Pooling降维 → 极简全连接层\"的结构，在保证表达能力的同时大幅减少参数量。 > - 训练时使用Adam优化器配合学习率调度和早停机制，有效防止过拟合并自动保存最佳模型。 #### 第2节：现代经典CNN网络 > - VGG证明了小卷积核(3×3)堆叠的有效性，但参数量巨大； > - GoogLeNet引入Inception模块实现多尺度并行提取，配合1×1卷积降维和GAP，以1/20的参数量达到相近性能； > - ResNet通过残差连接解决深层网络退化问题，使网络可扩展至152+层，成为后续CNN架构的基础。 #### 第3节：迁移学习 > - 利用ImageNet预训练模型的通用特征，冻结特征提取层，仅替换并训练新的分类层即可快速适配新任务。 > - 必须使用ImageNet的标准化参数保持数据分布一致。当冻结效果不佳时，可采用Fine-tuning策略：分层解冻网络，预训练层使用小学习率保护已有知识，新分类层使用较大学习率快速收敛。 > - 这种方法在小数据集场景下能以极少训练成本获得接近甚至超越自定义CNN的性能。"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-12",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
       },
       {
         "chunk_id": "循环神经网络-学生分发版-终版2026::cell-64",
@@ -18139,10 +18313,11 @@
   },
   "RNN": {
     "term": "RNN",
-    "total_count": 160,
+    "total_count": 166,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
@@ -18289,6 +18464,36 @@
         "title": "实践建议",
         "count": 2,
         "summary": "## 本章总结 ### 核心知识点回顾 第一部分：梯度消失与梯度爆炸及解决方案 - 梯度消失：深层网络中靠近输入层的梯度逐层减小→0，导致浅层无法学习 - 梯度爆炸：梯度指数级增长，损失变为NaN，常见于深层网络和RNN - 梯度裁剪：Value Clipping（元素级）、Norm Clipping（范数裁剪）、Backward Hooks（RNN专用） - 梯度爆炸治本方案：批归一化（BN/LN）、权重正则化、改进初始化（Fixup/正交初始化） - 梯度消失解决方案：Xavier初始化（Tanh/Sigmoid）、Kaiming/He初始化（ReLU）、批归一化（补偿不良初始化） - BN核心机制：训练用batch统计量，推理用移动平均；对每个通道独立归一化 第二部分：优化器与学习率调整 - 病态曲率：损失函数在某些方向变化陡峭，某些方向平缓，SGD呈锯齿状下降 - 动量（Momentum）：引入速度概念，加速收敛，减少震荡，γ通常设为0.9 - Nesterov加速梯度（NAG）：先展望再计算梯度，提前感知变化，避免冲过头 - 自适应学习率：Adagrad（累积梯度平方，学习率单调递减）、RMSProp（指数移动平均EMA解决Adagrad问题）、Adam（Momentum+RMSProp+偏差修正） - 学习率调度器：StepLR、MultiStepLR、ExponentialLR、ReduceLROnPlateau（最实用，推荐首选）、CosineAnnealingLR - 优化器与调度器配合：优化器负责'怎么走'（自适应梯度..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-9",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 3,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 RNN（循环神经网络）和LSTM（长短期记忆网络） RNN LSTM 处理文本、语音这样的序列数据， 可以理解为更复杂的RNN单元： 需要模型能够记住前面的信息。 = ◎ ）-〇〇 细胞状态：核心记忆通道 23374093 ③ x ③ • 遗忘门：决定丢弃哪些旧信息 • 输入门：决定添加哪些新信息 • 输出门：决定要输出什么样的隐藏状态 he=F（Wnn h-1+WxnXe+bn） • 顺序计算：训练速度较慢 • 梯度消失： 忘记前面内容 • 信息长距离传递：难以捕捉极长的依赖 • 梯度爆炸：难以收敛 关系，信息瓶颈严重 8"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-10",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 10,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 序列到序列 （seq2seq）模型（2014） ENCODER Reply Yes， what's -em 〈END> thought vector Are YOU free tomorrow？ Incoming Email DECODER 3374093 • 编码器（Encoder）：把输入句子读懂，压 口 RNN/LSTM擅长处理序列 缩成一个内部表示 口 翻译、总结文本、简单问答需要： • 解码器（Decoder）：根据 Encoder 提供 变长输入序列 一 变长输出序列 的表示，逐步生成目标语言"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-12",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 2,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
       },
       {
         "chunk_id": "多层感知机1_学生分发版::cell-66",
@@ -18736,21 +18941,32 @@
       "隐藏状态",
       "LSTM",
       "学习率",
+      "归一化",
       "Dropout",
       "梯度裁剪",
-      "激活函数",
-      "归一化"
+      "激活函数"
     ]
   },
   "隐藏状态": {
     "term": "隐藏状态",
-    "total_count": 80,
+    "total_count": 81,
     "files": [
+      "图学习课件_第二部分_20260602.pptx",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
     ],
     "hits": [
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-9",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 RNN（循环神经网络）和LSTM（长短期记忆网络） RNN LSTM 处理文本、语音这样的序列数据， 可以理解为更复杂的RNN单元： 需要模型能够记住前面的信息。 = ◎ ）-〇〇 细胞状态：核心记忆通道 23374093 ③ x ③ • 遗忘门：决定丢弃哪些旧信息 • 输入门：决定添加哪些新信息 • 输出门：决定要输出什么样的隐藏状态 he=F（Wnn h-1+WxnXe+bn） • 顺序计算：训练速度较慢 • 梯度消失： 忘记前面内容 • 信息长距离传递：难以捕捉极长的依赖 • 梯度爆炸：难以收敛 关系，信息瓶颈严重 8"
+      },
       {
         "chunk_id": "循环神经网络-学生分发版-终版2026::cell-9",
         "file": "循环神经网络-学生分发版-终版2026.ipynb",
@@ -19005,12 +19221,12 @@
     "related": [
       "RNN",
       "Batch",
-      "双向RNN",
       "LSTM",
+      "双向RNN",
       "Padding",
       "Dropout",
       "PackedSequence",
-      "注意力机制"
+      "嵌入"
     ]
   },
   "双向RNN": {
@@ -19172,6 +19388,7 @@
       "RNN",
       "隐藏状态",
       "梯度消失",
+      "嵌入",
       "Batch",
       "双向RNN",
       "LSTM"
@@ -19310,10 +19527,12 @@
   },
   "LSTM": {
     "term": "LSTM",
-    "total_count": 71,
+    "total_count": 76,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
+      "图学习课件_第二部分_20260602.pptx",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
@@ -19358,6 +19577,36 @@
         "title": "Dropout正则化效果",
         "count": 1,
         "summary": "#### Dropout正则化效果 Dropout概率选择建议 | 层位置 | 推荐概率 | 说明 | |:------:|:--------:|:----:| | 输入层 | 0.1-0.2 | 不要轻易丢弃原始输入信息 | | 隐藏层（全连接） | 0.3-0.5 | 最常用的配置，0.5是Hinton推荐值 | | CNN卷积层 | 一般不用或使用Dropout2d(p=0.1) | 卷积层参数共享，本身有正则化效果 | | RNN/LSTM | 0.2-0.3 | 或使用变分Dropout，时间序列需小心 | 💡 实践经验：从0.5开始，如果过拟合严重增加到0.7，如果欠拟合减少到0.3。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-27",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 27,
+        "title": "图学习算法分类",
+        "count": 2,
+        "summary": "图学习算法分类 DeepiVal NodeZVe 圓𤂅走类算法. UNE MetapathZVec- MetapathZVwc, Metapath2Vwce, Mul CCN 週春职（Spectrall ChetCcN ACCN 粗服风還 CCN GAT 图学习算法 園神烃网络算法 空間卷料ISpatial Caak CnaohSAGE Cated CNN| Tree LSTM Graph LSTM Tranf 知识圈谱嵌入算法 RotatE 知识图谱也是典型的图。 ComplEx DistMul"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-9",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 2,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 RNN（循环神经网络）和LSTM（长短期记忆网络） RNN LSTM 处理文本、语音这样的序列数据， 可以理解为更复杂的RNN单元： 需要模型能够记住前面的信息。 = ◎ ）-〇〇 细胞状态：核心记忆通道 23374093 ③ x ③ • 遗忘门：决定丢弃哪些旧信息 • 输入门：决定添加哪些新信息 • 输出门：决定要输出什么样的隐藏状态 he=F（Wnn h-1+WxnXe+bn） • 顺序计算：训练速度较慢 • 梯度消失： 忘记前面内容 • 信息长距离传递：难以捕捉极长的依赖 • 梯度爆炸：难以收敛 关系，信息瓶颈严重 8"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-10",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 10,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 序列到序列 （seq2seq）模型（2014） ENCODER Reply Yes， what's -em 〈END> thought vector Are YOU free tomorrow？ Incoming Email DECODER 3374093 • 编码器（Encoder）：把输入句子读懂，压 口 RNN/LSTM擅长处理序列 缩成一个内部表示 口 翻译、总结文本、简单问答需要： • 解码器（Decoder）：根据 Encoder 提供 变长输入序列 一 变长输出序列 的表示，逐步生成目标语言"
       },
       {
         "chunk_id": "循环神经网络-学生分发版-终版2026::cell-3",
@@ -19575,10 +19824,10 @@
       "Transformer",
       "Dropout",
       "GRU",
-      "Attention",
-      "Padding",
       "隐藏状态",
-      "Batch"
+      "Attention",
+      "嵌入",
+      "Padding"
     ]
   },
   "Padding": {
@@ -20165,7 +20414,7 @@
       "Padding",
       "Sigmoid",
       "Epoch",
-      "Valid"
+      "LSTM"
     ]
   },
   "1D卷积": {
@@ -20298,13 +20547,54 @@
   },
   "Seq2Seq": {
     "term": "Seq2Seq",
-    "total_count": 19,
+    "total_count": 23,
     "files": [
+      "图学习课件_第二部分_20260602.pptx",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb"
     ],
     "hits": [
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-10",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 10,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 序列到序列 （seq2seq）模型（2014） ENCODER Reply Yes， what's -em 〈END> thought vector Are YOU free tomorrow？ Incoming Email DECODER 3374093 • 编码器（Encoder）：把输入句子读懂，压 口 RNN/LSTM擅长处理序列 缩成一个内部表示 口 翻译、总结文本、简单问答需要： • 解码器（Decoder）：根据 Encoder 提供 变长输入序列 一 变长输出序列 的表示，逐步生成目标语言"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-11",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 注意力机制（2014） 普通 Seq2Seq Bahdanau Attention X4 ½2 ¥3 固定长度向量c Encoder Decoder Encoder Decoder 当前解码步 23374093 整句压縮为一个向量 Attention 每一步动态对齐并按需读取源句信息 长句时容易形成信息瓶颈 不再只依赖单一固定向量 10"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-13",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 13,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ Transformer模型很强大，但是最初设计是为了机器翻译设计的： encoder 读入源语言句子 一 decoder 自回归生成目标语言句子 但是有时语言模型不一定是seq2seq任务，需要更纯粹的理解模型或者生成模型！ 自然语言推断（NLI）任务 文本续写任务 前提：一只狗在草地上奔跑。 假设：有动物在草地上。 前文：今天天气很好，我决定去公园散 3374093 推断关系：蕴含 步。刚走到湖边， 前提：发言人说政策明年可能会改变。 续写：看见几只鸭子正在水面上慢慢游 过。 假设：政策已经改变了。 推断关系：矛盾 12"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-21",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 21,
+        "title": "GPT-2",
+        "count": 1,
+        "summary": "GPT-2 GPT-2沿用了与GPT-1相同的decoder only架构，是GPT-1在模型规模和训练数据 量上的直接扩展（13倍）。 零样本任务迁移（zero-shot task transfer）：一个被训练用于预测在一个非常巨大 且多样化的文本语料库中下一个词的语言模型，将会隐式地学会执行在该文本中以自 然语言形式展示出来的各种任务。 Reading Comprehension Translation Summarization 90 Human Ouestion Answering/ 25 Unsupervised Statistical MT| 32Lead-3 10 80| 430 20 L2 28 PoNet 81 10pen Domain QA Systems1 f 70 DrOA+PGNet 23374093| F60 EU15 Denoising + Backtranslate 20 DrQA 24 5eq2seq + Attn 50 4 PGNet 10 Embed Nearest Neighbor 40 Denotsing 822 20 Random-3 2 30 18 Seq2seq -most freq Q-type answer 117M| 345M 762M 1542MSJM # of parameters in LM| # of parameters in LM| 345M 762M 1542W19JM • of parameters in LM| 345M 762M| 1542MSJM • of pa..."
+      },
       {
         "chunk_id": "循环神经网络-学生分发版-终版2026::cell-16",
         "file": "循环神经网络-学生分发版-终版2026.ipynb",
@@ -20367,14 +20657,14 @@
       }
     ],
     "related": [
+      "Transformer",
       "Attention",
       "RNN",
-      "Transformer",
+      "注意力机制",
       "Q/K/V",
       "Self-Attention",
       "Positional Encoding",
-      "Dropout",
-      "注意力机制"
+      "Dropout"
     ]
   },
   "Encoder-Decoder": {
@@ -20488,9 +20778,10 @@
   },
   "注意力机制": {
     "term": "注意力机制",
-    "total_count": 22,
+    "total_count": 27,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
@@ -20505,6 +20796,46 @@
         "title": "原则 3：不仅要看\"最终指标\"，还要看\"训练动态\"(性价比)",
         "count": 1,
         "summary": "### 消融实验（Ablation Study） #### 1. 什么是消融实验？ 消融实验（Ablation Study） 源自神经科学中的 \"ablation\"（切除）概念。在深度学习中，它指的是通过系统地移除、替换或修改模型中的某个组件/超参数，来量化该组件对最终性能的贡献度。 消融实验的本质是控制变量的对比。 它不局限于\"切掉\"（ablate away），也包括\"加上去\"（plug in）。只要满足\"只改一个变量，其余尽量公平\"这个原则，以下几种都是标准的消融实验： | 类型 | 操作 | 示例 | |------|------|------| | 减法消融（Subtractive） | 从完整模型中移除模块 A | \"w/o Attention\" | | 加法消融（Additive） | 在纯基线模型中加入模块 A | \"Baseline + SE\" | | 替换消融（Substitutive） | 把模块 A 换成功能相似的模块 B | \"SE → CBAM\" | | 参数消融（Parametric） | 只改超参 λ，其余结构不变 | λ=0.1, 1.0, 10.0 | 核心思想：验证你声称有效的每一个设计，确实是因为它本身有效，而不是因为其他因素（如更多的参数量、更长的训练时间、隐含的基线优势等）。 #### 2. 为什么要做消融实验？ 在论文审稿和实际项目汇报中，消融实验解决的是同一个问题： > \"你的提升是真实的（genuine），还是虚假的（spurious）？\" 典型场景： - 你加了注意力机制，准确率提升了 2..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-11",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 注意力机制（2014） 普通 Seq2Seq Bahdanau Attention X4 ½2 ¥3 固定长度向量c Encoder Decoder Encoder Decoder 当前解码步 23374093 整句压縮为一个向量 Attention 每一步动态对齐并按需读取源句信息 长句时容易形成信息瓶颈 不再只依赖单一固定向量 10"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-12",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-35",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 35,
+        "title": "继续扩大规模就可以了吗？",
+        "count": 1,
+        "summary": "继续扩大规模就可以了吗？ 混合专家模型 GPT-1 117M 参数；10B tokens ： 多头潜在注意力机制 Y decpseekvs FP8 混合精度训练 GPT-2 1500M 参数；100B tokens • 训练规模（10万块GPU） 3 GPT-4.5 和价格极其昂贵 ：推出后仅五不月被淘汰 模型性能一般 GPT-3 175B 参数；300B tokens GPT-4 1-1.8T 参数；1.3T tokens（估计） 3374093 IS Scaling Laws Hitting a Wall？ 模型越大越好 Sam Altman @ sama 但是好的有限 there is no wall 下午2:06 2024年11月14日 276.4万 34"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-90",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 90,
+        "title": "总结：LLM核心技术演进与突破",
+        "count": 2,
+        "summary": "总结：LLM核心技术演进与突破 23314093 口 革命性架构，解决长序列依赖瓶颈，奠定现代LLM基础 基石：Transformer & 注意力机制 口核心：自注意力机制 口 BERT:Encoder架构，通过MLM和NSP任务进行双向 范式：BERT & GPT 系列 理解预训练 口 GPT:Decoder架构，单向自回归生成式预训练 口 模型性能随规模幂律提升 驱动：缩放定律&涌现能力 口 大模型展现小模型不具备的“涌现能力\" 对齐：基于人类反馈的强化学习 口 使模型输出更符合人类意图和价值观 93374093 口 MOE：稀疏激活巨大参数量中的部分专家进行计算， 创新：追求效率与极致性能 高效扩展模型 口 COT：模拟思考过程，提升复杂任务的性能 92"
       },
       {
         "chunk_id": "循环神经网络-学生分发版-终版2026::cell-16",
@@ -20641,18 +20972,19 @@
       "Attention",
       "Transformer",
       "Query",
-      "上下文向量",
       "Key",
       "Value",
+      "上下文向量",
       "Self-Attention",
       "Softmax"
     ]
   },
   "Attention": {
     "term": "Attention",
-    "total_count": 185,
+    "total_count": 195,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
@@ -20668,6 +21000,66 @@
         "title": "原则 3：不仅要看\"最终指标\"，还要看\"训练动态\"(性价比)",
         "count": 1,
         "summary": "### 消融实验（Ablation Study） #### 1. 什么是消融实验？ 消融实验（Ablation Study） 源自神经科学中的 \"ablation\"（切除）概念。在深度学习中，它指的是通过系统地移除、替换或修改模型中的某个组件/超参数，来量化该组件对最终性能的贡献度。 消融实验的本质是控制变量的对比。 它不局限于\"切掉\"（ablate away），也包括\"加上去\"（plug in）。只要满足\"只改一个变量，其余尽量公平\"这个原则，以下几种都是标准的消融实验： | 类型 | 操作 | 示例 | |------|------|------| | 减法消融（Subtractive） | 从完整模型中移除模块 A | \"w/o Attention\" | | 加法消融（Additive） | 在纯基线模型中加入模块 A | \"Baseline + SE\" | | 替换消融（Substitutive） | 把模块 A 换成功能相似的模块 B | \"SE → CBAM\" | | 参数消融（Parametric） | 只改超参 λ，其余结构不变 | λ=0.1, 1.0, 10.0 | 核心思想：验证你声称有效的每一个设计，确实是因为它本身有效，而不是因为其他因素（如更多的参数量、更长的训练时间、隐含的基线优势等）。 #### 2. 为什么要做消融实验？ 在论文审稿和实际项目汇报中，消融实验解决的是同一个问题： > \"你的提升是真实的（genuine），还是虚假的（spurious）？\" 典型场景： - 你加了注意力机制，准确率提升了 2..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-11",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 2,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 注意力机制（2014） 普通 Seq2Seq Bahdanau Attention X4 ½2 ¥3 固定长度向量c Encoder Decoder Encoder Decoder 当前解码步 23374093 整句压縮为一个向量 Attention 每一步动态对齐并按需读取源句信息 长句时容易形成信息瓶颈 不再只依赖单一固定向量 10"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-12",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 3,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-13",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 13,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ Transformer模型很强大，但是最初设计是为了机器翻译设计的： encoder 读入源语言句子 一 decoder 自回归生成目标语言句子 但是有时语言模型不一定是seq2seq任务，需要更纯粹的理解模型或者生成模型！ 自然语言推断（NLI）任务 文本续写任务 前提：一只狗在草地上奔跑。 假设：有动物在草地上。 前文：今天天气很好，我决定去公园散 3374093 推断关系：蕴含 步。刚走到湖边， 前提：发言人说政策明年可能会改变。 续写：看见几只鸭子正在水面上慢慢游 过。 假设：政策已经改变了。 推断关系：矛盾 12"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-18",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 18,
+        "title": "大模型时代的序幕：BERT&GPT",
+        "count": 1,
+        "summary": "大模型时代的序幕：BERT&GPT 3374093 BERT&GPT Input sequence Randomly mask words ［CLS］ IMASK］ Transtommer decoder Transformer decoder Q BERTL Transformer encoder Transformer decoder GPT-1 Predict the masked words am Masked self-attention 12 3374093 Feediorward neural network BERT Next generated word Mamas GPT 17"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-46",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 46,
+        "title": "DeepSeek v2",
+        "count": 2,
+        "summary": "DeepSeek v2 23374093 0000 Output Hidden h： 9009 Routed Expert Shared Expert Training Costs （K GPU Hours/T Tokens） DeepSeek 678 Feed-Fonward Network DeepSeek-V2| saving 42.5% of training costs 50 100 150 200 250 300 RMS Norm bhld Top K， KV Cache for Generation （KB/Token） 000O Input Hidden u， •（MLa） DeepSeek 67B Attention 〇@C ched During Deepseek.V2 reducing KV cache by 93.3% - Output Hladen w, Q000 0000 Muiti-Head Attention 100 200 300 400 RMS Norm Maximum Generation Throughput （Tokens/Sec） 3314093 （IKk:kFT DeepSeek 678 DeepSeek-V2 576% of maximum throughput 10000 20000 30000 40000 50000 00 utent s？ uatent cf Inout Hidden h, 0000 0000 45 Liu A, et al. arxiv preprint arXiv..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-48",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 48,
+        "title": "deepscckv3",
+        "count": 1,
+        "summary": "deepscckv3 3374093 000〇 outed Enpen Transformer Block x Output Hidcen h： Shared Epe • 基础架构与v2一致，参数量提高到 Feed-Fonward Neswork 671B； RMS Norm hih Top-K， • MOE采用一种无辅助损失的负载均衡 000〇 Input Hidden u， ntion（MLAL 策略，进一步提升性能； ① Cached During Infer Output Hicden u，［OO〇C 0000 • 多词元预测训练目标（MTP）：模型 Muli-Head Attention RMS Norm 不仅预测紧随其后的下一个词元，还 3314093 （Tki:kF 会预测再往后的1个额外词元； • FP8 混合精度训练。 00 Latentc UatentC Input Hidden h, 0000 47"
       },
       {
         "chunk_id": "循环神经网络-学生分发版-终版2026::cell-16",
@@ -21035,21 +21427,32 @@
       "Self-Attention",
       "注意力机制",
       "Query",
-      "Softmax",
       "Key",
       "Value",
+      "Softmax",
       "Dropout"
     ]
   },
   "Query": {
     "term": "Query",
-    "total_count": 40,
+    "total_count": 41,
     "files": [
+      "图学习课件_第二部分_20260602.pptx",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
     ],
     "hits": [
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-12",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
+      },
       {
         "chunk_id": "注意力机制及Transformer1-学生分发版-终版2026::cell-6",
         "file": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
@@ -21194,10 +21597,11 @@
   },
   "Key": {
     "term": "Key",
-    "total_count": 36,
+    "total_count": 38,
     "files": [
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
@@ -21222,6 +21626,26 @@
         "title": "完整流程",
         "count": 1,
         "summary": "# ============================================================================ # 迁移学习完整示例：ResNet18 on RPS Dataset # ============================================================================ import torch import torch.nn as nn import torch.optim as optim from torch.utils.data import DataLoader, TensorDataset from torchvision import models, transforms from torchvision.datasets import ImageFolder from sklearn.metrics import classification_report, confusion_matrix, accuracy_score import numpy as np import time print(\"=\" * 70) print(\"Transfer Learning: ResNet18 on RPS Dataset\") print(\"=\" * 70) # ============================================================================ # S..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-12",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-28",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 28,
+        "title": "基于人类反馈的强化学习（RLHF）",
+        "count": 1,
+        "summary": "基于人类反馈的强化学习（RLHF） 374093 第二步：训练奖励模型（Reward Model, RM） 您正在提供关于 ChatGPT 新版本的反馈。 您更偏向于哪个回复？回复可能需要一点时间来加載。 ⑤四1 回复 2 The correct answer is： The correct answer is： D. Residual stresses significantly decrease the measured D. Residual stresses significantly decrease the measured resonant frequencies. resonant frequencies. Explanation： Explanation： 23374093 In Resonant Ultrasound Spectroscopy （RUS） applied to Resonant Ultrasound Spectroscopy （RUS） measures the additively manufactured （AM） metallic components, residual natural vibration frequencies of a solid to infer its elastic stresses play a significant role in altering the measured properties, including stiffness tensor compon..."
       },
       {
         "chunk_id": "注意力机制及Transformer1-学生分发版-终版2026::cell-6",
@@ -21372,15 +21796,17 @@
       "Batch",
       "注意力机制",
       "Self-Attention",
-      "Dropout"
+      "归一化"
     ]
   },
   "Value": {
     "term": "Value",
-    "total_count": 72,
+    "total_count": 74,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机2-课堂练习-终版2026.ipynb",
       "多层感知机2-课堂练习答案-终版2026.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
@@ -21508,6 +21934,26 @@
         "title": "实践建议",
         "count": 1,
         "summary": "## 本章总结 ### 核心知识点回顾 第一部分：梯度消失与梯度爆炸及解决方案 - 梯度消失：深层网络中靠近输入层的梯度逐层减小→0，导致浅层无法学习 - 梯度爆炸：梯度指数级增长，损失变为NaN，常见于深层网络和RNN - 梯度裁剪：Value Clipping（元素级）、Norm Clipping（范数裁剪）、Backward Hooks（RNN专用） - 梯度爆炸治本方案：批归一化（BN/LN）、权重正则化、改进初始化（Fixup/正交初始化） - 梯度消失解决方案：Xavier初始化（Tanh/Sigmoid）、Kaiming/He初始化（ReLU）、批归一化（补偿不良初始化） - BN核心机制：训练用batch统计量，推理用移动平均；对每个通道独立归一化 第二部分：优化器与学习率调整 - 病态曲率：损失函数在某些方向变化陡峭，某些方向平缓，SGD呈锯齿状下降 - 动量（Momentum）：引入速度概念，加速收敛，减少震荡，γ通常设为0.9 - Nesterov加速梯度（NAG）：先展望再计算梯度，提前感知变化，避免冲过头 - 自适应学习率：Adagrad（累积梯度平方，学习率单调递减）、RMSProp（指数移动平均EMA解决Adagrad问题）、Adam（Momentum+RMSProp+偏差修正） - 学习率调度器：StepLR、MultiStepLR、ExponentialLR、ReduceLROnPlateau（最实用，推荐首选）、CosineAnnealingLR - 优化器与调度器配合：优化器负责'怎么走'（自适应梯度..."
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-54",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 54,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） men rlced 图像上的卷积操作 d neaby poe W6T w7 nhen New pieei value （des 图像卷积 将一个像素点周围的像素按照不同的权重叠加起来。"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-12",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
       },
       {
         "chunk_id": "多层感知机2-课堂练习-终版2026::cell-5",
@@ -21684,11 +22130,11 @@
       "Key",
       "Attention",
       "Query",
+      "RNN",
+      "Transformer",
       "梯度爆炸",
       "梯度裁剪",
-      "RNN",
-      "Batch",
-      "Dropout"
+      "归一化"
     ]
   },
   "Q/K/V": {
@@ -22032,13 +22478,24 @@
   },
   "Self-Attention": {
     "term": "Self-Attention",
-    "total_count": 43,
+    "total_count": 44,
     "files": [
+      "图学习课件_第二部分_20260602.pptx",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
     ],
     "hits": [
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-18",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 18,
+        "title": "大模型时代的序幕：BERT&GPT",
+        "count": 1,
+        "summary": "大模型时代的序幕：BERT&GPT 3374093 BERT&GPT Input sequence Randomly mask words ［CLS］ IMASK］ Transtommer decoder Transformer decoder Q BERTL Transformer encoder Transformer decoder GPT-1 Predict the masked words am Masked self-attention 12 3374093 Feediorward neural network BERT Next generated word Mamas GPT 17"
+      },
       {
         "chunk_id": "注意力机制及Transformer1-学生分发版-终版2026::cell-2",
         "file": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
@@ -22664,9 +23121,10 @@
   },
   "Transformer": {
     "term": "Transformer",
-    "total_count": 173,
+    "total_count": 194,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+      "图学习课件_第二部分_20260602.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "多层感知机2-学生分发版-终版2026.ipynb",
@@ -22685,6 +23143,166 @@
         "title": "第6步：观察损失曲线",
         "count": 1,
         "summary": "#### 第1步：观察初始损失 - 确保损失计算正确 - 将权重衰减设为零 #### 第2步：在小样本上过拟合 - 在少量样本上训练，尝试达到分类100%训练准确率，回归loss第3步：找到使损失下降的学习率 - 当损失下降较慢时，将学习率缩小10倍 - 使用较小的权重衰减 - 如果SGD调参困难，先用AdamW验证模型可行性（对学习率敏感度低） - 固定batch size（通常取显存能容纳的最大值的50%~80%）后再调学习率，如需改变bs，按线性规则调整lr（大bs需要更强正则，线性缩放规则：bs×4 → lr×4, Facebook AI Research (FAIR), Goyal, P., et al. (2017). Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour. arXiv:1706.02677.） - \"如果初期震荡严重，尝试warmup\"：前几个epoch线性增加学习率，再开始正常训练 scheduler = LinearWarmupCosineAnnealingLR(optimizer, warmup_epochs=5) ##### 方法1：网格搜索 固定batch size和weight decay（比如1e-4），选取几个数量级的候选学习率，各跑1-3个epoch： - 候选学习率: [1e-2, 1e-3, 1e-4, 1e-5] - 每个lr跑: 1-3个epoch - 观察指标： - 训练损失下降最快、且没有出现NaN/Inf的lr，就..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-9",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 RNN（循环神经网络）和LSTM（长短期记忆网络） RNN LSTM 处理文本、语音这样的序列数据， 可以理解为更复杂的RNN单元： 需要模型能够记住前面的信息。 = ◎ ）-〇〇 细胞状态：核心记忆通道 23374093 ③ x ③ • 遗忘门：决定丢弃哪些旧信息 • 输入门：决定添加哪些新信息 • 输出门：决定要输出什么样的隐藏状态 he=F（Wnn h-1+WxnXe+bn） • 顺序计算：训练速度较慢 • 梯度消失： 忘记前面内容 • 信息长距离传递：难以捕捉极长的依赖 • 梯度爆炸：难以收敛 关系，信息瓶颈严重 8"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-10",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 10,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 序列到序列 （seq2seq）模型（2014） ENCODER Reply Yes， what's -em 〈END> thought vector Are YOU free tomorrow？ Incoming Email DECODER 3374093 • 编码器（Encoder）：把输入句子读懂，压 口 RNN/LSTM擅长处理序列 缩成一个内部表示 口 翻译、总结文本、简单问答需要： • 解码器（Decoder）：根据 Encoder 提供 变长输入序列 一 变长输出序列 的表示，逐步生成目标语言"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-11",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer 3374093 注意力机制（2014） 普通 Seq2Seq Bahdanau Attention X4 ½2 ¥3 固定长度向量c Encoder Decoder Encoder Decoder 当前解码步 23374093 整句压縮为一个向量 Attention 每一步动态对齐并按需读取源句信息 长句时容易形成信息瓶颈 不再只依赖单一固定向量 10"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-12",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 2,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-13",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 13,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 2,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ Transformer模型很强大，但是最初设计是为了机器翻译设计的： encoder 读入源语言句子 一 decoder 自回归生成目标语言句子 但是有时语言模型不一定是seq2seq任务，需要更纯粹的理解模型或者生成模型！ 自然语言推断（NLI）任务 文本续写任务 前提：一只狗在草地上奔跑。 假设：有动物在草地上。 前文：今天天气很好，我决定去公园散 3374093 推断关系：蕴含 步。刚走到湖边， 前提：发言人说政策明年可能会改变。 续写：看见几只鸭子正在水面上慢慢游 过。 假设：政策已经改变了。 推断关系：矛盾 12"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-14",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 14,
+        "title": "大模型时代的序幕：BERT&GPT",
+        "count": 1,
+        "summary": "大模型时代的序幕：BERT&GPT 14093| BERT—Encoder only BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 预训练任务一：完形填空（Masked Language Model, MLM） 例句：The quick brown fox jumps over the lazy dog.（15% token被替换） 1:80%概率替换为（MASKJ： ［CLS］ The quick brown fox jumps over the ［MASK］ dog. ［SEP］ 2. 10% 概率替换为随机词： 3374093| ［CLS］ The quick brown fox jumps over the apple dog. ［SEP］ 3. 10% 概率保持不变： ［CLS］ The quick brown fox jumps over the lazy dog. ［SEP］ 13 Devlin J, et al. Proceedings of NAACL-HLT, 2019: 4171-4186）"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-15",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 15,
+        "title": "大模型时代的序幕：BERT&GPT",
+        "count": 1,
+        "summary": "大模型时代的序幕：BERT&GPT BERT—Encoder only BERT: Pre-training of Deep Bidirectional/Transformers for Language Understanding. NSP 预训练任务二：语句预测 （Next Sentence Prediction, NSP） ？ 玉例 （IsNext）： ［CLS］ the man went to ［MASK］ store ［SEP］ he bought a gallon ［MASK］ milk ［SEP］ IsNext 负例（NotNext）： 3374093| 7 ARE ［CLS］ the man went to ［MASK］ store ［SEP］ penguin ［MASK］ are FLIGHT BIRDS LESS flightless birds［SEP］ NotNext Devlin J, et al. Proceedings of NAACL-HLT, 2019:4171-4186）"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-16",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 16,
+        "title": "大模型时代的序幕：BERT&GPT",
+        "count": 1,
+        "summary": "大模型时代的序幕：BERT&GPT 3374093 BERT- -Encoder only BERT: Pre-training; of（Deep Bidirectional Transformers for Language Understanding. NSP Mask LM| Mask LM| MNLI NER SQuAD StartEnd Span 口 多文体自然语言推断（Multi- m日- Genre Natural Language Inference, MNLI） BERT BERT 命名实体识别 （Named Entity Recognition, NER） 口 斯坦福问答数据集（Stanford 23374093 Question Answering Masked Sentence A Masked Sentence B Question Paragraph Dataset, SQuAD） Unlabeled Sentence A and B Pair Question Answer Pair Pre-training Fine-Tuning 预训练-微调范式 15 Devlin J, et al. Proceedings of NAACL-HLT, 2019: 4171-4186）"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-17",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 17,
+        "title": "大模型时代的序幕：BERT&GPT",
+        "count": 1,
+        "summary": "大模型时代的序幕：BERT&GPT GPT-Decoder only Improving Language Understanding by Generative Pre-Training GPT-1架构 GPT-1：预训练好的12层的仅解码器的Transformer模型。 Prediction Classihier Text TaSk • The weather is • The weather is very 12x一 • The weather is very nice 23374093 • The weather is very nice today. 单向流动，逐步生成 Text & Position Embed 16"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-18",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 18,
+        "title": "大模型时代的序幕：BERT&GPT",
+        "count": 3,
+        "summary": "大模型时代的序幕：BERT&GPT 3374093 BERT&GPT Input sequence Randomly mask words ［CLS］ IMASK］ Transtommer decoder Transformer decoder Q BERTL Transformer encoder Transformer decoder GPT-1 Predict the masked words am Masked self-attention 12 3374093 Feediorward neural network BERT Next generated word Mamas GPT 17"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-39",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 39,
+        "title": "混合专家模型（MOE）",
+        "count": 1,
+        "summary": "混合专家模型（MOE） 3374093 Add• Noemalize 专家层 HNz||FNs 组件构成： Swtching FFN Layer =08. Poute • 路由器（Router） Adt • Novmalire • 专家组（Set of Experts） 3374093 More| Parameters| Switch Transformer 38 Fedus W, et al. Journal of Machine Leamning"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-40",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 40,
+        "title": "混合专家模型（MOE）",
+        "count": 1,
+        "summary": "混合专家模型（MOE） 3374093 工作流程： Add• Normalize 1. 路由决策 必 专家层 路由网络： Switcing FFN Layer =08 山 Go （x） = softmax（x•Wg） Add + Normaiire 得到权重： 3374093 More| Parameters Switch Transformer 39 Fedus W, et al. Journal of Machine Learning"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-41",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 41,
+        "title": "混合专家模型（MOE）",
+        "count": 1,
+        "summary": "混合专家模型（MOE） 3374093 工作流程： 2. 专家选择 必 将x发送到权重最大的专家E 专家层 Switching FFN Layer =08 3. 专家计算 进行标准的FFN计算： Add• Normafire FFNoutput 3374093 =ReLU（Wjx + bij）Wz；+bzi More Parameters 4. 加权输出整合 Switch Transformer 0=2 Go（）FFNoutput 40 Fedus W,et al.， 2022 Fedus W, et al. Journal of Machine Learning"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-48",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 48,
+        "title": "deepscckv3",
+        "count": 1,
+        "summary": "deepscckv3 3374093 000〇 outed Enpen Transformer Block x Output Hidcen h： Shared Epe • 基础架构与v2一致，参数量提高到 Feed-Fonward Neswork 671B； RMS Norm hih Top-K， • MOE采用一种无辅助损失的负载均衡 000〇 Input Hidden u， ntion（MLAL 策略，进一步提升性能； ① Cached During Infer Output Hicden u，［OO〇C 0000 • 多词元预测训练目标（MTP）：模型 Muli-Head Attention RMS Norm 不仅预测紧随其后的下一个词元，还 3314093 （Tki:kF 会预测再往后的1个额外词元； • FP8 混合精度训练。 00 Latentc UatentC Input Hidden h, 0000 47"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-61",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 61,
+        "title": "给予示例的Prompt",
+        "count": 2,
+        "summary": "给予示例的Prompt 【上传论文Improving Language Understanding by Generative Pre-Training】阅读我的论 文，请分析下面给出的标题示例特征，仿照这些风格，不用理会现有标题，帮我的论文换一个 你认为最合适的标题： BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding • Adam: A Method for Stochastic Optimization • Dropout: A Simple Way to Prevent Neural Networks from Overfitting 3374093 AI答案：GPT: Generative Pre-Training of Transformers for Language Understanding 61"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-90",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 90,
+        "title": "总结：LLM核心技术演进与突破",
+        "count": 1,
+        "summary": "总结：LLM核心技术演进与突破 23314093 口 革命性架构，解决长序列依赖瓶颈，奠定现代LLM基础 基石：Transformer & 注意力机制 口核心：自注意力机制 口 BERT:Encoder架构，通过MLM和NSP任务进行双向 范式：BERT & GPT 系列 理解预训练 口 GPT:Decoder架构，单向自回归生成式预训练 口 模型性能随规模幂律提升 驱动：缩放定律&涌现能力 口 大模型展现小模型不具备的“涌现能力\" 对齐：基于人类反馈的强化学习 口 使模型输出更符合人类意图和价值观 93374093 口 MOE：稀疏激活巨大参数量中的部分专家进行计算， 创新：追求效率与极致性能 高效扩展模型 口 COT：模拟思考过程，提升复杂任务的性能 92"
       },
       {
         "chunk_id": "多层感知机1_学生分发版::cell-78",
@@ -23200,22 +23818,54 @@
     "related": [
       "Attention",
       "Self-Attention",
-      "Softmax",
       "Query",
       "Key",
-      "Batch",
+      "Softmax",
+      "LSTM",
       "归一化",
       "Dropout"
     ]
   },
   "RoPE": {
     "term": "RoPE",
-    "total_count": 13,
+    "total_count": 17,
     "files": [
+      "图学习课件_第一部分_20260602.pptx",
+      "图学习课件_第二部分_20260602.pptx",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
     ],
     "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-17",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 17,
+        "title": "材料领域的潜在应用",
+        "count": 2,
+        "summary": "材料领域的潜在应用 communications materials REVIEW ARTICLE Mtps//44.an2/10:1038/W427 46-022-00119-4 Graph neural networks for materials science and chemistry prediction Property Screening Inverse design （Atomistic） simulations prediction understanding Synthesis Scientific Materials metal organic Properties of 9） frameworks ： 泌 Surface reaction simulations Understanding of particle interactions in amorphous solids and liquids Stability prediction of disordered materials Defect classification and design Polycrystalline systems"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-28",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 28,
+        "title": "基于人类反馈的强化学习（RLHF）",
+        "count": 1,
+        "summary": "基于人类反馈的强化学习（RLHF） 374093 第二步：训练奖励模型（Reward Model, RM） 您正在提供关于 ChatGPT 新版本的反馈。 您更偏向于哪个回复？回复可能需要一点时间来加載。 ⑤四1 回复 2 The correct answer is： The correct answer is： D. Residual stresses significantly decrease the measured D. Residual stresses significantly decrease the measured resonant frequencies. resonant frequencies. Explanation： Explanation： 23374093 In Resonant Ultrasound Spectroscopy （RUS） applied to Resonant Ultrasound Spectroscopy （RUS） measures the additively manufactured （AM） metallic components, residual natural vibration frequencies of a solid to infer its elastic stresses play a significant role in altering the measured properties, including stiffness tensor compon..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-78",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 78,
+        "title": "Kagome结构Co3SnlnS2研究背景调查案例",
+        "count": 1,
+        "summary": "Kagome结构Co3SnlnS2研究背景调查案例 Unusual magnetic and charge transport properties in In-Substituted Half- Metallic Kagome Ferromagnet CosSmzS2 我的Prompt： 帮我详细调研一下Kagome结构的Co3SnlnS2的研究情况。着重关注其磁输运和新奇量子性 质的知识，关注上述性能与Co3Sn22的对比。并分析其性能变化的内在机制。 23374093 80"
+      },
       {
         "chunk_id": "注意力机制及Transformer1-学生分发版-终版2026::cell-18",
         "file": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
@@ -23294,8 +23944,2419 @@
       "Softmax",
       "Multi-Head Attention",
       "归一化",
+      "Key",
+      "嵌入"
+    ]
+  },
+  "图学习": {
+    "term": "图学习",
+    "total_count": 18,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-1",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 1,
+        "title": "BITA",
+        "count": 1,
+        "summary": "BITA 图学习算法概述"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-2",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 2,
+        "title": "大纲• 图的基本概念",
+        "count": 1,
+        "summary": "大纲• 图的基本概念 • 图学习的两种算法 • 图游走 • 图卷积 • 总结"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-19",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 19,
+        "title": "图数据结构的学习优势",
+        "count": 1,
+        "summary": "图数据结构的学习优势 一般深度学习：难以处理不规则数据。 图学习：可以方便地处理不规则数据（图），充分利用图结构信息。 地图 商品广告"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-26",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 26,
+        "title": "图学习应用",
+        "count": 2,
+        "summary": "图学习应用 反金驶诈骗 金融 用户交互 推荐 股票预測 广告 研究粒子运动规律 物理 交通 地铁客流量预測 ETA 预測 气味预測 图学习应用 生物化学 药物发现 计算机视觉 自动驾驶-点云3D 象检測 其他 自然语言处理 知识图谱推理 实体关系抽取"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-27",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 27,
+        "title": "图学习算法分类",
+        "count": 2,
+        "summary": "图学习算法分类 DeepiVal NodeZVe 圓𤂅走类算法. UNE MetapathZVec- MetapathZVwc, Metapath2Vwce, Mul CCN 週春职（Spectrall ChetCcN ACCN 粗服风還 CCN GAT 图学习算法 園神烃网络算法 空間卷料ISpatial Caak CnaohSAGE Cated CNN| Tree LSTM Graph LSTM Tranf 知识圈谱嵌入算法 RotatE 知识图谱也是典型的图。 ComplEx DistMul"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-28",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 28,
+        "title": "图的基本概念",
+        "count": 4,
+        "summary": "图的基本概念 「U ｛ 两个基本元素：点、边 ［四提路 團是一种統一描述复杂事物约透害 图学习的基本概念 图学习是味 圈学习的优勢 ｛ 司以方便地处理朴 为什么选擇團学习 也可以处理規則數 节点級别任务 图的应用 边级别任务 图学习初印象 田能干啥 團扱别任务 領城： 生𥹉 撞荐系鏡、 自动骘驶 游違类算法 图学习如何做的 圈神陉网络算法 知识围训嵌入算法 主滾模蜇分贷骰览 如何做團学习 Show me the code 易用、高效、规模、 ｛ 圈学习库PCL 应用籓地 自研模型举例"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-30",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 30,
+        "title": "图学习课件第一部分，第 30 页",
+        "count": 2,
+        "summary": "图学习课件第一部分，第 30 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-31",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 31,
+        "title": "Overview",
+        "count": 1,
+        "summary": "Overview 图学习的两种算法"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-38",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 38,
+        "title": "Wordzvec>图学习领域",
+        "count": 1,
+        "summary": "Wordzvec>图学习领域 例：社交网络"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-47",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 47,
+        "title": "图学习的目的",
+        "count": 1,
+        "summary": "图学习的目的 节点特征 图特征 图网络模型 Graph Pooling 节点任务 图任务 关系预测、节点分类 图匹配、图分类"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-66",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 66,
+        "title": "图学习课件第一部分，第 66 页",
+        "count": 2,
+        "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      }
+    ],
+    "related": [
+      "节点",
+      "嵌入",
+      "边",
+      "邻接矩阵",
+      "度矩阵",
+      "拉普拉斯矩阵",
+      "卷积",
+      "图卷积"
+    ]
+  },
+  "图神经网络": {
+    "term": "图神经网络",
+    "total_count": 1,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-49",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 49,
+        "title": "5 图神经网络（GNN）",
+        "count": 1,
+        "summary": "5 图神经网络（GNN） MLP层 Layer N Layer N+1 graph in graph out 广 • Eaxn Graph Independent Layer update functionf=2： 节点，边和整体三者没有关联！"
+      }
+    ],
+    "related": [
+      "MLP",
+      "节点",
+      "边"
+    ]
+  },
+  "节点": {
+    "term": "节点",
+    "total_count": 57,
+    "files": [
+      "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+      "卷积神经网络2-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
+      "图学习课件_第二部分_20260602.pptx",
+      "多层感知机1_学生分发版.ipynb",
+      "多层感知机1_学生分发版_副本.ipynb"
+    ],
+    "hits": [
+      {
+        "chunk_id": "卷积神经网络2-学生分发版-终版2026(1)::cell-56",
+        "file": "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 56,
+        "slide_index": null,
+        "title": "PyTorch常用调度器对比",
+        "count": 1,
+        "summary": "#### PyTorch常用调度器对比 | 调度器 | 策略 | 关键参数 | 适用场景 | |:------:|:----:|:--------:|:--------:| | StepLR | 每隔N个epoch，lr×gamma | step_size, gamma | 周期性调整 | | MultiStepLR | 在指定里程碑调整 | milestones, gamma | 关键节点调整 | | ExponentialLR | 每个epoch指数衰减 | gamma | 平滑衰减 | | ReduceLROnPlateau | 验证停滞时降低 | mode, factor, patience | 自适应调整 | | CosineAnnealingLR | 余弦退火衰减 | T_max, eta_min | 周期性训练 | 使用频率（实际项目经验）： ReduceLROnPlateau > CosineAnnealingLR > StepLR > MultiStepLR > ExponentialLR"
+      },
+      {
+        "chunk_id": "卷积神经网络2-学生分发版-终版2026::cell-56",
+        "file": "卷积神经网络2-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 56,
+        "slide_index": null,
+        "title": "PyTorch常用调度器对比",
+        "count": 1,
+        "summary": "#### PyTorch常用调度器对比 | 调度器 | 策略 | 关键参数 | 适用场景 | |:------:|:----:|:--------:|:--------:| | StepLR | 每隔N个epoch，lr×gamma | step_size, gamma | 周期性调整 | | MultiStepLR | 在指定里程碑调整 | milestones, gamma | 关键节点调整 | | ExponentialLR | 每个epoch指数衰减 | gamma | 平滑衰减 | | ReduceLROnPlateau | 验证停滞时降低 | mode, factor, patience | 自适应调整 | | CosineAnnealingLR | 余弦退火衰减 | T_max, eta_min | 周期性训练 | 使用频率（实际项目经验）： ReduceLROnPlateau > CosineAnnealingLR > StepLR > MultiStepLR > ExponentialLR"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-3",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 3,
+        "title": "什么是图？",
+        "count": 1,
+        "summary": "什么是图？ 图论的开始 B C 七桥问题 图（Graph）就是节点（Vertices/Nodes）以及边（Edge） G= （V,E） 图（Graph）就是一种特殊的数据结构！"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-9",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "少图的分类",
+        "count": 2,
+        "summary": "少图的分类 购买 朋友关系 点击 浏览 购奕 用户节点 商品节点 同构图 异构图"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-10",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 10,
+        "title": "图的度和邻居",
+        "count": 1,
+        "summary": "图的度和邻居 节点4、 G= （V,E） 度（degree） 邻居（neighbor） 无向图 V=｛1,2,3.4｝ E=｛12,21, 14.41. degree = 3 neighbors = 1,2,3 24,42,34,43｝ 有向图 V=｛1,2,3,4｝ degree = 3 E=｛14,21,42,43｝ indegree = 1 predecessor = 1 outdegree = 2 successor =2,3"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-11",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "邻接矩阵",
+        "count": 2,
+        "summary": "邻接矩阵 ③ ②. 如果节点i和节点j之间有边：Au= 1 否则： Auy =0 （° 。。0 10 00 1 A= A= 0 00 1 0 0 0 （1 1 1 0） 0 1 1 无向图的邻接矩阵是对称矩阵。 https://distill.pub/2021/gnn-intro/"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-13",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 13,
+        "title": "实际的例子",
+        "count": 2,
+        "summary": "实际的例子 图是一种统一描述复杂事物的语言。 社交网络 互联网 节点：人 节点：网页 边：人与人之间的各种联系，如父母关系、 边： 网页与网页之间的超链接关系 朋友关系、同事关系等等。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-14",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 14,
+        "title": "实际的例子",
+        "count": 2,
+        "summary": "实际的例子 还有什么事物是可以用图来表示的呢？ 图是一种统一描述复杂事物的语言。 Nat =0 0-S=0 HO， NH gH PH HO. 2 OH Na+0 OH OH OH OH OH 推荐系统 化学分子 节点：用户和商品 节点：原子 边： 用户、商品之间的购买、点击等关系 边： 原子之间的相互作用力，也称为化学键"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-20",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 20,
+        "title": "图能做什么？",
+        "count": 1,
+        "summary": "图能做什么？ 节点级别任务 边级别任务 图级别任务"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-21",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 21,
+        "title": "）节点级别任务——金融诈骗检测",
+        "count": 2,
+        "summary": "）节点级别任务——金融诈骗检测 节点分类任务 图模型 预测潜在的金融 诈骗分子 A Semi-supervised Graph Attentive Network for Financial Fraud Detection"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-22",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 22,
+        "title": "节点级别任务—目标检测",
+        "count": 1,
+        "summary": "节点级别任务—目标检测 目标检测是自动驾驶中非常重要的一门技术。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-23",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 23,
+        "title": "节点级别任务——目标检测",
+        "count": 1,
+        "summary": "节点级别任务——目标检测 从3D点云中利用图模型进行目标检测 Graph Construction from a Point Cloud c: Bounding Box Merging and Scoring waph representation Detected olyect bounding boxes from vertices Merge bou boxes Point-GNN 点云数据 建图 图模型 目标检测 Point-GNN: Graph Neural Network for 3D Object Detection in a Point Cloud"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-28",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 28,
+        "title": "图的基本概念",
+        "count": 1,
+        "summary": "图的基本概念 「U ｛ 两个基本元素：点、边 ［四提路 團是一种統一描述复杂事物约透害 图学习的基本概念 图学习是味 圈学习的优勢 ｛ 司以方便地处理朴 为什么选擇團学习 也可以处理規則數 节点級别任务 图的应用 边级别任务 图学习初印象 田能干啥 團扱别任务 領城： 生𥹉 撞荐系鏡、 自动骘驶 游違类算法 图学习如何做的 圈神陉网络算法 知识围训嵌入算法 主滾模蜇分贷骰览 如何做團学习 Show me the code 易用、高效、规模、 ｛ 圈学习库PCL 应用籓地 自研模型举例"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-30",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 30,
+        "title": "图学习课件第一部分，第 30 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 30 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-32",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 32,
+        "title": "图游走类算法",
+        "count": 1,
+        "summary": "图游走类算法 重要问题：如何做Node embeddings？ Node embeddings 下游任务 命 辿一睥 学习到节点与邻居的关系 如何得到 Node embeddings ？"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-33",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 33,
+        "title": "图游走类算法",
+        "count": 4,
+        "summary": "图游走类算法 节点—…-…词？ 假设序列最大长度为4. 序列------句子？ 為一址＋壽一公 我 今天 非常 开心 一延一輪一公 图表示学习 得到节点表示， 爸爸 非常 开心 用于下游任务。 让一曲 器-至-暮一迎 节点与节点间形成序列，可以参考NLP领域中的Word2vec模型算法！"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-39",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 39,
+        "title": "图游走类模型——DeepWalk",
+        "count": 2,
+        "summary": "图游走类模型——DeepWalk 将 NLP 领域的思想运用到图（网络）嵌入领域。 How？ DeepWalk 节点 -＞单词 节点序列 ->句子 Sentence1 Sentence2 Word2Vec Sentence3"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-40",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 40,
+        "title": "）图游走类模型-",
+        "count": 2,
+        "summary": "）图游走类模型- —DeepWalk 游走方式：Random Walk Max length = 3 1 dea cea IN（w）| bce P（Ci =2ICi-1=0）=< if （v, x）cE e a ba 0， otherwise 下一个选择节点 当前节点 在无向图上游走 本质：可以回头的 DFS 深度优先遍历（Depth First Search， 简称 DFS）"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-43",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 43,
+        "title": "s nodezvec: bias random walk",
+        "count": 4,
+        "summary": "s nodezvec: bias random walk 归一化后的转移概率分布 Tux 一般的随机游走公式 P（Ci = xlci-1 =w）= Z i （U,x）EE otherwise 节点v未访问的邻居节点 当前正在访问的节点人人 上一个访问的节点一” node2vec: Scalable Feature Leaming for Networks"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-44",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 44,
+        "title": "- nodezvec: bias random walk",
+        "count": 3,
+        "summary": "- nodezvec: bias random walk Tox = apq（t,X）•Wox 考虑带权图，边的权值 X2 1 1 apg （t, x）= 1 ifdtx=1 4 1 1 p q dex： 当前节点v的一阶邻居节点到节点t的距离 node2vec: Scalable Feature Leaming for Networks"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-47",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 47,
+        "title": "图学习的目的",
+        "count": 3,
+        "summary": "图学习的目的 节点特征 图特征 图网络模型 Graph Pooling 节点任务 图任务 关系预测、节点分类 图匹配、图分类"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-49",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 49,
+        "title": "5 图神经网络（GNN）",
+        "count": 1,
+        "summary": "5 图神经网络（GNN） MLP层 Layer N Layer N+1 graph in graph out 广 • Eaxn Graph Independent Layer update functionf=2： 节点，边和整体三者没有关联！"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-52",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 52,
+        "title": "5 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN） ⑦又% 区 龱。区 龱 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 -⑧ 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-55",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 55,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） 图像上的卷积操作 图结构上的卷积 W0Lv w61 W7 图像卷积 将一个像素点周围的像素按照不同的权重叠加起来。 图结构卷积 将一个节点周围的邻居按照不同的权重叠加起来。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-56",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 56,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 1 1 。 A 邻接矩阵 1 1 1 1 D- 与度矩阵相关 0 1 0 0 0 1 1 0 1 1 H（）每一层的节点表示 0 0 1 1 邻接矩阵"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-57",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 57,
+        "title": "图卷积网络（GCN）",
+        "count": 3,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 与第1、2号节点相连 A 邻接矩阵 第0个节点 的链接 0 0 0 ① 乙 0 0 D-步与度矩阵相关 0 0 0 0 每一层的节点表示 0 0 无向图对称 邻接矩阵 自环"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-59",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 59,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 简化 H（+1）=o（AH!W） AHT（L） 公式的物理含义是什么 AIT（l）公式的物理含义是什么 F（l+1） A F（） 第0节点表示"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-60",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 60,
+        "title": "5 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN） AH （L 公式的物理含义是什么 H（L+1）. A 第0节点表示 。 0"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-62",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 62,
+        "title": "） 图卷积网络（GCN）-消息传递",
+        "count": 2,
+        "summary": "） 图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASRT RALLOT HERE 0号 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-63",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 63,
+        "title": "5 图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 之 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-66",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 66,
+        "title": "图学习课件第一部分，第 66 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-80",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 80,
+        "title": "Kagome结构Co3SnlnS2研究背景调查案例",
+        "count": 2,
+        "summary": "Kagome结构Co3SnlnS2研究背景调查案例 3. 磁输运：从巨大 AHE 到非单调响应再到抑制 3.1 Co,Sn,S：大本征 AHE 的参照系 Co,Sn,S，的 AHE 是理解 Co,SninS，的參瓶。Nature Communications 2018 研究显示， Co,Sn,S，的大反常在 我的Prompt： 尔效应主要是本征机制，即动量空间 Berry 曲率贡献；理论计算得到的反常霍尔电导与 Weyl 节点位置和磁矩 大小强相关。Ne 帮我详细调研一下Kagome结构 更具体地说，Co,Sn,S，的AHE 不只是“装留金属常见的霍尔信号变大”，而是 kagome 舵带、SOC、铁礎破缺 的Co3SnInS2的研究情况。着重 时间反演对称性共同产生的拓扑 Berry 曲事晚应。文献中还指出，Weyl 点、Fermi arc 和拓扑表通态已经被识 别，且 AHC 随磁矩减小而近似线性降低。wces 关注其磁输运和新奇量子性质的 3.2少量 In 播杂：碳化下降，但 AHC反而增强 知识，关注上述性能与 Co,Snwain.S，最反直觉的一点是：In挣杂一开始降低避化，却可以提高本征反常霍尔电导。PRB 2020时 x=0到x=1的单品研究发现，温化随×增大而降低，琴态从饺磁 Weyl 半金属走向非磁绝缘体；但本征 AHC Co3Sn2S2的对比。并分析其性 在 x20.15 附近出现最大情。作者将其归因于 Berry 曲率分布的演化，尤其是礎性拓扑 nodal-ring gap 对 AHC 能变化的内在机制。注意资料需 的..."
+      },
+      {
+        "chunk_id": "多层感知机1_学生分发版::cell-55",
+        "file": "多层感知机1_学生分发版.ipynb",
+        "kind": "ipynb",
+        "cell_index": 55,
+        "slide_index": null,
+        "title": "5. 动态计算图（Define-by-Run）",
+        "count": 2,
+        "summary": "### 核心概念清单 #### 1. 反向传播的核心目的 - [ ] 神经网络训练本质：找到使损失函数最小的权重 - [ ] 梯度指向损失函数上升最快的方向 - [ ] 沿梯度反方向更新权重（梯度下降） --- #### 2. 链式法则（Chain Rule） - [ ] 链式法则的数学表达 - [ ] 反向传播 = 多变量复合函数的链式法则在计算机程序中的应用 - [ ] 局部敏感度的概念 --- #### 3. 前向传播 vs 反向传播 | 阶段 | 方向 | 计算内容 | 目的 | |------|------|---------|------| | 前向传播 | 输入 → 输出 | 计算预测值和损失 | 得到损失值 | | 反向传播 | 输出 → 输入 | 计算梯度 | 得到参数更新方向 | 两阶段流程： 1. 前向传播：构建计算图，计算损失 2. 反向传播：沿计算图反向传播梯度 --- #### 4. 计算图（Computational Graph） - [ ] 计算图 的定义：描述数学运算的有向无环图（DAG） - [ ] 计算图的组成元素： - 节点：变量（蓝色框 = 需要梯度的参数） - 边：运算操作（灰色框） - 叶子节点：计算起点（绿色框） 注意：计算图只包含参与梯度计算的张量 --- #### 5. 动态计算图（Define-by-Run） - [ ] 动态计算图 的定义：每次前向传播时实时构建计算图 - [ ] PyTorch的动态计算图特点： - 每次前向传播可以不同 - 支持条件分支、循环等动态结构 - 内存效..."
+      },
+      {
+        "chunk_id": "多层感知机1_学生分发版_副本::cell-55",
+        "file": "多层感知机1_学生分发版_副本.ipynb",
+        "kind": "ipynb",
+        "cell_index": 55,
+        "slide_index": null,
+        "title": "5. 动态计算图（Define-by-Run）",
+        "count": 2,
+        "summary": "### 核心概念清单 #### 1. 反向传播的核心目的 - [ ] 神经网络训练本质：找到使损失函数最小的权重 - [ ] 梯度指向损失函数上升最快的方向 - [ ] 沿梯度反方向更新权重（梯度下降） --- #### 2. 链式法则（Chain Rule） - [ ] 链式法则的数学表达 - [ ] 反向传播 = 多变量复合函数的链式法则在计算机程序中的应用 - [ ] 局部敏感度的概念 --- #### 3. 前向传播 vs 反向传播 | 阶段 | 方向 | 计算内容 | 目的 | |------|------|---------|------| | 前向传播 | 输入 → 输出 | 计算预测值和损失 | 得到损失值 | | 反向传播 | 输出 → 输入 | 计算梯度 | 得到参数更新方向 | 两阶段流程： 1. 前向传播：构建计算图，计算损失 2. 反向传播：沿计算图反向传播梯度 --- #### 4. 计算图（Computational Graph） - [ ] 计算图 的定义：描述数学运算的有向无环图（DAG） - [ ] 计算图的组成元素： - 节点：变量（蓝色框 = 需要梯度的参数） - 边：运算操作（灰色框） - 叶子节点：计算起点（绿色框） 注意：计算图只包含参与梯度计算的张量 --- #### 5. 动态计算图（Define-by-Run） - [ ] 动态计算图 的定义：每次前向传播时实时构建计算图 - [ ] PyTorch的动态计算图特点： - 每次前向传播可以不同 - 支持条件分支、循环等动态结构 - 内存效..."
+      }
+    ],
+    "related": [
+      "卷积",
+      "图卷积",
+      "GCN",
+      "边",
+      "邻接矩阵",
+      "图学习",
+      "度矩阵",
+      "节点分类"
+    ]
+  },
+  "边": {
+    "term": "边",
+    "total_count": 74,
+    "files": [
+      "卷积神经网络1-学生分发版-终版2026.ipynb",
+      "卷积神经网络1-课堂练习-终版2026.ipynb",
+      "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+      "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+      "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
+      "图学习课件_第二部分_20260602.pptx",
+      "多层感知机1_学生分发版.ipynb",
+      "多层感知机1_学生分发版_副本.ipynb",
+      "多层感知机2-学生分发版-终版2026.ipynb",
+      "循环神经网络-学生分发版-终版2026.ipynb",
+      "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+      "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
+    ],
+    "hits": [
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-6",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 6,
+        "slide_index": null,
+        "title": "Hubel & Wiesel的发现（1962年，1981年诺贝尔奖）",
+        "count": 1,
+        "summary": "#### Hubel & Wiesel的发现（1962年，1981年诺贝尔奖） 神经科学领域的突破性研究“关于视觉系统的信息处理的发现”：证明了大脑不是 “被动的视网膜投影”，而是主动的特征提取系统，彻底推翻了当时 “视觉是视网膜图像直接投射到皮层” 的错误理论，为卷积神经网络奠定了生物学基础。 | 细胞类型 | 功能 | 对应CNN组件 | |:--------:|:----:|:-----------:| | 简单细胞（Simple cells） | 检测局部特征（如边缘） | 卷积核/滤波器 | | 复杂细胞（Complex cells） | 组合相邻简单细胞的输出，具有平移不变性 | 池化层 |"
+      },
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-11",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 11,
+        "slide_index": null,
+        "title": "填充",
+        "count": 8,
+        "summary": "#### 卷积 卷积操作： 1. 看：聚焦图像的某一小块区域（如3×3像素） 2. 算：将这9个像素与卷积核的9个权重对应相乘再求和 3. 记：把结果写入新图像的对应位置 4. 移：滑动到下一个位置，重复上述过程 卷积后的特征图大小取决于滤波器的大小，滤波器越大，生成的图像越小。 卷积核越大，特征图越小 $$\\left(h_{i}, w_{i}\\right) * f=\\left(h_{i}-f+1, w_{i}-f+1\\right)$$ 把核从头往右走，顶住之后再加一，公式来源（这个情况是默认步数为1的情况下的） 💡 类比：卷积就像给图像加滤镜——边缘检测滤镜让边缘突出，模糊滤镜让图像平滑，锐化滤镜让细节清晰。 ##### 步长 使用步长参数$s$，更新特征图尺寸计算公式： $$\\left(h_{i}, w_{i}\\right) * f=\\left(\\frac{h_{i}-f+1}{s}, \\frac{w_{i}-f+1}{s}\\right)$$ 平时步数默认一步 ##### 填充 外围填充一圈去保证处理完尺寸仍然和输入一致 填充模式：常数填充、反射填充、复制填充、循环填充 通常采用的策略 | 场景 | 推荐策略 | 原因 | |------|----------|------| | 通用图像分类 | 零填充 | 简单高效，主流框架默认 | | 语义分割 | 反射/复制填充 | 保持边缘信息，避免零边界影响 | | 生成模型（GAN） | 反射填充 | 减少棋盘格伪影，边缘更自然 | | 超分辨率 | 反射填充 | 边缘连续性好 | |..."
+      },
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-12",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 12,
+        "slide_index": null,
+        "title": "卷积核：不是人工设计的，是学习得到的",
+        "count": 2,
+        "summary": "### 卷积核：不是人工设计的，是学习得到的 CNN的革命性： 最后的卷积核，是机器自己学习得到的 CNN中的卷积核初始是随机的，通过反向传播自动学习最优的权重。随着网络深度的增加，特征逐渐从底层向高层抽象 注意：这种层次性是连续且渐进的，并非每一层都有清晰可分的语义边界，不同任务、不同网络中的特征分布也会存在显著差异。 💡 关键洞察：CNN自动学会了从像素→边缘→纹理→部件→物体的层次化特征表示！"
+      },
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-21",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 21,
+        "slide_index": null,
+        "title": "卷积的三种形式：Valid、Same、Full",
+        "count": 1,
+        "summary": "| 卷积类型 | 描述 | 输出尺寸 | 特点 | |:--------:|:----:|:--------:|:----:| | Valid | 不使用填充 | $(M-K+1) \\times (N-K+1)$ | 不扩展边界，输出最小 | | Same | 使用填充使输出尺寸与输入相同 | $M \\times N$ | 零填充，保持空间尺寸 | | Full | 完全填充 | $(M+K-1) \\times (N+K-1)$ | 最大扩展，输出最大 |"
+      },
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-23",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 23,
+        "slide_index": null,
+        "title": "递推公式（从后往前）",
+        "count": 1,
+        "summary": "#### 什么是感受野？ 感受野（Receptive Field）：神经网络中某个神经元能够\"看到\"的原始输入图像的区域大小。 💡 核心洞察：随着网络加深，每个神经元的感受野逐渐扩大，从看局部细节到看全局语义！ #### 感受野的计算 ##### 递推公式（从后往前） 设 $RF_l$表示第 $l$ 层一个神经元在特征图上的感受野边长，则回溯公式为： $$RF_{l-1} = (RF_l - 1) \\times s_l + k_l$$ 其中： - $s_l$：第 $l$ 层（即从 $l-1$ 到 $l$ 的变换）的步长 - $k_l$：第 $l$ 层的卷积核或池化窗口大小"
+      },
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-27",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 27,
+        "slide_index": null,
+        "title": "池化操作的尺寸计算",
+        "count": 1,
+        "summary": "#### 池化操作的尺寸计算 输出尺寸公式： $$\\text{Output Size} = \\left\\lfloor \\frac{M - K}{S} \\right\\rfloor + 1$$ 其中： - $M$：输入尺寸 - $K$：池化核大小 - $S$：步长（stride）（池化核边长）"
+      },
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-33",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 33,
+        "slide_index": null,
+        "title": "Hubel & Wiesel的发现 → CNN的实现",
+        "count": 2,
+        "summary": "#### Hubel & Wiesel的发现 → CNN的实现 回顾Hubel & Wiesel的生物学发现，与CNN的对应关系： | 生物学发现 | CNN实现 | 直观理解 | |:----------:|:-------:|:--------:| | 简单细胞检测局部边缘 | 卷积核检测特定方向的边缘 | 如检测水平线、垂直线的核 | | 不同细胞对不同方向/频率敏感 | 不同卷积核学习不同特征 | 有的核检测横线，有的检测纹理 | | 感受野局部连接 | 卷积核局部区域 | 3×3核只看9个像素，模仿视网膜局部感知 | | 复杂细胞的位置不变性 | 池化层 | 小幅平移不影响识别，如Max Pooling | | 层级结构（V1→V2→IT） | 深度网络结构 | 从简单到复杂的特征层次 | 💡 重要区别：生物神经元的连接是进化固定的（弱势的治疗方法），而CNN的卷积核是数据驱动学习的——同样的架构，学习不同数据，会得到不同的特征检测器！"
+      },
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-42",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 42,
+        "slide_index": null,
+        "title": "Step 3：多通道输入 → 多通道输出（最终形态）",
+        "count": 1,
+        "summary": "#### Step 3：多通道输入 → 多通道输出（最终形态） 如果需要输出多个通道（如同时检测边缘、纹理、颜色等不同特征），怎么办？ 核心思想：使用多组滤波器，每组产生一个输出通道 输入: [C_in, H, W] 滤波器组: [C_out, C_in, K, K] 输出: [C_out, H', W'] │ ├── 滤波器0: [C_in, K, K] ──→ 输出通道0 ├── 滤波器1: [C_in, K, K] ──→ 输出通道1 ├── 滤波器2: [C_in, K, K] ──→ 输出通道2 └── 滤波器... 具体例子（3通道输入 → 16通道输出）： | 组件 | 形状 | 说明 | |:---|:---|:---| | 输入图像 | [3, 32, 32] | 3通道，32×32像素 | | 滤波器组 | [16, 3, 3, 3] | 16个滤波器，每个3通道，3×3大小 | | 输出特征图 | [16, 30, 30] | 16通道，30×30像素（无填充）| 最终结论： | 参数 | 符号 | 维度说明 | |:---|:---:|:---| | 输入通道 | $C_{in}$ | 输入图像的通道数 | | 输出通道 | $C_{out}$ | 滤波器的数量（组数） | | 滤波器形状 | - | [C_out, C_in, K, K] | | 输出特征图 | - | [C_out, H', W'] | 💡 一句话总结：输出通道数 = 滤波器组数，每个滤波器组包含 $C_{in}$ 个卷积核。"
+      },
+      {
+        "chunk_id": "卷积神经网络1-课堂练习-终版2026::cell-7",
+        "file": "卷积神经网络1-课堂练习-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 7,
+        "slide_index": null,
+        "title": "递推公式（从后往前回溯）",
+        "count": 1,
+        "summary": "#### 递推公式（从后往前回溯） $$RF_{l-1} = (RF_l - 1) \\times s_l + k_l$$ 其中： - $RF_l$：第 $l$ 层一个神经元在特征图上的感受野边长 - $s_l$：第 $l$ 层的步长 - $k_l$：第 $l$ 层的卷积核或池化窗口大小"
+      },
+      {
+        "chunk_id": "卷积神经网络1-课堂练习-终版2026::cell-8",
+        "file": "卷积神经网络1-课堂练习-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 8,
+        "slide_index": null,
+        "title": "要求",
+        "count": 1,
+        "summary": "#### 要求 任务 1.1：填写下表，计算每层在输入图像上的感受野 | 层号 | 当前层感受野（边长） | 计算公式 | |:----:|:--------------------:|:---------| | 5 | $1 \\times 1$ | | | 4 | $3 \\times 3$ | | | 3 | $6 \\times 6$ | | | 2 | $8 \\times 8$ | | | 1 | $16 \\times 16$ | | | 输入 | $18 \\times 18$ | |"
+      },
+      {
+        "chunk_id": "卷积神经网络2-学生分发版-终版2026(1)::cell-82",
+        "file": "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 82,
+        "slide_index": null,
+        "title": "第6步：观察损失曲线",
+        "count": 1,
+        "summary": "#### 第1步：观察初始损失 - 确保损失计算正确 - 将权重衰减设为零 #### 第2步：在小样本上过拟合 - 在少量样本上训练，尝试达到分类100%训练准确率，回归loss第3步：找到使损失下降的学习率 - 当损失下降较慢时，将学习率缩小10倍 - 使用较小的权重衰减 - 如果SGD调参困难，先用AdamW验证模型可行性（对学习率敏感度低） - 固定batch size（通常取显存能容纳的最大值的50%~80%）后再调学习率，如需改变bs，按线性规则调整lr（大bs需要更强正则，线性缩放规则：bs×4 → lr×4, Facebook AI Research (FAIR), Goyal, P., et al. (2017). Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour. arXiv:1706.02677.） - \"如果初期震荡严重，尝试warmup\"：前几个epoch线性增加学习率，再开始正常训练 scheduler = LinearWarmupCosineAnnealingLR(optimizer, warmup_epochs=5) ##### 方法1：网格搜索 固定batch size和weight decay（比如1e-4），选取几个数量级的候选学习率，各跑1-3个epoch： - 候选学习率: [1e-2, 1e-3, 1e-4, 1e-5] - 每个lr跑: 1-3个epoch - 观察指标： - 训练损失下降最快、且没有出现NaN/Inf的lr，就..."
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026(1)::cell-38",
+        "file": "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 38,
+        "slide_index": null,
+        "title": "作用二：跨通道信息融合",
+        "count": 1,
+        "summary": "##### 作用二：跨通道信息融合 抽象解释：每个输出通道是所有输入通道的加权组合。 作用：让网络自动学习如何\\\"混合\\\"不同通道的特征（如边缘+颜色=特定物体）。 > 💡 类比：1×1卷积就像是给每个像素位置安排了一个\\\"小型全连接层\\\"，这个全连接层的输入是所有通道在该位置的值，输出是新通道在该位置的值。"
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026(1)::cell-48",
+        "file": "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 48,
+        "slide_index": null,
+        "title": "迁移学习推荐：首选 ResNet-50",
+        "count": 1,
+        "summary": "### 五、CNN架构的参数和性能对比 #### CNN 架构对比：准确率 vs 参数量 vs 计算量 核心结论：更好的网络结构设计（ResNet、Inception）可以用更少的参数和计算量，达到比\"暴力堆叠\"（VGG）更高的准确率。 | 模型 | 参数量 | 计算量 | Top-1 准确率 | 核心特点 | |:---|:---|:---|:---|:---| | AlexNet | ~60M | ~0.7 G-Ops | ~57% | 开山之作，结构简单 | | VGG-16/19 | ~138M（最大） | ~30+ G-Ops | ~70% | 堆叠深而宽，参数冗余严重 | | GoogLeNet | ~6.8M（极小） | ~3 G-Ops | ~68.5% | Inception + 全局平均池化 | | ResNet-18/34 | ~11M / ~21M | ~2-4 G-Ops | ~70% / ~73% | 残差连接，解决退化 | | ResNet-50/101/152 | ~25M / ~44M / ~60M | ~4-11 G-Ops | ~76-78% | 越深越准，参数效率极高 | | Inception-v3/v4 | ~23M / ~42M | ~5-12 G-Ops | ~78-80% | 多尺度 + 残差融合 | 关键洞察： - VGG 靠堆参数和计算量换性能，效率最低。 - GoogLeNet 用精巧设计（$1\\times1$ 降维、全局平均池化）大幅压缩了参数。 - ResNet 和 Incept..."
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026(1)::cell-57",
+        "file": "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 57,
+        "slide_index": null,
+        "title": "模型冻结与微调",
+        "count": 1,
+        "summary": "- 冻结部分的网络已经在 ImageNet 上预训练好了，学到了通用的边缘、纹理、形状等特征。对于新任务（比如识别猫狗、医疗影像），这些底层特征往往是通用的，不需要重新学。 - 冻结预训练网络的特征提取部分，只训练（或替换后训练）顶部的分类器，让模型快速适应自己的数据集。"
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026(1)::cell-58",
+        "file": "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 58,
+        "slide_index": null,
+        "title": "模型冻结（Model Freezing）",
+        "count": 1,
+        "summary": "#### 模型冻结（Model Freezing） 概念：冻结模型意味着模型的参数在训练过程中不会被更新。 为什么需要冻结？ - 预训练模型已经学到了通用的特征（边缘、纹理、形状等） - 我们只需要训练最后的分类层来适应特定任务 - 避免在少量数据上过度调整预训练权重，导致过拟合 冻结实现：通过设置requires_grad = False"
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026(1)::cell-70",
+        "file": "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 70,
+        "slide_index": null,
+        "title": "解冻后务必重新创建 optimizer，不要直接复用阶段1的实例！",
+        "count": 1,
+        "summary": "#### 微调策略详解 迁移学习要根据数据集大小和与ImageNet的相似度来选择策略： | 场景 | 数据集大小 | 与ImageNet相似度 | 推荐策略 | |:---|:---|:---|:---| | 场景1 | 小（ 10万） | 高 | 用较小学习率微调所有层 | | 场景4 | 大（> 10万） | 低 | 从预训练权重开始微调所有层（完全从头训练一般没必要）| 如何做到极小幅的微调：\"极小幅微调\" ≈ 很小的学习率（1e-5） + 很短的训练时间（5-10 epoch） + 只动最后1-2层 + 必要时加大 weight decay + “SGD + Momentum“ 逐层微调（Layer-wise Fine-tuning） 越靠近输入的层学到的是越通用的特征（边缘、颜色），越靠近输出的层学到的是越任务相关的特征。所以可以给不同层设置不同学习率： PyTorch实现（以 VGG / AlexNet 结构为例）： python optim.Adam([ {'params': model.features[:6].parameters(), 'lr': 0}, # 冻结 {'params': model.features[6:12].parameters(), 'lr': 1e-5}, # 低学习率 {'params': model.features[12:].parameters(), 'lr': 1e-4}, # 中学习率 {'params': model.classifier.parameters(), 'lr'..."
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026::cell-38",
+        "file": "卷积神经网络3-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 38,
+        "slide_index": null,
+        "title": "作用二：跨通道信息融合",
+        "count": 1,
+        "summary": "##### 作用二：跨通道信息融合 抽象解释：每个输出通道是所有输入通道的加权组合。 作用：让网络自动学习如何\\\"混合\\\"不同通道的特征（如边缘+颜色=特定物体）。 > 💡 类比：1×1卷积就像是给每个像素位置安排了一个\\\"小型全连接层\\\"，这个全连接层的输入是所有通道在该位置的值，输出是新通道在该位置的值。"
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026::cell-48",
+        "file": "卷积神经网络3-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 48,
+        "slide_index": null,
+        "title": "迁移学习推荐：首选 ResNet-50",
+        "count": 1,
+        "summary": "### 五、CNN架构的参数和性能对比 #### CNN 架构对比：准确率 vs 参数量 vs 计算量 核心结论：更好的网络结构设计（ResNet、Inception）可以用更少的参数和计算量，达到比\"暴力堆叠\"（VGG）更高的准确率。 | 模型 | 参数量 | 计算量 | Top-1 准确率 | 核心特点 | |:---|:---|:---|:---|:---| | AlexNet | ~60M | ~0.7 G-Ops | ~57% | 开山之作，结构简单 | | VGG-16/19 | ~138M（最大） | ~30+ G-Ops | ~70% | 堆叠深而宽，参数冗余严重 | | GoogLeNet | ~6.8M（极小） | ~3 G-Ops | ~68.5% | Inception + 全局平均池化 | | ResNet-18/34 | ~11M / ~21M | ~2-4 G-Ops | ~70% / ~73% | 残差连接，解决退化 | | ResNet-50/101/152 | ~25M / ~44M / ~60M | ~4-11 G-Ops | ~76-78% | 越深越准，参数效率极高 | | Inception-v3/v4 | ~23M / ~42M | ~5-12 G-Ops | ~78-80% | 多尺度 + 残差融合 | 关键洞察： - VGG 靠堆参数和计算量换性能，效率最低。 - GoogLeNet 用精巧设计（$1\\times1$ 降维、全局平均池化）大幅压缩了参数。 - ResNet 和 Incept..."
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026::cell-57",
+        "file": "卷积神经网络3-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 57,
+        "slide_index": null,
+        "title": "模型冻结与微调",
+        "count": 1,
+        "summary": "- 冻结部分的网络已经在 ImageNet 上预训练好了，学到了通用的边缘、纹理、形状等特征。对于新任务（比如识别猫狗、医疗影像），这些底层特征往往是通用的，不需要重新学。 - 冻结预训练网络的特征提取部分，只训练（或替换后训练）顶部的分类器，让模型快速适应自己的数据集。"
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026::cell-58",
+        "file": "卷积神经网络3-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 58,
+        "slide_index": null,
+        "title": "模型冻结（Model Freezing）",
+        "count": 1,
+        "summary": "#### 模型冻结（Model Freezing） 概念：冻结模型意味着模型的参数在训练过程中不会被更新。 为什么需要冻结？ - 预训练模型已经学到了通用的特征（边缘、纹理、形状等） - 我们只需要训练最后的分类层来适应特定任务 - 避免在少量数据上过度调整预训练权重，导致过拟合 冻结实现：通过设置requires_grad = False"
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026::cell-70",
+        "file": "卷积神经网络3-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 70,
+        "slide_index": null,
+        "title": "解冻后务必重新创建 optimizer，不要直接复用阶段1的实例！",
+        "count": 1,
+        "summary": "#### 微调策略详解 迁移学习要根据数据集大小和与ImageNet的相似度来选择策略： | 场景 | 数据集大小 | 与ImageNet相似度 | 推荐策略 | |:---|:---|:---|:---| | 场景1 | 小（ 10万） | 高 | 用较小学习率微调所有层 | | 场景4 | 大（> 10万） | 低 | 从预训练权重开始微调所有层（完全从头训练一般没必要）| 如何做到极小幅的微调：\"极小幅微调\" ≈ 很小的学习率（1e-5） + 很短的训练时间（5-10 epoch） + 只动最后1-2层 + 必要时加大 weight decay + “SGD + Momentum“ 逐层微调（Layer-wise Fine-tuning） 越靠近输入的层学到的是越通用的特征（边缘、颜色），越靠近输出的层学到的是越任务相关的特征。所以可以给不同层设置不同学习率： PyTorch实现（以 VGG / AlexNet 结构为例）： python optim.Adam([ {'params': model.features[:6].parameters(), 'lr': 0}, # 冻结 {'params': model.features[6:12].parameters(), 'lr': 1e-5}, # 低学习率 {'params': model.features[12:].parameters(), 'lr': 1e-4}, # 中学习率 {'params': model.classifier.parameters(), 'lr'..."
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-3",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 3,
+        "title": "什么是图？",
+        "count": 1,
+        "summary": "什么是图？ 图论的开始 B C 七桥问题 图（Graph）就是节点（Vertices/Nodes）以及边（Edge） G= （V,E） 图（Graph）就是一种特殊的数据结构！"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-11",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "邻接矩阵",
+        "count": 1,
+        "summary": "邻接矩阵 ③ ②. 如果节点i和节点j之间有边：Au= 1 否则： Auy =0 （° 。。0 10 00 1 A= A= 0 00 1 0 0 0 （1 1 1 0） 0 1 1 无向图的邻接矩阵是对称矩阵。 https://distill.pub/2021/gnn-intro/"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-13",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 13,
+        "title": "实际的例子",
+        "count": 2,
+        "summary": "实际的例子 图是一种统一描述复杂事物的语言。 社交网络 互联网 节点：人 节点：网页 边：人与人之间的各种联系，如父母关系、 边： 网页与网页之间的超链接关系 朋友关系、同事关系等等。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-14",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 14,
+        "title": "实际的例子",
+        "count": 2,
+        "summary": "实际的例子 还有什么事物是可以用图来表示的呢？ 图是一种统一描述复杂事物的语言。 Nat =0 0-S=0 HO， NH gH PH HO. 2 OH Na+0 OH OH OH OH OH 推荐系统 化学分子 节点：用户和商品 节点：原子 边： 用户、商品之间的购买、点击等关系 边： 原子之间的相互作用力，也称为化学键"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-20",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 20,
+        "title": "图能做什么？",
+        "count": 1,
+        "summary": "图能做什么？ 节点级别任务 边级别任务 图级别任务"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-24",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 24,
+        "title": "边级别任务——推荐系统",
+        "count": 1,
+        "summary": "边级别任务——推荐系统 伊石傳说：清健體懷上種服姆. 遷记排全島控好時？ 𨧻热平衛多 • 推荐系统是经典的Link Prediction任务 A 用户行为图关系 輕𤷫罐𡟻两𡩣𠄌 用户/内容向量空间 应用 B 图文推荐 视频推荐 C 用户理解 深慣92%的外地人世不知：1月3日記社保要 年国可の理藻城P口 新闻推荐"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-28",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 28,
+        "title": "图的基本概念",
+        "count": 2,
+        "summary": "图的基本概念 「U ｛ 两个基本元素：点、边 ［四提路 團是一种統一描述复杂事物约透害 图学习的基本概念 图学习是味 圈学习的优勢 ｛ 司以方便地处理朴 为什么选擇團学习 也可以处理規則數 节点級别任务 图的应用 边级别任务 图学习初印象 田能干啥 團扱别任务 領城： 生𥹉 撞荐系鏡、 自动骘驶 游違类算法 图学习如何做的 圈神陉网络算法 知识围训嵌入算法 主滾模蜇分贷骰览 如何做團学习 Show me the code 易用、高效、规模、 ｛ 圈学习库PCL 应用籓地 自研模型举例"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-30",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 30,
+        "title": "图学习课件第一部分，第 30 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 30 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-44",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 44,
+        "title": "- nodezvec: bias random walk",
+        "count": 1,
+        "summary": "- nodezvec: bias random walk Tox = apq（t,X）•Wox 考虑带权图，边的权值 X2 1 1 apg （t, x）= 1 ifdtx=1 4 1 1 p q dex： 当前节点v的一阶邻居节点到节点t的距离 node2vec: Scalable Feature Leaming for Networks"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-49",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 49,
+        "title": "5 图神经网络（GNN）",
+        "count": 1,
+        "summary": "5 图神经网络（GNN） MLP层 Layer N Layer N+1 graph in graph out 广 • Eaxn Graph Independent Layer update functionf=2： 节点，边和整体三者没有关联！"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-62",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 62,
+        "title": "） 图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "） 图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASRT RALLOT HERE 0号 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-65",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 65,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AH（L D-号AD-号H（0 d越大，信息量越小，言越小’ 1 0号 V3vS 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-66",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 66,
+        "title": "图学习课件第一部分，第 66 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-13",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 13,
+        "title": "从序列建模瓶颈到 Transformer",
+        "count": 1,
+        "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ Transformer模型很强大，但是最初设计是为了机器翻译设计的： encoder 读入源语言句子 一 decoder 自回归生成目标语言句子 但是有时语言模型不一定是seq2seq任务，需要更纯粹的理解模型或者生成模型！ 自然语言推断（NLI）任务 文本续写任务 前提：一只狗在草地上奔跑。 假设：有动物在草地上。 前文：今天天气很好，我决定去公园散 3374093 推断关系：蕴含 步。刚走到湖边， 前提：发言人说政策明年可能会改变。 续写：看见几只鸭子正在水面上慢慢游 过。 假设：政策已经改变了。 推断关系：矛盾 12"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-53",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 53,
+        "title": "Prompt工程的核心任务",
+        "count": 1,
+        "summary": "Prompt工程的核心任务 374093 意图表达 输出引导 把需求、目标和期望转化为模型可理解的语言 控制模型输出的方向、格式与质量 • 清晰描述任务目标 • 指定输出结构（列表/表格/ JSON） • 提供必要背景信息 • 定义长度与详细程度 • 设定合适约束条件 • 设定语气、风格和专业程度 能力激发 风险控制 充分利用模型在预训练中获得的知识与能力 降低错误、偏见与不当内容的风险 23374093 • 用提示激活推理能力 • 减少“幻觉”和虚假信息 • 用示例引导特定模式 • 不确定时承认知识边界 • 通过角色设定调整行为方式 • 防止提示词注入等安全风险 52"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-57",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 57,
+        "title": "清晰且有约束的Prompt",
+        "count": 2,
+        "summary": "清晰且有约束的Prompt 3374083 传携研究问題 机器学习可做的事 对二维材料的启发 请用专业但是不生濯的语言向一位不了解AI以及数据的二维材料研究者 解釋什么是机器学习，并给出研究启发。 粵些新二擔化合物可能稳定？ 学习已知材料的形成統、利腐能、声 从*凭化学直觉选体系*变为“系統握索餐 要求： 子撸定悾規律 选空闻 1. 如果使用数据/A专业词汇必須提前进行解释 2. 尽量内容富有科学性，不要浅层解释 蚣何调控帶蒽和觼郁边位置？ 建立粗成、层数、应实、鼓箱与电子 为光电彈黑、光催化、品体管沟通材料 结构2间的关系 捏供鎛透路纸 3.可以直接使用材料学专业词汇，回答要有启发性 4. 要善用表格，给出具体研究例子，激发阅读兴趣 CVD生长参數如何影諦品粒尺寸？ 从溫度、的驱体浓度、载气流靈、番 将\"经验调参\"转沩“生长条件优化\" 5. 要使用小标題+段落报告的形式，不要一句请一段，也不要在没必要 鹿处理等数鋸中学习工艺窗口 的地方使用分点 6. 不要随意使用不翻译的英文专业词，除非设调汇象少恰当且公认的醒 肤陷时僅化活性有什么膨响？ 关联鼓陷类型、局城配位、电荷分布 帮助设计边缘位点。空位、单原子锡定 译方法 5吸附袋 位点 7. 回答不要超过3000字 收起～ 品费围像中如何说别品界、空位、猫 从椋注圈像中学习請构缺陷的极贷楆 加達高遘罣衷征和總汁分靳 式 机器学习真正“学到”的是什么？ 机器学习惯型学到的不是教科书上的显式公式，而是输入和输出之间的映射关系。例如研究二推催化材料时， 3374093 输入可以是金属中心种类。配位..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-58",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 58,
+        "title": "清晰且有约束的Prompt",
+        "count": 1,
+        "summary": "清晰且有约束的Prompt 23374093| 请用专业但是不生涩的语言向一位不了解AI以及数据的二推材料研究者 解释什么是机器学习，井给出研究启发。 二维材料中，哪些问题特别适合机器学习？ 要求： 1. 如果使用数据/AI专业词汇必須提前进行解释 机器学习體适合郡些变留多、样本逐渐积紧、規律非找性明显的问题。这里的非线性是指结果不是由单个因素 2. 尽量内容富有科学性，不要浅层解释 简单相加决定的，例如层数变化、基底耦合和缺陷散射可能共同影响载流子迁移率；单看其中一个因素，规律 3.可以直接使用材料学专业词汇。回答要有启发性 并不清楚。 4.要善用表格，给出具体研究例子，激发阅读兴趣 研究方向 可输入的信息 可预測或傀化的目标 可能产生的新问器 5. 要使用小标題+段落报告的形式，不要一句话一段，也不要在没必要 新型二撞半野傳等透 的地方使用分点 元窮组成、品停精构、限间| 彩辣、有效质量、环塊糖定 是香存在适含低功耗器件的新 6. 不要随意使用不翻译的英文专业调，除非该调汇說少恰当且公认的醒 結合能、对腳性 沟𨘋材料？ 译方法 慈穗华舜质桔设计 功通数、品格关配、履间 7. 回答不要超过3000字 統带对齐、界面电荷转移、 如何快漣寻找刂型繞罾矩列破强 拒、煌圾方式 激子行为 内建电场体系？ 收起 鴃餡工程 空位，挣杂、边螺物型，局 修化吸附總、磁矩、红流子 哪类𩸭餡類提窩活性又不破坏 城配位 數射 樟定性？ 生长与制备 温度、时间。前逐体比例. 单晶尺寸、层致均匀性、鴃 胎香预測最优CVD腐口，而不 基鹿、气尔 陷密度 是逐轮试镥？..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-59",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 59,
+        "title": "清晰且有约束的Prompt",
+        "count": 2,
+        "summary": "清晰且有约束的Prompt 3374083 请用专业但是不生涩的语言向一位不了解A以及数据的二维材料研究者 一个具体例子：从“找催化活性位点”到“设计活性位点” 解釋什么是机器学习，井给出研究启发。 假设研究目标是寻找高效二维析氧反应健化材料。传统路线可能是先选择MoS」、WS；、MoSe，等体系，再通 要求： 过制造硫空位、边缘暴露、金属接杂或构建异质结来优化性能。机器学习路线可以更系统：先收集不同二维材 1. 如果使用数据/A专业词汇必須提前进行解释 料中氢吸附自由能、形成能、导电性、缺陷类型和局域配位环境等数理：再把金属元索性质、配位数、健长、 2. 尽量内容富有科学性，不要浅层解釋 局城电荷、应变状态等转化为特征；然后训练模型预測惠些位点接近热中性氢吸附。 3.可以直接使用材料学专业词汇，回答要有启发性 4. 要善用表格，给出具体研究例子，激发阅读兴趣 真正有启发性的地方在于，模型可能不是简单告诉你“某材料最好”，而是指出一类规律：例如菜些边缘位点在 5. 要使用小标题+段落报告的形式，不要一句话一段，也不要在没必要 轻德拉伸应变下吸附能更接近理想馆，或者菜类单原子摻杂能同时改善导电性和中间体吸附。这样，机器学习 的地方使用分点 就从“我行榜工具“变成“假没生成器”：它提出可检验的材料设计思路，实验和计算再去验证。 6. 不要随意使用不翻译的英文专业词，除非该调汇缺少恰当且公认的醒 译方法 另一个例子：二维材料生长的“工艺地图” 7. 回答不要超过3000字 CVD生长二推精料时，研究者面对的是典型的复杂系统：温度梯度、前驱体蒸气..."
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-77",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 77,
+        "title": "提示词实例解析",
+        "count": 1,
+        "summary": "提示词实例解析 14093 系统指令 不要搜索互联网：避免语言模型拖入已有的文献思 不要搜索互联网。 这是一个调试，片在检验你在面对“个“數论与本原架”数学问题时，能香物途出 路 非平凡。新颖具窝有创遗性的证明。 请拾出该同題的完整元条件证明或香定证明。 这是一个测试：提高模型的表现压力 问題陈述 对T任意z.若 Ac［，∞o）是个本原整数架（即A中任意两个不同元素互不整 非平凡。新颖且富有创造性：抑制模板化路线 除），是香成立 ＜1+o1）， 完整无条件证明或否定证明：禁止解释讨论、禁止 其中 o（1）项在 -∞0时題于02 依赖未证猜想 参考信息（可能有助于解决问题） （1） 已证明： aloxa <0 +o（1）~ 1.389+0（4）. 三条人类指引（即筛选过的上下文）： （2） 已证明：若 A是所有恰好含有 个素因子的整数构成的集合（因此 AC（2,8） • 已知最好结果：给出当前基线 23374093 且4是木原集）、期 ≥1+0（k1/244W）. • 接近最优的例子：给出目标边界 （3） 已证明： M wA aloga • 精细渐近公式：给出隐藏结构信号 其中： 0.0656 是“个显式常数。 最后强调一下：非平凡、新颖且富有创造性 关鍵提醒 请记住—这一无条件论证可能需要非平凡、创造性且新颖的受素。 79"
+      },
+      {
+        "chunk_id": "图学习课件_第二部分_20260602::slide-81",
+        "file": "图学习课件_第二部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 81,
+        "title": "Prompt工程的核心任务",
+        "count": 1,
+        "summary": "Prompt工程的核心任务 374093 意图表达 输出引导 把需求、目标和期望转化为模型可理解的语言 控制模型输出的方向、格式与质量 • 清晰描述任务目标 • 指定输出结构（列表/表格/ JSON） • 提供必要背景信息 • 定义长度与详细程度 • 设定合适约束条件 • 设定语气、风格和专业程度 能力激发 风险控制 充分利用模型在预训练中获得的知识与能力 降低错误、偏见与不当内容的风险 23374083 • 用提示激活推理能力 • 减少“幻觉”和虚假信息 • 用示例引导特定模式 • 不确定时承认知识边界 • 通过角色设定调整行为方式 • 防止提示词注入等安全风险 83"
+      },
+      {
+        "chunk_id": "多层感知机1_学生分发版::cell-55",
+        "file": "多层感知机1_学生分发版.ipynb",
+        "kind": "ipynb",
+        "cell_index": 55,
+        "slide_index": null,
+        "title": "5. 动态计算图（Define-by-Run）",
+        "count": 1,
+        "summary": "### 核心概念清单 #### 1. 反向传播的核心目的 - [ ] 神经网络训练本质：找到使损失函数最小的权重 - [ ] 梯度指向损失函数上升最快的方向 - [ ] 沿梯度反方向更新权重（梯度下降） --- #### 2. 链式法则（Chain Rule） - [ ] 链式法则的数学表达 - [ ] 反向传播 = 多变量复合函数的链式法则在计算机程序中的应用 - [ ] 局部敏感度的概念 --- #### 3. 前向传播 vs 反向传播 | 阶段 | 方向 | 计算内容 | 目的 | |------|------|---------|------| | 前向传播 | 输入 → 输出 | 计算预测值和损失 | 得到损失值 | | 反向传播 | 输出 → 输入 | 计算梯度 | 得到参数更新方向 | 两阶段流程： 1. 前向传播：构建计算图，计算损失 2. 反向传播：沿计算图反向传播梯度 --- #### 4. 计算图（Computational Graph） - [ ] 计算图 的定义：描述数学运算的有向无环图（DAG） - [ ] 计算图的组成元素： - 节点：变量（蓝色框 = 需要梯度的参数） - 边：运算操作（灰色框） - 叶子节点：计算起点（绿色框） 注意：计算图只包含参与梯度计算的张量 --- #### 5. 动态计算图（Define-by-Run） - [ ] 动态计算图 的定义：每次前向传播时实时构建计算图 - [ ] PyTorch的动态计算图特点： - 每次前向传播可以不同 - 支持条件分支、循环等动态结构 - 内存效..."
+      },
+      {
+        "chunk_id": "多层感知机1_学生分发版::cell-61",
+        "file": "多层感知机1_学生分发版.ipynb",
+        "kind": "ipynb",
+        "cell_index": 61,
+        "slide_index": null,
+        "title": "作业3:深度学习框架的自动微分实现",
+        "count": 2,
+        "summary": "### 作业3:深度学习框架的自动微分实现 > 参考资料：/Users/pandamas/work/03深度学习讲习班/参考资料/Build Framework/part01.ipynb 本作业旨在通过阅读简化版自动微分框架的实现代码，深入理解深度学习框架中自动微分的核心原理。 - 作业要求： 请仔细阅读参考资料 notebook，按顺序理解以下核心内容： | 步骤 | 核心概念 | 需要理解的关键点 | |------|---------|------------------| | 步骤1-3 | Variable & Function | 变量作为\"箱子\"、函数封装、正向传播流程 | | 步骤4 | 数值微分 | 中心差分近似的原理、数值微分的两个问题（精度丢失、计算成本高） | | 步骤5 | 反向传播理论 | 链式法则、计算图结构、局部梯度的概念 | | 步骤6-7 | 手动→自动反向传播 | grad 属性、creator 机制、动态计算图的构建原理 | | 步骤8 | 递归→循环 | 为什么将递归改为循环？循环实现的优势是什么？ | | 步骤9 | 易用性改进 | 类型检查、as_array 的作用、梯度自动初始化 | | 步骤10 | 梯度检验 | 使用数值微分验证反向传播正确性的方法 | 阅读建议： - 建议边读边动手运行代码，观察中间结果 - 重点关注 Variable 类和 Function 类的演变过程 - 理解 creator 属性如何建立变量与函数之间的连接 阅读后请思考如下问题： 1. 为什么要把数据包装成 V..."
+      },
+      {
+        "chunk_id": "多层感知机1_学生分发版_副本::cell-55",
+        "file": "多层感知机1_学生分发版_副本.ipynb",
+        "kind": "ipynb",
+        "cell_index": 55,
+        "slide_index": null,
+        "title": "5. 动态计算图（Define-by-Run）",
+        "count": 1,
+        "summary": "### 核心概念清单 #### 1. 反向传播的核心目的 - [ ] 神经网络训练本质：找到使损失函数最小的权重 - [ ] 梯度指向损失函数上升最快的方向 - [ ] 沿梯度反方向更新权重（梯度下降） --- #### 2. 链式法则（Chain Rule） - [ ] 链式法则的数学表达 - [ ] 反向传播 = 多变量复合函数的链式法则在计算机程序中的应用 - [ ] 局部敏感度的概念 --- #### 3. 前向传播 vs 反向传播 | 阶段 | 方向 | 计算内容 | 目的 | |------|------|---------|------| | 前向传播 | 输入 → 输出 | 计算预测值和损失 | 得到损失值 | | 反向传播 | 输出 → 输入 | 计算梯度 | 得到参数更新方向 | 两阶段流程： 1. 前向传播：构建计算图，计算损失 2. 反向传播：沿计算图反向传播梯度 --- #### 4. 计算图（Computational Graph） - [ ] 计算图 的定义：描述数学运算的有向无环图（DAG） - [ ] 计算图的组成元素： - 节点：变量（蓝色框 = 需要梯度的参数） - 边：运算操作（灰色框） - 叶子节点：计算起点（绿色框） 注意：计算图只包含参与梯度计算的张量 --- #### 5. 动态计算图（Define-by-Run） - [ ] 动态计算图 的定义：每次前向传播时实时构建计算图 - [ ] PyTorch的动态计算图特点： - 每次前向传播可以不同 - 支持条件分支、循环等动态结构 - 内存效..."
+      },
+      {
+        "chunk_id": "多层感知机1_学生分发版_副本::cell-61",
+        "file": "多层感知机1_学生分发版_副本.ipynb",
+        "kind": "ipynb",
+        "cell_index": 61,
+        "slide_index": null,
+        "title": "作业3:深度学习框架的自动微分实现",
+        "count": 2,
+        "summary": "### 作业3:深度学习框架的自动微分实现 > 参考资料：/Users/pandamas/work/03深度学习讲习班/参考资料/Build Framework/part01.ipynb 本作业旨在通过阅读简化版自动微分框架的实现代码，深入理解深度学习框架中自动微分的核心原理。 - 作业要求： 请仔细阅读参考资料 notebook，按顺序理解以下核心内容： | 步骤 | 核心概念 | 需要理解的关键点 | |------|---------|------------------| | 步骤1-3 | Variable & Function | 变量作为\"箱子\"、函数封装、正向传播流程 | | 步骤4 | 数值微分 | 中心差分近似的原理、数值微分的两个问题（精度丢失、计算成本高） | | 步骤5 | 反向传播理论 | 链式法则、计算图结构、局部梯度的概念 | | 步骤6-7 | 手动→自动反向传播 | grad 属性、creator 机制、动态计算图的构建原理 | | 步骤8 | 递归→循环 | 为什么将递归改为循环？循环实现的优势是什么？ | | 步骤9 | 易用性改进 | 类型检查、as_array 的作用、梯度自动初始化 | | 步骤10 | 梯度检验 | 使用数值微分验证反向传播正确性的方法 | 阅读建议： - 建议边读边动手运行代码，观察中间结果 - 重点关注 Variable 类和 Function 类的演变过程 - 理解 creator 属性如何建立变量与函数之间的连接 阅读后请思考如下问题： 1. 为什么要把数据包装成 V..."
+      },
+      {
+        "chunk_id": "多层感知机2-学生分发版-终版2026::cell-18",
+        "file": "多层感知机2-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 18,
+        "slide_index": null,
+        "title": "为什么需要MLP？",
+        "count": 1,
+        "summary": "## 第五节 多层感知机（MLP），也叫做全连接神经网络 ### 为什么需要MLP？ - Logistic回归决策边界是线性的 - 对于非线性可分数据（如make_moons），需要非线性变换 - 网格结构特点：共L层，相邻层之间的神经元两两链接（全连接），一层之间的神经元不连接 ❓ 关键问题：如果没有激活函数会怎样？ 💡 答案：无论多少层，都等价于单层线性模型！ $$f(x) = W_2(W_1 x + b_1) + b_2 = (W_2 W_1)x + (W_2 b_1 + b_2) = Wx + b$$ 结论：激活函数是必需的，用于引入非线性。"
+      },
+      {
+        "chunk_id": "多层感知机2-学生分发版-终版2026::cell-20",
+        "file": "多层感知机2-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 20,
+        "slide_index": null,
+        "title": "激活函数的本质作用",
+        "count": 2,
+        "summary": "### 激活函数的本质作用 仿射变换（线性变换+平移）：旋转、缩放、平移特征空间 $$u_j^{(l)} = \\sum_{i} w_{ji}^{(l)} y_i^{(l-1)} + b_j^{(l)}$$ 神经元的操作仅限于仿射变换（线性组合+平移），不包含激活函数。 激活函数：对特征空间进行非线性扭曲 $$y_j^{(l)} = f(u_j^{(l)})$$ 🎯 核心洞察： > 原始特征空间中的曲线决策边界 ↔ 激活后空间中的直线决策边界 > 一句话总结：激活函数通过非线性变换扭曲特征空间，使原本线性不可分的数据在新的空间中变得线性可分！"
+      },
+      {
+        "chunk_id": "循环神经网络-学生分发版-终版2026::cell-64",
+        "file": "循环神经网络-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 64,
+        "slide_index": null,
+        "title": "感受野增长对比",
+        "count": 1,
+        "summary": "### 三、TCN：时序卷积网络 #### 为什么需要TCN？ 传统1D卷积感受野有限，难以捕捉长程依赖。TCN（Temporal Convolutional Network）通过三种技术解决这个问题： | 技术 | 解决的问题 | 原理 | |:---:|:---|:---| | 因果卷积 | 信息泄漏（偷看未来） | 只依赖历史信息，左边padding | | 空洞卷积 | 感受野受限 | 跳过采样，指数扩大感受野 | | 残差连接 | 梯度消失 | 跨层跳跃连接 | --- ##### 感受野增长对比 普通1D卷积（kernel=3, 层数=4）: 感受野 = 9 TCN（kernel=3, dilation=1,2,4,8）: 感受野 = 31 关键洞察： - 空洞卷积让感受野随层数指数增长（而非线性） - 保持时间分辨率（不池化），适合精细时序任务"
+      },
+      {
+        "chunk_id": "注意力机制及Transformer2-学生分发版-终版2026::cell-22",
+        "file": "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 22,
+        "slide_index": null,
+        "title": "附：v11 分层学习率的实验结果",
+        "count": 1,
+        "summary": "### 预训练模型 vs 从零训练：对比总结 #### 性能对比 | 指标 | 我们的 Transformer (v6) | DistilBERT (v8/v10) | |------|------------------------|---------------------| | 参数量 | ~4.7M | ~66M | | 预训练数据 | 无 | Wikipedia + BookCorpus（数十亿词） | | 训练方式 | 随机初始化 | 预训练权重 + 微调 | | IMDB 测试准确率 | ~84% | ~90-91% | | 训练 epoch | 10-15 | 2-3 | | 每 epoch 时间 | 快 | 较慢（模型更大） | #### 关键结论 1. 预训练模型将 IMDB 准确率从 ~84% 提升到 ~91%，提升约 7 个百分点！ 2. 预训练不是\"更好的架构\"，而是\"见多识广的表示\" —— 同样的 Transformer 架构，预训练后性能天壤之别 3. 微调只需 2-3 个 epoch，因为预训练已经学到语言知识，微调只是做\"任务适配\" #### 为什么 DistilBERT 只需更少的训练 epoch？ 预训练阶段已经学习了： - 词与词之间的语义关系（\"good\" 和 \"great\" 是相似的） - 句法结构（主谓宾关系） - 上下文理解（一词多义） 微调阶段只需学习： - 将这些已有知识映射到 \"正面 / 负面\" 标签 所以微调 epoch 数远少于从零训练！ #### 调参思路 v9 结果中训练准确率..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-3",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 3,
+        "slide_index": null,
+        "title": "小结：从\"静态查表\"到\"动态生成\"",
+        "count": 1,
+        "summary": "## 第1节 词嵌入的演进历程 ### 为什么需要词嵌入？一个核心问题 计算机无法直接理解文字，必须把文字转换成数字。这引出了 NLP 最基础的问题： > 如何把词表示成向量，让语义相近的词在向量空间中也相近？ 整个词嵌入技术的发展史，就是不断逼近这个问题的答案。 --- ### 阶段一：One-Hot 编码 —— \"每个词各住一间房\" 思路：给词汇表中的每个词分配一个独立的维度。 vocabulary = [\"猫\", \"狗\", \"鱼\", \"跑\", \"跳\"] 猫 = [1, 0, 0, 0, 0] 狗 = [0, 1, 0, 0, 0] 鱼 = [0, 0, 1, 0, 0] ... 致命缺陷： - ❌ 维度灾难：10 万词的词汇表 → 10 万维向量 - ❌ 语义无关：\"猫\"和\"狗\"的相似度 = 0（完全正交），但人知道它们都是动物 - ❌ 无法计算语义关系：king - man + woman 这种操作毫无意义 > One-Hot 只是\"编号\"，不是\"表示\" ### 阶段二：Word2Vec —— \"物以类聚，词以群分\" 核心问题：One-Hot 只给词编号，没有语义信息。能不能让模型自己学会词的语义？ Word2Vec 的聪明思路： > \"语义相近的词，经常出现在相似的上下文中\"（分布假说） 例如： - \"猫\"经常和\"跑\"、\"跳\"、\"抓\"一起出现 - \"狗\"也经常和\"跑\"、\"跳\"、\"抓\"一起出现 - 所以\"猫\"和\"狗\"的向量应该接近 怎么学？让神经网络\"猜邻居\"： - CBOW：给上下文词，猜中心词 - Skip-gram：给中心词..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-6",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 6,
+        "slide_index": null,
+        "title": "四、BERT vs GPT 对比",
+        "count": 4,
+        "summary": "## 第2节 预训练模型时代：BERT vs GPT ### 一、从词嵌入到预训练模型：质的飞跃 前面我们讨论了词嵌入技术的演进：One-Hot → Word2Vec → GloVe → ELMo。 这些技术的核心目标都是把词表示为向量。 但从 2018 年开始，NLP 的研究范式发生了根本转变： 不再孤立地优化词嵌入，而是训练一个完整的深层语言模型，然后将其作为下游任务的\"特征提取器\"或\"初始化参数\"。 这就是预训练 + 微调范式。 BERT 论文 [\"Pre-training of Deep Bidirectional Transformers for Language Understanding\"](https://arxiv.org/abs/1810.04805) (Devlin et al., 2018) --- ### 二、BERT：为\"理解\"而生的双向编码器 BERT 的设计目标：解决\"理解类\"任务 什么是理解类任务？ - 情感分类：\"这部电影太棒了\" → 正面 or 负面？ - 问答系统：给定文章，回答\"谁发明了电话？\"（阅读理解） - 命名实体识别：\"苹果发布了新款 iPhone\" → \"苹果\"是公司名 为什么 BERT 擅长理解任务？ > 因为 BERT 在预训练时就学会了双向理解整句话！ 自回归语言模型（如 GPT）只能从左到右看句子： \"我今天[?]很开心\" → 只能根据\"我今天\"猜，不知道后面是\"很开心\" BERT 的做法：随机盖掉一些词，用整句话的上下文来猜 \"我今天[MASK]很开心\" → 同时看左边\"我今天..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-7",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 7,
+        "slide_index": null,
+        "title": "四、BERT vs GPT 对比",
+        "count": 3,
+        "summary": "# ============================================================================ # BERT MLM 现场演示：用预训练模型玩\"填空游戏\" # ============================================================================ try: from transformers import pipeline HAS_TRANSFORMERS = True except ImportError: print(\"⚠️ 需要安装: pip install transformers\") HAS_TRANSFORMERS = False if HAS_TRANSFORMERS: print(\"=\" * 60) print(\"BERT MLM 演示：掩码语言模型\") print(\"=\" * 60) print(\" BERT 的预训练任务就是'填空'：\") print(\" 输入: 'The cat sat on the [MASK].'\") print(\" BERT 要猜: [MASK] 是什么词？\") print(\" 同时看左边'The cat sat on the'和右边的标点\") print(\" → 猜出 'mat'、'floor'、'chair' 等 \") # 加载英文 BERT 的 fill-mask pipeline（英文更适合演示一词多义） try: unmasker = pipeline(\"fi..."
+      }
+    ],
+    "related": [
+      "卷积",
+      "节点",
+      "池化",
+      "卷积核",
+      "Transformer",
+      "反向传播",
+      "感受野",
+      "AlexNet"
+    ]
+  },
+  "邻接矩阵": {
+    "term": "邻接矩阵",
+    "total_count": 9,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-11",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "邻接矩阵",
+        "count": 2,
+        "summary": "邻接矩阵 ③ ②. 如果节点i和节点j之间有边：Au= 1 否则： Auy =0 （° 。。0 10 00 1 A= A= 0 00 1 0 0 0 （1 1 1 0） 0 1 1 无向图的邻接矩阵是对称矩阵。 https://distill.pub/2021/gnn-intro/"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-30",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 30,
+        "title": "图学习课件第一部分，第 30 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 30 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-56",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 56,
+        "title": "图卷积网络（GCN）",
+        "count": 2,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 1 1 。 A 邻接矩阵 1 1 1 1 D- 与度矩阵相关 0 1 0 0 0 1 1 0 1 1 H（）每一层的节点表示 0 0 1 1 邻接矩阵"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-57",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 57,
+        "title": "图卷积网络（GCN）",
+        "count": 2,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 与第1、2号节点相连 A 邻接矩阵 第0个节点 的链接 0 0 0 ① 乙 0 0 D-步与度矩阵相关 0 0 0 0 每一层的节点表示 0 0 无向图对称 邻接矩阵 自环"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-58",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 58,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 求和 A 是邻接矩阵 是度矩阵 D- 。 。 。 0 0 0 0 0 0 0"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-66",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 66,
+        "title": "图学习课件第一部分，第 66 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      }
+    ],
+    "related": [
+      "节点",
+      "度矩阵",
+      "边",
+      "卷积",
+      "图卷积",
+      "GCN",
+      "图学习",
+      "拉普拉斯矩阵"
+    ]
+  },
+  "度矩阵": {
+    "term": "度矩阵",
+    "total_count": 5,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-30",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 30,
+        "title": "图学习课件第一部分，第 30 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 30 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-56",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 56,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 1 1 。 A 邻接矩阵 1 1 1 1 D- 与度矩阵相关 0 1 0 0 0 1 1 0 1 1 H（）每一层的节点表示 0 0 1 1 邻接矩阵"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-57",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 57,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 与第1、2号节点相连 A 邻接矩阵 第0个节点 的链接 0 0 0 ① 乙 0 0 D-步与度矩阵相关 0 0 0 0 每一层的节点表示 0 0 无向图对称 邻接矩阵 自环"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-58",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 58,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 求和 A 是邻接矩阵 是度矩阵 D- 。 。 。 0 0 0 0 0 0 0"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-66",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 66,
+        "title": "图学习课件第一部分，第 66 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      }
+    ],
+    "related": [
+      "邻接矩阵",
+      "节点",
+      "卷积",
+      "图卷积",
+      "GCN",
+      "图学习",
+      "边",
+      "拉普拉斯矩阵"
+    ]
+  },
+  "拉普拉斯矩阵": {
+    "term": "拉普拉斯矩阵",
+    "total_count": 2,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-30",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 30,
+        "title": "图学习课件第一部分，第 30 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 30 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-66",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 66,
+        "title": "图学习课件第一部分，第 66 页",
+        "count": 1,
+        "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      }
+    ],
+    "related": [
+      "图学习",
+      "节点",
+      "边",
+      "邻接矩阵",
+      "度矩阵"
+    ]
+  },
+  "图卷积": {
+    "term": "图卷积",
+    "total_count": 21,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-2",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 2,
+        "title": "大纲• 图的基本概念",
+        "count": 1,
+        "summary": "大纲• 图的基本概念 • 图学习的两种算法 • 图游走 • 图卷积 • 总结"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-52",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 52,
+        "title": "5 图卷积网络（GCN）",
+        "count": 2,
+        "summary": "5 图卷积网络（GCN） ⑦又% 区 龱。区 龱 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 -⑧ 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-53",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 53,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） 叉又叉 ∞×× 如何从图像卷积，类比到图结构卷积"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-54",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 54,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） men rlced 图像上的卷积操作 d neaby poe W6T w7 nhen New pieei value （des 图像卷积 将一个像素点周围的像素按照不同的权重叠加起来。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-55",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 55,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） 图像上的卷积操作 图结构上的卷积 W0Lv w61 W7 图像卷积 将一个像素点周围的像素按照不同的权重叠加起来。 图结构卷积 将一个节点周围的邻居按照不同的权重叠加起来。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-56",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 56,
+        "title": "图卷积网络（GCN）",
+        "count": 3,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 1 1 。 A 邻接矩阵 1 1 1 1 D- 与度矩阵相关 0 1 0 0 0 1 1 0 1 1 H（）每一层的节点表示 0 0 1 1 邻接矩阵"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-57",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 57,
+        "title": "图卷积网络（GCN）",
+        "count": 3,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 与第1、2号节点相连 A 邻接矩阵 第0个节点 的链接 0 0 0 ① 乙 0 0 D-步与度矩阵相关 0 0 0 0 每一层的节点表示 0 0 无向图对称 邻接矩阵 自环"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-58",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 58,
+        "title": "图卷积网络（GCN）",
+        "count": 2,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 求和 A 是邻接矩阵 是度矩阵 D- 。 。 。 0 0 0 0 0 0 0"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-59",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 59,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 简化 H（+1）=o（AH!W） AHT（L） 公式的物理含义是什么 AIT（l）公式的物理含义是什么 F（l+1） A F（） 第0节点表示"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-60",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 60,
+        "title": "5 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN） AH （L 公式的物理含义是什么 H（L+1）. A 第0节点表示 。 0"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-61",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 61,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） AFT（l） 公式的物理含义是什么 A 消息传递 Message Passing 0号 1号 0号 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-62",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 62,
+        "title": "） 图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "） 图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASRT RALLOT HERE 0号 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-63",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 63,
+        "title": "5 图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 之 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-64",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 64,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） AH （） 将邻居的特征接收、聚合 是否所有的人对自己的评价都是有用的？ You 如何衡量邻属的重要性度"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-65",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 65,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AH（L D-号AD-号H（0 d越大，信息量越小，言越小’ 1 0号 V3vS 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号"
+      }
+    ],
+    "related": [
+      "卷积",
+      "GCN",
+      "节点",
+      "消息传递",
+      "邻接矩阵",
+      "度矩阵",
+      "聚合",
+      "图学习"
+    ]
+  },
+  "GCN": {
+    "term": "GCN",
+    "total_count": 14,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-52",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 52,
+        "title": "5 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN） ⑦又% 区 龱。区 龱 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 -⑧ 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-53",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 53,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） 叉又叉 ∞×× 如何从图像卷积，类比到图结构卷积"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-54",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 54,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） men rlced 图像上的卷积操作 d neaby poe W6T w7 nhen New pieei value （des 图像卷积 将一个像素点周围的像素按照不同的权重叠加起来。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-55",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 55,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） 图像上的卷积操作 图结构上的卷积 W0Lv w61 W7 图像卷积 将一个像素点周围的像素按照不同的权重叠加起来。 图结构卷积 将一个节点周围的邻居按照不同的权重叠加起来。"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-56",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 56,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 1 1 。 A 邻接矩阵 1 1 1 1 D- 与度矩阵相关 0 1 0 0 0 1 1 0 1 1 H（）每一层的节点表示 0 0 1 1 邻接矩阵"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-57",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 57,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 与第1、2号节点相连 A 邻接矩阵 第0个节点 的链接 0 0 0 ① 乙 0 0 D-步与度矩阵相关 0 0 0 0 每一层的节点表示 0 0 无向图对称 邻接矩阵 自环"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-58",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 58,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 求和 A 是邻接矩阵 是度矩阵 D- 。 。 。 0 0 0 0 0 0 0"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-59",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 59,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 简化 H（+1）=o（AH!W） AHT（L） 公式的物理含义是什么 AIT（l）公式的物理含义是什么 F（l+1） A F（） 第0节点表示"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-60",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 60,
+        "title": "5 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN） AH （L 公式的物理含义是什么 H（L+1）. A 第0节点表示 。 0"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-61",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 61,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） AFT（l） 公式的物理含义是什么 A 消息传递 Message Passing 0号 1号 0号 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-62",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 62,
+        "title": "） 图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "） 图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASRT RALLOT HERE 0号 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-63",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 63,
+        "title": "5 图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 之 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-64",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 64,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） AH （） 将邻居的特征接收、聚合 是否所有的人对自己的评价都是有用的？ You 如何衡量邻属的重要性度"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-65",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 65,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AH（L D-号AD-号H（0 d越大，信息量越小，言越小’ 1 0号 V3vS 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号"
+      }
+    ],
+    "related": [
+      "卷积",
+      "图卷积",
+      "节点",
+      "消息传递",
+      "邻接矩阵",
+      "度矩阵",
+      "聚合",
+      "节点分类"
+    ]
+  },
+  "GAT": {
+    "term": "GAT",
+    "total_count": 20,
+    "files": [
+      "卷积神经网络1-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
+      "循环神经网络-学生分发版-终版2026.ipynb",
+      "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
+    ],
+    "hits": [
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-69",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 69,
+        "slide_index": null,
+        "title": "最佳实践总结",
+        "count": 2,
+        "summary": "### 处理数据集类别不平衡问题的策略 ##### 为什么需要weight和pos_weight？ 在实际数据集中，不同类别的样本数量往往不均衡： | 场景 | 类别分布示例 | 导致的问题 | |:--|:--|:--| | 医疗诊断 | 正常: 9900, 患病: 100 | 模型全部预测为\"正常\"也能达到99%准确率 | | 欺诈检测 | 正常交易: 99900, 欺诈: 100 | 模型学不到欺诈的特征 | | 目标检测 | 背景: 大量, 目标: 少量 | 模型倾向于预测为背景 | 核心问题：模型会被\"多数类\"主导，对\"少数类\"的识别能力很差。 --- ##### 两个参数的区别 | 参数 | 适用损失函数 | 适用场景 | 作用 | |:--|:--|:--|:--| | pos_weight | BCEWithLogitsLoss | 二分类（正/负样本）| 增加正样本（少数类）的权重 | | weight | CrossEntropyLoss NLLLoss | 多分类（≥3个类别）| 给每个类别分别设置权重 | --- ##### 为什么需要指定这两个参数？ 默认情况（不指定weight）： python criterion = nn.CrossEntropyLoss() # 所有类别权重相等 会发生的问题： - 模型学到：总是预测为多数类 - 正类/少数类召回率可能接近0% - 准确率虚高但实际应用价值为零 ##### 如何计算和设置权重？ ##### 基于样本比例的倒数（最常用） python import torc..."
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-27",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 27,
+        "title": "图学习算法分类",
+        "count": 1,
+        "summary": "图学习算法分类 DeepiVal NodeZVe 圓𤂅走类算法. UNE MetapathZVec- MetapathZVwc, Metapath2Vwce, Mul CCN 週春职（Spectrall ChetCcN ACCN 粗服风還 CCN GAT 图学习算法 園神烃网络算法 空間卷料ISpatial Caak CnaohSAGE Cated CNN| Tree LSTM Graph LSTM Tranf 知识圈谱嵌入算法 RotatE 知识图谱也是典型的图。 ComplEx DistMul"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-36",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 36,
+        "title": "Word2vec: Negative Sampling",
+        "count": 2,
+        "summary": "Word2vec: Negative Sampling 假设，给定中心词 orange，我们要预测其上下文词中的juice。 计算词表内所有单词的概率->计算量大 Softmax 0.0003 0.005 0.001 0.6 alien at me happy juice out zero orange Negative Sampling（负采样） 正样本：（orange, juice） Y=1 Softmax -> Multiple sigmoid 负样本：（orange, alien）， （orange, happy）. （orange, zero） Y=0 只对正样本和选取的负样本进行分类，从而减少计算量 Word2vec: Distributed Representations of Words and Phrases and their Compositionality"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-37",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 37,
+        "title": "Word2vec：整体架构",
+        "count": 1,
+        "summary": "Word2vec：整体架构 Sentences Negative Skip Gram Sampling Word Embedding Word2vec: Distributed Representations of Words and Phrases and their Compositionality"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-41",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 41,
+        "title": "》图游走类模型",
+        "count": 1,
+        "summary": "》图游走类模型 —DeepWalk Graph- Random Walk Skip Gram + Negative Sampling Node Downstream - Embeddings Task DeepWalk算法简单且有效！但也存在一定问题！"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-46",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 46,
+        "title": "node2vec：整体框架",
+        "count": 1,
+        "summary": "node2vec：整体框架 Biased Graph • Random ＋ Skip Gram Negative Walk Sampling Node Downstream Embeddings Task"
+      },
+      {
+        "chunk_id": "循环神经网络-学生分发版-终版2026::cell-38",
+        "file": "循环神经网络-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 38,
+        "slide_index": null,
+        "title": "一、GRU的设计目标",
+        "count": 3,
+        "summary": "### 一、GRU的设计目标 GRU（Gated Recurrent Unit）由Cho等人于2014年提出 核心思想：引入门控机制来控制信息的流动 | 组件 | 功能 | 激活函数 | |:----:|:----:|:--------:| | 重置门（Reset Gate） | 控制过去信息的遗忘程度 | Sigmoid | | 更新门（Update Gate） | 控制新旧状态的混合比例 | Sigmoid |"
+      },
+      {
+        "chunk_id": "循环神经网络-学生分发版-终版2026::cell-43",
+        "file": "循环神经网络-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 43,
+        "slide_index": null,
+        "title": "LSTM的核心组件",
+        "count": 3,
+        "summary": "#### LSTM的核心组件 LSTM使用两个状态和三个门控： 状态： - Hidden State ($h_t$)：短期记忆，与RNN相同 - Cell State ($C_t$)：长期记忆，贯穿整个链条 门控： | 门控 | 功能 | 激活函数 | |:----:|:----:|:--------:| | 遗忘门（Forget Gate） | 控制丢弃多少旧信息 | Sigmoid | | 输入门（Input Gate） | 控制添加多少新信息 | Sigmoid | | 输出门（Output Gate） | 控制输出多少信息 | Sigmoid | 核心思想：\"旧的忘记多少，新的输入多少\""
+      },
+      {
+        "chunk_id": "循环神经网络-学生分发版-终版2026::cell-67",
+        "file": "循环神经网络-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 67,
+        "slide_index": null,
+        "title": "IMDB 数据集简介",
+        "count": 1,
+        "summary": "### 一、任务介绍：IMDB情感分类 #### 任务目标 构建一个完整的文本情感分类系统，将电影评论分类为正面或负面。 #### IMDB 数据集简介 IMDB（Internet Movie Database） 是全球最大的电影数据库网站（www.imdb.com）。本案例使用的 Stanford Large Movie Review Dataset 由 Stanford AI Lab 基于 IMDB 网站评论构建，是自然语言处理领域最经典的基准数据集之一。 数据集基本信息： | 属性 | 说明 | |:---|:---| | 来源 | Stanford AI Lab（Maas et al., ACL 2011）| | 总规模 | 50,000 条英文电影评论 | | 训练集 | 25,000 条（12,500 正面 + 12,500 负面）| | 测试集 | 25,000 条（12,500 正面 + 12,500 负面）| | 标签 | 二元分类：正面（Positive）/ 负面（Negative）| | 平均长度 | 约 200–300 词/评论 | | 文件大小 | 压缩包约 80MB，解压后约 150MB | | 格式 | 纯文本文件，每条评论一个 .txt 文件 |"
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-5",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 5,
+        "slide_index": null,
+        "title": "Embedding Arithmetic：词向量的魔法",
+        "count": 4,
+        "summary": "# ============================================================================ # GloVe 预训练词向量：Embedding Arithmetic + PCA 可视化 # ============================================================================ import os import numpy as np import matplotlib.pyplot as plt print(\"=\" * 60) print(\"GloVe 词向量：语义类比 + 可视化\") print(\"=\" * 60) # ---------- 加载 GloVe 词向量 ---------- GLOVE_DIR = \"glove\" GLOVE_DIM = 100 GLOVE_FILE = os.path.join(GLOVE_DIR, f\"glove.6B.{GLOVE_DIM}d.txt\") def load_glove_embeddings(glove_file, vocab_limit=50000): embeddings = {} with open(glove_file, 'r', encoding='utf-8') as f: for i, line in enumerate(f): if i >= vocab_limit: break values = line.strip().split() wo..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-22",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 22,
+        "slide_index": null,
+        "title": "博客与综述",
+        "count": 1,
+        "summary": "### 八、推荐阅读与参考论文 #### 核心论文 - Vaswani et al., 2017 - [Attention Is All You Need](https://arxiv.org/abs/1706.03762)（Transformer 原始论文） - Shazeer, 2020 - [GLU Variants Improve Transformer](https://arxiv.org/abs/2002.05202)（SwiGLU） - Zhang & Sennrich, 2019 - [Root Mean Square Layer Normalization](https://arxiv.org/abs/1910.07467)（RMSNorm） - Su et al., 2021 - [RoFormer: Enhanced Transformer with Rotary Position Embedding](https://arxiv.org/abs/2104.09864)（RoPE） - Ainslie et al., 2023 - [GQA: Training Generalized Multi-Query Transformer Models](https://arxiv.org/abs/2305.13245)（GQA） - Dao et al., 2022 - [FlashAttention: Fast and Memory-Efficient Exact Attention](https://arxiv.org..."
+      }
+    ],
+    "related": [
+      "Sigmoid",
+      "LSTM",
+      "激活函数",
+      "损失函数",
+      "BCEWithLogitsLoss",
+      "CrossEntropyLoss",
+      "归一化",
+      "WeightedRandomSampler"
+    ]
+  },
+  "消息传递": {
+    "term": "消息传递",
+    "total_count": 6,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-52",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 52,
+        "title": "5 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN） ⑦又% 区 龱。区 龱 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 -⑧ 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-61",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 61,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） AFT（l） 公式的物理含义是什么 A 消息传递 Message Passing 0号 1号 0号 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-62",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 62,
+        "title": "） 图卷积网络（GCN）-消息传递",
+        "count": 2,
+        "summary": "） 图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASRT RALLOT HERE 0号 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-63",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 63,
+        "title": "5 图卷积网络（GCN）-消息传递",
+        "count": 2,
+        "summary": "5 图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 之 2号"
+      }
+    ],
+    "related": [
+      "卷积",
+      "图卷积",
+      "GCN",
+      "节点",
+      "节点分类",
+      "边",
+      "聚合"
+    ]
+  },
+  "聚合": {
+    "term": "聚合",
+    "total_count": 2,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-63",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 63,
+        "title": "5 图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 之 2号"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-64",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 64,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） AH （） 将邻居的特征接收、聚合 是否所有的人对自己的评价都是有用的？ You 如何衡量邻属的重要性度"
+      }
+    ],
+    "related": [
+      "卷积",
+      "图卷积",
+      "GCN",
+      "节点",
+      "消息传递"
+    ]
+  },
+  "节点分类": {
+    "term": "节点分类",
+    "total_count": 3,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-21",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 21,
+        "title": "）节点级别任务——金融诈骗检测",
+        "count": 1,
+        "summary": "）节点级别任务——金融诈骗检测 节点分类任务 图模型 预测潜在的金融 诈骗分子 A Semi-supervised Graph Attentive Network for Financial Fraud Detection"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-47",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 47,
+        "title": "图学习的目的",
+        "count": 1,
+        "summary": "图学习的目的 节点特征 图特征 图网络模型 Graph Pooling 节点任务 图任务 关系预测、节点分类 图匹配、图分类"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-52",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 52,
+        "title": "5 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "5 图卷积网络（GCN） ⑦又% 区 龱。区 龱 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 -⑧ 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）"
+      }
+    ],
+    "related": [
+      "节点",
+      "图学习",
+      "图分类",
+      "卷积",
+      "图卷积",
+      "GCN",
+      "消息传递"
+    ]
+  },
+  "图分类": {
+    "term": "图分类",
+    "total_count": 1,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-47",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 47,
+        "title": "图学习的目的",
+        "count": 1,
+        "summary": "图学习的目的 节点特征 图特征 图网络模型 Graph Pooling 节点任务 图任务 关系预测、节点分类 图匹配、图分类"
+      }
+    ],
+    "related": [
+      "图学习",
+      "节点",
+      "节点分类"
+    ]
+  },
+  "随机游走": {
+    "term": "随机游走",
+    "total_count": 4,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-42",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 42,
+        "title": "r node2vec： 对 DeepWalk 的改进",
+        "count": 1,
+        "summary": "r node2vec： 对 DeepWalk 的改进 a Max length = 3 DeepWalk d ea • 简单直接：DFS cea ．图是一个复杂结构， bce 需要考虑更多因素 a ba 在无向图上随机游走 G （Se） node2vec BFS 广度优先遍历 >DFS 深度优先遍历 Sy Sg） Sg node2vec: Scalable Feature Leamning for Networks"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-43",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 43,
+        "title": "s nodezvec: bias random walk",
+        "count": 1,
+        "summary": "s nodezvec: bias random walk 归一化后的转移概率分布 Tux 一般的随机游走公式 P（Ci = xlci-1 =w）= Z i （U,x）EE otherwise 节点v未访问的邻居节点 当前正在访问的节点人人 上一个访问的节点一” node2vec: Scalable Feature Leaming for Networks"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-45",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 45,
+        "title": "w nodezvec: bias random walk",
+        "count": 2,
+        "summary": "w nodezvec: bias random walk 后irak -0 •p：控制随机游走以多大的概率“回头” Tux = Cpa（t,x）• Wox Cpg（t,x）= 1 ifdex=1 • 参数q：控制随机游走偏向DFS 还是 BFS 6ud -2 •q较大时（q>1），倾向于 BFS； • q较小时（q <1），倾向于 DFS； • 当p=9=1时，Tox= Wox. Back BFS DFS 1 t ① q node2vec: Scalable Feature Leamning for Networks"
+      }
+    ],
+    "related": [
+      "归一化",
+      "节点"
+    ]
+  },
+  "嵌入": {
+    "term": "嵌入",
+    "total_count": 32,
+    "files": [
+      "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+      "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
+      "多层感知机1_学生分发版.ipynb",
+      "多层感知机1_学生分发版_副本.ipynb",
+      "循环神经网络-学生分发版-终版2026.ipynb",
+      "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+      "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+      "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
+    ],
+    "hits": [
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026(1)::cell-48",
+        "file": "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 48,
+        "slide_index": null,
+        "title": "迁移学习推荐：首选 ResNet-50",
+        "count": 1,
+        "summary": "### 五、CNN架构的参数和性能对比 #### CNN 架构对比：准确率 vs 参数量 vs 计算量 核心结论：更好的网络结构设计（ResNet、Inception）可以用更少的参数和计算量，达到比\"暴力堆叠\"（VGG）更高的准确率。 | 模型 | 参数量 | 计算量 | Top-1 准确率 | 核心特点 | |:---|:---|:---|:---|:---| | AlexNet | ~60M | ~0.7 G-Ops | ~57% | 开山之作，结构简单 | | VGG-16/19 | ~138M（最大） | ~30+ G-Ops | ~70% | 堆叠深而宽，参数冗余严重 | | GoogLeNet | ~6.8M（极小） | ~3 G-Ops | ~68.5% | Inception + 全局平均池化 | | ResNet-18/34 | ~11M / ~21M | ~2-4 G-Ops | ~70% / ~73% | 残差连接，解决退化 | | ResNet-50/101/152 | ~25M / ~44M / ~60M | ~4-11 G-Ops | ~76-78% | 越深越准，参数效率极高 | | Inception-v3/v4 | ~23M / ~42M | ~5-12 G-Ops | ~78-80% | 多尺度 + 残差融合 | 关键洞察： - VGG 靠堆参数和计算量换性能，效率最低。 - GoogLeNet 用精巧设计（$1\\times1$ 降维、全局平均池化）大幅压缩了参数。 - ResNet 和 Incept..."
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026::cell-48",
+        "file": "卷积神经网络3-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 48,
+        "slide_index": null,
+        "title": "迁移学习推荐：首选 ResNet-50",
+        "count": 1,
+        "summary": "### 五、CNN架构的参数和性能对比 #### CNN 架构对比：准确率 vs 参数量 vs 计算量 核心结论：更好的网络结构设计（ResNet、Inception）可以用更少的参数和计算量，达到比\"暴力堆叠\"（VGG）更高的准确率。 | 模型 | 参数量 | 计算量 | Top-1 准确率 | 核心特点 | |:---|:---|:---|:---|:---| | AlexNet | ~60M | ~0.7 G-Ops | ~57% | 开山之作，结构简单 | | VGG-16/19 | ~138M（最大） | ~30+ G-Ops | ~70% | 堆叠深而宽，参数冗余严重 | | GoogLeNet | ~6.8M（极小） | ~3 G-Ops | ~68.5% | Inception + 全局平均池化 | | ResNet-18/34 | ~11M / ~21M | ~2-4 G-Ops | ~70% / ~73% | 残差连接，解决退化 | | ResNet-50/101/152 | ~25M / ~44M / ~60M | ~4-11 G-Ops | ~76-78% | 越深越准，参数效率极高 | | Inception-v3/v4 | ~23M / ~42M | ~5-12 G-Ops | ~78-80% | 多尺度 + 残差融合 | 关键洞察： - VGG 靠堆参数和计算量换性能，效率最低。 - GoogLeNet 用精巧设计（$1\\times1$ 降维、全局平均池化）大幅压缩了参数。 - ResNet 和 Incept..."
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-27",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 27,
+        "title": "图学习算法分类",
+        "count": 1,
+        "summary": "图学习算法分类 DeepiVal NodeZVe 圓𤂅走类算法. UNE MetapathZVec- MetapathZVwc, Metapath2Vwce, Mul CCN 週春职（Spectrall ChetCcN ACCN 粗服风還 CCN GAT 图学习算法 園神烃网络算法 空間卷料ISpatial Caak CnaohSAGE Cated CNN| Tree LSTM Graph LSTM Tranf 知识圈谱嵌入算法 RotatE 知识图谱也是典型的图。 ComplEx DistMul"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-28",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 28,
+        "title": "图的基本概念",
+        "count": 1,
+        "summary": "图的基本概念 「U ｛ 两个基本元素：点、边 ［四提路 團是一种統一描述复杂事物约透害 图学习的基本概念 图学习是味 圈学习的优勢 ｛ 司以方便地处理朴 为什么选擇團学习 也可以处理規則數 节点級别任务 图的应用 边级别任务 图学习初印象 田能干啥 團扱别任务 領城： 生𥹉 撞荐系鏡、 自动骘驶 游違类算法 图学习如何做的 圈神陉网络算法 知识围训嵌入算法 主滾模蜇分贷骰览 如何做團学习 Show me the code 易用、高效、规模、 ｛ 圈学习库PCL 应用籓地 自研模型举例"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-39",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 39,
+        "title": "图游走类模型——DeepWalk",
+        "count": 1,
+        "summary": "图游走类模型——DeepWalk 将 NLP 领域的思想运用到图（网络）嵌入领域。 How？ DeepWalk 节点 -＞单词 节点序列 ->句子 Sentence1 Sentence2 Word2Vec Sentence3"
+      },
+      {
+        "chunk_id": "多层感知机1_学生分发版::cell-78",
+        "file": "多层感知机1_学生分发版.ipynb",
+        "kind": "ipynb",
+        "cell_index": 78,
+        "slide_index": null,
+        "title": "定义模型",
+        "count": 1,
+        "summary": "- Convolution Layers[卷积层](https://docs.pytorch.org/docs/stable/nn.html#convolution-layers) - Pooling Layers[池化层](https://docs.pytorch.org/docs/stable/nn.html#pooling-layers) - Padding Layers[填充层](https://docs.pytorch.org/docs/stable/nn.html#padding-layers) - Non-linear Activations[非线性激活层](https://docs.pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity) - Normalization Layers[归一化层](https://docs.pytorch.org/docs/stable/nn.html#normalization-layers) - Recurrent Layers[循环层](https://docs.pytorch.org/docs/stable/nn.html#recurrent-layers) - [Transformer Layers](https://docs.pytorch.org/docs/stable/nn.html#transformer-layers) - Linear Layers[线性层](htt..."
+      },
+      {
+        "chunk_id": "多层感知机1_学生分发版_副本::cell-78",
+        "file": "多层感知机1_学生分发版_副本.ipynb",
+        "kind": "ipynb",
+        "cell_index": 78,
+        "slide_index": null,
+        "title": "定义模型",
+        "count": 1,
+        "summary": "- Convolution Layers[卷积层](https://docs.pytorch.org/docs/stable/nn.html#convolution-layers) - Pooling Layers[池化层](https://docs.pytorch.org/docs/stable/nn.html#pooling-layers) - Padding Layers[填充层](https://docs.pytorch.org/docs/stable/nn.html#padding-layers) - Non-linear Activations[非线性激活层](https://docs.pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity) - Normalization Layers[归一化层](https://docs.pytorch.org/docs/stable/nn.html#normalization-layers) - Recurrent Layers[循环层](https://docs.pytorch.org/docs/stable/nn.html#recurrent-layers) - [Transformer Layers](https://docs.pytorch.org/docs/stable/nn.html#transformer-layers) - Linear Layers[线性层](htt..."
+      },
+      {
+        "chunk_id": "循环神经网络-学生分发版-终版2026::cell-21",
+        "file": "循环神经网络-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 21,
+        "slide_index": null,
+        "title": "代码示例：Shape演示",
+        "count": 1,
+        "summary": "#### 堆叠RNN的原理 堆叠RNN：将多个RNN层堆叠在一起，前一层的输出作为后一层的输入。 注意： - 两层堆叠RNN已经计算代价很高（时间上的顺序依赖 + 层间的顺序依赖） - 输出是最后一层的隐藏状态序列 - 每层的最终隐藏状态会被保存 --- ##### 参数量计算 堆叠RNN的计算成本随层数线性增长： python # 单层RNN参数量（单向） 单层参数量 = (input_size + hidden_size) * hidden_size + hidden_size # 堆叠L层RNN参数量（单向） 总参数量 = [(input_size + hidden_size) * hidden_size + hidden_size] # 第1层 + (L-1) * [(hidden_size + hidden_size) * hidden_size + hidden_size] # 第2~L层 # 简化公式（假设 input_size ≈ hidden_size，常见于嵌入维度等于隐藏维度时） 总参数量 ≈ L × (2 * hidden_size² + hidden_size) 示例：input_size = hidden_size = 256 时，单层 ≈ 131K，层数每加 1 约增加 131K 关键洞察：层数增加带来表达能力提升，但也增加了梯度消失风险和过拟合可能。 --- ##### 代码示例：Shape演示"
+      },
+      {
+        "chunk_id": "循环神经网络-学生分发版-终版2026::cell-68",
+        "file": "循环神经网络-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 68,
+        "slide_index": null,
+        "title": "IMDB 数据集简介",
+        "count": 1,
+        "summary": "# ============================================================ # 第六节：PyTorch 实现 IMDB 情感分类综合案例 # ============================================================ # 本代码演示一个完整的深度学习工程流程： # 数据加载 → 预处理 → 模型定义 → 训练 → 评估 → 可视化 # 核心重点：PackedSequence 处理变长序列、训练技巧的应用 # ==================== 超参数配置区 ==================== # 所有可调整的超参数集中在此，方便实验调参 # --- 数据相关 --- MAX_SEQ_LEN = 500 # 序列最大长度（超过则截断） MIN_WORD_FREQ = 5 # 词表最小词频（低于此频率的词归为） BATCH_SIZE = 64 # 批大小（每批处理的样本数） # --- 模型相关 --- EMBED_DIM = 128 # 词嵌入维度（每个词映射为多少维向量） HIDDEN_DIM = 256 # LSTM隐藏层维度（决定模型的记忆容量） NUM_LAYERS = 1 # LSTM层数（本案例使用单层） DROPOUT = 0.5 # Dropout概率（训练时随机失活的比例） BIDIRECTIONAL = False # 是否双向（False=单向，True=双向） # --- 训练相关 --- LEARNING_R..."
+      },
+      {
+        "chunk_id": "循环神经网络-学生分发版-终版2026::cell-70",
+        "file": "循环神经网络-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 70,
+        "slide_index": null,
+        "title": "PackedSequence 在模型中的流转",
+        "count": 2,
+        "summary": "# ==================== 模型定义 ==================== print(\" \" + \"=\" * 50) print(\"步骤6: 定义 SentimentLSTM 模型\") print(\"=\" * 50) class SentimentLSTM(nn.Module): \"\"\" 基于LSTM的情感分类模型 结构：Embedding → LSTM → Dropout → FC 关键设计： 1. 使用 PackedSequence 输入，避免padding带来的无效计算 2. 正交初始化 LSTM 权重，缓解梯度消失/爆炸 3. Dropout 防止过拟合 \"\"\" def init(self, vocab_size, embed_dim=EMBED_DIM, hidden_dim=HIDDEN_DIM, num_layers=NUM_LAYERS, dropout=DROPOUT, bidirectional=BIDIRECTIONAL): super().init() self.hidden_dim = hidden_dim self.num_layers = num_layers self.bidirectional = bidirectional self.num_directions = 2 if bidirectional else 1 # --- 1. Embedding层：将词索引映射为稠密向量 --- # padding_idx=0: 保证 token 的嵌入向量始终为0且不参与梯度更新 se..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer1-学生分发版-终版2026::cell-18",
+        "file": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 18,
+        "slide_index": null,
+        "title": "两种位置编码的对比",
+        "count": 3,
+        "summary": "### 四、现代大模型中的旋转位置编码（RoPE） > 前面我们学习了经典的 sin/cos 位置编码，这是 2017 年原始 Transformer 论文中的方案。但在现代大语言模型（如 LLaMA、ChatGLM、DeepSeek）中，广泛使用的是一种更先进的位置编码——旋转位置编码（RoPE, Rotary Position Embedding）。 > 💡 核心直觉：RoPE 不是\"告诉\"模型位置信息，而是让位置信息内嵌在向量本身的角度中，通过旋转自然体现。 可参考论文 [\"RoFormer: Enhanced Transformer with Rotary Position Embedding\" (Su et al., 2021) ](https://arxiv.org/pdf/2104.09864) > RoPE的核心思想：每个位置对应一个旋转角度，向量被旋转后，点乘自然反映相对位置关系。 --- #### 两种位置编码的对比 | 维度 | Sinusoidal PE（正弦/余弦） | RoPE（旋转位置编码） | |:---|:---|:---| | 提出时间 | 2017年（原始 Transformer） | 2021年（RoFormer 论文） | | 核心思想 | 给每个位置生成编码向量，加到词嵌入上 | 对 Q/K 向量进行旋转，角度反映位置 | | 类型 | 绝对位置编码 | 相对位置编码 | | 比喻 | 给每个人发座号名牌贴在身上 | 让每个人面朝不同角度坐着 | | 数学操作 | 加法：输入 = 词向量 + 位..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer2-学生分发版-终版2026::cell-18",
+        "file": "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 18,
+        "slide_index": null,
+        "title": "五、ViT 的演化：从分类到更多任务",
+        "count": 1,
+        "summary": "## 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉 ### 一、从 NLP 到 CV：Transformer 的跨界 Transformer 最初为 NLP 设计，但其核心思想——Self-Attention——并不局限于文本。2020 年，Google 提出了 Vision Transformer（ViT），将 Transformer 成功应用于图像分类任务。 核心思想： > 把图像切成一个个小 patch，把每个 patch 当作一个\"词\"，然后输入 Transformer Encoder！ 图像 (224x224x3) ↓ 切成 16x16 的 patches 196 个 patches，每个 16x16x3 = 768 维 ↓ 展平 + 线性投影 196 个 \"词向量\"，每个 768 维 ↓ + [CLS] token + 位置编码 197 个向量输入 Transformer Encoder ↓ [CLS] 位置的输出 -> MLP Head -> 图像类别 论文 [\"An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale\"](https://arxiv.org/abs/2010.11929) (Dosovitskiy et al., 2020) 中的 Figure 1。 ### 二、Patch Embedding：图像如何变成序列？ ViT 的第一步是将图像转换为序列。这可以通过 卷积..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-1",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "本章内容",
+        "count": 3,
+        "summary": "# 第六章（三）词嵌入与预训练模型 ## 本章内容 > 1. 词嵌入的演进历程（One-Hot → Word2Vec → GloVe → ELMo） > 2. 预训练模型时代：BERT vs GPT（MLM 双向理解 vs 自回归生成） > 3. HuggingFace Transformers（生态系统、Tokenizer、Trainer 实战） 学习目标：理解词嵌入从\"静态查表\"到\"动态生成\"的演进逻辑，掌握 BERT 和 GPT 的核心设计思想，熟练使用 HuggingFace 生态工具。"
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-3",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 3,
+        "slide_index": null,
+        "title": "小结：从\"静态查表\"到\"动态生成\"",
+        "count": 4,
+        "summary": "## 第1节 词嵌入的演进历程 ### 为什么需要词嵌入？一个核心问题 计算机无法直接理解文字，必须把文字转换成数字。这引出了 NLP 最基础的问题： > 如何把词表示成向量，让语义相近的词在向量空间中也相近？ 整个词嵌入技术的发展史，就是不断逼近这个问题的答案。 --- ### 阶段一：One-Hot 编码 —— \"每个词各住一间房\" 思路：给词汇表中的每个词分配一个独立的维度。 vocabulary = [\"猫\", \"狗\", \"鱼\", \"跑\", \"跳\"] 猫 = [1, 0, 0, 0, 0] 狗 = [0, 1, 0, 0, 0] 鱼 = [0, 0, 1, 0, 0] ... 致命缺陷： - ❌ 维度灾难：10 万词的词汇表 → 10 万维向量 - ❌ 语义无关：\"猫\"和\"狗\"的相似度 = 0（完全正交），但人知道它们都是动物 - ❌ 无法计算语义关系：king - man + woman 这种操作毫无意义 > One-Hot 只是\"编号\"，不是\"表示\" ### 阶段二：Word2Vec —— \"物以类聚，词以群分\" 核心问题：One-Hot 只给词编号，没有语义信息。能不能让模型自己学会词的语义？ Word2Vec 的聪明思路： > \"语义相近的词，经常出现在相似的上下文中\"（分布假说） 例如： - \"猫\"经常和\"跑\"、\"跳\"、\"抓\"一起出现 - \"狗\"也经常和\"跑\"、\"跳\"、\"抓\"一起出现 - 所以\"猫\"和\"狗\"的向量应该接近 怎么学？让神经网络\"猜邻居\"： - CBOW：给上下文词，猜中心词 - Skip-gram：给中心词..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-4",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 4,
+        "slide_index": null,
+        "title": "Embedding Arithmetic：词向量的魔法",
+        "count": 2,
+        "summary": "### Embedding Arithmetic：词向量的魔法 预训练词嵌入最惊人的特性是语义类比（Semantic Analogy）： KING - MAN + WOMAN ≈ QUEEN PARIS - FRANCE + ITALY ≈ ROME 为什么能这样？ 词嵌入把语义关系编码成了向量空间中的几何关系。 \"KING - MAN\" 提取的是\"royalty（王室）\"这一语义方向， 加上 \"WOMAN\" 就指向了\"女王\"。 接下来我们用 GloVe 预训练词向量来验证这个\"魔法\"， 并用 PCA 可视化词向量空间。"
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-6",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 6,
+        "slide_index": null,
+        "title": "四、BERT vs GPT 对比",
+        "count": 3,
+        "summary": "## 第2节 预训练模型时代：BERT vs GPT ### 一、从词嵌入到预训练模型：质的飞跃 前面我们讨论了词嵌入技术的演进：One-Hot → Word2Vec → GloVe → ELMo。 这些技术的核心目标都是把词表示为向量。 但从 2018 年开始，NLP 的研究范式发生了根本转变： 不再孤立地优化词嵌入，而是训练一个完整的深层语言模型，然后将其作为下游任务的\"特征提取器\"或\"初始化参数\"。 这就是预训练 + 微调范式。 BERT 论文 [\"Pre-training of Deep Bidirectional Transformers for Language Understanding\"](https://arxiv.org/abs/1810.04805) (Devlin et al., 2018) --- ### 二、BERT：为\"理解\"而生的双向编码器 BERT 的设计目标：解决\"理解类\"任务 什么是理解类任务？ - 情感分类：\"这部电影太棒了\" → 正面 or 负面？ - 问答系统：给定文章，回答\"谁发明了电话？\"（阅读理解） - 命名实体识别：\"苹果发布了新款 iPhone\" → \"苹果\"是公司名 为什么 BERT 擅长理解任务？ > 因为 BERT 在预训练时就学会了双向理解整句话！ 自回归语言模型（如 GPT）只能从左到右看句子： \"我今天[?]很开心\" → 只能根据\"我今天\"猜，不知道后面是\"很开心\" BERT 的做法：随机盖掉一些词，用整句话的上下文来猜 \"我今天[MASK]很开心\" → 同时看左边\"我今天..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-13",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 13,
+        "slide_index": null,
+        "title": "🎯 三阶段递进对比：核心结论",
+        "count": 5,
+        "summary": "## 本章总结 ### 词嵌入演进时间线 2013 ── Word2Vec ── 静态词嵌入，捕捉语义相似度 │ 2014 ── GloVe ───── 全局统计信息，Embedding Arithmetic │ 2018 ── ELMo ───── 上下文相关，一词多义（双向LSTM） │ 2018 ── BERT ───── 预训练+微调，MLM双向理解 │ 2019 ── GPT-2 ──── 预训练+微调，自回归生成 │ 2020 ── GPT-3 ──── 175B参数，上下文学习 │ 2023+ ─ GPT-4 ──── 多模态，推理能力 ### 关键知识点对比 | 模型 | 词嵌入类型 | 是否上下文相关 | 核心特点 | |:-----|:----------|:-------------|:--------| | Word2Vec | 静态 | ❌ 否 | 局部窗口，CBOW/Skip-gram | | GloVe | 静态 | ❌ 否 | 全局共现矩阵，Embedding Arithmetic | | ELMo | 动态 | ✅ 是 | 双向LSTM，层加权组合 | | BERT | 动态 | ✅ 是 | Transformer Encoder，MLM双向理解 | | GPT | 动态 | ✅ 是 | Transformer Decoder，自回归生成 | ### BERT vs GPT 核心差异 | | BERT | GPT | |:---|:---|:---| | 目标 | 理解 | 生成 | | 注意力 | 双向..."
+      }
+    ],
+    "related": [
+      "Transformer",
+      "池化",
+      "LSTM",
+      "Dropout",
+      "Padding",
+      "隐藏状态",
+      "ResNet",
+      "卷积"
+    ]
+  },
+  "Vertex": {
+    "term": "Vertex",
+    "total_count": 4,
+    "files": [
+      "图学习课件_第一部分_20260602.pptx"
+    ],
+    "hits": [
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-4",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 4,
+        "title": "遂图数据的基本结构",
+        "count": 1,
+        "summary": "遂图数据的基本结构 V Vertex （or node） attributes e.g.， node identity, number of neighbors E Edge （or link） attributes and directions e.g.， edge identity, edge weight U Global （or master node） attributes e.g.， number of nodes, longest path"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-5",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 5,
+        "title": "图数据的基本结构",
+        "count": 1,
+        "summary": "图数据的基本结构 V.Vertex （or node） attributes e.g.， node identity, number of neighbors E Edge （or link） attributes and directions e.g.， edge identity, edge weight U Global （or master node） attributes e.g.， number of nodes, longest path"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-6",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 6,
+        "title": "图数据的基本结构",
+        "count": 1,
+        "summary": "图数据的基本结构 V Vertex （or node） attributes e.g.， node identity, number of neighbors E Edge （or link） attributes and directions e.g.， edge identity, edge weight U Global （or master node） attributes e.g.， number of nodes, longest path"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-7",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 7,
+        "title": "图数据的基本结构",
+        "count": 1,
+        "summary": "图数据的基本结构 Vertex （or node） embedding Edge （or link） attributes and embedding - Global （or master node） embedding"
+      }
+    ],
+    "related": [
+      "Edge"
+    ]
+  },
+  "Edge": {
+    "term": "Edge",
+    "total_count": 41,
+    "files": [
+      "卷积神经网络1-学生分发版-终版2026.ipynb",
+      "卷积神经网络1-课堂练习-终版2026.ipynb",
+      "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+      "卷积神经网络2-学生分发版-终版2026.ipynb",
+      "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+      "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图学习课件_第一部分_20260602.pptx",
+      "多层感知机2-课堂练习-终版2026.ipynb",
+      "多层感知机2-课堂练习答案-终版2026.ipynb",
+      "循环神经网络-学生分发版-终版2026.ipynb",
+      "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+      "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+      "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
+    ],
+    "hits": [
+      {
+        "chunk_id": "卷积神经网络1-学生分发版-终版2026::cell-1",
+        "file": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "卷积神经网络1-学生分发版-终版2026",
+        "count": 2,
+        "summary": "import numpy as np import torch import torch.optim as optim import torch.nn as nn import torch.nn.functional as F from torch.utils.data import DataLoader, Dataset, random_split from torchvision.transforms import Compose, ToTensor, Normalize from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix import matplotlib.pyplot as plt from matplotlib.patches import Rectangle import warnings warnings.filterwarnings('ignore') # 设置matplotlib为黑色主题 plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtic..."
+      },
+      {
+        "chunk_id": "卷积神经网络1-课堂练习-终版2026::cell-1",
+        "file": "卷积神经网络1-课堂练习-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "卷积神经网络1-课堂练习-终版2026",
+        "count": 1,
+        "summary": "import numpy as np import torch import matplotlib.pyplot as plt # 设置matplotlib为黑色主题 plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtick.color': 'white', 'ytick.color': 'white', 'grid.color': '#444444', 'grid.alpha': 0.3, })"
+      },
+      {
+        "chunk_id": "卷积神经网络2-学生分发版-终版2026(1)::cell-1",
+        "file": "卷积神经网络2-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "卷积神经网络2-学生分发版-终版2026(1)",
+        "count": 2,
+        "summary": "import numpy as np import torch import torch.optim as optim import torch.nn as nn import torch.nn.functional as F from torch.utils.data import DataLoader, Dataset, random_split from torchvision.transforms import Compose, ToTensor, Normalize import matplotlib.pyplot as plt from matplotlib.patches import Rectangle import warnings warnings.filterwarnings('ignore') # 设置matplotlib为黑色主题 plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtick.color': 'white', 'ytick.color': 'white', 'grid.color': '#444444', 'grid.alpha': 0.3, 'legend.facecol..."
+      },
+      {
+        "chunk_id": "卷积神经网络2-学生分发版-终版2026::cell-1",
+        "file": "卷积神经网络2-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "卷积神经网络2-学生分发版-终版2026",
+        "count": 2,
+        "summary": "import numpy as np import torch import torch.optim as optim import torch.nn as nn import torch.nn.functional as F from torch.utils.data import DataLoader, Dataset, random_split from torchvision.transforms import Compose, ToTensor, Normalize import matplotlib.pyplot as plt from matplotlib.patches import Rectangle import warnings warnings.filterwarnings('ignore') # 设置matplotlib为黑色主题 plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtick.color': 'white', 'ytick.color': 'white', 'grid.color': '#444444', 'grid.alpha': 0.3, 'legend.facecol..."
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026(1)::cell-1",
+        "file": "卷积神经网络3-学生分发版-终版2026(1).ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "卷积神经网络3-学生分发版-终版2026(1)",
+        "count": 2,
+        "summary": "import numpy as np import torch import torch.optim as optim import torch.nn as nn import torch.nn.functional as F from torch.utils.data import DataLoader, Dataset, random_split from torchvision.transforms import Compose, ToTensor, Normalize, RandomHorizontalFlip import matplotlib.pyplot as plt from matplotlib.patches import Rectangle import warnings warnings.filterwarnings('ignore') # 设置matplotlib为黑色主题 plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtick.color': 'white', 'ytick.color': 'white', 'grid.color': '#444444', 'grid.alpha'..."
+      },
+      {
+        "chunk_id": "卷积神经网络3-学生分发版-终版2026::cell-1",
+        "file": "卷积神经网络3-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "卷积神经网络3-学生分发版-终版2026",
+        "count": 2,
+        "summary": "import numpy as np import torch import torch.optim as optim import torch.nn as nn import torch.nn.functional as F from torch.utils.data import DataLoader, Dataset, random_split from torchvision.transforms import Compose, ToTensor, Normalize, RandomHorizontalFlip import matplotlib.pyplot as plt from matplotlib.patches import Rectangle import warnings warnings.filterwarnings('ignore') # 设置matplotlib为黑色主题 plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtick.color': 'white', 'ytick.color': 'white', 'grid.color': '#444444', 'grid.alpha'..."
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-3",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 3,
+        "title": "什么是图？",
+        "count": 1,
+        "summary": "什么是图？ 图论的开始 B C 七桥问题 图（Graph）就是节点（Vertices/Nodes）以及边（Edge） G= （V,E） 图（Graph）就是一种特殊的数据结构！"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-4",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 4,
+        "title": "遂图数据的基本结构",
+        "count": 3,
+        "summary": "遂图数据的基本结构 V Vertex （or node） attributes e.g.， node identity, number of neighbors E Edge （or link） attributes and directions e.g.， edge identity, edge weight U Global （or master node） attributes e.g.， number of nodes, longest path"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-5",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 5,
+        "title": "图数据的基本结构",
+        "count": 3,
+        "summary": "图数据的基本结构 V.Vertex （or node） attributes e.g.， node identity, number of neighbors E Edge （or link） attributes and directions e.g.， edge identity, edge weight U Global （or master node） attributes e.g.， number of nodes, longest path"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-6",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 6,
+        "title": "图数据的基本结构",
+        "count": 3,
+        "summary": "图数据的基本结构 V Vertex （or node） attributes e.g.， node identity, number of neighbors E Edge （or link） attributes and directions e.g.， edge identity, edge weight U Global （or master node） attributes e.g.， number of nodes, longest path"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-7",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 7,
+        "title": "图数据的基本结构",
+        "count": 1,
+        "summary": "图数据的基本结构 Vertex （or node） embedding Edge （or link） attributes and embedding - Global （or master node） embedding"
+      },
+      {
+        "chunk_id": "图学习课件_第一部分_20260602::slide-12",
+        "file": "图学习课件_第一部分_20260602.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "邻接表",
+        "count": 1,
+        "summary": "邻接表 Nodes ［o.1.1.0 •.1.1.1］ Edges ［2,1.1,1.2,1,11 Adjacency List /I1,0］、12,0］、14, 3］、16,2）， ［7, 3］， ［7, 4）. 17, 511 Global https://distill.pub/2021/gnn-intro/"
+      },
+      {
+        "chunk_id": "多层感知机2-课堂练习-终版2026::cell-1",
+        "file": "多层感知机2-课堂练习-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "多层感知机2-课堂练习-终版2026",
+        "count": 2,
+        "summary": "import numpy as np import torch import torch.nn as nn import matplotlib.pyplot as plt # 设置matplotlib为黑色主题（与课件保持一致） plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtick.color': 'white', 'ytick.color': 'white', 'grid.color': '#444444', 'grid.alpha': 0.3, 'legend.facecolor': 'black', 'legend.edgecolor': 'white', }) print('✅ 环境准备完成！')"
+      },
+      {
+        "chunk_id": "多层感知机2-课堂练习答案-终版2026::cell-1",
+        "file": "多层感知机2-课堂练习答案-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "多层感知机2-课堂练习答案-终版2026",
+        "count": 2,
+        "summary": "import numpy as np import torch import torch.nn as nn import matplotlib.pyplot as plt # 设置matplotlib为黑色主题（与课件保持一致） plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtick.color': 'white', 'ytick.color': 'white', 'grid.color': '#444444', 'grid.alpha': 0.3, 'legend.facecolor': 'black', 'legend.edgecolor': 'white', }) print('✅ 环境准备完成！')"
+      },
+      {
+        "chunk_id": "循环神经网络-学生分发版-终版2026::cell-1",
+        "file": "循环神经网络-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "循环神经网络-学生分发版-终版2026",
+        "count": 2,
+        "summary": "import numpy as np import torch import torch.optim as optim import torch.nn as nn import torch.nn.functional as F from torch.utils.data import DataLoader, Dataset, TensorDataset from torch.nn.utils import rnn as rnn_utils from sklearn.model_selection import train_test_split import matplotlib.pyplot as plt from matplotlib.patches import FancyArrowPatch, Circle, Rectangle import warnings warnings.filterwarnings('ignore') plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtick.color': 'white', 'ytick.color': 'white', 'grid.color': '#4444..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer1-学生分发版-终版2026::cell-1",
+        "file": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "注意力机制及Transformer1-学生分发版-终版2026",
+        "count": 2,
+        "summary": "# ============================================================================ # 导入必要的库 # ============================================================================ import numpy as np import torch import torch.nn as nn import torch.nn.functional as F import math import matplotlib.pyplot as plt import warnings warnings.filterwarnings('ignore') # 设置matplotlib为黑色主题 plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edgecolor': 'white', 'axes.labelcolor': 'white', 'text.color': 'white', 'xtick.color': 'white', 'ytick.color': 'white', 'grid.color': '#444444', 'grid.alpha': 0.3, 'legend.facecolor': 'black', 'le..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer1-学生分发版-终版2026::cell-20",
+        "file": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 20,
+        "slide_index": null,
+        "title": "两种位置编码的对比",
+        "count": 2,
+        "summary": "# ============================================================================ # 位置编码可视化（改进版） # ============================================================================ d_model = 128 max_len = 100 # 设置中文字体，确保图中中文正常显示（适配 macOS 和常见系统） plt.rcParams['font.sans-serif'] = ['Arial Unicode MS', 'PingFang SC', 'Heiti TC', 'SimHei', 'DejaVu Sans'] plt.rcParams['axes.unicode_minus'] = False pe_layer = PositionalEncoding(d_model=d_model, max_len=max_len) pe = pe_layer.pe[0].numpy() # [max_len, d_model] fig, axes = plt.subplots(2, 2, figsize=(18, 12)) fig.suptitle('Positional Encoding: From Formula to Properties', fontsize=18, y=0.98) # --------------------------------------------..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer2-学生分发版-终版2026::cell-1",
+        "file": "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 1,
+        "slide_index": null,
+        "title": "注意力机制及Transformer2-学生分发版-终版2026",
+        "count": 2,
+        "summary": "# ============================================================================ # 导入必要的库 # ============================================================================ import os import urllib.request import tarfile import copy import re from collections import Counter import numpy as np import torch import torch.nn as nn import torch.nn.functional as F import torch.optim as optim from torch.utils.data import Dataset, DataLoader, random_split import math import matplotlib.pyplot as plt import warnings warnings.filterwarnings('ignore') # 设置matplotlib为黑色主题 plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.facecolor': 'black', 'axes.edge..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer2-学生分发版-终版2026::cell-10",
+        "file": "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+        "kind": "ipynb",
+        "cell_index": 10,
+        "slide_index": null,
+        "title": "三、LayerNorm 的数学公式",
+        "count": 3,
+        "summary": "# ============================================================================ # LayerNorm vs BatchNorm 可视化对比 # ============================================================================ torch.manual_seed(23) batch_size, seq_len, d_model = 4, 1, 256 dummy_points = torch.randn(batch_size, seq_len, d_model) # 添加位置编码（模拟实际场景） pe = PositionalEncoding(d_model, max_len=seq_len, dropout=0.0) dummy_enc = pe(dummy_points) # LayerNorm layer_norm = nn.LayerNorm(d_model) dummy_ln = layer_norm(dummy_enc) # BatchNorm（需要调整维度） bn = nn.BatchNorm1d(d_model) dummy_bn = bn(dummy_enc.transpose(1, 2)).transpose(1, 2) # 可视化 fig, axes = plt.subplots(1, 3, figsize=(18, 4)) axes[0].hist(dummy_enc..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-2",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 2,
+        "slide_index": null,
+        "title": "本章内容",
+        "count": 2,
+        "summary": "# ============================================================================ # 导入必要的库 + 黑色主题设置 + IMDB 数据加载 # ============================================================================ import os import re from collections import Counter import numpy as np import torch import torch.nn as nn import torch.nn.functional as F import torch.optim as optim from torch.utils.data import Dataset, DataLoader import math import matplotlib.pyplot as plt from sklearn.decomposition import PCA import warnings warnings.filterwarnings('ignore') # ---------- 设置 matplotlib 为黑色主题（与前面课件一致）---------- plt.style.use('dark_background') plt.rcParams.update({ 'figure.facecolor': 'black', 'axes.fac..."
+      },
+      {
+        "chunk_id": "注意力机制及Transformer3-学生分发版-终版2026(3)::cell-5",
+        "file": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+        "kind": "ipynb",
+        "cell_index": 5,
+        "slide_index": null,
+        "title": "Embedding Arithmetic：词向量的魔法",
+        "count": 1,
+        "summary": "# ============================================================================ # GloVe 预训练词向量：Embedding Arithmetic + PCA 可视化 # ============================================================================ import os import numpy as np import matplotlib.pyplot as plt print(\"=\" * 60) print(\"GloVe 词向量：语义类比 + 可视化\") print(\"=\" * 60) # ---------- 加载 GloVe 词向量 ---------- GLOVE_DIR = \"glove\" GLOVE_DIM = 100 GLOVE_FILE = os.path.join(GLOVE_DIR, f\"glove.6B.{GLOVE_DIM}d.txt\") def load_glove_embeddings(glove_file, vocab_limit=50000): embeddings = {} with open(glove_file, 'r', encoding='utf-8') as f: for i, line in enumerate(f): if i >= vocab_limit: break values = line.strip().split() wo..."
+      }
+    ],
+    "related": [
+      "Vertex",
       "Value",
-      "Positional Encoding"
+      "位置编码",
+      "Positional Encoding",
+      "节点",
+      "边",
+      "RNN",
+      "RoPE"
     ]
   }
 }

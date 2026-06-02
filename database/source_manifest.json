@@ -54,6 +54,20 @@
     "sha256": "9eeba2ff050905757112af142e843143447402aee82ebd34e44f44bd0608be28"
   },
   {
+    "file": "图学习课件_第一部分_20260602.pptx",
+    "kind": "pptx",
+    "size_bytes": 9581658,
+    "slide_count": 66,
+    "sha256": "dcef2cdd619e657bd60ed2028c0f59f7bbb2e33cc5c1d8b644feee02bbe84caf"
+  },
+  {
+    "file": "图学习课件_第二部分_20260602.pptx",
+    "kind": "pptx",
+    "size_bytes": 12338088,
+    "slide_count": 91,
+    "sha256": "d1b7ff5d01f42987987960d9674dbcfe98a211f58d7554dffb90e3a60ece4c15"
+  },
+  {
     "file": "多层感知机1_学生分发版.ipynb",
     "kind": "ipynb",
     "size_bytes": 66696,
