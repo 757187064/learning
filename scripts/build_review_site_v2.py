@@ -324,7 +324,7 @@ def extract_notebook(path: Path):
 def ensure_ocr_binary():
     swiftc = shutil.which("swiftc")
     swift = OUT / "scripts" / "ocr_image.swift"
-    binary = DATABASE / "ocr_image"
+    binary = Path("/tmp") / "review_site_ocr_image"
     if not swiftc or not swift.exists():
         return None
     if binary.exists() and binary.stat().st_mtime >= swift.stat().st_mtime:
