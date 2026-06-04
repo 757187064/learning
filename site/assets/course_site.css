@@ -405,6 +405,19 @@ tr:last-child td { border-bottom: 0; }
   color: inherit;
   padding: 0;
 }
+.math-block {
+  margin: 14px 0;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  overflow-x: auto;
+}
+.markdown-body mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
 .table-line {
   font-family: "SFMono-Regular", Consolas, monospace;
   background: #f8fafc;

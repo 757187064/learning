@@ -2006,6 +2006,19 @@ tr:last-child td { border-bottom: 0; }
   color: inherit;
   padding: 0;
 }
+.math-block {
+  margin: 14px 0;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  overflow-x: auto;
+}
+.markdown-body mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
 .table-line {
   font-family: "SFMono-Regular", Consolas, monospace;
   background: #f8fafc;
@@ -2039,6 +2052,21 @@ const $ = (id) => document.getElementById(id);
 const norm = (s) => (s || "").toString().toLowerCase();
 const escapeHtml = (s) => (s || "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const lastQuizState = { beginner: null, standard: null };
+
+function queueMathTypeset(root = document.body, attempt = 0) {
+  const run = () => {
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([root]).catch(err => console.warn("MathJax typeset failed", err));
+    } else if (attempt < 30) {
+      window.setTimeout(() => queueMathTypeset(root, attempt + 1), 120);
+    }
+  };
+  if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+    MathJax.startup.promise.then(run);
+  } else {
+    window.setTimeout(run, 120);
+  }
+}
 
 function showView(name) {
   document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === `view-${name}`));
@@ -2373,7 +2401,9 @@ function markdownToHtml(md) {
   const html = [];
   let listOpen = false;
   let inCode = false;
+  let inMath = false;
   let codeLines = [];
+  let mathLines = [];
   const closeList = () => {
     if (listOpen) {
       html.push("</ul>");
@@ -2381,6 +2411,28 @@ function markdownToHtml(md) {
     }
   };
   lines.forEach(line => {
+    const trimmed = line.trim();
+    const singleLineMath = trimmed.match(/^\$\$(.+)\$\$$/);
+    if (!inCode && singleLineMath) {
+      closeList();
+      html.push(`<div class="math-block">$$${escapeHtml(singleLineMath[1].trim())}$$</div>`);
+      return;
+    }
+    if (!inCode && trimmed === "$$") {
+      if (inMath) {
+        html.push(`<div class="math-block">$$${escapeHtml(mathLines.join("\n"))}$$</div>`);
+        mathLines = [];
+        inMath = false;
+      } else {
+        closeList();
+        inMath = true;
+      }
+      return;
+    }
+    if (inMath) {
+      mathLines.push(line);
+      return;
+    }
     if (line.trim().startsWith("```")) {
       if (inCode) {
         html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
@@ -2430,6 +2482,7 @@ function markdownToHtml(md) {
     html.push(`<p>${inlineMarkdown(line)}</p>`);
   });
   closeList();
+  if (inMath) html.push(`<div class="math-block">$$${escapeHtml(mathLines.join("\n"))}$$</div>`);
   if (inCode) html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
   return html.join("");
 }
@@ -2494,12 +2547,14 @@ function renderReview() {
       <div id="topicGuideReader">${renderTopicGuideContent(items[0])}</div>
     </div>
   `;
+  queueMathTypeset($("topicGuideReader"));
   $("topicGuideNav").querySelectorAll("button[data-guide]").forEach(btn => btn.addEventListener("click", () => {
     $("topicGuideNav").querySelectorAll("button").forEach(b => b.classList.toggle("active", b === btn));
     const guide = items.find(g => g.id === btn.dataset.guide);
     $("topicGuideReader").innerHTML = renderTopicGuideContent(guide);
     const printBtn = $("topicGuideReader").querySelector("[data-print-guide]");
     if (printBtn) printBtn.addEventListener("click", () => window.print());
+    queueMathTypeset($("topicGuideReader"));
   }));
   const printBtn = $("topicGuideReader").querySelector("[data-print-guide]");
   if (printBtn) printBtn.addEventListener("click", () => window.print());
@@ -2536,6 +2591,19 @@ HTML = """<!doctype html>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>深度学习期末复习资料库</title>
   <link rel="stylesheet" href="assets/course_site.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']],
+        processEscapes: true
+      },
+      svg: { fontCache: 'global' },
+      startup: { typeset: false },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
   <header>
