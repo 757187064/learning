@@ -6,10 +6,10 @@
 - 易错点：推理阶段一般使用训练中累计的均值方差，不依赖当前 batch。
 - 必记：BatchNorm：标准化激活，稳定训练，加快收敛。
 ### Attention
-- 通俗解释：第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3. Transformer Encoder：从单层到多层堆叠；4...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3....
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Self-Attention
 - 通俗解释：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
 - 考试怎么考：常考它和 Cross-Attention 的区别。
@@ -26,10 +26,10 @@
 - 易错点：Transformer 不依赖 RNN 的逐步递归来建模序列。
 - 必记：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
 ### Encoder-Decoder
-- 通俗解释：第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3. Transformer Encoder：从单层到多层堆叠；4...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3....
+- 通俗解释：编码器把输入变成表示，解码器根据表示生成输出。
+- 考试怎么考：常考机器翻译、Seq2Seq、Cross-Attention 中 Q/K/V 来源。
+- 易错点：不要把编码器和解码器的输入输出方向混淆。
+- 必记：Encoder 编码输入，Decoder 生成输出。
 ### Batch
 - 通俗解释：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。
 - 考试怎么考：常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。
@@ -46,10 +46,10 @@
 - 易错点：Dropout 不是提高模型容量，而是正则化。
 - 必记：Dropout：训练随机失活，推理正常使用。
 ### Query
-- 通俗解释：1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T5 全部使用 Narrow Attention；2. Sub...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T...
+- 通俗解释：Query 表示当前位置主动提出的查询，用来和 Key 计算匹配度。
+- 考试怎么考：常考 Q 与 K 点积得到注意力分数。
+- 易错点：不要把 Query 和 Value 的角色混淆。
+- 必记：Query 问：我要找什么信息？
 ## 第六章（二）Self-Attention 与完整 Transformer 架构 / 第1节 回顾与过渡
 ### Softmax
 - 通俗解释：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
@@ -72,30 +72,30 @@
 - 易错点：普通 Seq2Seq 容易受固定长度上下文瓶颈影响。
 - 必记：Seq2Seq = Encoder + Decoder。
 ### Attention
-- 通俗解释：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下文向量 → Decoder
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Q/K/V
-- 通俗解释：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下文向量 → Decoder
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下...
+- 通俗解释：注意力中的 Query、Key、Value 三类向量，分别负责查询、匹配和取信息。
+- 考试怎么考：常考三者来源和作用。
+- 易错点：不要把三者都说成同一个东西。
+- 必记：Q 查，K 配，V 取。
 ### 上下文向量
-- 通俗解释：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下文向量 → Decoder
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下...
+- 通俗解释：注意力对 Value 加权求和后得到的综合表示。
+- 考试怎么考：常考注意力权重如何生成上下文。
+- 易错点：上下文向量不是简单拼接所有输入。
+- 必记：上下文向量 = 注意力权重加权后的 Value。
 ### Self-Attention
 - 通俗解释：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
 - 考试怎么考：常考它和 Cross-Attention 的区别。
 - 易错点：Self 不是只看自己一个位置，而是同一序列内部互相看。
 - 必记：自注意力：同一序列内部做注意力。
 ### Positional Encoding
-- 通俗解释：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下文向量 → Decoder
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下...
+- 通俗解释：Transformer 中加入位置信息的方法，可用正余弦或可学习位置向量。
+- 考试怎么考：常考它和词嵌入相加、提供顺序信息。
+- 易错点：不要把它当成普通标签。
+- 必记：Positional Encoding 告诉模型位置。
 ### Transformer
 - 通俗解释：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
 - 考试怎么考：常考编码器/解码器结构、多头注意力和位置编码。
@@ -113,15 +113,15 @@
 - 易错点：Softmax 是对一组数整体归一化，不是逐个独立压缩。
 - 必记：Softmax 输出非负且总和为 1。
 ### Attention
-- 通俗解释：第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 | 每个头的输入 | 优点 | 缺点；Wide Attention | 完整 $d_{model}$ |...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 | 每个头的输入 | 优点 | 缺点；Wid...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Multi-Head Attention
-- 通俗解释：第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 | 每个头的输入 | 优点 | 缺点；Wide Attention | 完整 $d_{model}$ |...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 | 每个头的输入 | 优点 | 缺点；Wid...
+- 通俗解释：把注意力分成多个头并行学习不同关系，再拼接融合。
+- 考试怎么考：常考多头为什么能捕捉不同子空间信息。
+- 易错点：多头不是重复同一个注意力结果，而是不同投影。
+- 必记：多头注意力让模型从多个角度看关系。
 ## 第六章（二）Self-Attention 与完整 Transformer 架构 / 第3节 Transformer Encoder（多层堆叠）
 ### Softmax
 - 通俗解释：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
@@ -139,25 +139,25 @@
 - 易错点：Dropout 不是提高模型容量，而是正则化。
 - 必记：Dropout：训练随机失活，推理正常使用。
 ### Attention
-- 通俗解释：第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关注其他所有位置；2. Feed-Forward Networ...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Multi-Head Attention
-- 通俗解释：第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关注其他所有位置；2. Feed-Forward Networ...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关...
+- 通俗解释：把注意力分成多个头并行学习不同关系，再拼接融合。
+- 考试怎么考：常考多头为什么能捕捉不同子空间信息。
+- 易错点：多头不是重复同一个注意力结果，而是不同投影。
+- 必记：多头注意力让模型从多个角度看关系。
 ### Self-Attention
 - 通俗解释：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
 - 考试怎么考：常考它和 Cross-Attention 的区别。
 - 易错点：Self 不是只看自己一个位置，而是同一序列内部互相看。
 - 必记：自注意力：同一序列内部做注意力。
 ### 位置编码
-- 通俗解释：第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关注其他所有位置；2. Feed-Forward Networ...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关...
+- 通俗解释：给序列注入位置信息，让注意力知道顺序。
+- 考试怎么考：常考为什么 Transformer 需要位置编码。
+- 易错点：没有位置编码时，自注意力本身不天然知道词序。
+- 必记：位置编码补上序列顺序。
 ### Transformer
 - 通俗解释：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
 - 考试怎么考：常考编码器/解码器结构、多头注意力和位置编码。
@@ -165,25 +165,25 @@
 - 必记：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
 ## 第六章（二）Self-Attention 与完整 Transformer 架构 / 第4节 Transformer Decoder
 ### Attention
-- 通俗解释：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decoder；Sub-Layer 1 | Multi-Head Se...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decod...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Query
-- 通俗解释：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decoder；Sub-Layer 1 | Multi-Head Se...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decod...
+- 通俗解释：Query 表示当前位置主动提出的查询，用来和 Key 计算匹配度。
+- 考试怎么考：常考 Q 与 K 点积得到注意力分数。
+- 易错点：不要把 Query 和 Value 的角色混淆。
+- 必记：Query 问：我要找什么信息？
 ### Key
-- 通俗解释：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decoder；Sub-Layer 1 | Multi-Head Se...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decod...
+- 通俗解释：Key 表示被匹配的索引，用来和 Query 计算相关性。
+- 考试怎么考：常考 Key 与 Query 的维度、匹配关系。
+- 易错点：Key 不是最终被加权求和的内容，Value 才是内容。
+- 必记：Key 用来匹配，Value 用来取内容。
 ### Value
-- 通俗解释：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decoder；Sub-Layer 1 | Multi-Head Se...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decod...
+- 通俗解释：Value 是被注意力权重加权求和的信息内容。
+- 考试怎么考：常考 softmax 权重乘 Value 得到上下文向量。
+- 易错点：不要把 Value 当成计算匹配度的主要对象。
+- 必记：Value 是最后被汇总的信息。
 ### Self-Attention
 - 通俗解释：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
 - 考试怎么考：常考它和 Cross-Attention 的区别。
@@ -222,10 +222,10 @@
 - 必记：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
 ## 第六章（二）Self-Attention 与完整 Transformer 架构 / 第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）
 ### Attention
-- 通俗解释：第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）；一、任务介绍：IMDB 电影评论情感分析；在上一章（循环神经网络）中，我们使用 LSTM 对 IMDB 电影评论进行情感分类（正面/负面）。本章，我们将用 Transformer 解决同一个任务，对比两者的效果差异...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）；一、任务介绍：IMDB 电影评论情感分析；在上一章（循环神经网络）中，我们使用 LSTM 对 IMDB 电影评论进行情感分类（正面/负面）。本章，我们将用 T...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Self-Attention
 - 通俗解释：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
 - 考试怎么考：常考它和 Cross-Attention 的区别。
@@ -258,20 +258,20 @@
 - 易错点：Dropout 不是提高模型容量，而是正则化。
 - 必记：Dropout：训练随机失活，推理正常使用。
 ### Key
-- 通俗解释：第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.Transformer。了解它的接口和特点非常重要。；PyTo...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.T...
+- 通俗解释：Key 表示被匹配的索引，用来和 Query 计算相关性。
+- 考试怎么考：常考 Key 与 Query 的维度、匹配关系。
+- 易错点：Key 不是最终被加权求和的内容，Value 才是内容。
+- 必记：Key 用来匹配，Value 用来取内容。
 ### Subsequent Mask
-- 通俗解释：第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.Transformer。了解它的接口和特点非常重要。；PyTo...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.T...
+- 通俗解释：一种上三角未来位置遮罩，让解码器只能看当前位置及之前。
+- 考试怎么考：常考 Decoder 自注意力中的未来信息屏蔽。
+- 易错点：不是屏蔽 padding 的主要 mask。
+- 必记：Subsequent Mask 用来挡住未来 token。
 ### 位置编码
-- 通俗解释：第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.Transformer。了解它的接口和特点非常重要。；PyTo...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.T...
+- 通俗解释：给序列注入位置信息，让注意力知道顺序。
+- 考试怎么考：常考为什么 Transformer 需要位置编码。
+- 易错点：没有位置编码时，自注意力本身不天然知道词序。
+- 必记：位置编码补上序列顺序。
 ### Transformer
 - 通俗解释：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
 - 考试怎么考：常考编码器/解码器结构、多头注意力和位置编码。
@@ -279,20 +279,20 @@
 - 必记：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
 ## 第六章（二）Self-Attention 与完整 Transformer 架构 / 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉
 ### Attention
-- 通俗解释：第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attention——并不局限于文本。2020 年，Google 提出了...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attenti...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Self-Attention
 - 通俗解释：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
 - 考试怎么考：常考它和 Cross-Attention 的区别。
 - 易错点：Self 不是只看自己一个位置，而是同一序列内部互相看。
 - 必记：自注意力：同一序列内部做注意力。
 ### 位置编码
-- 通俗解释：第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attention——并不局限于文本。2020 年，Google 提出了...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attenti...
+- 通俗解释：给序列注入位置信息，让注意力知道顺序。
+- 考试怎么考：常考为什么 Transformer 需要位置编码。
+- 易错点：没有位置编码时，自注意力本身不天然知道词序。
+- 必记：位置编码补上序列顺序。
 ### Transformer
 - 通俗解释：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
 - 考试怎么考：常考编码器/解码器结构、多头注意力和位置编码。

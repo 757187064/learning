@@ -1,476 +1,1212 @@
-# 注意力机制及Transformer2-学生分发版-终版2026：期末考试复习讲义
+# 注意力机制及Transformer2-学生分发版-终版2026：按课件顺序重写的考试复习讲义
 
-> 使用方式：先通读“学习路线”，再按章节背“必记句子”，最后用每章自测题检查。这里不是课件原文搬运，而是按考试复习顺序重写。
+这份讲义会尽量按你读课件时真正需要的顺序来讲。
 
-## 一、这份课件先解决什么问题
+**目标不是把课件拆成表格，而是像复习书一样，一点一点说明：为什么讲这个、它解决什么问题、考试怎么抓。**
 
-这一类课件从序列建模瓶颈进入注意力机制。复习时先把 Q/K/V、注意力权重、mask、位置编码讲顺，再看 Transformer 编码器和解码器。
+---
 
-考试常考注意力公式的每一项含义、Self-Attention 与 Cross-Attention 的区别、以及 mask 为什么存在。
+## 先说整份课件到底在解决什么问题
 
-## 二、学习路线
+这一份课件要解决的是：**如果不按 RNN 那样一步一步读，模型还能不能直接判断序列里不同位置之间的关系。**
 
-1. **第六章（二）Self-Attention 与完整 Transformer 架构**：先抓 BatchNorm、Attention、Self-Attention、Cross-Attention、Transformer。
-2. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第1节 回顾与过渡**：先抓 Softmax、Dropout、RNN、Seq2Seq、Attention。
-3. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第2节 Narrow Attention 深度解析**：先抓 Batch、Softmax、Attention、Multi-Head Attention。
-4. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第3节 Transformer Encoder（多层堆叠）**：先抓 Softmax、归一化、Dropout、Attention、Multi-Head Attention。
-5. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第4节 Transformer Decoder**：先抓 Attention、Query、Key、Value、Self-Attention。
-6. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第5节 Layer Normalization 深度讲解**：先抓 Batch、归一化、BatchNorm、Transformer。
-7. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）**：先抓 Attention、Self-Attention、Transformer。
-8. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第7节 PyTorch 内置 Transformer**：先抓 Batch、激活函数、归一化、Dropout、Key。
-9. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉**：先抓 Attention、Self-Attention、位置编码、Transformer。
-10. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第10节 预训练模型：DistilBERT 微调实战**：先抓 Transformer、学习率、Epoch。
+注意力机制的核心不是公式本身，而是“谁在查询、去和谁匹配、最后从哪里取信息”。Transformer 把这套机制堆成了完整结构。
 
-## 三、章节详解
+读的时候先抓这条线：**Q/K/V -> 注意力权重 -> 多头注意力 -> 位置编码与 Mask -> Encoder/Decoder 或 Decoder-only 结构。**
+
+---
+
+## 建议阅读顺序
+
+下面不是知识点清单，而是你复习时可以照着走的路线：
+
+1. **第六章（二）Self-Attention 与完整 Transformer 架构**：先读 BatchNorm、Attention、Self-Attention、Cross-Attention。
+2. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第1节 回顾与过渡**：先读 Softmax、Dropout、RNN、Seq2Seq。
+3. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第2节 Narrow Attention 深度解析**：先读 Batch、Softmax、Attention、Multi-Head Attention。
+4. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第3节 Transformer Encoder（多层堆叠）**：先读 Softmax、归一化、Dropout、Attention。
+5. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第4节 Transformer Decoder**：先读 Attention、Query、Key、Value。
+6. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第5节 Layer Normalization 深度讲解**：先读 Batch、归一化、BatchNorm、Transformer。
+7. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）**：先读 Attention、Self-Attention、Transformer。
+8. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第7节 PyTorch 内置 Transformer**：先读 Batch、激活函数、归一化、Dropout。
+9. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉**：先读 Attention、Self-Attention、位置编码、Transformer。
+10. **第六章（二）Self-Attention 与完整 Transformer 架构 / 第10节 预训练模型：DistilBERT 微调实战**：先读 Transformer、学习率、Epoch。
+
+---
+
+## 开始按课件一点一点讲
 
 ## 第 1 部分：第六章（二）Self-Attention 与完整 Transformer 架构
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **BatchNorm、Attention、Self-Attention、Cross-Attention** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **BatchNorm -> Attention -> Self-Attention -> Cross-Attention -> Transformer** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 BatchNorm
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| BatchNorm | 在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。 | 常考训练/推理阶段统计量不同，以及放在卷积/全连接和激活附近。 | 推理阶段一般使用训练中累计的均值方差，不依赖当前 batch。 | BatchNorm：标准化激活，稳定训练，加快收敛。 |
-| Attention | 第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3. Transformer Encoder：从单层到多层堆叠；4... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3.... |
-| Self-Attention | Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 | 常考它和 Cross-Attention 的区别。 | Self 不是只看自己一个位置，而是同一序列内部互相看。 | 自注意力：同一序列内部做注意力。 |
-| Cross-Attention | Query 来自一个序列，Key/Value 来自另一个序列，常用于解码器关注编码器输出。 | 常考 Transformer 解码器中 Cross-Attention 的输入来源。 | 不要和 Self-Attention 混成同一来源。 | 交叉注意力：Q 与 K/V 来源不同。 |
-| Transformer | 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 | 常考编码器/解码器结构、多头注意力和位置编码。 | Transformer 不依赖 RNN 的逐步递归来建模序列。 | Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。 |
-| Encoder-Decoder | 第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3. Transformer Encoder：从单层到多层堆叠；4... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3.... |
-| Batch | 一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。 | 常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。 | Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。 | Batch 是一批样本；Epoch 是全训练集完整训练一遍。 |
-| 归一化 | 把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。 | 常考图像预处理为什么要缩放像素值。 | 归一化不等于 BatchNorm，前者多是输入预处理。 | 图像常先把像素值缩放到 0-1。 |
-| Dropout | 训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。 | 常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。 | Dropout 不是提高模型容量，而是正则化。 | Dropout：训练随机失活，推理正常使用。 |
-| Query | 1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T5 全部使用 Narrow Attention；2. Sub... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T... |
-| Key | 1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T5 全部使用 Narrow Attention；2. Sub... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T... |
-| Value | 1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T5 全部使用 Narrow Attention；2. Sub... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T... |
-| Positional Encoding | 1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T5 全部使用 Narrow Attention；2. Sub... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T... |
+先用最普通的话说，**BatchNorm** 就是：在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考训练/推理阶段统计量不同，以及放在卷积/全连接和激活附近。
 
-- **BatchNorm**：在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。 考试写作时要补一句：常考训练/推理阶段统计量不同，以及放在卷积/全连接和激活附近。 易错点是：推理阶段一般使用训练中累计的均值方差，不依赖当前 batch。
-- **Attention**：第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3. Transformer Encoder：从单层到多层堆叠；4... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Self-Attention**：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 考试写作时要补一句：常考它和 Cross-Attention 的区别。 易错点是：Self 不是只看自己一个位置，而是同一序列内部互相看。
-- **Cross-Attention**：Query 来自一个序列，Key/Value 来自另一个序列，常用于解码器关注编码器输出。 考试写作时要补一句：常考 Transformer 解码器中 Cross-Attention 的输入来源。 易错点是：不要和 Self-Attention 混成同一来源。
-- **Transformer**：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 考试写作时要补一句：常考编码器/解码器结构、多头注意力和位置编码。 易错点是：Transformer 不依赖 RNN 的逐步递归来建模序列。
-- **Encoder-Decoder**：第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3. Transformer Encoder：从单层到多层堆叠；4... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Batch**：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。 考试写作时要补一句：常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。 易错点是：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。
-- **归一化**：把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。 考试写作时要补一句：常考图像预处理为什么要缩放像素值。 易错点是：归一化不等于 BatchNorm，前者多是输入预处理。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> BatchNorm -> Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**BatchNorm：标准化激活，稳定训练，加快收敛。**
 
-- 判断：BatchNorm只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Self-Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Cross-Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Transformer只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Encoder-Decoder只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Batch只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：归一化只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：推理阶段一般使用训练中累计的均值方差，不依赖当前 batch。
 
-### 5. 本节速记
+### 2. 先讲 Attention
 
-- BatchNorm：标准化激活，稳定训练，加快收敛。
-- 第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3....
-- 自注意力：同一序列内部做注意力。
-- 交叉注意力：Q 与 K/V 来源不同。
-- Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
-- 第六章（二）Self-Attention 与完整 Transformer 架构；1. 回顾与过渡：承接上一章，明确本章学习目标；2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它；3....
-- Batch 是一批样本；Epoch 是全训练集完整训练一遍。
-- 图像常先把像素值缩放到 0-1。
-- Dropout：训练随机失活，推理正常使用。
-- 1. Narrow Attention：；核心原则：先投影，再切片（chunk the projections, not the inputs）；每个投影值是所有原始特征的线性组合，确保每个头都能访问完整信息；工业标准：GPT、BERT、T...
+先用最普通的话说，**Attention** 就是：根据相关性分配权重，再对信息加权汇总。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Q/K/V、权重、softmax、上下文向量。
+
+如果按课件顺序串起来，可以这样看：**BatchNorm -> Attention -> Self-Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Attention = 按相关性加权关注。**
+
+这里最容易错的是：Attention 不是简单平均。
+
+### 3. 先讲 Self-Attention
+
+先用最普通的话说，**Self-Attention** 就是：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考它和 Cross-Attention 的区别。
+
+如果按课件顺序串起来，可以这样看：**Attention -> Self-Attention -> Cross-Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**自注意力：同一序列内部做注意力。**
+
+这里最容易错的是：Self 不是只看自己一个位置，而是同一序列内部互相看。
+
+### 4. 先讲 Cross-Attention
+
+先用最普通的话说，**Cross-Attention** 就是：Query 来自一个序列，Key/Value 来自另一个序列，常用于解码器关注编码器输出。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Transformer 解码器中 Cross-Attention 的输入来源。
+
+如果按课件顺序串起来，可以这样看：**Self-Attention -> Cross-Attention -> Transformer**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**交叉注意力：Q 与 K/V 来源不同。**
+
+这里最容易错的是：不要和 Self-Attention 混成同一来源。
+
+### 5. 先讲 Transformer
+
+先用最普通的话说，**Transformer** 就是：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考编码器/解码器结构、多头注意力和位置编码。
+
+如果按课件顺序串起来，可以这样看：**Cross-Attention -> Transformer -> Encoder-Decoder**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。**
+
+这里最容易错的是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+
+### 6. 先讲 Encoder-Decoder
+
+先用最普通的话说，**Encoder-Decoder** 就是：编码器把输入变成表示，解码器根据表示生成输出。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考机器翻译、Seq2Seq、Cross-Attention 中 Q/K/V 来源。
+
+如果按课件顺序串起来，可以这样看：**Transformer -> Encoder-Decoder -> Batch**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Encoder 编码输入，Decoder 生成输出。**
+
+这里最容易错的是：不要把编码器和解码器的输入输出方向混淆。
+
+### 7. 先讲 Batch
+
+先用最普通的话说，**Batch** 就是：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。
+
+如果按课件顺序串起来，可以这样看：**Encoder-Decoder -> Batch -> 归一化**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Batch 是一批样本；Epoch 是全训练集完整训练一遍。**
+
+这里最容易错的是：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。
+
+### 8. 先讲 归一化
+
+先用最普通的话说，**归一化** 就是：把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考图像预处理为什么要缩放像素值。
+
+如果按课件顺序串起来，可以这样看：**Batch -> 归一化 -> Dropout**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**图像常先把像素值缩放到 0-1。**
+
+这里最容易错的是：归一化不等于 BatchNorm，前者多是输入预处理。
+
+### 9. 先讲 Dropout
+
+先用最普通的话说，**Dropout** 就是：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。
+
+如果按课件顺序串起来，可以这样看：**归一化 -> Dropout -> Query**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Dropout：训练随机失活，推理正常使用。**
+
+这里最容易错的是：Dropout 不是提高模型容量，而是正则化。
+
+### 10. 先讲 Query
+
+先用最普通的话说，**Query** 就是：Query 表示当前位置主动提出的查询，用来和 Key 计算匹配度。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Q 与 K 点积得到注意力分数。
+
+如果按课件顺序串起来，可以这样看：**Dropout -> Query -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Query 问：我要找什么信息？**
+
+这里最容易错的是：不要把 Query 和 Value 的角色混淆。
+
+### 这一节最后怎么记
+
+- **BatchNorm**：BatchNorm：标准化激活，稳定训练，加快收敛。
+- **Attention**：Attention = 按相关性加权关注。
+- **Self-Attention**：自注意力：同一序列内部做注意力。
+- **Cross-Attention**：交叉注意力：Q 与 K/V 来源不同。
+- **Transformer**：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+- **Encoder-Decoder**：Encoder 编码输入，Decoder 生成输出。
+
+### 本节检查题
+
+1. **选择题：关于 BatchNorm，下列说法错误的是：**
+   A. 在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。
+   B. BatchNorm：标准化激活，稳定训练，加快收敛。
+   C. 常考训练/推理阶段统计量不同，以及放在卷积/全连接和激活附近。
+   D. BatchNorm 推理时仍必须使用当前 batch 的统计量。
+
+   **答案：D。** A、B、C 都能和课件里的 BatchNorm 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** Attention 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** 根据相关性分配权重，再对信息加权汇总。
+
+3. **简答题：为什么考试里不能只背 Self-Attention 的定义？**
+
+   **参考答案：** 因为 Self-Attention 在课件中有明确的位置和作用：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 答题时还要补出它通常怎么考：常考它和 Cross-Attention 的区别。 最后要避开这个误区：Self 不是只看自己一个位置，而是同一序列内部互相看。
+
+4. **辨析题：请区分 BatchNorm 和 Cross-Attention。**
+
+   **参考答案：** BatchNorm：在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。；Cross-Attention：Query 来自一个序列，Key/Value 来自另一个序列，常用于解码器关注编码器输出。。答题时先判断它们分别处在数据、结构、训练还是输出环节。
+
+---
 
 ## 第 2 部分：第六章（二）Self-Attention 与完整 Transformer 架构 / 第1节 回顾与过渡
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **Softmax、Dropout、RNN、Seq2Seq** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **Softmax -> Dropout -> RNN -> Seq2Seq -> Attention** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 Softmax
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| Softmax | 把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。 | 常考多分类输出、注意力权重为什么能加权求和。 | Softmax 是对一组数整体归一化，不是逐个独立压缩。 | Softmax 输出非负且总和为 1。 |
-| Dropout | 训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。 | 常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。 | Dropout 不是提高模型容量，而是正则化。 | Dropout：训练随机失活，推理正常使用。 |
-| RNN | 按时间步处理序列，用隐藏状态把前面信息传到后面。 | 常考隐藏状态、序列建模、梯度消失/爆炸。 | RNN 不是一次性把所有时间步完全独立处理。 | 当前输出依赖当前输入和上一时刻隐藏状态。 |
-| Seq2Seq | 编码器把输入序列压成表示，解码器再生成输出序列，常用于翻译、问答等序列到序列任务。 | 常考 Encoder-Decoder 结构、Teacher Forcing 和注意力机制为何被引入。 | 普通 Seq2Seq 容易受固定长度上下文瓶颈影响。 | Seq2Seq = Encoder + Decoder。 |
-| Attention | 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 / 核心内容 / 关键公式/概念；Seq2Seq / 序列到序列的映射框架 / Encoder → 上下文向量 → Decoder | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 / 核心内容 / 关键公式/概念；Seq2Seq / 序列到序列的映射框架 / Encoder → 上下... |
-| Q/K/V | 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 / 核心内容 / 关键公式/概念；Seq2Seq / 序列到序列的映射框架 / Encoder → 上下文向量 → Decoder | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 / 核心内容 / 关键公式/概念；Seq2Seq / 序列到序列的映射框架 / Encoder → 上下... |
-| 上下文向量 | 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 / 核心内容 / 关键公式/概念；Seq2Seq / 序列到序列的映射框架 / Encoder → 上下文向量 → Decoder | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 / 核心内容 / 关键公式/概念；Seq2Seq / 序列到序列的映射框架 / Encoder → 上下... |
-| Self-Attention | Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 | 常考它和 Cross-Attention 的区别。 | Self 不是只看自己一个位置，而是同一序列内部互相看。 | 自注意力：同一序列内部做注意力。 |
-| Positional Encoding | 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 / 核心内容 / 关键公式/概念；Seq2Seq / 序列到序列的映射框架 / Encoder → 上下文向量 → Decoder | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 / 核心内容 / 关键公式/概念；Seq2Seq / 序列到序列的映射框架 / Encoder → 上下... |
-| Transformer | 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 | 常考编码器/解码器结构、多头注意力和位置编码。 | Transformer 不依赖 RNN 的逐步递归来建模序列。 | Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。 |
+先用最普通的话说，**Softmax** 就是：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考多分类输出、注意力权重为什么能加权求和。
 
-- **Softmax**：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。 考试写作时要补一句：常考多分类输出、注意力权重为什么能加权求和。 易错点是：Softmax 是对一组数整体归一化，不是逐个独立压缩。
-- **Dropout**：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。 考试写作时要补一句：常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。 易错点是：Dropout 不是提高模型容量，而是正则化。
-- **RNN**：按时间步处理序列，用隐藏状态把前面信息传到后面。 考试写作时要补一句：常考隐藏状态、序列建模、梯度消失/爆炸。 易错点是：RNN 不是一次性把所有时间步完全独立处理。
-- **Seq2Seq**：编码器把输入序列压成表示，解码器再生成输出序列，常用于翻译、问答等序列到序列任务。 考试写作时要补一句：常考 Encoder-Decoder 结构、Teacher Forcing 和注意力机制为何被引入。 易错点是：普通 Seq2Seq 容易受固定长度上下文瓶颈影响。
-- **Attention**：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下文向量 → Decoder 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Q/K/V**：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下文向量 → Decoder 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **上下文向量**：第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下文向量 → Decoder 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Self-Attention**：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 考试写作时要补一句：常考它和 Cross-Attention 的区别。 易错点是：Self 不是只看自己一个位置，而是同一序列内部互相看。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> Softmax -> Dropout**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**Softmax 输出非负且总和为 1。**
 
-- 判断：Softmax只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Dropout只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：RNN只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Seq2Seq只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Q/K/V只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：上下文向量只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Self-Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：Softmax 是对一组数整体归一化，不是逐个独立压缩。
 
-### 5. 本节速记
+### 2. 先讲 Dropout
 
-- Softmax 输出非负且总和为 1。
-- Dropout：训练随机失活，推理正常使用。
-- 当前输出依赖当前输入和上一时刻隐藏状态。
-- Seq2Seq = Encoder + Decoder。
-- 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下...
-- 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下...
-- 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下...
-- 自注意力：同一序列内部做注意力。
-- 第1节 回顾与过渡；一、上一章我们学到了什么？；在上一章中，我们沿着 Transformer 的发展脉络，学习了以下核心内容：；知识点 | 核心内容 | 关键公式/概念；Seq2Seq | 序列到序列的映射框架 | Encoder → 上下...
-- Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+先用最普通的话说，**Dropout** 就是：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。
+
+如果按课件顺序串起来，可以这样看：**Softmax -> Dropout -> RNN**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Dropout：训练随机失活，推理正常使用。**
+
+这里最容易错的是：Dropout 不是提高模型容量，而是正则化。
+
+### 3. 先讲 RNN
+
+先用最普通的话说，**RNN** 就是：按时间步处理序列，用隐藏状态把前面信息传到后面。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考隐藏状态、序列建模、梯度消失/爆炸。
+
+如果按课件顺序串起来，可以这样看：**Dropout -> RNN -> Seq2Seq**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**当前输出依赖当前输入和上一时刻隐藏状态。**
+
+这里最容易错的是：RNN 不是一次性把所有时间步完全独立处理。
+
+### 4. 先讲 Seq2Seq
+
+先用最普通的话说，**Seq2Seq** 就是：编码器把输入序列压成表示，解码器再生成输出序列，常用于翻译、问答等序列到序列任务。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Encoder-Decoder 结构、Teacher Forcing 和注意力机制为何被引入。
+
+如果按课件顺序串起来，可以这样看：**RNN -> Seq2Seq -> Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Seq2Seq = Encoder + Decoder。**
+
+这里最容易错的是：普通 Seq2Seq 容易受固定长度上下文瓶颈影响。
+
+### 5. 先讲 Attention
+
+先用最普通的话说，**Attention** 就是：根据相关性分配权重，再对信息加权汇总。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Q/K/V、权重、softmax、上下文向量。
+
+如果按课件顺序串起来，可以这样看：**Seq2Seq -> Attention -> Q/K/V**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Attention = 按相关性加权关注。**
+
+这里最容易错的是：Attention 不是简单平均。
+
+### 6. 先讲 Q/K/V
+
+先用最普通的话说，**Q/K/V** 就是：注意力中的 Query、Key、Value 三类向量，分别负责查询、匹配和取信息。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考三者来源和作用。
+
+如果按课件顺序串起来，可以这样看：**Attention -> Q/K/V -> 上下文向量**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Q 查，K 配，V 取。**
+
+这里最容易错的是：不要把三者都说成同一个东西。
+
+### 7. 先讲 上下文向量
+
+先用最普通的话说，**上下文向量** 就是：注意力对 Value 加权求和后得到的综合表示。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考注意力权重如何生成上下文。
+
+如果按课件顺序串起来，可以这样看：**Q/K/V -> 上下文向量 -> Self-Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**上下文向量 = 注意力权重加权后的 Value。**
+
+这里最容易错的是：上下文向量不是简单拼接所有输入。
+
+### 8. 先讲 Self-Attention
+
+先用最普通的话说，**Self-Attention** 就是：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考它和 Cross-Attention 的区别。
+
+如果按课件顺序串起来，可以这样看：**上下文向量 -> Self-Attention -> Positional Encoding**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**自注意力：同一序列内部做注意力。**
+
+这里最容易错的是：Self 不是只看自己一个位置，而是同一序列内部互相看。
+
+### 9. 先讲 Positional Encoding
+
+先用最普通的话说，**Positional Encoding** 就是：Transformer 中加入位置信息的方法，可用正余弦或可学习位置向量。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考它和词嵌入相加、提供顺序信息。
+
+如果按课件顺序串起来，可以这样看：**Self-Attention -> Positional Encoding -> Transformer**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Positional Encoding 告诉模型位置。**
+
+这里最容易错的是：不要把它当成普通标签。
+
+### 10. 先讲 Transformer
+
+先用最普通的话说，**Transformer** 就是：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考编码器/解码器结构、多头注意力和位置编码。
+
+如果按课件顺序串起来，可以这样看：**Positional Encoding -> Transformer -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。**
+
+这里最容易错的是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+
+### 这一节最后怎么记
+
+- **Softmax**：Softmax 输出非负且总和为 1。
+- **Dropout**：Dropout：训练随机失活，推理正常使用。
+- **RNN**：当前输出依赖当前输入和上一时刻隐藏状态。
+- **Seq2Seq**：Seq2Seq = Encoder + Decoder。
+- **Attention**：Attention = 按相关性加权关注。
+- **Q/K/V**：Q 查，K 配，V 取。
+
+### 本节检查题
+
+1. **选择题：关于 Softmax，下列说法错误的是：**
+   A. 把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
+   B. Softmax 输出非负且总和为 1。
+   C. 常考多分类输出、注意力权重为什么能加权求和。
+   D. Softmax 输出不需要总和为 1。
+
+   **答案：D。** A、B、C 都能和课件里的 Softmax 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** Dropout 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** 训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。
+
+3. **简答题：为什么考试里不能只背 RNN 的定义？**
+
+   **参考答案：** 因为 RNN 在课件中有明确的位置和作用：按时间步处理序列，用隐藏状态把前面信息传到后面。 答题时还要补出它通常怎么考：常考隐藏状态、序列建模、梯度消失/爆炸。 最后要避开这个误区：RNN 不是一次性把所有时间步完全独立处理。
+
+4. **辨析题：请区分 Softmax 和 Seq2Seq。**
+
+   **参考答案：** Softmax：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。；Seq2Seq：编码器把输入序列压成表示，解码器再生成输出序列，常用于翻译、问答等序列到序列任务。。答题时先判断它们分别处在数据、结构、训练还是输出环节。
+
+---
 
 ## 第 3 部分：第六章（二）Self-Attention 与完整 Transformer 架构 / 第2节 Narrow Attention 深度解析
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **Batch、Softmax、Attention、Multi-Head Attention** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **Batch -> Softmax -> Attention -> Multi-Head Attention** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 Batch
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| Batch | 一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。 | 常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。 | Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。 | Batch 是一批样本；Epoch 是全训练集完整训练一遍。 |
-| Softmax | 把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。 | 常考多分类输出、注意力权重为什么能加权求和。 | Softmax 是对一组数整体归一化，不是逐个独立压缩。 | Softmax 输出非负且总和为 1。 |
-| Attention | 第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 / 每个头的输入 / 优点 / 缺点；Wide Attention / 完整 $d_{model}$ /... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 / 每个头的输入 / 优点 / 缺点；Wid... |
-| Multi-Head Attention | 第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 / 每个头的输入 / 优点 / 缺点；Wide Attention / 完整 $d_{model}$ /... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 / 每个头的输入 / 优点 / 缺点；Wid... |
+先用最普通的话说，**Batch** 就是：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。
 
-- **Batch**：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。 考试写作时要补一句：常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。 易错点是：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。
-- **Softmax**：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。 考试写作时要补一句：常考多分类输出、注意力权重为什么能加权求和。 易错点是：Softmax 是对一组数整体归一化，不是逐个独立压缩。
-- **Attention**：第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 | 每个头的输入 | 优点 | 缺点；Wide Attention | 完整 $d_{model}$ |... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Multi-Head Attention**：第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 | 每个头的输入 | 优点 | 缺点；Wide Attention | 完整 $d_{model}$ |... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> Batch -> Softmax**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**Batch 是一批样本；Epoch 是全训练集完整训练一遍。**
 
-- 判断：Batch只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Softmax只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Multi-Head Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。
 
-### 5. 本节速记
+### 2. 先讲 Softmax
 
-- Batch 是一批样本；Epoch 是全训练集完整训练一遍。
-- Softmax 输出非负且总和为 1。
-- 第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 | 每个头的输入 | 优点 | 缺点；Wid...
-- 第2节 Narrow Attention 深度解析；一、从 Wide 到 Narrow：为什么需要改变？；在上一章中，我们介绍了 Multi-Head Attention 的两种实现方式：；方式 | 每个头的输入 | 优点 | 缺点；Wid...
+先用最普通的话说，**Softmax** 就是：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考多分类输出、注意力权重为什么能加权求和。
+
+如果按课件顺序串起来，可以这样看：**Batch -> Softmax -> Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Softmax 输出非负且总和为 1。**
+
+这里最容易错的是：Softmax 是对一组数整体归一化，不是逐个独立压缩。
+
+### 3. 先讲 Attention
+
+先用最普通的话说，**Attention** 就是：根据相关性分配权重，再对信息加权汇总。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Q/K/V、权重、softmax、上下文向量。
+
+如果按课件顺序串起来，可以这样看：**Softmax -> Attention -> Multi-Head Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Attention = 按相关性加权关注。**
+
+这里最容易错的是：Attention 不是简单平均。
+
+### 4. 先讲 Multi-Head Attention
+
+先用最普通的话说，**Multi-Head Attention** 就是：把注意力分成多个头并行学习不同关系，再拼接融合。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考多头为什么能捕捉不同子空间信息。
+
+如果按课件顺序串起来，可以这样看：**Attention -> Multi-Head Attention -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**多头注意力让模型从多个角度看关系。**
+
+这里最容易错的是：多头不是重复同一个注意力结果，而是不同投影。
+
+### 这一节最后怎么记
+
+- **Batch**：Batch 是一批样本；Epoch 是全训练集完整训练一遍。
+- **Softmax**：Softmax 输出非负且总和为 1。
+- **Attention**：Attention = 按相关性加权关注。
+- **Multi-Head Attention**：多头注意力让模型从多个角度看关系。
+
+### 本节检查题
+
+1. **选择题：关于 Batch，下列说法错误的是：**
+   A. 一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。
+   B. Batch 是一批样本；Epoch 是全训练集完整训练一遍。
+   C. 常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。
+   D. Batch 表示序列长度，而不是一次送入模型的样本数。
+
+   **答案：D。** A、B、C 都能和课件里的 Batch 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** Softmax 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** 把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
+
+3. **简答题：为什么考试里不能只背 Attention 的定义？**
+
+   **参考答案：** 因为 Attention 在课件中有明确的位置和作用：根据相关性分配权重，再对信息加权汇总。 答题时还要补出它通常怎么考：常考 Q/K/V、权重、softmax、上下文向量。 最后要避开这个误区：Attention 不是简单平均。
+
+4. **辨析题：请区分 Batch 和 Multi-Head Attention。**
+
+   **参考答案：** Batch：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。；Multi-Head Attention：把注意力分成多个头并行学习不同关系，再拼接融合。。答题时先判断它们分别处在数据、结构、训练还是输出环节。
+
+---
 
 ## 第 4 部分：第六章（二）Self-Attention 与完整 Transformer 架构 / 第3节 Transformer Encoder（多层堆叠）
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **Softmax、归一化、Dropout、Attention** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **Softmax -> 归一化 -> Dropout -> Attention -> Multi-Head Attention** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 Softmax
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| Softmax | 把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。 | 常考多分类输出、注意力权重为什么能加权求和。 | Softmax 是对一组数整体归一化，不是逐个独立压缩。 | Softmax 输出非负且总和为 1。 |
-| 归一化 | 把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。 | 常考图像预处理为什么要缩放像素值。 | 归一化不等于 BatchNorm，前者多是输入预处理。 | 图像常先把像素值缩放到 0-1。 |
-| Dropout | 训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。 | 常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。 | Dropout 不是提高模型容量，而是正则化。 | Dropout：训练随机失活，推理正常使用。 |
-| Attention | 第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关注其他所有位置；2. Feed-Forward Networ... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关... |
-| Multi-Head Attention | 第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关注其他所有位置；2. Feed-Forward Networ... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关... |
-| Self-Attention | Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 | 常考它和 Cross-Attention 的区别。 | Self 不是只看自己一个位置，而是同一序列内部互相看。 | 自注意力：同一序列内部做注意力。 |
-| 位置编码 | 第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关注其他所有位置；2. Feed-Forward Networ... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关... |
-| Transformer | 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 | 常考编码器/解码器结构、多头注意力和位置编码。 | Transformer 不依赖 RNN 的逐步递归来建模序列。 | Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。 |
+先用最普通的话说，**Softmax** 就是：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考多分类输出、注意力权重为什么能加权求和。
 
-- **Softmax**：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。 考试写作时要补一句：常考多分类输出、注意力权重为什么能加权求和。 易错点是：Softmax 是对一组数整体归一化，不是逐个独立压缩。
-- **归一化**：把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。 考试写作时要补一句：常考图像预处理为什么要缩放像素值。 易错点是：归一化不等于 BatchNorm，前者多是输入预处理。
-- **Dropout**：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。 考试写作时要补一句：常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。 易错点是：Dropout 不是提高模型容量，而是正则化。
-- **Attention**：第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关注其他所有位置；2. Feed-Forward Networ... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Multi-Head Attention**：第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关注其他所有位置；2. Feed-Forward Networ... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Self-Attention**：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 考试写作时要补一句：常考它和 Cross-Attention 的区别。 易错点是：Self 不是只看自己一个位置，而是同一序列内部互相看。
-- **位置编码**：第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关注其他所有位置；2. Feed-Forward Networ... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Transformer**：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 考试写作时要补一句：常考编码器/解码器结构、多头注意力和位置编码。 易错点是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> Softmax -> 归一化**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**Softmax 输出非负且总和为 1。**
 
-- 判断：Softmax只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：归一化只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Dropout只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Multi-Head Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Self-Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：位置编码只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Transformer只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：Softmax 是对一组数整体归一化，不是逐个独立压缩。
 
-### 5. 本节速记
+### 2. 先讲 归一化
 
-- Softmax 输出非负且总和为 1。
-- 图像常先把像素值缩放到 0-1。
-- Dropout：训练随机失活，推理正常使用。
-- 第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关...
-- 第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关...
-- 自注意力：同一序列内部做注意力。
-- 第3节 Transformer Encoder（多层堆叠）；一、从单层到多层：为什么要堆叠？；一个 Encoder Layer 包含两个 Sub-Layers：；1. Multi-Head Self-Attention：让序列中的每个位置关...
-- Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+先用最普通的话说，**归一化** 就是：把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考图像预处理为什么要缩放像素值。
+
+如果按课件顺序串起来，可以这样看：**Softmax -> 归一化 -> Dropout**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**图像常先把像素值缩放到 0-1。**
+
+这里最容易错的是：归一化不等于 BatchNorm，前者多是输入预处理。
+
+### 3. 先讲 Dropout
+
+先用最普通的话说，**Dropout** 就是：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。
+
+如果按课件顺序串起来，可以这样看：**归一化 -> Dropout -> Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Dropout：训练随机失活，推理正常使用。**
+
+这里最容易错的是：Dropout 不是提高模型容量，而是正则化。
+
+### 4. 先讲 Attention
+
+先用最普通的话说，**Attention** 就是：根据相关性分配权重，再对信息加权汇总。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Q/K/V、权重、softmax、上下文向量。
+
+如果按课件顺序串起来，可以这样看：**Dropout -> Attention -> Multi-Head Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Attention = 按相关性加权关注。**
+
+这里最容易错的是：Attention 不是简单平均。
+
+### 5. 先讲 Multi-Head Attention
+
+先用最普通的话说，**Multi-Head Attention** 就是：把注意力分成多个头并行学习不同关系，再拼接融合。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考多头为什么能捕捉不同子空间信息。
+
+如果按课件顺序串起来，可以这样看：**Attention -> Multi-Head Attention -> Self-Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**多头注意力让模型从多个角度看关系。**
+
+这里最容易错的是：多头不是重复同一个注意力结果，而是不同投影。
+
+### 6. 先讲 Self-Attention
+
+先用最普通的话说，**Self-Attention** 就是：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考它和 Cross-Attention 的区别。
+
+如果按课件顺序串起来，可以这样看：**Multi-Head Attention -> Self-Attention -> 位置编码**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**自注意力：同一序列内部做注意力。**
+
+这里最容易错的是：Self 不是只看自己一个位置，而是同一序列内部互相看。
+
+### 7. 先讲 位置编码
+
+先用最普通的话说，**位置编码** 就是：给序列注入位置信息，让注意力知道顺序。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考为什么 Transformer 需要位置编码。
+
+如果按课件顺序串起来，可以这样看：**Self-Attention -> 位置编码 -> Transformer**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**位置编码补上序列顺序。**
+
+这里最容易错的是：没有位置编码时，自注意力本身不天然知道词序。
+
+### 8. 先讲 Transformer
+
+先用最普通的话说，**Transformer** 就是：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考编码器/解码器结构、多头注意力和位置编码。
+
+如果按课件顺序串起来，可以这样看：**位置编码 -> Transformer -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。**
+
+这里最容易错的是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+
+### 这一节最后怎么记
+
+- **Softmax**：Softmax 输出非负且总和为 1。
+- **归一化**：图像常先把像素值缩放到 0-1。
+- **Dropout**：Dropout：训练随机失活，推理正常使用。
+- **Attention**：Attention = 按相关性加权关注。
+- **Multi-Head Attention**：多头注意力让模型从多个角度看关系。
+- **Self-Attention**：自注意力：同一序列内部做注意力。
+
+### 本节检查题
+
+1. **选择题：关于 Softmax，下列说法错误的是：**
+   A. 把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
+   B. Softmax 输出非负且总和为 1。
+   C. 常考多分类输出、注意力权重为什么能加权求和。
+   D. Softmax 输出不需要总和为 1。
+
+   **答案：D。** A、B、C 都能和课件里的 Softmax 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** 归一化 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** 把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。
+
+3. **简答题：为什么考试里不能只背 Dropout 的定义？**
+
+   **参考答案：** 因为 Dropout 在课件中有明确的位置和作用：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。 答题时还要补出它通常怎么考：常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。 最后要避开这个误区：Dropout 不是提高模型容量，而是正则化。
+
+4. **辨析题：请区分 Softmax 和 Attention。**
+
+   **参考答案：** Softmax：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。；Attention：根据相关性分配权重，再对信息加权汇总。。答题时先判断它们分别处在数据、结构、训练还是输出环节。
+
+---
 
 ## 第 5 部分：第六章（二）Self-Attention 与完整 Transformer 架构 / 第4节 Transformer Decoder
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **Attention、Query、Key、Value** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **Attention -> Query -> Key -> Value -> Self-Attention** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 Attention
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| Attention | 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer / Encoder / Decoder；Sub-Layer 1 / Multi-Head Se... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer / Encoder / Decod... |
-| Query | 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer / Encoder / Decoder；Sub-Layer 1 / Multi-Head Se... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer / Encoder / Decod... |
-| Key | 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer / Encoder / Decoder；Sub-Layer 1 / Multi-Head Se... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer / Encoder / Decod... |
-| Value | 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer / Encoder / Decoder；Sub-Layer 1 / Multi-Head Se... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer / Encoder / Decod... |
-| Self-Attention | Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 | 常考它和 Cross-Attention 的区别。 | Self 不是只看自己一个位置，而是同一序列内部互相看。 | 自注意力：同一序列内部做注意力。 |
-| Cross-Attention | Query 来自一个序列，Key/Value 来自另一个序列，常用于解码器关注编码器输出。 | 常考 Transformer 解码器中 Cross-Attention 的输入来源。 | 不要和 Self-Attention 混成同一来源。 | 交叉注意力：Q 与 K/V 来源不同。 |
-| Transformer | 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 | 常考编码器/解码器结构、多头注意力和位置编码。 | Transformer 不依赖 RNN 的逐步递归来建模序列。 | Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。 |
+先用最普通的话说，**Attention** 就是：根据相关性分配权重，再对信息加权汇总。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Q/K/V、权重、softmax、上下文向量。
 
-- **Attention**：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decoder；Sub-Layer 1 | Multi-Head Se... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Query**：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decoder；Sub-Layer 1 | Multi-Head Se... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Key**：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decoder；Sub-Layer 1 | Multi-Head Se... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Value**：第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decoder；Sub-Layer 1 | Multi-Head Se... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Self-Attention**：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 考试写作时要补一句：常考它和 Cross-Attention 的区别。 易错点是：Self 不是只看自己一个位置，而是同一序列内部互相看。
-- **Cross-Attention**：Query 来自一个序列，Key/Value 来自另一个序列，常用于解码器关注编码器输出。 考试写作时要补一句：常考 Transformer 解码器中 Cross-Attention 的输入来源。 易错点是：不要和 Self-Attention 混成同一来源。
-- **Transformer**：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 考试写作时要补一句：常考编码器/解码器结构、多头注意力和位置编码。 易错点是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> Attention -> Query**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**Attention = 按相关性加权关注。**
 
-- 判断：Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Query只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Key只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Value只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Self-Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Cross-Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Transformer只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：Attention 不是简单平均。
 
-### 5. 本节速记
+### 2. 先讲 Query
 
-- 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decod...
-- 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decod...
-- 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decod...
-- 第4节 Transformer Decoder；一、Decoder 比 Encoder 多什么？；Decoder 的任务是生成目标序列，因此它比 Encoder 多了一层 Sub-Layer：；Layer | Encoder | Decod...
-- 自注意力：同一序列内部做注意力。
-- 交叉注意力：Q 与 K/V 来源不同。
-- Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+先用最普通的话说，**Query** 就是：Query 表示当前位置主动提出的查询，用来和 Key 计算匹配度。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Q 与 K 点积得到注意力分数。
+
+如果按课件顺序串起来，可以这样看：**Attention -> Query -> Key**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Query 问：我要找什么信息？**
+
+这里最容易错的是：不要把 Query 和 Value 的角色混淆。
+
+### 3. 先讲 Key
+
+先用最普通的话说，**Key** 就是：Key 表示被匹配的索引，用来和 Query 计算相关性。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Key 与 Query 的维度、匹配关系。
+
+如果按课件顺序串起来，可以这样看：**Query -> Key -> Value**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Key 用来匹配，Value 用来取内容。**
+
+这里最容易错的是：Key 不是最终被加权求和的内容，Value 才是内容。
+
+### 4. 先讲 Value
+
+先用最普通的话说，**Value** 就是：Value 是被注意力权重加权求和的信息内容。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 softmax 权重乘 Value 得到上下文向量。
+
+如果按课件顺序串起来，可以这样看：**Key -> Value -> Self-Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Value 是最后被汇总的信息。**
+
+这里最容易错的是：不要把 Value 当成计算匹配度的主要对象。
+
+### 5. 先讲 Self-Attention
+
+先用最普通的话说，**Self-Attention** 就是：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考它和 Cross-Attention 的区别。
+
+如果按课件顺序串起来，可以这样看：**Value -> Self-Attention -> Cross-Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**自注意力：同一序列内部做注意力。**
+
+这里最容易错的是：Self 不是只看自己一个位置，而是同一序列内部互相看。
+
+### 6. 先讲 Cross-Attention
+
+先用最普通的话说，**Cross-Attention** 就是：Query 来自一个序列，Key/Value 来自另一个序列，常用于解码器关注编码器输出。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Transformer 解码器中 Cross-Attention 的输入来源。
+
+如果按课件顺序串起来，可以这样看：**Self-Attention -> Cross-Attention -> Transformer**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**交叉注意力：Q 与 K/V 来源不同。**
+
+这里最容易错的是：不要和 Self-Attention 混成同一来源。
+
+### 7. 先讲 Transformer
+
+先用最普通的话说，**Transformer** 就是：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考编码器/解码器结构、多头注意力和位置编码。
+
+如果按课件顺序串起来，可以这样看：**Cross-Attention -> Transformer -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。**
+
+这里最容易错的是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+
+### 这一节最后怎么记
+
+- **Attention**：Attention = 按相关性加权关注。
+- **Query**：Query 问：我要找什么信息？
+- **Key**：Key 用来匹配，Value 用来取内容。
+- **Value**：Value 是最后被汇总的信息。
+- **Self-Attention**：自注意力：同一序列内部做注意力。
+- **Cross-Attention**：交叉注意力：Q 与 K/V 来源不同。
+
+### 本节检查题
+
+1. **选择题：关于 Attention，下列说法错误的是：**
+   A. 根据相关性分配权重，再对信息加权汇总。
+   B. Attention = 按相关性加权关注。
+   C. 常考 Q/K/V、权重、softmax、上下文向量。
+   D. Attention可以完全脱离 Q/K/V、位置关系和 mask 单独理解。
+
+   **答案：D。** A、B、C 都能和课件里的 Attention 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** Query 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** Query 表示当前位置主动提出的查询，用来和 Key 计算匹配度。
+
+3. **简答题：为什么考试里不能只背 Key 的定义？**
+
+   **参考答案：** 因为 Key 在课件中有明确的位置和作用：Key 表示被匹配的索引，用来和 Query 计算相关性。 答题时还要补出它通常怎么考：常考 Key 与 Query 的维度、匹配关系。 最后要避开这个误区：Key 不是最终被加权求和的内容，Value 才是内容。
+
+4. **辨析题：请区分 Attention 和 Value。**
+
+   **参考答案：** Attention：根据相关性分配权重，再对信息加权汇总。；Value：Value 是被注意力权重加权求和的信息内容。。答题时先判断它们分别处在数据、结构、训练还是输出环节。
+
+---
 
 ## 第 6 部分：第六章（二）Self-Attention 与完整 Transformer 架构 / 第5节 Layer Normalization 深度讲解
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **Batch、归一化、BatchNorm、Transformer** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **Batch -> 归一化 -> BatchNorm -> Transformer** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 Batch
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| Batch | 一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。 | 常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。 | Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。 | Batch 是一批样本；Epoch 是全训练集完整训练一遍。 |
-| 归一化 | 把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。 | 常考图像预处理为什么要缩放像素值。 | 归一化不等于 BatchNorm，前者多是输入预处理。 | 图像常先把像素值缩放到 0-1。 |
-| BatchNorm | 在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。 | 常考训练/推理阶段统计量不同，以及放在卷积/全连接和激活附近。 | 推理阶段一般使用训练中累计的均值方差，不依赖当前 batch。 | BatchNorm：标准化激活，稳定训练，加快收敛。 |
-| Transformer | 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 | 常考编码器/解码器结构、多头注意力和位置编码。 | Transformer 不依赖 RNN 的逐步递归来建模序列。 | Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。 |
+先用最普通的话说，**Batch** 就是：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。
 
-- **Batch**：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。 考试写作时要补一句：常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。 易错点是：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。
-- **归一化**：把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。 考试写作时要补一句：常考图像预处理为什么要缩放像素值。 易错点是：归一化不等于 BatchNorm，前者多是输入预处理。
-- **BatchNorm**：在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。 考试写作时要补一句：常考训练/推理阶段统计量不同，以及放在卷积/全连接和激活附近。 易错点是：推理阶段一般使用训练中累计的均值方差，不依赖当前 batch。
-- **Transformer**：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 考试写作时要补一句：常考编码器/解码器结构、多头注意力和位置编码。 易错点是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> Batch -> 归一化**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**Batch 是一批样本；Epoch 是全训练集完整训练一遍。**
 
-- 判断：Batch只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：归一化只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：BatchNorm只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Transformer只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。
 
-### 5. 本节速记
+### 2. 先讲 归一化
 
-- Batch 是一批样本；Epoch 是全训练集完整训练一遍。
-- 图像常先把像素值缩放到 0-1。
-- BatchNorm：标准化激活，稳定训练，加快收敛。
-- Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+先用最普通的话说，**归一化** 就是：把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考图像预处理为什么要缩放像素值。
+
+如果按课件顺序串起来，可以这样看：**Batch -> 归一化 -> BatchNorm**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**图像常先把像素值缩放到 0-1。**
+
+这里最容易错的是：归一化不等于 BatchNorm，前者多是输入预处理。
+
+### 3. 先讲 BatchNorm
+
+先用最普通的话说，**BatchNorm** 就是：在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考训练/推理阶段统计量不同，以及放在卷积/全连接和激活附近。
+
+如果按课件顺序串起来，可以这样看：**归一化 -> BatchNorm -> Transformer**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**BatchNorm：标准化激活，稳定训练，加快收敛。**
+
+这里最容易错的是：推理阶段一般使用训练中累计的均值方差，不依赖当前 batch。
+
+### 4. 先讲 Transformer
+
+先用最普通的话说，**Transformer** 就是：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考编码器/解码器结构、多头注意力和位置编码。
+
+如果按课件顺序串起来，可以这样看：**BatchNorm -> Transformer -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。**
+
+这里最容易错的是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+
+### 这一节最后怎么记
+
+- **Batch**：Batch 是一批样本；Epoch 是全训练集完整训练一遍。
+- **归一化**：图像常先把像素值缩放到 0-1。
+- **BatchNorm**：BatchNorm：标准化激活，稳定训练，加快收敛。
+- **Transformer**：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+
+### 本节检查题
+
+1. **选择题：关于 Batch，下列说法错误的是：**
+   A. 一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。
+   B. Batch 是一批样本；Epoch 是全训练集完整训练一遍。
+   C. 常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。
+   D. Batch 表示序列长度，而不是一次送入模型的样本数。
+
+   **答案：D。** A、B、C 都能和课件里的 Batch 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** 归一化 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** 把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。
+
+3. **简答题：为什么考试里不能只背 BatchNorm 的定义？**
+
+   **参考答案：** 因为 BatchNorm 在课件中有明确的位置和作用：在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。 答题时还要补出它通常怎么考：常考训练/推理阶段统计量不同，以及放在卷积/全连接和激活附近。 最后要避开这个误区：推理阶段一般使用训练中累计的均值方差，不依赖当前 batch。
+
+4. **辨析题：请区分 Batch 和 Transformer。**
+
+   **参考答案：** Batch：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。；Transformer：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。。答题时先判断它们分别处在数据、结构、训练还是输出环节。
+
+---
 
 ## 第 7 部分：第六章（二）Self-Attention 与完整 Transformer 架构 / 第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **Attention、Self-Attention、Transformer** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **Attention -> Self-Attention -> Transformer** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 Attention
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| Attention | 第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）；一、任务介绍：IMDB 电影评论情感分析；在上一章（循环神经网络）中，我们使用 LSTM 对 IMDB 电影评论进行情感分类（正面/负面）。本章，我们将用 Transformer 解决同一个任务，对比两者的效果差异... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）；一、任务介绍：IMDB 电影评论情感分析；在上一章（循环神经网络）中，我们使用 LSTM 对 IMDB 电影评论进行情感分类（正面/负面）。本章，我们将用 T... |
-| Self-Attention | Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 | 常考它和 Cross-Attention 的区别。 | Self 不是只看自己一个位置，而是同一序列内部互相看。 | 自注意力：同一序列内部做注意力。 |
-| Transformer | 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 | 常考编码器/解码器结构、多头注意力和位置编码。 | Transformer 不依赖 RNN 的逐步递归来建模序列。 | Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。 |
+先用最普通的话说，**Attention** 就是：根据相关性分配权重，再对信息加权汇总。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Q/K/V、权重、softmax、上下文向量。
 
-- **Attention**：第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）；一、任务介绍：IMDB 电影评论情感分析；在上一章（循环神经网络）中，我们使用 LSTM 对 IMDB 电影评论进行情感分类（正面/负面）。本章，我们将用 Transformer 解决同一个任务，对比两者的效果差异... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Self-Attention**：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 考试写作时要补一句：常考它和 Cross-Attention 的区别。 易错点是：Self 不是只看自己一个位置，而是同一序列内部互相看。
-- **Transformer**：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 考试写作时要补一句：常考编码器/解码器结构、多头注意力和位置编码。 易错点是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> Attention -> Self-Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**Attention = 按相关性加权关注。**
 
-- 判断：Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Self-Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Transformer只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：Attention 不是简单平均。
 
-### 5. 本节速记
+### 2. 先讲 Self-Attention
 
-- 第6节 完整 Transformer 架构 + 端到端训练（IMDB 情感分类）；一、任务介绍：IMDB 电影评论情感分析；在上一章（循环神经网络）中，我们使用 LSTM 对 IMDB 电影评论进行情感分类（正面/负面）。本章，我们将用 T...
-- 自注意力：同一序列内部做注意力。
-- Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+先用最普通的话说，**Self-Attention** 就是：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考它和 Cross-Attention 的区别。
+
+如果按课件顺序串起来，可以这样看：**Attention -> Self-Attention -> Transformer**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**自注意力：同一序列内部做注意力。**
+
+这里最容易错的是：Self 不是只看自己一个位置，而是同一序列内部互相看。
+
+### 3. 先讲 Transformer
+
+先用最普通的话说，**Transformer** 就是：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考编码器/解码器结构、多头注意力和位置编码。
+
+如果按课件顺序串起来，可以这样看：**Self-Attention -> Transformer -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。**
+
+这里最容易错的是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+
+### 这一节最后怎么记
+
+- **Attention**：Attention = 按相关性加权关注。
+- **Self-Attention**：自注意力：同一序列内部做注意力。
+- **Transformer**：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+
+### 本节检查题
+
+1. **选择题：关于 Attention，下列说法错误的是：**
+   A. 根据相关性分配权重，再对信息加权汇总。
+   B. Attention = 按相关性加权关注。
+   C. 常考 Q/K/V、权重、softmax、上下文向量。
+   D. Attention可以完全脱离 Q/K/V、位置关系和 mask 单独理解。
+
+   **答案：D。** A、B、C 都能和课件里的 Attention 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** Self-Attention 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
+
+3. **简答题：为什么考试里不能只背 Transformer 的定义？**
+
+   **参考答案：** 因为 Transformer 在课件中有明确的位置和作用：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 答题时还要补出它通常怎么考：常考编码器/解码器结构、多头注意力和位置编码。 最后要避开这个误区：Transformer 不依赖 RNN 的逐步递归来建模序列。
+
+---
 
 ## 第 8 部分：第六章（二）Self-Attention 与完整 Transformer 架构 / 第7节 PyTorch 内置 Transformer
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **Batch、激活函数、归一化、Dropout** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **Batch -> 激活函数 -> 归一化 -> Dropout -> Key** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 Batch
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| Batch | 一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。 | 常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。 | Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。 | Batch 是一批样本；Epoch 是全训练集完整训练一遍。 |
-| 激活函数 | 给线性变换加入非线性，使网络能拟合非线性关系。 | 常考没有激活函数时多层线性网络仍等价于线性模型。 | 不要把激活函数说成只改变维度，它主要提供非线性。 | 仿射变换 + 激活函数 = 神经网络层的基本模式。 |
-| 归一化 | 把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。 | 常考图像预处理为什么要缩放像素值。 | 归一化不等于 BatchNorm，前者多是输入预处理。 | 图像常先把像素值缩放到 0-1。 |
-| Dropout | 训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。 | 常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。 | Dropout 不是提高模型容量，而是正则化。 | Dropout：训练随机失活，推理正常使用。 |
-| Key | 第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.Transformer。了解它的接口和特点非常重要。；PyTo... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.T... |
-| Subsequent Mask | 第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.Transformer。了解它的接口和特点非常重要。；PyTo... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.T... |
-| 位置编码 | 第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.Transformer。了解它的接口和特点非常重要。；PyTo... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.T... |
-| Transformer | 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 | 常考编码器/解码器结构、多头注意力和位置编码。 | Transformer 不依赖 RNN 的逐步递归来建模序列。 | Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。 |
+先用最普通的话说，**Batch** 就是：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。
 
-- **Batch**：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。 考试写作时要补一句：常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。 易错点是：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。
-- **激活函数**：给线性变换加入非线性，使网络能拟合非线性关系。 考试写作时要补一句：常考没有激活函数时多层线性网络仍等价于线性模型。 易错点是：不要把激活函数说成只改变维度，它主要提供非线性。
-- **归一化**：把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。 考试写作时要补一句：常考图像预处理为什么要缩放像素值。 易错点是：归一化不等于 BatchNorm，前者多是输入预处理。
-- **Dropout**：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。 考试写作时要补一句：常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。 易错点是：Dropout 不是提高模型容量，而是正则化。
-- **Key**：第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.Transformer。了解它的接口和特点非常重要。；PyTo... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Subsequent Mask**：第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.Transformer。了解它的接口和特点非常重要。；PyTo... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **位置编码**：第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.Transformer。了解它的接口和特点非常重要。；PyTo... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Transformer**：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 考试写作时要补一句：常考编码器/解码器结构、多头注意力和位置编码。 易错点是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> Batch -> 激活函数**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**Batch 是一批样本；Epoch 是全训练集完整训练一遍。**
 
-- 判断：Batch只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：激活函数只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：归一化只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Dropout只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Key只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Subsequent Mask只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：位置编码只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Transformer只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。
 
-### 5. 本节速记
+### 2. 先讲 激活函数
 
-- Batch 是一批样本；Epoch 是全训练集完整训练一遍。
-- 仿射变换 + 激活函数 = 神经网络层的基本模式。
-- 图像常先把像素值缩放到 0-1。
-- Dropout：训练随机失活，推理正常使用。
-- 第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.T...
-- 第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.T...
-- 第7节 PyTorch 内置 Transformer；一、为什么需要了解 PyTorch 内置实现？；到目前为止，我们用自定义代码实现了 Transformer 的各个组件。但在实际工作中，你更可能直接使用 PyTorch 提供的 nn.T...
-- Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+先用最普通的话说，**激活函数** 就是：给线性变换加入非线性，使网络能拟合非线性关系。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考没有激活函数时多层线性网络仍等价于线性模型。
+
+如果按课件顺序串起来，可以这样看：**Batch -> 激活函数 -> 归一化**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**仿射变换 + 激活函数 = 神经网络层的基本模式。**
+
+这里最容易错的是：不要把激活函数说成只改变维度，它主要提供非线性。
+
+### 3. 先讲 归一化
+
+先用最普通的话说，**归一化** 就是：把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考图像预处理为什么要缩放像素值。
+
+如果按课件顺序串起来，可以这样看：**激活函数 -> 归一化 -> Dropout**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**图像常先把像素值缩放到 0-1。**
+
+这里最容易错的是：归一化不等于 BatchNorm，前者多是输入预处理。
+
+### 4. 先讲 Dropout
+
+先用最普通的话说，**Dropout** 就是：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考训练阶段启用、推理阶段关闭，以及它缓解过拟合。
+
+如果按课件顺序串起来，可以这样看：**归一化 -> Dropout -> Key**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Dropout：训练随机失活，推理正常使用。**
+
+这里最容易错的是：Dropout 不是提高模型容量，而是正则化。
+
+### 5. 先讲 Key
+
+先用最普通的话说，**Key** 就是：Key 表示被匹配的索引，用来和 Query 计算相关性。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Key 与 Query 的维度、匹配关系。
+
+如果按课件顺序串起来，可以这样看：**Dropout -> Key -> Subsequent Mask**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Key 用来匹配，Value 用来取内容。**
+
+这里最容易错的是：Key 不是最终被加权求和的内容，Value 才是内容。
+
+### 6. 先讲 Subsequent Mask
+
+先用最普通的话说，**Subsequent Mask** 就是：一种上三角未来位置遮罩，让解码器只能看当前位置及之前。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Decoder 自注意力中的未来信息屏蔽。
+
+如果按课件顺序串起来，可以这样看：**Key -> Subsequent Mask -> 位置编码**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Subsequent Mask 用来挡住未来 token。**
+
+这里最容易错的是：不是屏蔽 padding 的主要 mask。
+
+### 7. 先讲 位置编码
+
+先用最普通的话说，**位置编码** 就是：给序列注入位置信息，让注意力知道顺序。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考为什么 Transformer 需要位置编码。
+
+如果按课件顺序串起来，可以这样看：**Subsequent Mask -> 位置编码 -> Transformer**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**位置编码补上序列顺序。**
+
+这里最容易错的是：没有位置编码时，自注意力本身不天然知道词序。
+
+### 8. 先讲 Transformer
+
+先用最普通的话说，**Transformer** 就是：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考编码器/解码器结构、多头注意力和位置编码。
+
+如果按课件顺序串起来，可以这样看：**位置编码 -> Transformer -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。**
+
+这里最容易错的是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+
+### 这一节最后怎么记
+
+- **Batch**：Batch 是一批样本；Epoch 是全训练集完整训练一遍。
+- **激活函数**：仿射变换 + 激活函数 = 神经网络层的基本模式。
+- **归一化**：图像常先把像素值缩放到 0-1。
+- **Dropout**：Dropout：训练随机失活，推理正常使用。
+- **Key**：Key 用来匹配，Value 用来取内容。
+- **Subsequent Mask**：Subsequent Mask 用来挡住未来 token。
+
+### 本节检查题
+
+1. **选择题：关于 Batch，下列说法错误的是：**
+   A. 一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。
+   B. Batch 是一批样本；Epoch 是全训练集完整训练一遍。
+   C. 常考 batch size、mini-batch、epoch、iteration 的区别，也会结合张量形状中的 N 维度判断。
+   D. Batch 表示序列长度，而不是一次送入模型的样本数。
+
+   **答案：D。** A、B、C 都能和课件里的 Batch 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** 激活函数 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** 给线性变换加入非线性，使网络能拟合非线性关系。
+
+3. **简答题：为什么考试里不能只背 归一化 的定义？**
+
+   **参考答案：** 因为 归一化 在课件中有明确的位置和作用：把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。 答题时还要补出它通常怎么考：常考图像预处理为什么要缩放像素值。 最后要避开这个误区：归一化不等于 BatchNorm，前者多是输入预处理。
+
+4. **辨析题：请区分 Batch 和 Dropout。**
+
+   **参考答案：** Batch：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。；Dropout：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。。答题时先判断它们分别处在数据、结构、训练还是输出环节。
+
+---
 
 ## 第 9 部分：第六章（二）Self-Attention 与完整 Transformer 架构 / 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **Attention、Self-Attention、位置编码、Transformer** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **Attention -> Self-Attention -> 位置编码 -> Transformer** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 Attention
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| Attention | 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attention——并不局限于文本。2020 年，Google 提出了... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attenti... |
-| Self-Attention | Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 | 常考它和 Cross-Attention 的区别。 | Self 不是只看自己一个位置，而是同一序列内部互相看。 | 自注意力：同一序列内部做注意力。 |
-| 位置编码 | 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attention——并不局限于文本。2020 年，Google 提出了... | 会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 | 不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。 | 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attenti... |
-| Transformer | 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 | 常考编码器/解码器结构、多头注意力和位置编码。 | Transformer 不依赖 RNN 的逐步递归来建模序列。 | Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。 |
+先用最普通的话说，**Attention** 就是：根据相关性分配权重，再对信息加权汇总。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Q/K/V、权重、softmax、上下文向量。
 
-- **Attention**：第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attention——并不局限于文本。2020 年，Google 提出了... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Self-Attention**：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。 考试写作时要补一句：常考它和 Cross-Attention 的区别。 易错点是：Self 不是只看自己一个位置，而是同一序列内部互相看。
-- **位置编码**：第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attention——并不局限于文本。2020 年，Google 提出了... 考试写作时要补一句：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。 易错点是：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- **Transformer**：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 考试写作时要补一句：常考编码器/解码器结构、多头注意力和位置编码。 易错点是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> Attention -> Self-Attention**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**Attention = 按相关性加权关注。**
 
-- 判断：Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Self-Attention只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：位置编码只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Transformer只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：Attention 不是简单平均。
 
-### 5. 本节速记
+### 2. 先讲 Self-Attention
 
-- 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attenti...
-- 自注意力：同一序列内部做注意力。
-- 第8节 Vision Transformer（ViT）：Transformer 进军计算机视觉；一、从 NLP 到 CV：Transformer 的跨界；Transformer 最初为 NLP 设计，但其核心思想——Self-Attenti...
-- Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+先用最普通的话说，**Self-Attention** 就是：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考它和 Cross-Attention 的区别。
+
+如果按课件顺序串起来，可以这样看：**Attention -> Self-Attention -> 位置编码**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**自注意力：同一序列内部做注意力。**
+
+这里最容易错的是：Self 不是只看自己一个位置，而是同一序列内部互相看。
+
+### 3. 先讲 位置编码
+
+先用最普通的话说，**位置编码** 就是：给序列注入位置信息，让注意力知道顺序。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考为什么 Transformer 需要位置编码。
+
+如果按课件顺序串起来，可以这样看：**Self-Attention -> 位置编码 -> Transformer**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**位置编码补上序列顺序。**
+
+这里最容易错的是：没有位置编码时，自注意力本身不天然知道词序。
+
+### 4. 先讲 Transformer
+
+先用最普通的话说，**Transformer** 就是：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考编码器/解码器结构、多头注意力和位置编码。
+
+如果按课件顺序串起来，可以这样看：**位置编码 -> Transformer -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。**
+
+这里最容易错的是：Transformer 不依赖 RNN 的逐步递归来建模序列。
+
+### 这一节最后怎么记
+
+- **Attention**：Attention = 按相关性加权关注。
+- **Self-Attention**：自注意力：同一序列内部做注意力。
+- **位置编码**：位置编码补上序列顺序。
+- **Transformer**：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+
+### 本节检查题
+
+1. **选择题：关于 Attention，下列说法错误的是：**
+   A. 根据相关性分配权重，再对信息加权汇总。
+   B. Attention = 按相关性加权关注。
+   C. 常考 Q/K/V、权重、softmax、上下文向量。
+   D. Attention可以完全脱离 Q/K/V、位置关系和 mask 单独理解。
+
+   **答案：D。** A、B、C 都能和课件里的 Attention 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** Self-Attention 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
+
+3. **简答题：为什么考试里不能只背 位置编码 的定义？**
+
+   **参考答案：** 因为 位置编码 在课件中有明确的位置和作用：给序列注入位置信息，让注意力知道顺序。 答题时还要补出它通常怎么考：常考为什么 Transformer 需要位置编码。 最后要避开这个误区：没有位置编码时，自注意力本身不天然知道词序。
+
+4. **辨析题：请区分 Attention 和 Transformer。**
+
+   **参考答案：** Attention：根据相关性分配权重，再对信息加权汇总。；Transformer：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。。答题时先判断它们分别处在数据、结构、训练还是输出环节。
+
+---
 
 ## 第 10 部分：第六章（二）Self-Attention 与完整 Transformer 架构 / 第10节 预训练模型：DistilBERT 微调实战
 
-### 1. 本节先看什么
+### 这一节先不要急着背
 
-这一节先把 **Transformer、学习率、Epoch** 放到同一条知识链里理解。不要先背细节，先问自己：它在输入、模型结构、训练流程、损失函数或评估里处在哪一步？
+这一节可以按 **Transformer -> 学习率 -> Epoch** 的顺序读。第一个概念通常是入口，后面的概念要么是在补结构，要么是在解释训练时会遇到的问题。
 
-### 2. 核心知识点表
+### 1. 先讲 Transformer
 
-| 知识点 | 通俗解释 | 考试怎么考 | 易错点 | 必记句子/公式 |
-|---|---|---|---|---|
-| Transformer | 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 | 常考编码器/解码器结构、多头注意力和位置编码。 | Transformer 不依赖 RNN 的逐步递归来建模序列。 | Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。 |
-| 学习率 | 控制每次参数沿梯度方向更新的步子大小。学习率太大容易震荡甚至发散，太小则收敛很慢。 | 常考学习率过大/过小的训练现象，以及学习率调度的目的。 | 学习率不是越大越好；也不是模型学到的参数。 | 学习率决定更新步长。 |
-| Epoch | 训练集被模型完整看过一遍，叫一个 epoch。一个 epoch 内通常包含很多个 batch 更新。 | 常考 Epoch、Batch、Iteration 的区别，或判断训练轮数增加对欠拟合/过拟合的影响。 | Epoch 不是一次参数更新；一次更新通常对应一个 batch。 | 1 个 Epoch = 全部训练样本被用过一遍。 |
+先用最普通的话说，**Transformer** 就是：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
 
-### 3. 像考试答案一样组织语言
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考编码器/解码器结构、多头注意力和位置编码。
 
-- **Transformer**：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。 考试写作时要补一句：常考编码器/解码器结构、多头注意力和位置编码。 易错点是：Transformer 不依赖 RNN 的逐步递归来建模序列。
-- **学习率**：控制每次参数沿梯度方向更新的步子大小。学习率太大容易震荡甚至发散，太小则收敛很慢。 考试写作时要补一句：常考学习率过大/过小的训练现象，以及学习率调度的目的。 易错点是：学习率不是越大越好；也不是模型学到的参数。
-- **Epoch**：训练集被模型完整看过一遍，叫一个 epoch。一个 epoch 内通常包含很多个 batch 更新。 考试写作时要补一句：常考 Epoch、Batch、Iteration 的区别，或判断训练轮数增加对欠拟合/过拟合的影响。 易错点是：Epoch 不是一次参数更新；一次更新通常对应一个 batch。
+如果按课件顺序串起来，可以这样看：**前面的概念 -> Transformer -> 学习率**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-### 4. 本节自测
+考试写到这里，最稳的一句话是：**Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。**
 
-- 判断：Transformer只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：学习率只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
-- 判断：Epoch只需要背定义，不需要知道它在模型或训练流程中的位置。（答案：错。复习时必须结合“作用 + 位置 + 易错点”。）
+这里最容易错的是：Transformer 不依赖 RNN 的逐步递归来建模序列。
 
-### 5. 本节速记
+### 2. 先讲 学习率
 
-- Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
-- 学习率决定更新步长。
-- 1 个 Epoch = 全部训练样本被用过一遍。
+先用最普通的话说，**学习率** 就是：控制每次参数沿梯度方向更新的步子大小。学习率太大容易震荡甚至发散，太小则收敛很慢。
 
-## 四、考前总复盘
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考学习率过大/过小的训练现象，以及学习率调度的目的。
 
-考前不要平均用力。优先检查下面这些问题：
+如果按课件顺序串起来，可以这样看：**Transformer -> 学习率 -> Epoch**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
 
-1. 每个核心概念能不能用一句话说明“它是什么”。
-2. 能不能说出它在模型结构、训练流程或数据处理中的位置。
-3. 能不能说出一个最常见的错误说法。
-4. 遇到选择题时，能不能判断选项是在混淆概念、夸大作用，还是写反了训练/推理阶段。
+考试写到这里，最稳的一句话是：**学习率决定更新步长。**
 
-## 五、打印建议
+这里最容易错的是：学习率不是越大越好；也不是模型学到的参数。
 
-<style>@media print { @page { margin: 8mm; } body { font-size: 11pt; line-height: 1.35; } h1, h2, h3 { page-break-after: avoid; } table { font-size: 9pt; border-collapse: collapse; } th, td { padding: 3px 5px; border: 1px solid #ddd; vertical-align: top; } }</style>
+### 3. 先讲 Epoch
+
+先用最普通的话说，**Epoch** 就是：训练集被模型完整看过一遍，叫一个 epoch。一个 epoch 内通常包含很多个 batch 更新。
+
+它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：常考 Epoch、Batch、Iteration 的区别，或判断训练轮数增加对欠拟合/过拟合的影响。
+
+如果按课件顺序串起来，可以这样看：**学习率 -> Epoch -> 后面的概念**。
+也就是说，你不是在背一个词，而是在看知识点之间怎样往下推进。
+
+考试写到这里，最稳的一句话是：**1 个 Epoch = 全部训练样本被用过一遍。**
+
+这里最容易错的是：Epoch 不是一次参数更新；一次更新通常对应一个 batch。
+
+### 这一节最后怎么记
+
+- **Transformer**：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+- **学习率**：学习率决定更新步长。
+- **Epoch**：1 个 Epoch = 全部训练样本被用过一遍。
+
+### 本节检查题
+
+1. **选择题：关于 Transformer，下列说法错误的是：**
+   A. 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
+   B. Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
+   C. 常考编码器/解码器结构、多头注意力和位置编码。
+   D. Transformer 必须依赖 RNN 的递归结构处理序列。
+
+   **答案：D。** A、B、C 都能和课件里的 Transformer 对上；D 是把概念说反或放错位置。
+
+2. **填空题：** 学习率 的复习重点不是只写名称，而是写清它的作用：____。
+
+   **参考答案：** 控制每次参数沿梯度方向更新的步子大小。学习率太大容易震荡甚至发散，太小则收敛很慢。
+
+3. **简答题：为什么考试里不能只背 Epoch 的定义？**
+
+   **参考答案：** 因为 Epoch 在课件中有明确的位置和作用：训练集被模型完整看过一遍，叫一个 epoch。一个 epoch 内通常包含很多个 batch 更新。 答题时还要补出它通常怎么考：常考 Epoch、Batch、Iteration 的区别，或判断训练轮数增加对欠拟合/过拟合的影响。 最后要避开这个误区：Epoch 不是一次参数更新；一次更新通常对应一个 batch。
+
+---
+
+## 考前总复盘
+
+考前不要平均用力。你可以按这四个问题检查自己：
+
+1. 这个概念为什么会在课件这里出现？
+2. 它解决的是输入、模型结构、训练优化、输出损失，还是图/序列关系的问题？
+3. 如果让我写简答，我能不能不用空话，写出一句准确解释？
+4. 如果让我做选择题，我能不能看出选项是不是把概念放错位置、说反作用、混淆训练和推理？
+
+## 打印建议
+
+<style>@media print { @page { margin: 8mm; } body { font-size: 11pt; line-height: 1.35; } h1, h2, h3 { page-break-after: avoid; } }</style>

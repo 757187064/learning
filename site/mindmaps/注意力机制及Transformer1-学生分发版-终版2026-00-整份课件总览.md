@@ -6,30 +6,30 @@
 - 易错点：普通 Seq2Seq 容易受固定长度上下文瓶颈影响。
 - 必记：Seq2Seq = Encoder + Decoder。
 ### Encoder-Decoder
-- 通俗解释：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问题到Q/K/V，再到Scaled Dot-Product；4...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问...
+- 通俗解释：编码器把输入变成表示，解码器根据表示生成输出。
+- 考试怎么考：常考机器翻译、Seq2Seq、Cross-Attention 中 Q/K/V 来源。
+- 易错点：不要把编码器和解码器的输入输出方向混淆。
+- 必记：Encoder 编码输入，Decoder 生成输出。
 ### Attention
-- 通俗解释：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问题到Q/K/V，再到Scaled Dot-Product；4...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Q/K/V
-- 通俗解释：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问题到Q/K/V，再到Scaled Dot-Product；4...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问...
+- 通俗解释：注意力中的 Query、Key、Value 三类向量，分别负责查询、匹配和取信息。
+- 考试怎么考：常考三者来源和作用。
+- 易错点：不要把三者都说成同一个东西。
+- 必记：Q 查，K 配，V 取。
 ### Self-Attention
 - 通俗解释：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
 - 考试怎么考：常考它和 Cross-Attention 的区别。
 - 易错点：Self 不是只看自己一个位置，而是同一序列内部互相看。
 - 必记：自注意力：同一序列内部做注意力。
 ### Positional Encoding
-- 通俗解释：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问题到Q/K/V，再到Scaled Dot-Product；4...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问...
+- 通俗解释：Transformer 中加入位置信息的方法，可用正余弦或可学习位置向量。
+- 考试怎么考：常考它和词嵌入相加、提供顺序信息。
+- 易错点：不要把它当成普通标签。
+- 必记：Positional Encoding 告诉模型位置。
 ### Transformer
 - 通俗解释：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
 - 考试怎么考：常考编码器/解码器结构、多头注意力和位置编码。
@@ -41,10 +41,10 @@
 - 易错点：注意力不是简单平均，而是按相关性加权。
 - 必记：Attention(Q,K,V)=softmax(QK^T/sqrt(d_k))V。
 ### 位置编码
-- 通俗解释：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问题到Q/K/V，再到Scaled Dot-Product；4...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第六章 Seq2Seq、注意力机制与Transformer基础；1. Seq2Seq（序列到序列）：理解序列映射任务的本质；2. Encoder-Decoder架构：编码器-解码器的工作机制；3. 注意力机制（Attention）：从瓶颈问...
+- 通俗解释：给序列注入位置信息，让注意力知道顺序。
+- 考试怎么考：常考为什么 Transformer 需要位置编码。
+- 易错点：没有位置编码时，自注意力本身不天然知道词序。
+- 必记：位置编码补上序列顺序。
 ### Softmax
 - 通俗解释：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
 - 考试怎么考：常考多分类输出、注意力权重为什么能加权求和。
@@ -57,36 +57,36 @@
 - 易错点：普通 Seq2Seq 容易受固定长度上下文瓶颈影响。
 - 必记：Seq2Seq = Encoder + Decoder。
 ### Attention
-- 通俗解释：第1节 序列到序列（Seq2Seq）；一、什么是 Seq2Seq？；Seq2Seq（Sequence to Sequence），顾名思义，是一种将一个序列映射到另一个序列的深度学习模型。；与之前我们处理的问题不同：；图像分类：输入一张图 -> 输出一个类别（单输入 -> 单输出）
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第1节 序列到序列（Seq2Seq）；一、什么是 Seq2Seq？；Seq2Seq（Sequence to Sequence），顾名思义，是一种将一个序列映射到另一个序列的深度学习模型。；与之前我们处理的问题不同：；图像分类：输入一张图 -...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ## 第六章 Seq2Seq、注意力机制与Transformer基础 / 第2节 Encoder-Decoder 架构
 ### Encoder-Decoder
-- 通俗解释：第2节 Encoder-Decoder 架构；为了完成"序列 -> 序列"的映射任务，研究者们提出了一种优雅的架构：编码器-解码器架构（Encoder-Decoder Architecture）。；一、Encoder（编码器）：理解输入；核心任务：将源序列（Source Sequence）编码成一个...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第2节 Encoder-Decoder 架构；为了完成"序列 -> 序列"的映射任务，研究者们提出了一种优雅的架构：编码器-解码器架构（Encoder-Decoder Architecture）。；一、Encoder（编码器）：理解输入；核...
+- 通俗解释：编码器把输入变成表示，解码器根据表示生成输出。
+- 考试怎么考：常考机器翻译、Seq2Seq、Cross-Attention 中 Q/K/V 来源。
+- 易错点：不要把编码器和解码器的输入输出方向混淆。
+- 必记：Encoder 编码输入，Decoder 生成输出。
 ### Teacher Forcing
-- 通俗解释：第2节 Encoder-Decoder 架构；为了完成"序列 -> 序列"的映射任务，研究者们提出了一种优雅的架构：编码器-解码器架构（Encoder-Decoder Architecture）。；一、Encoder（编码器）：理解输入；核心任务：将源序列（Source Sequence）编码成一个...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第2节 Encoder-Decoder 架构；为了完成"序列 -> 序列"的映射任务，研究者们提出了一种优雅的架构：编码器-解码器架构（Encoder-Decoder Architecture）。；一、Encoder（编码器）：理解输入；核...
+- 通俗解释：训练解码器时使用真实上一步输出作为下一步输入，加快训练。
+- 考试怎么考：常考训练和推理阶段输入来源不同。
+- 易错点：推理时没有真实答案可喂，只能用模型自己生成的结果。
+- 必记：Teacher Forcing 训练用真值，推理用预测。
 ### 注意力机制
 - 通俗解释：根据 Query 与 Key 的匹配程度，给 Value 分配权重并加权求和。
 - 考试怎么考：常考 Q/K/V 含义、注意力权重、上下文向量计算流程。
 - 易错点：注意力不是简单平均，而是按相关性加权。
 - 必记：Attention(Q,K,V)=softmax(QK^T/sqrt(d_k))V。
 ### Attention
-- 通俗解释：第2节 Encoder-Decoder 架构；为了完成"序列 -> 序列"的映射任务，研究者们提出了一种优雅的架构：编码器-解码器架构（Encoder-Decoder Architecture）。；一、Encoder（编码器）：理解输入；核心任务：将源序列（Source Sequence）编码成一个...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第2节 Encoder-Decoder 架构；为了完成"序列 -> 序列"的映射任务，研究者们提出了一种优雅的架构：编码器-解码器架构（Encoder-Decoder Architecture）。；一、Encoder（编码器）：理解输入；核...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### 上下文向量
-- 通俗解释：第2节 Encoder-Decoder 架构；为了完成"序列 -> 序列"的映射任务，研究者们提出了一种优雅的架构：编码器-解码器架构（Encoder-Decoder Architecture）。；一、Encoder（编码器）：理解输入；核心任务：将源序列（Source Sequence）编码成一个...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第2节 Encoder-Decoder 架构；为了完成"序列 -> 序列"的映射任务，研究者们提出了一种优雅的架构：编码器-解码器架构（Encoder-Decoder Architecture）。；一、Encoder（编码器）：理解输入；核...
+- 通俗解释：注意力对 Value 加权求和后得到的综合表示。
+- 考试怎么考：常考注意力权重如何生成上下文。
+- 易错点：上下文向量不是简单拼接所有输入。
+- 必记：上下文向量 = 注意力权重加权后的 Value。
 ## 第六章 Seq2Seq、注意力机制与Transformer基础 / 第3节 注意力机制（Attention Mechanism）
 ### 注意力机制
 - 通俗解释：根据 Query 与 Key 的匹配程度，给 Value 分配权重并加权求和。
@@ -94,15 +94,15 @@
 - 易错点：注意力不是简单平均，而是按相关性加权。
 - 必记：Attention(Q,K,V)=softmax(QK^T/sqrt(d_k))V。
 ### 上下文向量
-- 通俗解释：第3节 注意力机制（Attention Mechanism）；一、为什么需要注意力机制？；回顾 Encoder-Decoder 的瓶颈问题：；整个源序列被压缩成一个上下文向量；Decoder 在生成每一个目标词时，都只能依赖这同一个上下文向量 三、Query、Key、Value（Q/K/V）；注意力...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第3节 注意力机制（Attention Mechanism）；一、为什么需要注意力机制？；回顾 Encoder-Decoder 的瓶颈问题：；整个源序列被压缩成一个上下文向量；Decoder 在生成每一个目标词时，都只能依赖这同一个上下文向...
+- 通俗解释：注意力对 Value 加权求和后得到的综合表示。
+- 考试怎么考：常考注意力权重如何生成上下文。
+- 易错点：上下文向量不是简单拼接所有输入。
+- 必记：上下文向量 = 注意力权重加权后的 Value。
 ### Attention
-- 通俗解释：第3节 注意力机制（Attention Mechanism）；一、为什么需要注意力机制？；回顾 Encoder-Decoder 的瓶颈问题：；整个源序列被压缩成一个上下文向量；Decoder 在生成每一个目标词时，都只能依赖这同一个上下文向量 三、Query、Key、Value（Q/K/V）；注意力...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第3节 注意力机制（Attention Mechanism）；一、为什么需要注意力机制？；回顾 Encoder-Decoder 的瓶颈问题：；整个源序列被压缩成一个上下文向量；Decoder 在生成每一个目标词时，都只能依赖这同一个上下文向...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Softmax
 - 通俗解释：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。
 - 考试怎么考：常考多分类输出、注意力权重为什么能加权求和。
@@ -114,30 +114,30 @@
 - 易错点：归一化不等于 BatchNorm，前者多是输入预处理。
 - 必记：图像常先把像素值缩放到 0-1。
 ### Query
-- 通俗解释：三、Query、Key、Value（Q/K/V）；注意力机制引入了三个核心概念：Query（查询）、Key（键）、Value（值）。；2. Q/K/V 的来源；概念 | 来源 | 作用 | 是否经过线性变换；Query（Q） | Decoder 的当前隐藏状态 | "我想查什么" | 是 五、为什么...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：三、Query、Key、Value（Q/K/V）；注意力机制引入了三个核心概念：Query（查询）、Key（键）、Value（值）。；2. Q/K/V 的来源；概念 | 来源 | 作用 | 是否经过线性变换；Query（Q） | Decod...
+- 通俗解释：Query 表示当前位置主动提出的查询，用来和 Key 计算匹配度。
+- 考试怎么考：常考 Q 与 K 点积得到注意力分数。
+- 易错点：不要把 Query 和 Value 的角色混淆。
+- 必记：Query 问：我要找什么信息？
 ### Key
-- 通俗解释：三、Query、Key、Value（Q/K/V）；注意力机制引入了三个核心概念：Query（查询）、Key（键）、Value（值）。；2. Q/K/V 的来源；概念 | 来源 | 作用 | 是否经过线性变换；Query（Q） | Decoder 的当前隐藏状态 | "我想查什么" | 是 五、为什么...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：三、Query、Key、Value（Q/K/V）；注意力机制引入了三个核心概念：Query（查询）、Key（键）、Value（值）。；2. Q/K/V 的来源；概念 | 来源 | 作用 | 是否经过线性变换；Query（Q） | Decod...
+- 通俗解释：Key 表示被匹配的索引，用来和 Query 计算相关性。
+- 考试怎么考：常考 Key 与 Query 的维度、匹配关系。
+- 易错点：Key 不是最终被加权求和的内容，Value 才是内容。
+- 必记：Key 用来匹配，Value 用来取内容。
 ### Transformer
 - 通俗解释：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
 - 考试怎么考：常考编码器/解码器结构、多头注意力和位置编码。
 - 易错点：Transformer 不依赖 RNN 的逐步递归来建模序列。
 - 必记：Transformer 核心：Attention + FFN + 残差 + Norm + 位置编码。
 ### Encoder-Decoder
-- 通俗解释：第3节 注意力机制（Attention Mechanism）；一、为什么需要注意力机制？；回顾 Encoder-Decoder 的瓶颈问题：；整个源序列被压缩成一个上下文向量；Decoder 在生成每一个目标词时，都只能依赖这同一个上下文向量
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第3节 注意力机制（Attention Mechanism）；一、为什么需要注意力机制？；回顾 Encoder-Decoder 的瓶颈问题：；整个源序列被压缩成一个上下文向量；Decoder 在生成每一个目标词时，都只能依赖这同一个上下文向...
+- 通俗解释：编码器把输入变成表示，解码器根据表示生成输出。
+- 考试怎么考：常考机器翻译、Seq2Seq、Cross-Attention 中 Q/K/V 来源。
+- 易错点：不要把编码器和解码器的输入输出方向混淆。
+- 必记：Encoder 编码输入，Decoder 生成输出。
 ### Value
-- 通俗解释：三、Query、Key、Value（Q/K/V）；注意力机制引入了三个核心概念：Query（查询）、Key（键）、Value（值）。；2. Q/K/V 的来源；概念 | 来源 | 作用 | 是否经过线性变换；Query（Q） | Decoder 的当前隐藏状态 | "我想查什么" | 是
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：三、Query、Key、Value（Q/K/V）；注意力机制引入了三个核心概念：Query（查询）、Key（键）、Value（值）。；2. Q/K/V 的来源；概念 | 来源 | 作用 | 是否经过线性变换；Query（Q） | Decod...
+- 通俗解释：Value 是被注意力权重加权求和的信息内容。
+- 考试怎么考：常考 softmax 权重乘 Value 得到上下文向量。
+- 易错点：不要把 Value 当成计算匹配度的主要对象。
+- 必记：Value 是最后被汇总的信息。
 ## 第六章 Seq2Seq、注意力机制与Transformer基础 / 第4节 Self-Attention（自注意力机制）
 ### 注意力机制
 - 通俗解释：根据 Query 与 Key 的匹配程度，给 Value 分配权重并加权求和。
@@ -145,25 +145,25 @@
 - 易错点：注意力不是简单平均，而是按相关性加权。
 - 必记：Attention(Q,K,V)=softmax(QK^T/sqrt(d_k))V。
 ### Attention
-- 通俗解释：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](https://arxiv.org/abs/1706.037...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Query
-- 通俗解释：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](https://arxiv.org/abs/1706.037...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](...
+- 通俗解释：Query 表示当前位置主动提出的查询，用来和 Key 计算匹配度。
+- 考试怎么考：常考 Q 与 K 点积得到注意力分数。
+- 易错点：不要把 Query 和 Value 的角色混淆。
+- 必记：Query 问：我要找什么信息？
 ### Key
-- 通俗解释：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](https://arxiv.org/abs/1706.037...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](...
+- 通俗解释：Key 表示被匹配的索引，用来和 Query 计算相关性。
+- 考试怎么考：常考 Key 与 Query 的维度、匹配关系。
+- 易错点：Key 不是最终被加权求和的内容，Value 才是内容。
+- 必记：Key 用来匹配，Value 用来取内容。
 ### Value
-- 通俗解释：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](https://arxiv.org/abs/1706.037...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](...
+- 通俗解释：Value 是被注意力权重加权求和的信息内容。
+- 考试怎么考：常考 softmax 权重乘 Value 得到上下文向量。
+- 易错点：不要把 Value 当成计算匹配度的主要对象。
+- 必记：Value 是最后被汇总的信息。
 ### Self-Attention
 - 通俗解释：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
 - 考试怎么考：常考它和 Cross-Attention 的区别。
@@ -185,21 +185,21 @@
 - 易错点：RNN 不是一次性把所有时间步完全独立处理。
 - 必记：当前输出依赖当前输入和上一时刻隐藏状态。
 ### 上下文向量
-- 通俗解释：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](https://arxiv.org/abs/1706.037...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第4节 Self-Attention（自注意力机制）；一、Attention Is All You Need；2017年，Google 的研究团队发表了一篇具有里程碑意义的论文：；["Attention Is All You Need"](...
+- 通俗解释：注意力对 Value 加权求和后得到的综合表示。
+- 考试怎么考：常考注意力权重如何生成上下文。
+- 易错点：上下文向量不是简单拼接所有输入。
+- 必记：上下文向量 = 注意力权重加权后的 Value。
 ## 第六章 Seq2Seq、注意力机制与Transformer基础 / 第5节 位置编码（Positional Encoding）
 ### 位置编码
-- 通俗解释：第5节 位置编码（Positional Encoding）；一、为什么需要位置编码？；Self-Attention 有一个致命的缺陷：它完全丢失了序列的顺序信息。；对比 RNN：；RNN 是顺序计算的：h_t 依赖于 h_{t-1}，天然编码了顺序 二、位置编码的设计推导；设计一个好的位置编码，需要...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第5节 位置编码（Positional Encoding）；一、为什么需要位置编码？；Self-Attention 有一个致命的缺陷：它完全丢失了序列的顺序信息。；对比 RNN：；RNN 是顺序计算的：h_t 依赖于 h_{t-1}，天然编...
+- 通俗解释：给序列注入位置信息，让注意力知道顺序。
+- 考试怎么考：常考为什么 Transformer 需要位置编码。
+- 易错点：没有位置编码时，自注意力本身不天然知道词序。
+- 必记：位置编码补上序列顺序。
 ### Positional Encoding
-- 通俗解释：第5节 位置编码（Positional Encoding）；一、为什么需要位置编码？；Self-Attention 有一个致命的缺陷：它完全丢失了序列的顺序信息。；对比 RNN：；RNN 是顺序计算的：h_t 依赖于 h_{t-1}，天然编码了顺序 二、位置编码的设计推导；设计一个好的位置编码，需要...
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第5节 位置编码（Positional Encoding）；一、为什么需要位置编码？；Self-Attention 有一个致命的缺陷：它完全丢失了序列的顺序信息。；对比 RNN：；RNN 是顺序计算的：h_t 依赖于 h_{t-1}，天然编...
+- 通俗解释：Transformer 中加入位置信息的方法，可用正余弦或可学习位置向量。
+- 考试怎么考：常考它和词嵌入相加、提供顺序信息。
+- 易错点：不要把它当成普通标签。
+- 必记：Positional Encoding 告诉模型位置。
 ### Transformer
 - 通俗解释：以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。
 - 考试怎么考：常考编码器/解码器结构、多头注意力和位置编码。
@@ -211,10 +211,10 @@
 - 易错点：RNN 不是一次性把所有时间步完全独立处理。
 - 必记：当前输出依赖当前输入和上一时刻隐藏状态。
 ### Attention
-- 通俗解释：第5节 位置编码（Positional Encoding）；一、为什么需要位置编码？；Self-Attention 有一个致命的缺陷：它完全丢失了序列的顺序信息。；对比 RNN：；RNN 是顺序计算的：h_t 依赖于 h_{t-1}，天然编码了顺序
-- 考试怎么考：会结合 Q/K/V、注意力权重、位置编码、mask 或编码器解码器结构考。
-- 易错点：不要只背公式；要能说明每个张量来自哪里、为什么要 mask 或缩放。
-- 必记：第5节 位置编码（Positional Encoding）；一、为什么需要位置编码？；Self-Attention 有一个致命的缺陷：它完全丢失了序列的顺序信息。；对比 RNN：；RNN 是顺序计算的：h_t 依赖于 h_{t-1}，天然编...
+- 通俗解释：根据相关性分配权重，再对信息加权汇总。
+- 考试怎么考：常考 Q/K/V、权重、softmax、上下文向量。
+- 易错点：Attention 不是简单平均。
+- 必记：Attention = 按相关性加权关注。
 ### Self-Attention
 - 通俗解释：Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。
 - 考试怎么考：常考它和 Cross-Attention 的区别。
