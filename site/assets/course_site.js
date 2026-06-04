@@ -2,6 +2,7 @@ const DB = window.COURSE_DB;
 const $ = (id) => document.getElementById(id);
 const norm = (s) => (s || "").toString().toLowerCase();
 const escapeHtml = (s) => (s || "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const lastQuizState = { beginner: null, standard: null };
 
 function showView(name) {
   document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === `view-${name}`));
@@ -40,6 +41,80 @@ function shuffle(arr) {
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
+}
+
+function safeFileName(text) {
+  return (text || "试卷").replace(/[\\/:*?"<>|]+/g, "-").replace(/\s+/g, "-").slice(0, 80);
+}
+
+function downloadTextFile(filename, text) {
+  const blob = new Blob([text], {type: "text/markdown;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function printStyleBlock() {
+  return `<style>
+@media print {
+  @page { margin: 7mm; }
+  body { font-size: 10.5pt; line-height: 1.32; }
+  h1, h2, h3 { page-break-after: avoid; margin: 0.45em 0 0.25em; }
+  p, li { margin: 0.2em 0; }
+  .blank { display: inline-block; min-width: 42mm; border-bottom: 1px solid #777; }
+}
+</style>`;
+}
+
+function questionMarkdown(q, idx) {
+  if (q.type === "mcq") {
+    return `${idx}. ${q.stem}\n\n${q.options.map(o => `   ${o}`).join("\n")}`;
+  }
+  if (q.type === "tf") {
+    return `${idx}. ${q.stem}\n\n   A. 正确\n   B. 错误`;
+  }
+  if (q.type === "fill") {
+    return `${idx}. ${q.stem} <span class="blank"></span>`;
+  }
+  return `${idx}. ${q.stem}\n\n答题区：\n\n\n`;
+}
+
+function answerMarkdown(q, idx) {
+  return `${idx}. [${q.id}] 答案：${q.answer}\n\n解析：${q.explanation}\n\n来源：${q.source} · ${q.topic}`;
+}
+
+function exportQuizMarkdown(mode, part) {
+  const state = lastQuizState[mode];
+  if (!state || !state.chosen.length) return;
+  const modeName = mode === "beginner" ? "基础练习" : "标准组卷";
+  const title = `${modeName}${state.topic ? "：" + state.topic : ""}`;
+  const labels = {mcq: "单选题", tf: "判断题", fill: "填空题", short: "简答题"};
+  const lines = [
+    printStyleBlock(),
+    `# ${title}${part === "questions" ? "（题目版）" : "（答案解析版）"}`,
+    "",
+    `生成时间：${new Date().toLocaleString("zh-CN")}`,
+    "",
+    part === "questions" ? "> 打印建议：题目和答案分开打印；本文件已内置较小页边距样式。" : "> 打印建议：答案解析单独打印或仅在核对时查看。",
+    "",
+  ];
+  if (part === "questions") {
+    state.spec.forEach(([type]) => {
+      const items = state.chosen.filter(q => q.type === type);
+      if (!items.length) return;
+      lines.push(`## ${labels[type]}`, "");
+      items.forEach((q, i) => lines.push(questionMarkdown(q, i + 1), ""));
+    });
+  } else {
+    state.chosen.forEach((q, i) => lines.push(answerMarkdown(q, i + 1), ""));
+  }
+  const suffix = part === "questions" ? "题目" : "答案解析";
+  downloadTextFile(`${safeFileName(title)}-${suffix}.md`, lines.join("\n"));
 }
 
 function renderStats() {
@@ -208,6 +283,7 @@ function generateQuiz(bank, mode, topic = "") {
   const targetTitle = mode === "beginner" ? $("beginnerTitle") : $("quizTitle");
   const targetMeta = mode === "beginner" ? $("beginnerMeta") : $("quizMeta");
   const targetBody = mode === "beginner" ? $("beginnerBody") : $("quizBody");
+  lastQuizState[mode] = {chosen, spec, topic, title};
   targetTitle.textContent = topic ? `${title}：${topic}` : title;
   targetMeta.textContent = spec.map(([type, count]) => `${count} 道${labels[type]}`).join("、") + "。再次点击会重新随机生成。";
   targetBody.innerHTML = spec.map(([type]) => {
@@ -251,7 +327,22 @@ function renderAnswer(q, idx) {
 
 function renderReview() {
   const r = DB.review;
-  $("reviewBody").innerHTML = (r.sections || []).map(sec => `
+  const guideBlock = DB.guides ? `
+    <section class="review-section">
+      <h2>考试版 Markdown 讲义下载</h2>
+      <p class="muted">每份课件一份讲义，按“问题动机 -> 学习路线 -> 章节详解 -> 考法提醒 -> 自测”整理。Markdown 内置小页边距打印样式。</p>
+      <p><a class="btn secondary" href="${escapeHtml(DB.guides.index)}" download>下载总目录</a></p>
+      <div class="guide-grid">
+        ${(DB.guides.items || []).map(g => `
+          <div class="guide-card">
+            <strong>${escapeHtml(g.title)}</strong>
+            <span class="muted">${escapeHtml(g.file)} · ${g.chapter_count} 章块</span>
+            <br><a class="btn secondary" href="${escapeHtml(g.href)}" download>下载讲义 .md</a>
+          </div>
+        `).join("")}
+      </div>
+    </section>` : "";
+  $("reviewBody").innerHTML = guideBlock + (r.sections || []).map(sec => `
     <section class="review-section">
       <h2>${escapeHtml(sec.title)}</h2>
       <ul>${(sec.points || []).map(p => `<li>${escapeHtml(p)}</li>`).join("")}</ul>
@@ -270,6 +361,10 @@ function init() {
   $("makeBeginnerQuiz").addEventListener("click", () => generateBeginnerQuiz($("searchInput").value.trim()));
   $("quizAll").addEventListener("click", () => generateStandardQuiz(""));
   $("beginnerAll").addEventListener("click", () => generateBeginnerQuiz(""));
+  $("quizExportQuestions").addEventListener("click", () => exportQuizMarkdown("standard", "questions"));
+  $("quizExportAnswers").addEventListener("click", () => exportQuizMarkdown("standard", "answers"));
+  $("beginnerExportQuestions").addEventListener("click", () => exportQuizMarkdown("beginner", "questions"));
+  $("beginnerExportAnswers").addEventListener("click", () => exportQuizMarkdown("beginner", "answers"));
   renderStats();
   renderTermCloud();
   renderOutline();

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1220" viewBox="0 0 1800 1220">
+<defs><filter id="shadow" x="-15%" y="-20%" width="130%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity=".10"/></filter></defs>
+<rect width="100%" height="100%" fill="#f8fafc"/>
+<circle cx="900" cy="610" r="520" fill="#ffffff" stroke="#eef2f7" stroke-width="2"/>
+<circle cx="900" cy="610" r="350" fill="none" stroke="#f1f5f9" stroke-width="2"/>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}.link{stroke-width:3;fill:none;opacity:.36}.thin{stroke-width:1.8;fill:none;opacity:.32}.root{filter:url(#shadow)}.pill{filter:url(#shadow)}</style>
+<circle class="root" cx="900.0" cy="610.0" r="105" fill="#e8f4ff" stroke="#1a73e8" stroke-width="3"/>
+<text x="900.0" y="581.2" text-anchor="middle" font-size="20" font-weight="850" fill="#174ea6"><tspan x="900.0" dy="0.0">图学习课件_第一</tspan><tspan x="900.0" dy="24.4">部分_20260602 </tspan><tspan x="900.0" dy="24.4">/ 图学习算法分</tspan></text>
+<text x="900.0" y="668.0" text-anchor="middle" font-size="13" font-weight="700" fill="#64748b">课件总览</text>
+<path class="link" d="M900.0 516.0 C900.0 420.0, 900.0 360.0, 900.0 250.0" stroke="#2d9cdb"/>
+<rect class="pill" x="770.0" y="217.0" rx="20" width="260" height="66" fill="#ffffff" stroke="#2d9cdb" stroke-width="2.4"/>
+<circle cx="795.0" cy="250.0" r="8" fill="#2d9cdb"/>
+<text x="912.0" y="254.0" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="912.0" dy="0.0">图学习算法分类</tspan></text>
+<path class="thin" d="M900.0 250.0 C782.4 250.0, 782.4 181.6, 664.7 181.6" stroke="#2d9cdb"/>
+<rect x="576.7" y="160.6" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
+<text x="664.728047009149" y="185.64717902038876" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="664.728047009149" dy="0.0">图学习</tspan></text>
+<path class="thin" d="M900.0 250.0 C900.0 250.0, 900.0 84.0, 900.0 84.0" stroke="#2d9cdb"/>
+<rect x="812.0" y="63.0" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
+<text x="900.0" y="79.94" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="900.0" dy="0.0">GAT = 注意力</tspan><tspan x="900.0" dy="15.9">聚合</tspan></text>
+<path class="thin" d="M900.0 250.0 C1017.6 250.0, 1017.6 181.6, 1135.3 181.6" stroke="#2d9cdb"/>
+<rect x="1047.3" y="160.6" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
+<text x="1135.271952990851" y="185.64717902038882" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="1135.271952990851" dy="0.0">嵌入</tspan></text>
+</svg>

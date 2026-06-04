@@ -1104,38 +1104,12 @@
     "difficulty": "易"
   },
   {
-    "id": "YMC006",
-    "type": "mcq",
-    "topic": "训练/model.train",
-    "stem": "若题目围绕训练代码排错考model.train()，下列说法正确的是",
-    "options": [
-      "A. model.train()会自动执行一轮训练并更新参数。",
-      "B. model.train()的高频考法通常与这个误区有关：model.train()会自动执行一轮训练并更新参数。",
-      "C. model.train()只是一种记忆标签，本身不影响模型结构、训练流程或推理行为。",
-      "D. model.train()让Dropout、BatchNorm等模块进入训练行为。"
-    ],
-    "answer": "D",
-    "explanation": "D正确：model.train()让Dropout、BatchNorm等模块进入训练行为。 常见误区是：model.train()会自动执行一轮训练并更新参数。 train/eval是模块行为开关，不是训练循环本身。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
     "id": "XF006",
     "type": "fill",
     "topic": "训练/model.train",
     "stem": "____让Dropout、BatchNorm等模块进入训练行为。",
     "answer": "model.train()",
     "explanation": "答案是model.train()。train/eval是模块行为开关，不是训练循环本身。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "XS006",
-    "type": "short",
-    "topic": "训练/model.train",
-    "stem": "若训练代码围绕model.train()写错，最常见的错误现象是什么？先说明它的作用，再说明后果。",
-    "answer": "model.train()的核心定义或作用是：model.train()让Dropout、BatchNorm等模块进入训练行为。 常见误区是：model.train()会自动执行一轮训练并更新参数。 train/eval是模块行为开关，不是训练循环本身。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "多层感知机1_学生分发版.ipynb",
     "difficulty": "易"
   },
@@ -1468,38 +1442,12 @@
     "difficulty": "中"
   },
   {
-    "id": "YMC013",
-    "type": "mcq",
-    "topic": "计算图/动态计算图",
-    "stem": "若题目围绕训练代码排错考动态计算图，下列说法正确的是",
-    "options": [
-      "A. 动态计算图必须在训练前完整静态声明，运行中不能变化。",
-      "B. 动态计算图的高频考法通常与这个误区有关：动态计算图必须在训练前完整静态声明，运行中不能变化。",
-      "C. PyTorch动态图按实际执行路径构建，适合包含Python控制流的模型。",
-      "D. 动态计算图只是一种记忆标签，本身不影响模型结构、训练流程或推理行为。"
-    ],
-    "answer": "C",
-    "explanation": "C正确：PyTorch动态图按实际执行路径构建，适合包含Python控制流的模型。 常见误区是：动态计算图必须在训练前完整静态声明，运行中不能变化。 考点是define-by-run：运行到哪里，图就按实际操作建到哪里。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "中"
-  },
-  {
     "id": "XF013",
     "type": "fill",
     "topic": "计算图/动态计算图",
     "stem": "PyTorch按实际执行路径边运行边构建的计算图通常称为____计算图。",
     "answer": "动态",
     "explanation": "动态图能自然适配Python控制流，是PyTorch的重要特性。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "中"
-  },
-  {
-    "id": "XS013",
-    "type": "short",
-    "topic": "计算图/动态计算图",
-    "stem": "若训练代码围绕动态计算图写错，最常见的错误现象是什么？先说明它的作用，再说明后果。",
-    "answer": "动态计算图的核心定义或作用是：PyTorch动态图按实际执行路径构建，适合包含Python控制流的模型。 常见误区是：动态计算图必须在训练前完整静态声明，运行中不能变化。 考点是define-by-run：运行到哪里，图就按实际操作建到哪里。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "多层感知机1_学生分发版.ipynb",
     "difficulty": "中"
   },
@@ -1572,38 +1520,12 @@
     "difficulty": "难"
   },
   {
-    "id": "YMC015",
-    "type": "mcq",
-    "topic": "自动微分/叶子张量",
-    "stem": "若题目围绕训练代码排错考叶子张量，下列说法正确的是",
-    "options": [
-      "A. 用户直接创建且需要梯度的参数通常是叶子张量，梯度保存在其grad中。",
-      "B. 所有中间张量默认都会长期保存grad。",
-      "C. 叶子张量的高频考法通常与这个误区有关：所有中间张量默认都会长期保存grad。",
-      "D. 叶子张量只是一种记忆标签，本身不影响模型结构、训练流程或推理行为。"
-    ],
-    "answer": "A",
-    "explanation": "A正确：用户直接创建且需要梯度的参数通常是叶子张量，梯度保存在其grad中。 常见误区是：所有中间张量默认都会长期保存grad。 命题会问为什么某些中间变量grad为空，默认只保留叶子张量梯度。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "难"
-  },
-  {
     "id": "XF015",
     "type": "fill",
     "topic": "自动微分/叶子张量",
     "stem": "用户直接创建且需要梯度的参数通常是____，梯度保存在其grad中。",
     "answer": "叶子张量",
     "explanation": "答案是叶子张量。命题会问为什么某些中间变量grad为空，默认只保留叶子张量梯度。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "难"
-  },
-  {
-    "id": "XS015",
-    "type": "short",
-    "topic": "自动微分/叶子张量",
-    "stem": "若训练代码围绕叶子张量写错，最常见的错误现象是什么？先说明它的作用，再说明后果。",
-    "answer": "叶子张量的核心定义或作用是：用户直接创建且需要梯度的参数通常是叶子张量，梯度保存在其grad中。 常见误区是：所有中间张量默认都会长期保存grad。 命题会问为什么某些中间变量grad为空，默认只保留叶子张量梯度。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "多层感知机1_学生分发版.ipynb",
     "difficulty": "难"
   },
@@ -1620,22 +1542,6 @@
     ],
     "answer": "A",
     "explanation": "A错误：分类任务的标签空间必须是连续实数区间。。正确理解是：分类任务输出离散类别，回归任务输出连续数值。 先判断任务类型，再匹配输出层和损失函数。",
-    "source": "多层感知机2-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "YMC016",
-    "type": "mcq",
-    "topic": "分类/回归 vs 分类",
-    "stem": "若围绕分类判断任务类型或输出形式，下列说法正确的是",
-    "options": [
-      "A. 分类任务的标签空间必须是连续实数区间。",
-      "B. 分类任务输出离散类别，回归任务输出连续数值。",
-      "C. 分类的高频考法通常与这个误区有关：分类任务的标签空间必须是连续实数区间。",
-      "D. 分类只是一种记忆标签，本身不影响模型结构、训练流程或推理行为。"
-    ],
-    "answer": "B",
-    "explanation": "B正确：分类任务输出离散类别，回归任务输出连续数值。 常见误区是：分类任务的标签空间必须是连续实数区间。 先判断任务类型，再匹配输出层和损失函数。",
     "source": "多层感知机2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
@@ -1880,22 +1786,6 @@
     ],
     "answer": "B",
     "explanation": "B错误：Sigmoid输出可以小于0或大于1。。正确理解是：Sigmoid把实数logit映射到(0,1)，可解释为二分类正类概率。 题目若问概率输出区间，Sigmoid是(0,1)。",
-    "source": "多层感知机2-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "YMC021",
-    "type": "mcq",
-    "topic": "Logistic/Sigmoid",
-    "stem": "若围绕Sigmoid判断任务类型或输出形式，下列说法正确的是",
-    "options": [
-      "A. Sigmoid输出可以小于0或大于1。",
-      "B. Sigmoid的高频考法通常与这个误区有关：Sigmoid输出可以小于0或大于1。",
-      "C. Sigmoid把实数logit映射到(0,1)，可解释为二分类正类概率。",
-      "D. Sigmoid只是一种记忆标签，本身不影响模型结构、训练流程或推理行为。"
-    ],
-    "answer": "C",
-    "explanation": "C正确：Sigmoid把实数logit映射到(0,1)，可解释为二分类正类概率。 常见误区是：Sigmoid输出可以小于0或大于1。 题目若问概率输出区间，Sigmoid是(0,1)。",
     "source": "多层感知机2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
@@ -2300,22 +2190,6 @@
     "difficulty": "易"
   },
   {
-    "id": "YMC029",
-    "type": "mcq",
-    "topic": "MLP/ReLU",
-    "stem": "若围绕ReLU判断任务类型或输出形式，下列说法正确的是",
-    "options": [
-      "A. ReLU会把所有正数都压缩到0到1之间。",
-      "B. ReLU的高频考法通常与这个误区有关：ReLU会把所有正数都压缩到0到1之间。",
-      "C. ReLU常写作max(0,x)，正半轴梯度稳定，计算简单。",
-      "D. ReLU只是一种记忆标签，本身不影响模型结构、训练流程或推理行为。"
-    ],
-    "answer": "C",
-    "explanation": "C正确：ReLU常写作max(0,x)，正半轴梯度稳定，计算简单。 常见误区是：ReLU会把所有正数都压缩到0到1之间。 ReLU不是概率函数，不要和Sigmoid混淆。",
-    "source": "多层感知机2-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
     "id": "XF029",
     "type": "fill",
     "topic": "MLP/ReLU",
@@ -2634,16 +2508,6 @@
     "stem": "____控制卷积核滑动间隔，步长越大输出空间尺寸通常越小。",
     "answer": "步长",
     "explanation": "答案是步长。尺寸计算题先写公式，再代n、p、k、s。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "XS035",
-    "type": "short",
-    "topic": "卷积/步长",
-    "stem": "若考试围绕步长出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "步长的核心定义或作用是：步长控制卷积核滑动间隔，步长越大输出空间尺寸通常越小。 常见误区是：步长越大输出尺寸一定越大。 尺寸计算题先写公式，再代n、p、k、s。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
@@ -3002,16 +2866,6 @@
     "difficulty": "易"
   },
   {
-    "id": "XS042",
-    "type": "short",
-    "topic": "池化/平均池化",
-    "stem": "若考试围绕平均池化出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "平均池化的核心定义或作用是：平均池化取局部窗口平均值，保留局部平均信息。 常见误区是：平均池化会把通道数固定变成类别数。 区分空间下采样与分类层输出类别。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
     "id": "XMC043",
     "type": "mcq",
     "topic": "感受野/定义",
@@ -3206,16 +3060,6 @@
     "stem": "图像张量格式NHWC中，最后一个维度C表示____。",
     "answer": "通道数",
     "explanation": "NHWC依次表示batch、height、width、channel。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
-    "id": "XS047",
-    "type": "short",
-    "topic": "图像/NHWC",
-    "stem": "若考试围绕NHWC出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "NHWC的核心定义或作用是：NHWC表示batch、height、width、channel，常见于TensorFlow或图像显示场景。 常见误区是：NHWC与NCHW完全等价且无需维度转换。 格式转换错误会导致卷积层通道维不匹配。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "中"
   },
@@ -3574,16 +3418,6 @@
     "difficulty": "易"
   },
   {
-    "id": "XS054",
-    "type": "short",
-    "topic": "架构/LeNet",
-    "stem": "若考试围绕LeNet出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "LeNet的核心定义或作用是：LeNet是早期经典CNN，用卷积、池化和全连接完成图像分类。 常见误区是：LeNet的核心是Transformer自注意力结构。 经典网络题多考年代、基本结构和作用，不要求背全部参数。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
     "id": "XMC055",
     "type": "mcq",
     "topic": "架构/AlexNet",
@@ -3674,16 +3508,6 @@
     "stem": "____把不同输入空间尺寸映射到指定输出尺寸。",
     "answer": "自适应池化",
     "explanation": "答案是自适应池化。考点是连接分类器前统一特征尺寸。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
-    "id": "XS056",
-    "type": "short",
-    "topic": "架构/自适应池化",
-    "stem": "若考试围绕自适应池化出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "自适应池化的核心定义或作用是：自适应池化把不同输入空间尺寸映射到指定输出尺寸。 常见误区是：自适应池化要求输入图像尺寸必须完全一致，否则无法工作。 考点是连接分类器前统一特征尺寸。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "中"
   },
@@ -3782,16 +3606,6 @@
     "difficulty": "中"
   },
   {
-    "id": "XS058",
-    "type": "short",
-    "topic": "不平衡/pos_weight",
-    "stem": "若考试围绕pos_weight出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "pos_weight的核心定义或作用是：pos_weight在二分类BCEWithLogitsLoss中提高正样本损失权重。 常见误区是：pos_weight用于指定每个输入像素的卷积核大小。 常按负样本数/正样本数估算。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
     "id": "XMC059",
     "type": "mcq",
     "topic": "不平衡/class weight",
@@ -3886,16 +3700,6 @@
     "difficulty": "易"
   },
   {
-    "id": "XS060",
-    "type": "short",
-    "topic": "梯度/梯度消失",
-    "stem": "若考试围绕梯度消失出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "梯度消失的核心定义或作用是：梯度消失使浅层参数更新很小，深层网络难以学习早期特征。 常见误区是：梯度消失表现为梯度无限变大并导致NaN。 和梯度爆炸相反，答题要分清方向和后果。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
     "id": "XMC061",
     "type": "mcq",
     "topic": "梯度/梯度爆炸",
@@ -3938,16 +3742,6 @@
     "difficulty": "易"
   },
   {
-    "id": "XS061",
-    "type": "short",
-    "topic": "梯度/梯度爆炸",
-    "stem": "若考试围绕梯度爆炸出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "梯度爆炸的核心定义或作用是：梯度爆炸使梯度过大，可能导致训练震荡、溢出或NaN。 常见误区是：梯度爆炸表示所有梯度都变成0。 RNN长序列和高学习率都可能触发。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
     "id": "XMC062",
     "type": "mcq",
     "topic": "梯度/Value Clipping",
@@ -3986,16 +3780,6 @@
     "stem": "____逐元素限制梯度值范围。",
     "answer": "Value Clipping",
     "explanation": "答案是Value Clipping。和Norm Clipping区分：一个逐元素，一个看整体范数。",
-    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
-    "id": "XS062",
-    "type": "short",
-    "topic": "梯度/Value Clipping",
-    "stem": "若考试围绕Value Clipping出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "Value Clipping的核心定义或作用是：Value Clipping逐元素限制梯度值范围。 常见误区是：Value Clipping按整体L2范数等比例缩放所有梯度。 和Norm Clipping区分：一个逐元素，一个看整体范数。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
     "difficulty": "中"
   },
@@ -4510,16 +4294,6 @@
     "difficulty": "中"
   },
   {
-    "id": "XS072",
-    "type": "short",
-    "topic": "优化/Momentum",
-    "stem": "若考试围绕Momentum出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "Momentum的核心定义或作用是：Momentum引入历史梯度方向的速度项，帮助加速并抑制震荡。 常见误区是：Momentum会完全忽略历史梯度，只看当前batch。 动量题要写“历史方向/惯性”。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
     "id": "XMC073",
     "type": "mcq",
     "topic": "优化/Nesterov",
@@ -4610,16 +4384,6 @@
     "stem": "____累积平方梯度，使频繁更新参数的有效学习率下降。",
     "answer": "Adagrad",
     "explanation": "答案是Adagrad。缺点是学习率可能衰减过快。",
-    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
-    "id": "XS074",
-    "type": "short",
-    "topic": "优化/Adagrad",
-    "stem": "若考试围绕Adagrad出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "Adagrad的核心定义或作用是：Adagrad累积平方梯度，使频繁更新参数的有效学习率下降。 常见误区是：Adagrad的学习率会对所有参数持续增大。 缺点是学习率可能衰减过快。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
     "difficulty": "中"
   },
@@ -4770,16 +4534,6 @@
     "difficulty": "中"
   },
   {
-    "id": "XS077",
-    "type": "short",
-    "topic": "调度/ReduceLROnPlateau",
-    "stem": "若考试围绕ReduceLROnPlateau出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "ReduceLROnPlateau的核心定义或作用是：ReduceLROnPlateau在监测指标停滞若干轮后降低学习率。 常见误区是：ReduceLROnPlateau无需传入验证指标即可判断平台期。 常在每轮验证后scheduler.step(val_loss)。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
     "id": "XMC078",
     "type": "mcq",
     "topic": "调参/小样本过拟合",
@@ -4818,16 +4572,6 @@
     "stem": "____用于检查模型和训练链路是否具备学习能力。",
     "answer": "小样本过拟合",
     "explanation": "答案是小样本过拟合。这是排查代码/数据/损失配置错误的实用步骤。",
-    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
-    "difficulty": "难"
-  },
-  {
-    "id": "XS078",
-    "type": "short",
-    "topic": "调参/小样本过拟合",
-    "stem": "若考试围绕小样本过拟合出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "小样本过拟合的核心定义或作用是：小样本过拟合用于检查模型和训练链路是否具备学习能力。 常见误区是：如果小样本都无法过拟合，说明模型一定泛化很好。 这是排查代码/数据/损失配置错误的实用步骤。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
     "difficulty": "难"
   },
@@ -4926,16 +4670,6 @@
     "difficulty": "易"
   },
   {
-    "id": "XS080",
-    "type": "short",
-    "topic": "实践/ImageFolder",
-    "stem": "若考试围绕ImageFolder出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "ImageFolder的核心定义或作用是：ImageFolder按类别子文件夹读取图像，并把文件夹名映射为类别。 常见误区是：ImageFolder要求所有图像必须放在根目录，不能有类别文件夹。 目录结构题高频：root/class_x/img.png。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络3-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
     "id": "XMC081",
     "type": "mcq",
     "topic": "实践/Transform",
@@ -5030,16 +4764,6 @@
     "difficulty": "易"
   },
   {
-    "id": "XS082",
-    "type": "short",
-    "topic": "实践/训练验证测试",
-    "stem": "若考试围绕训练验证测试出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "训练验证测试的核心定义或作用是：训练集用于学习参数，验证集用于调参与早停，测试集用于最终评估。 常见误区是：测试集可以在训练过程中反复用于选择超参数。 三者职责划分是考试常规简答点。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络3-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
     "id": "XMC083",
     "type": "mcq",
     "topic": "实践/模型保存",
@@ -5078,16 +4802,6 @@
     "stem": "PyTorch部署或恢复模型时，最常保存和加载的是模型的____。",
     "answer": "state_dict",
     "explanation": "state_dict保存参数权重，是最常见的模型保存方式。",
-    "source": "卷积神经网络3-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
-    "id": "XS083",
-    "type": "short",
-    "topic": "实践/模型保存",
-    "stem": "若考试围绕模型保存出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "模型保存的核心定义或作用是：常保存state_dict或checkpoint，部署预测时加载参数并切换eval。 常见误区是：保存模型后预测时必须保持train模式以启用Dropout。 checkpoint可包含模型、优化器、epoch等以恢复训练。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "卷积神经网络3-学生分发版-终版2026.ipynb",
     "difficulty": "中"
   },
@@ -5186,16 +4900,6 @@
     "difficulty": "中"
   },
   {
-    "id": "XS085",
-    "type": "short",
-    "topic": "现代/GoogLeNet",
-    "stem": "若考试围绕GoogLeNet出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "GoogLeNet的核心定义或作用是：GoogLeNet/Inception用多分支并行卷积捕获不同尺度特征。 常见误区是：GoogLeNet完全依赖单一路径3x3卷积，不能并行分支。 关键词是Inception、多尺度、多分支。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
-    "source": "卷积神经网络3-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
     "id": "XMC086",
     "type": "mcq",
     "topic": "现代/ResNet",
@@ -5286,16 +4990,6 @@
     "stem": "____利用预训练模型的通用特征，替换或微调分类头适配新任务。",
     "answer": "迁移学习",
     "explanation": "答案是迁移学习。步骤题：加载预训练、冻结/微调、替换head、训练评估。",
-    "source": "卷积神经网络3-学生分发版-终版2026.ipynb",
-    "difficulty": "中"
-  },
-  {
-    "id": "XS087",
-    "type": "short",
-    "topic": "迁移/迁移学习",
-    "stem": "若考试围绕迁移学习出简答题，至少应写清它的核心作用、适用场景，以及一个典型易错点。",
-    "answer": "迁移学习的核心定义或作用是：迁移学习利用预训练模型的通用特征，替换或微调分类头适配新任务。 常见误区是：迁移学习要求新任务与原任务类别完全相同。 步骤题：加载预训练、冻结/微调、替换head、训练评估。",
-    "explanation": "这类简答题建议按“定义/机制 -> 解决的问题 -> 易错点或对比点”三步作答。",
     "source": "卷积神经网络3-学生分发版-终版2026.ipynb",
     "difficulty": "中"
   },

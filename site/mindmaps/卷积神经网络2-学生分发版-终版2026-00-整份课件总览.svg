@@ -10,81 +10,81 @@
 <path class="link" d="M900.0 516.0 C900.0 420.0, 900.0 360.0, 900.0 250.0" stroke="#2d9cdb"/>
 <rect class="pill" x="770.0" y="217.0" rx="20" width="260" height="66" fill="#ffffff" stroke="#2d9cdb" stroke-width="2.4"/>
 <circle cx="795.0" cy="250.0" r="8" fill="#2d9cdb"/>
-<text x="912.0" y="235.4" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="912.0" dy="0.0">第五章 神经网</tspan><tspan x="912.0" dy="18.3">络训练技巧深度</tspan><tspan x="912.0" dy="18.3">解析 / 第1节 </tspan></text>
+<text x="912.0" y="235.4" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="912.0" dy="0.0">第五章 神经网</tspan><tspan x="912.0" dy="18.3">络训练技巧深度</tspan><tspan x="912.0" dy="18.3">解析</tspan></text>
 <path class="thin" d="M900.0 250.0 C782.4 250.0, 782.4 181.6, 664.7 181.6" stroke="#2d9cdb"/>
 <rect x="576.7" y="160.6" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="664.728047009149" y="185.64717902038876" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="664.728047009149" dy="0.0">Batch</tspan></text>
+<text x="664.728047009149" y="185.64717902038876" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="664.728047009149" dy="0.0">学习率</tspan></text>
 <path class="thin" d="M900.0 250.0 C849.0 250.0, 849.0 84.0, 798.0 84.0" stroke="#2d9cdb"/>
 <rect x="710.0" y="63.0" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="798.0112058962018" y="88.0" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="798.0112058962018" dy="0.0">归一化</tspan></text>
+<text x="798.0112058962018" y="88.0" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="798.0112058962018" dy="0.0">梯度消失</tspan></text>
 <path class="thin" d="M900.0 250.0 C951.0 250.0, 951.0 84.0, 1002.0 84.0" stroke="#2d9cdb"/>
 <rect x="914.0" y="63.0" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="1001.9887941037982" y="88.0" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="1001.9887941037982" dy="0.0">学习率</tspan></text>
+<text x="1001.9887941037982" y="88.0" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="1001.9887941037982" dy="0.0">梯度爆炸</tspan></text>
 <path class="thin" d="M900.0 250.0 C1017.6 250.0, 1017.6 181.6, 1135.3 181.6" stroke="#2d9cdb"/>
 <rect x="1047.3" y="160.6" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="1135.271952990851" y="185.64717902038882" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="1135.271952990851" dy="0.0">激活函数</tspan></text>
+<text x="1135.271952990851" y="185.64717902038882" text-anchor="middle" font-size="13" font-weight="750" fill="#2d9cdb"><tspan x="1135.271952990851" dy="0.0">优化器</tspan></text>
 <path class="link" d="M989.4 581.0 C1080.7 551.3, 1137.8 532.7, 1242.4 498.8" stroke="#00a676"/>
 <rect class="pill" x="1112.4" y="465.8" rx="20" width="260" height="66" fill="#ffffff" stroke="#00a676" stroke-width="2.4"/>
 <circle cx="1137.4" cy="498.8" r="8" fill="#00a676"/>
-<text x="1254.3803458662553" y="484.1538820250189" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="1254.3803458662553" dy="0.0">第五章 神经网</tspan><tspan x="1254.3803458662553" dy="18.3">络训练技巧深度</tspan><tspan x="1254.3803458662553" dy="18.3">解析 / 第2节 </tspan></text>
+<text x="1254.3803458662553" y="484.1538820250189" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="1254.3803458662553" dy="0.0">第五章 神经网</tspan><tspan x="1254.3803458662553" dy="18.3">络训练技巧深度</tspan><tspan x="1254.3803458662553" dy="18.3">解析 / 第1节 </tspan></text>
 <path class="thin" d="M1242.4 498.8 C1238.5 498.8, 1238.5 253.9, 1234.7 253.9" stroke="#00a676"/>
 <rect x="1146.7" y="232.9" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="1234.684709892114" y="257.8747747354147" text-anchor="middle" font-size="13" font-weight="750" fill="#00a676"><tspan x="1234.684709892114" dy="0.0">学习率</tspan></text>
+<text x="1234.684709892114" y="257.8747747354147" text-anchor="middle" font-size="13" font-weight="750" fill="#00a676"><tspan x="1234.684709892114" dy="0.0">归一化</tspan></text>
 <path class="thin" d="M1242.4 498.8 C1332.6 498.8, 1332.6 332.9, 1422.7 332.9" stroke="#00a676"/>
 <rect x="1334.7" y="311.9" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="1422.7241322105901" y="336.919269452767" text-anchor="middle" font-size="13" font-weight="750" fill="#00a676"><tspan x="1422.7241322105901" dy="0.0">Adam</tspan></text>
+<text x="1422.7241322105901" y="336.919269452767" text-anchor="middle" font-size="13" font-weight="750" fill="#00a676"><tspan x="1422.7241322105901" dy="0.0">学习率</tspan></text>
 <path class="thin" d="M1242.4 498.8 C1364.1 498.8, 1364.1 526.9, 1485.8 526.9" stroke="#00a676"/>
 <rect x="1397.8" y="505.9" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="1485.7566734383524" y="530.9134838957713" text-anchor="middle" font-size="13" font-weight="750" fill="#00a676"><tspan x="1485.7566734383524" dy="0.0">优化器</tspan></text>
+<text x="1485.7566734383524" y="530.9134838957713" text-anchor="middle" font-size="13" font-weight="750" fill="#00a676"><tspan x="1485.7566734383524" dy="0.0">Batch</tspan></text>
 <path class="thin" d="M1242.4 498.8 C1311.2 498.8, 1311.2 701.4, 1380.1 701.4" stroke="#00a676"/>
 <rect x="1292.1" y="680.4" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="1380.0907734400273" y="705.3886227222865" text-anchor="middle" font-size="13" font-weight="750" fill="#00a676"><tspan x="1380.0907734400273" dy="0.0">Adagrad</tspan></text>
+<text x="1380.0907734400273" y="705.3886227222865" text-anchor="middle" font-size="13" font-weight="750" fill="#00a676"><tspan x="1380.0907734400273" dy="0.0">激活函数</tspan></text>
 <path class="link" d="M955.3 686.0 C1011.7 763.7, 1046.9 812.3, 1111.6 901.2" stroke="#f59e0b"/>
 <rect class="pill" x="981.6" y="868.2" rx="20" width="260" height="66" fill="#ffffff" stroke="#f59e0b" stroke-width="2.4"/>
 <circle cx="1006.6" cy="901.2" r="8" fill="#f59e0b"/>
-<text x="1123.6026908252902" y="886.646117974981" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="1123.6026908252902" dy="0.0">第五章 神经网</tspan><tspan x="1123.6026908252902" dy="18.3">络训练技巧深度</tspan><tspan x="1123.6026908252902" dy="18.3">解析 / 第3节 </tspan></text>
+<text x="1123.6026908252902" y="886.646117974981" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="1123.6026908252902" dy="0.0">第五章 神经网</tspan><tspan x="1123.6026908252902" dy="18.3">络训练技巧深度</tspan><tspan x="1123.6026908252902" dy="18.3">解析 / 第2节 </tspan></text>
 <path class="thin" d="M1111.6 901.2 C1226.9 901.2, 1226.9 818.3, 1342.1 818.3" stroke="#f59e0b"/>
 <rect x="1254.1" y="797.3" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="1342.1184792190754" y="822.2553275148847" text-anchor="middle" font-size="13" font-weight="750" fill="#f59e0b"><tspan x="1342.1184792190754" dy="0.0">Dropout</tspan></text>
+<text x="1342.1184792190754" y="822.2553275148847" text-anchor="middle" font-size="13" font-weight="750" fill="#f59e0b"><tspan x="1342.1184792190754" dy="0.0">学习率</tspan></text>
 <path class="thin" d="M1111.6 901.2 C1218.3 901.2, 1218.3 1021.5, 1325.1 1021.5" stroke="#f59e0b"/>
 <rect x="1237.1" y="1000.5" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="1325.0500745497366" y="1025.5175376106906" text-anchor="middle" font-size="13" font-weight="750" fill="#f59e0b"><tspan x="1325.0500745497366" dy="0.0">数据增强</tspan></text>
+<text x="1325.0500745497366" y="1025.5175376106906" text-anchor="middle" font-size="13" font-weight="750" fill="#f59e0b"><tspan x="1325.0500745497366" dy="0.0">Adam</tspan></text>
 <path class="thin" d="M1111.6 901.2 C1135.8 901.2, 1135.8 1136.0, 1160.0 1136.0" stroke="#f59e0b"/>
 <rect x="1072.0" y="1115.0" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="1160.028739218176" y="1140.0" text-anchor="middle" font-size="13" font-weight="750" fill="#f59e0b"><tspan x="1160.028739218176" dy="0.0">早停</tspan></text>
+<text x="1160.028739218176" y="1140.0" text-anchor="middle" font-size="13" font-weight="750" fill="#f59e0b"><tspan x="1160.028739218176" dy="0.0">优化器</tspan></text>
 <path class="thin" d="M1111.6 901.2 C1036.5 901.2, 1036.5 1094.8, 961.4 1094.8" stroke="#f59e0b"/>
 <rect x="873.4" y="1073.8" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="961.440462680311" y="1098.8340960070252" text-anchor="middle" font-size="13" font-weight="750" fill="#f59e0b"><tspan x="961.440462680311" dy="0.0">权重衰减</tspan></text>
+<text x="961.440462680311" y="1098.8340960070252" text-anchor="middle" font-size="13" font-weight="750" fill="#f59e0b"><tspan x="961.440462680311" dy="0.0">RMSProp</tspan></text>
 <path class="link" d="M844.7 686.0 C788.3 763.7, 753.1 812.3, 688.4 901.2" stroke="#ef476f"/>
 <rect class="pill" x="558.4" y="868.2" rx="20" width="260" height="66" fill="#ffffff" stroke="#ef476f" stroke-width="2.4"/>
 <circle cx="583.4" cy="901.2" r="8" fill="#ef476f"/>
-<text x="700.3973091747097" y="886.646117974981" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="700.3973091747097" dy="0.0">第五章 神经网</tspan><tspan x="700.3973091747097" dy="18.3">络训练技巧深度</tspan><tspan x="700.3973091747097" dy="18.3">解析 / 第4节 </tspan></text>
+<text x="700.3973091747097" y="886.646117974981" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="700.3973091747097" dy="0.0">第五章 神经网</tspan><tspan x="700.3973091747097" dy="18.3">络训练技巧深度</tspan><tspan x="700.3973091747097" dy="18.3">解析 / 第3节 </tspan></text>
 <path class="thin" d="M688.4 901.2 C763.5 901.2, 763.5 1094.8, 838.6 1094.8" stroke="#ef476f"/>
 <rect x="750.6" y="1073.8" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="838.5595373196888" y="1098.8340960070252" text-anchor="middle" font-size="13" font-weight="750" fill="#ef476f"><tspan x="838.5595373196888" dy="0.0">学习率</tspan></text>
+<text x="838.5595373196888" y="1098.8340960070252" text-anchor="middle" font-size="13" font-weight="750" fill="#ef476f"><tspan x="838.5595373196888" dy="0.0">Dropout</tspan></text>
 <path class="thin" d="M688.4 901.2 C664.2 901.2, 664.2 1136.0, 640.0 1136.0" stroke="#ef476f"/>
 <rect x="552.0" y="1115.0" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="639.9712607818237" y="1140.0" text-anchor="middle" font-size="13" font-weight="750" fill="#ef476f"><tspan x="639.9712607818237" dy="0.0">Dropout</tspan></text>
+<text x="639.9712607818237" y="1140.0" text-anchor="middle" font-size="13" font-weight="750" fill="#ef476f"><tspan x="639.9712607818237" dy="0.0">数据增强</tspan></text>
 <path class="thin" d="M688.4 901.2 C581.7 901.2, 581.7 1021.5, 474.9 1021.5" stroke="#ef476f"/>
 <rect x="386.9" y="1000.5" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
 <text x="474.9499254502633" y="1025.5175376106906" text-anchor="middle" font-size="13" font-weight="750" fill="#ef476f"><tspan x="474.9499254502633" dy="0.0">权重衰减</tspan></text>
 <path class="thin" d="M688.4 901.2 C573.1 901.2, 573.1 818.3, 457.9 818.3" stroke="#ef476f"/>
 <rect x="369.9" y="797.3" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="457.8815207809244" y="822.2553275148848" text-anchor="middle" font-size="13" font-weight="750" fill="#ef476f"><tspan x="457.8815207809244" dy="0.0">Batch</tspan></text>
+<text x="457.8815207809244" y="822.2553275148848" text-anchor="middle" font-size="13" font-weight="750" fill="#ef476f"><tspan x="457.8815207809244" dy="0.0">损失函数</tspan></text>
 <path class="link" d="M810.6 581.0 C719.3 551.3, 662.2 532.7, 557.6 498.8" stroke="#7c3aed"/>
 <rect class="pill" x="427.6" y="465.8" rx="20" width="260" height="66" fill="#ffffff" stroke="#7c3aed" stroke-width="2.4"/>
 <circle cx="452.6" cy="498.8" r="8" fill="#7c3aed"/>
-<text x="569.6196541337447" y="484.15388202501896" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="569.6196541337447" dy="0.0">第五章 神经网</tspan><tspan x="569.6196541337447" dy="18.3">络训练技巧深度</tspan><tspan x="569.6196541337447" dy="18.3">解析</tspan></text>
+<text x="569.6196541337447" y="484.15388202501896" text-anchor="middle" font-size="15" font-weight="820" fill="#123047"><tspan x="569.6196541337447" dy="0.0">第五章 神经网</tspan><tspan x="569.6196541337447" dy="18.3">络训练技巧深度</tspan><tspan x="569.6196541337447" dy="18.3">解析 / 第4节 </tspan></text>
 <path class="thin" d="M557.6 498.8 C488.8 498.8, 488.8 701.4, 419.9 701.4" stroke="#7c3aed"/>
 <rect x="331.9" y="680.4" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="419.9092265599727" y="705.3886227222866" text-anchor="middle" font-size="13" font-weight="750" fill="#7c3aed"><tspan x="419.9092265599727" dy="0.0">损失函数</tspan></text>
+<text x="419.9092265599727" y="705.3886227222866" text-anchor="middle" font-size="13" font-weight="750" fill="#7c3aed"><tspan x="419.9092265599727" dy="0.0">学习率</tspan></text>
 <path class="thin" d="M557.6 498.8 C435.9 498.8, 435.9 526.9, 314.2 526.9" stroke="#7c3aed"/>
 <rect x="226.2" y="505.9" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="314.24332656164756" y="530.9134838957713" text-anchor="middle" font-size="13" font-weight="750" fill="#7c3aed"><tspan x="314.24332656164756" dy="0.0">学习率</tspan></text>
+<text x="314.24332656164756" y="530.9134838957713" text-anchor="middle" font-size="13" font-weight="750" fill="#7c3aed"><tspan x="314.24332656164756" dy="0.0">Dropout</tspan></text>
 <path class="thin" d="M557.6 498.8 C467.4 498.8, 467.4 332.9, 377.3 332.9" stroke="#7c3aed"/>
 <rect x="289.3" y="311.9" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="377.27586778940974" y="336.91926945276714" text-anchor="middle" font-size="13" font-weight="750" fill="#7c3aed"><tspan x="377.27586778940974" dy="0.0">Batch</tspan></text>
+<text x="377.27586778940974" y="336.91926945276714" text-anchor="middle" font-size="13" font-weight="750" fill="#7c3aed"><tspan x="377.27586778940974" dy="0.0">权重衰减</tspan></text>
 <path class="thin" d="M557.6 498.8 C561.5 498.8, 561.5 253.9, 565.3 253.9" stroke="#7c3aed"/>
 <rect x="477.3" y="232.9" rx="16" width="176" height="42" fill="#ffffff" stroke="#dbe4ef" stroke-width="1.4"/>
-<text x="565.3152901078861" y="257.87477473541475" text-anchor="middle" font-size="13" font-weight="750" fill="#7c3aed"><tspan x="565.3152901078861" dy="0.0">Sigmoid</tspan></text>
+<text x="565.3152901078861" y="257.87477473541475" text-anchor="middle" font-size="13" font-weight="750" fill="#7c3aed"><tspan x="565.3152901078861" dy="0.0">Batch</tspan></text>
 </svg>

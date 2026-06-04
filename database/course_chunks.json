@@ -98,7 +98,6 @@
     "text": "### 为什么需要卷积神经网络？\n\n##### 如果使用MLP处理图像数据，会怎么样？\n\n在MLP中，我们把图像数据展开成一维向量，丢失了空间信息\n\n问题：\n1. 丢失空间结构：相邻像素之间的关系被破坏\n2. 参数量巨大：全连接层参数量 = 输入维度 × 输出维度\n3. 无法利用平移不变性：同一特征在不同位置需要分别学习",
     "summary": "### 为什么需要卷积神经网络？ ##### 如果使用MLP处理图像数据，会怎么样？ 在MLP中，我们把图像数据展开成一维向量，丢失了空间信息 问题： 1. 丢失空间结构：相邻像素之间的关系被破坏 2. 参数量巨大：全连接层参数量 = 输入维度 × 输出维度 3. 无法利用平移不变性：同一特征在不同位置需要分别学习",
     "terms": [
-      "MLP",
       "卷积"
     ]
   },
@@ -182,7 +181,6 @@
     "text": "#### 从全连接到局部连接\n\n卷积神经网络（Convolutional Neural Network, CNN）是一种专门处理具有网格结构数据的神经网络，最擅长处理图像（2D网格）。\n\n与MLP的全连接不同，CNN采用局部连接的思想\n\n💡 核心思想：用卷积核Kernel/Filter在图像上滑动，提取局部特征，逐步构建从简单到复杂的特征层次。",
     "summary": "#### 从全连接到局部连接 卷积神经网络（Convolutional Neural Network, CNN）是一种专门处理具有网格结构数据的神经网络，最擅长处理图像（2D网格）。 与MLP的全连接不同，CNN采用局部连接的思想 💡 核心思想：用卷积核Kernel/Filter在图像上滑动，提取局部特征，逐步构建从简单到复杂的特征层次。",
     "terms": [
-      "MLP",
       "卷积",
       "卷积核"
     ]
@@ -223,6 +221,7 @@
     "text": "#### 卷积\n\n卷积操作：\n1. 看：聚焦图像的某一小块区域（如3×3像素）\n2. 算：将这9个像素与卷积核的9个权重对应相乘再求和\n3. 记：把结果写入新图像的对应位置\n4. 移：滑动到下一个位置，重复上述过程\n\n卷积后的特征图大小取决于滤波器的大小，滤波器越大，生成的图像越小。\n卷积核越大，特征图越小\n\n$$\\left(h_{i}, w_{i}\\right) * f=\\left(h_{i}-f+1, w_{i}-f+1\\right)$$\n\n把核从头往右走，顶住之后再加一，公式来源（这个情况是默认步数为1的情况下的）\n\n💡 类比：卷积就像给图像加滤镜——边缘检测滤镜让边缘突出，模糊滤镜让图像平滑，锐化滤镜让细节清晰。\n\n##### 步长 \n\n使用步长参数$s$，更新特征图尺寸计算公式：\n\n$$\\left(h_{i}, w_{i}\\right) * f=\\left(\\frac{h_{i}-f+1}{s}, \\frac{w_{i}-f+1}{s}\\right)$$\n\n平时步数默认一步\n\n##### 填充 \n\n外围填充一圈去保证处理完尺寸仍然和输入一致\n\n填充模式：常数填充、反射填充、复制填充、循环填充\n\n通常采用的策略\n\n| 场景 | 推荐策略 | 原因 |\n|------|----------|------|\n| 通用图像分类 | 零填充 | 简单高效，主流框架默认 |\n| 语义分割 | 反射/复制填充 | 保持边缘信息，避免零边界影响 |\n| 生成模型（GAN） | 反射填充 | 减少棋盘格伪影，边缘更自然 |\n| 超分辨率 | 反射填充 | 边缘连续性好 |\n| 周期性数据 | 循环填充 | 符合数据本质特性 |\n| 需要严格尺寸控制 | 零填充 (Same) | 精确控制输出尺寸 |\n\n实践建议：\n\n1. 默认选择：大多数情况仍使用 零填充，因为它与批量归一化（BN）配合良好，且计算高效。\n2. 关注边缘的任务：对于分割、生成类任务，建议尝试 反射填充，可以减少边界伪影。\n\n带有步幅$s$和填充$p$的卷积后特征图形状计算公式：\n\n$$\\left(h_{i}, w_{i}\\right) * f=\\left(\\frac{\\left(h_{i}+2 p\\right)-f+1}{s}, \\frac{\\left(w_{i}+2 p\\right)-f+1}{s}\\right)$$",
     "summary": "#### 卷积 卷积操作： 1. 看：聚焦图像的某一小块区域（如3×3像素） 2. 算：将这9个像素与卷积核的9个权重对应相乘再求和 3. 记：把结果写入新图像的对应位置 4. 移：滑动到下一个位置，重复上述过程 卷积后的特征图大小取决于滤波器的大小，滤波器越大，生成的图像越小。 卷积核越大，特征图越小 $$\\left(h_{i}, w_{i}\\right) * f=\\left(h_{i}-f+1, w_{i}-f+1\\right)$$ 把核从头往右走，顶住之后再加一，公式来源（这个情况是默认步数为1的情况下的） 💡 类比：卷积就像给图像加滤镜——边缘检测滤镜让边缘突出，模糊滤镜让图像平滑，锐化滤镜让细节清晰。 ##### 步长 使用步长参数$s$，更新特征图尺寸计算公式： $$\\left(h_{i}, w_{i}\\right) * f=\\left(\\frac{h_{i}-f+1}{s}, \\frac{w_{i}-f+1}{s}\\right)$$ 平时步数默认一步 ##### 填充 外围填充一圈去保证处理完尺寸仍然和输入一致 填充模式：常数填充、反射填充、复制填充、循环填充 通常采用的策略 | 场景 | 推荐策略 | 原因 | |------|----------|------| | 通用图像分类 | 零填充 | 简单高效，主流框架默认 | | 语义分割 | 反射/复制填充 | 保持边缘信息，避免零边界影响 | | 生成模型（GAN） | 反射填充 | 减少棋盘格伪影，边缘更自然 | | 超分辨率 | 反射填充 | 边缘连续性好 | |...",
     "terms": [
+      "Batch",
       "卷积",
       "卷积核",
       "步长",
@@ -1407,8 +1406,7 @@
       "CrossEntropyLoss",
       "归一化",
       "WeightedRandomSampler",
-      "类别不平衡",
-      "GAT"
+      "类别不平衡"
     ]
   },
   {
@@ -1674,7 +1672,6 @@
     "text": "# 步骤5：创建WeightedRandomSampler处理类别不平衡\nfrom torch.utils.data import WeightedRandomSampler\nimport numpy as np\n\ndef make_balanced_sampler(y):\n \"\"\"\n 创建类别平衡的采样器\n 少数类样本会被更频繁地采样\n 返回: (sampler, sample_weights) 元组\n \"\"\"\n # 计算每个类别的样本数\n classes, counts = y.unique(return_counts=True)\n print(f\"类别: {classes.flatten().tolist()}\")\n print(f\"数量: {counts.tolist()}\")\n \n # 计算权重：样本数少的类别权重大\n weights = 1.0 / counts.float()\n print(f\"类别权重: {weights.tolist()}\")\n \n # 为每个样本分配权重\n sample_weights = weights[y.squeeze().long()]\n \n # 创建采样器\n generator = torch.Generator()\n sampler = WeightedRandomSampler(\n weights=sample_weights,\n num_samples=len(sample_weights),\n generator=generator,\n replacement=True\n )\n return sampler, sample_weights # 返回sample_weights供后续使用\n\nprint(\"=\" * 60)\nprint(\"创建类别平衡采样器\")\nprint(\"=\" * 60)\nsampler, sample_weights = make_balanced_sampler(y_train) # 同时获取sampler和sample_weights\n\n# 创建DataLoader\ntrain_loader = DataLoader(\n dataset=train_dataset,\n batch_size=16,\n sampler=sampler # 使用加权采样器\n)\n\nval_loader = DataLoader(\n dataset=val_dataset,\n batch_size=16,\n shuffle=False\n)\n\nprint(f\"训练DataLoader: {len(train_loader)} 批次\")\nprint(f\"验证DataLoader: {len(val_loader)} 批次\")\n\n# 多次采样测试，展示平衡效果\nprint(\"\" + \"=\" * 60)\nprint(\"验证采样器效果：执行20次独立采样测试\")\nprint(\"=\" * 60)\nprint(\"观察：虽然单次采样有随机波动，但平均趋向平衡\")\n\nnum_trials = 20\nall_counts_0 = []\nall_counts_1 = []\n\nfor trial in range(num_trials):\n # 创建新的采样器实例（确保随机性）\n trial_sampler = WeightedRandomSampler(\n weights=sample_weights,\n num_samples=len(sample_weights),\n replacement=True\n )\n trial_loader = DataLoader(\n dataset=train_dataset,\n batch_size=16,\n sampler=trial_sampler\n )\n \n # 统计该次采样的类别分布\n class_counts = torch.zeros(2)\n for _, labels in trial_loader:\n for c in range(2):\n class_counts[c] += (labels == c).sum()\n \n all_counts_0.append(int(class_counts[0]))\n all_counts_1.append(int(class_counts[1]))\n ratio = class_counts[1].item() / class_counts[0].item() if class_counts[0] > 0 else float('inf')\n \n # 用箭头标记接近1:1的情况\n marker = \" ← 接近平衡\" if 0.95 <= ratio <= 1.05 else \"\"\n print(f\"第{trial+1:2d}次采样: 类别0={int(class_counts[0]):3d}, 类别1={int(class_counts[1]):3d}, 比例={ratio:.3f}:1{marker}\")\n\n# 统计平均结果\nprint(\"\" + \"=\" * 60)\nprint(\"统计结果汇总\")\nprint(\"=\" * 60)\navg_0 = np.mean(all_counts_0)\navg_1 = np.mean(all_counts_1)\nstd_0 = np.std(all_counts_0)\nstd_1 = np.std(all_counts_1)\n\nprint(f\"类别0: 平均={avg_0:.2f}, 标准差={std_0:.2f}, 范围=[{min(all_counts_0)}, {max(all_counts_0)}]\")\nprint(f\"类别1: 平均={avg_1:.2f}, 标准差={std_1:.2f}, 范围=[{min(all_counts_1)}, {max(all_counts_1)}]\")\nprint(f\"平均比例: {avg_1/avg_0:.4f}:1 (理想值: 1.0000)\")\nprint(f\"平衡改善度: 原始比例 {125/115:.3f}:1 → 采样后 {avg_1/avg_0:.3f}:1\")",
     "summary": "# 步骤5：创建WeightedRandomSampler处理类别不平衡 from torch.utils.data import WeightedRandomSampler import numpy as np def make_balanced_sampler(y): \"\"\" 创建类别平衡的采样器 少数类样本会被更频繁地采样 返回: (sampler, sample_weights) 元组 \"\"\" # 计算每个类别的样本数 classes, counts = y.unique(return_counts=True) print(f\"类别: {classes.flatten().tolist()}\") print(f\"数量: {counts.tolist()}\") # 计算权重：样本数少的类别权重大 weights = 1.0 / counts.float() print(f\"类别权重: {weights.tolist()}\") # 为每个样本分配权重 sample_weights = weights[y.squeeze().long()] # 创建采样器 generator = torch.Generator() sampler = WeightedRandomSampler( weights=sample_weights, num_samples=len(sample_weights), generator=generator, replacement=True ) return sampler, sample_weights #...",
     "terms": [
-      "Batch",
       "WeightedRandomSampler",
       "类别不平衡"
     ]
@@ -2906,7 +2903,6 @@
     "summary": "##### BN带来的好处 | 好处 | 说明 | |:----:|:-----| | 允许更大学习率 | 梯度不会爆炸/消失，训练更稳定 | | 减少对初始化的敏感 | 即使初始化不好也能正常训练 | | 轻微正则化效果 | 每个样本的归一化依赖于同batch其他样本 | | 加速收敛 | 通常能减少一半的迭代次数 | 核心本质：BN将每层的输入分布稳定下来，使网络各层可以独立学习，降低了层与层之间的耦合",
     "terms": [
       "学习率",
-      "Batch",
       "归一化"
     ]
   },
@@ -2927,7 +2923,6 @@
     "text": "##### CNN中使用BN的注意事项\n\n1. 小batch问题\n\n当batch size太小（如=1或2）时，统计量估计不准确，此时应使用 GroupNorm 或 LayerNorm 替代\n\n2. 卷积层设置 bias=False\n\n由于BN已经包含可学习的平移参数 $\\beta$，卷积层的偏置项变得冗余，通常设置为 bias=False\n\npython\nnn.Conv2d(in_ch, out_ch, kernel_size, bias=False) # 推荐\nnn.BatchNorm2d(out_ch) # 包含beta参数，out_ch = 通道数\n\n3. 迁移学习时的注意事项\n\n加载预训练权重时，BN的running mean/var也要一起加载。",
     "summary": "##### CNN中使用BN的注意事项 1. 小batch问题 当batch size太小（如=1或2）时，统计量估计不准确，此时应使用 GroupNorm 或 LayerNorm 替代 2. 卷积层设置 bias=False 由于BN已经包含可学习的平移参数 $\\beta$，卷积层的偏置项变得冗余，通常设置为 bias=False python nn.Conv2d(in_ch, out_ch, kernel_size, bias=False) # 推荐 nn.BatchNorm2d(out_ch) # 包含beta参数，out_ch = 通道数 3. 迁移学习时的注意事项 加载预训练权重时，BN的running mean/var也要一起加载。",
     "terms": [
-      "Batch",
       "卷积",
       "BatchNorm",
       "迁移学习"
@@ -2994,7 +2989,6 @@
     "text": "# BasicConv2d实现\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\n\nclass BasicConv2d(nn.Module):\n def init(self, in_channels, out_channels, kwargs):\n super(BasicConv2d, self).init()\n # 卷积层（不使用偏置，因为BN会处理）\n self.conv = nn.Conv2d(\n in_channels, out_channels, bias=False, kwargs\n )\n # 批归一化层\n self.bn = nn.BatchNorm2d(out_channels, eps=0.001)\n \n def forward(self, x):\n x = self.conv(x) # 卷积\n x = self.bn(x) # 批归一化\n return F.relu(x, inplace=True) # ReLU激活\n\n# 测试BasicConv2d\nbasic_conv = BasicConv2d(3, 64, kernel_size=3, padding=1)\ntest_input = torch.randn(2, 3, 28, 28)\noutput = basic_conv(test_input)\nprint(f\"BasicConv2d结构:\n{basic_conv}\")\nprint(f\"\n输入形状: {test_input.shape}\")\nprint(f\"输出形状: {output.shape}\")",
     "summary": "# BasicConv2d实现 import torch import torch.nn as nn import torch.nn.functional as F class BasicConv2d(nn.Module): def init(self, in_channels, out_channels, kwargs): super(BasicConv2d, self).init() # 卷积层（不使用偏置，因为BN会处理） self.conv = nn.Conv2d( in_channels, out_channels, bias=False, kwargs ) # 批归一化层 self.bn = nn.BatchNorm2d(out_channels, eps=0.001) def forward(self, x): x = self.conv(x) # 卷积 x = self.bn(x) # 批归一化 return F.relu(x, inplace=True) # ReLU激活 # 测试BasicConv2d basic_conv = BasicConv2d(3, 64, kernel_size=3, padding=1) test_input = torch.randn(2, 3, 28, 28) output = basic_conv(test_input) print(f\"BasicConv2d结构: {basic_conv}\") print(f\" 输入形状: {test_input.shape}\") print(f\"输...",
     "terms": [
-      "Batch",
       "卷积",
       "归一化",
       "BatchNorm",
@@ -3044,7 +3038,6 @@
     "terms": [
       "学习率",
       "Epoch",
-      "Batch",
       "Sigmoid",
       "激活函数",
       "卷积",
@@ -3071,8 +3064,7 @@
     "summary": "##### 其他归一化技巧 - 都有同样的线性变换形式，但是针对不同的维度 - 批归一化（Batch norm）用于CNN - 层归一化（Layer norm）用于RNN - 实例归一化（Instance norm）用于图像风格化 - 群归一化（Group norm）用于CNN处理批较小的情况",
     "terms": [
       "Batch",
-      "归一化",
-      "RNN"
+      "归一化"
     ]
   },
   {
@@ -3139,7 +3131,6 @@
     "summary": "#### 最佳实践建议 1. 正确选择初始化方案 - TanH/Sigmoid → Xavier初始化 - ReLU → Kaiming初始化 2. 优先使用批归一化（BN） - 可以补偿不良初始化 - 允许使用更大的学习率 - 提供轻微正则化效果 - 注意：训练用batch统计量，推理用移动平均 3. 遇到梯度消失时 - 检查激活函数选择（避免Sigmoid/Tanh导致的饱和） - 使用批归一化稳定中间层分布 - 尝试残差连接改善梯度流 - 监控各层梯度范数，定位消失位置 4. 遇到梯度爆炸时 - 治本：使用归一化技术（BN/LayerNorm/Spectral Norm）、权重正则化（L2/Weight Decay）、改进初始化 - 治标：梯度裁剪作为保险（推荐Norm Clipping） - 检查目标变量范围、降低学习率 5. 监控梯度大小 - 打印各层梯度范数：p.grad.norm() - 使用TensorBoard可视化梯度分布 - 设置梯度爆炸报警阈值（如>100）",
     "terms": [
       "学习率",
-      "Batch",
       "Sigmoid",
       "激活函数",
       "归一化",
@@ -4157,7 +4148,6 @@
       "学习率调度器",
       "ReduceLROnPlateau",
       "超参数",
-      "RNN",
       "Value"
     ]
   },
@@ -4764,7 +4754,6 @@
     "summary": "##### BN带来的好处 | 好处 | 说明 | |:----:|:-----| | 允许更大学习率 | 梯度不会爆炸/消失，训练更稳定 | | 减少对初始化的敏感 | 即使初始化不好也能正常训练 | | 轻微正则化效果 | 每个样本的归一化依赖于同batch其他样本 | | 加速收敛 | 通常能减少一半的迭代次数 | 核心本质：BN将每层的输入分布稳定下来，使网络各层可以独立学习，降低了层与层之间的耦合",
     "terms": [
       "学习率",
-      "Batch",
       "归一化"
     ]
   },
@@ -4785,7 +4774,6 @@
     "text": "##### CNN中使用BN的注意事项\n\n1. 小batch问题\n\n当batch size太小（如=1或2）时，统计量估计不准确，此时应使用 GroupNorm 或 LayerNorm 替代\n\n2. 卷积层设置 bias=False\n\n由于BN已经包含可学习的平移参数 $\\beta$，卷积层的偏置项变得冗余，通常设置为 bias=False\n\npython\nnn.Conv2d(in_ch, out_ch, kernel_size, bias=False) # 推荐\nnn.BatchNorm2d(out_ch) # 包含beta参数，out_ch = 通道数\n\n3. 迁移学习时的注意事项\n\n加载预训练权重时，BN的running mean/var也要一起加载。",
     "summary": "##### CNN中使用BN的注意事项 1. 小batch问题 当batch size太小（如=1或2）时，统计量估计不准确，此时应使用 GroupNorm 或 LayerNorm 替代 2. 卷积层设置 bias=False 由于BN已经包含可学习的平移参数 $\\beta$，卷积层的偏置项变得冗余，通常设置为 bias=False python nn.Conv2d(in_ch, out_ch, kernel_size, bias=False) # 推荐 nn.BatchNorm2d(out_ch) # 包含beta参数，out_ch = 通道数 3. 迁移学习时的注意事项 加载预训练权重时，BN的running mean/var也要一起加载。",
     "terms": [
-      "Batch",
       "卷积",
       "BatchNorm",
       "迁移学习"
@@ -4852,7 +4840,6 @@
     "text": "# BasicConv2d实现\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\n\nclass BasicConv2d(nn.Module):\n def init(self, in_channels, out_channels, kwargs):\n super(BasicConv2d, self).init()\n # 卷积层（不使用偏置，因为BN会处理）\n self.conv = nn.Conv2d(\n in_channels, out_channels, bias=False, kwargs\n )\n # 批归一化层\n self.bn = nn.BatchNorm2d(out_channels, eps=0.001)\n \n def forward(self, x):\n x = self.conv(x) # 卷积\n x = self.bn(x) # 批归一化\n return F.relu(x, inplace=True) # ReLU激活\n\n# 测试BasicConv2d\nbasic_conv = BasicConv2d(3, 64, kernel_size=3, padding=1)\ntest_input = torch.randn(2, 3, 28, 28)\noutput = basic_conv(test_input)\nprint(f\"BasicConv2d结构:\n{basic_conv}\")\nprint(f\"\n输入形状: {test_input.shape}\")\nprint(f\"输出形状: {output.shape}\")",
     "summary": "# BasicConv2d实现 import torch import torch.nn as nn import torch.nn.functional as F class BasicConv2d(nn.Module): def init(self, in_channels, out_channels, kwargs): super(BasicConv2d, self).init() # 卷积层（不使用偏置，因为BN会处理） self.conv = nn.Conv2d( in_channels, out_channels, bias=False, kwargs ) # 批归一化层 self.bn = nn.BatchNorm2d(out_channels, eps=0.001) def forward(self, x): x = self.conv(x) # 卷积 x = self.bn(x) # 批归一化 return F.relu(x, inplace=True) # ReLU激活 # 测试BasicConv2d basic_conv = BasicConv2d(3, 64, kernel_size=3, padding=1) test_input = torch.randn(2, 3, 28, 28) output = basic_conv(test_input) print(f\"BasicConv2d结构: {basic_conv}\") print(f\" 输入形状: {test_input.shape}\") print(f\"输...",
     "terms": [
-      "Batch",
       "卷积",
       "归一化",
       "BatchNorm",
@@ -4902,7 +4889,6 @@
     "terms": [
       "学习率",
       "Epoch",
-      "Batch",
       "Sigmoid",
       "激活函数",
       "卷积",
@@ -4929,8 +4915,7 @@
     "summary": "##### 其他归一化技巧 - 都有同样的线性变换形式，但是针对不同的维度 - 批归一化（Batch norm）用于CNN - 层归一化（Layer norm）用于RNN - 实例归一化（Instance norm）用于图像风格化 - 群归一化（Group norm）用于CNN处理批较小的情况",
     "terms": [
       "Batch",
-      "归一化",
-      "RNN"
+      "归一化"
     ]
   },
   {
@@ -4997,7 +4982,6 @@
     "summary": "#### 最佳实践建议 1. 正确选择初始化方案 - TanH/Sigmoid → Xavier初始化 - ReLU → Kaiming初始化 2. 优先使用批归一化（BN） - 可以补偿不良初始化 - 允许使用更大的学习率 - 提供轻微正则化效果 - 注意：训练用batch统计量，推理用移动平均 3. 遇到梯度消失时 - 检查激活函数选择（避免Sigmoid/Tanh导致的饱和） - 使用批归一化稳定中间层分布 - 尝试残差连接改善梯度流 - 监控各层梯度范数，定位消失位置 4. 遇到梯度爆炸时 - 治本：使用归一化技术（BN/LayerNorm/Spectral Norm）、权重正则化（L2/Weight Decay）、改进初始化 - 治标：梯度裁剪作为保险（推荐Norm Clipping） - 检查目标变量范围、降低学习率 5. 监控梯度大小 - 打印各层梯度范数：p.grad.norm() - 使用TensorBoard可视化梯度分布 - 设置梯度爆炸报警阈值（如>100）",
     "terms": [
       "学习率",
-      "Batch",
       "Sigmoid",
       "激活函数",
       "归一化",
@@ -5955,7 +5939,6 @@
       "学习率调度器",
       "ReduceLROnPlateau",
       "超参数",
-      "RNN",
       "Value"
     ]
   },
@@ -6220,7 +6203,6 @@
     "text": "# ============================================================================\n# Step 2: 数据增强与标准化\n# ============================================================================\n\nfrom torchvision import transforms\nfrom torchvision.datasets import ImageFolder\nfrom torch.utils.data import DataLoader, random_split\nimport torch\n\nIMG_SIZE = 128\n\n# 【方案】计算统计量时直接用底层dataset，避免Subset的transform问题\ndef calculate_mean_std_v2(dataset, indices, batch_size=64, num_workers=2):\n \"\"\"\n 计算指定索引数据的RGB通道均值和标准差\n 参数:\n dataset: ImageFolder数据集（有transform属性）\n indices: 要计算的样本索引列表\n \"\"\"\n temp_transform = transforms.Compose([\n transforms.Resize((IMG_SIZE, IMG_SIZE)),\n transforms.ToTensor()\n ])\n \n # 保存原始transform\n original_transform = dataset.transform\n dataset.transform = temp_transform\n \n # 创建Subset用于DataLoader\n subset = torch.utils.data.Subset(dataset, indices)\n \n temp_loader = DataLoader(\n subset,\n batch_size=batch_size,\n shuffle=False,\n num_workers=num_workers\n )\n \n mean = torch.zeros(3)\n std = torch.zeros(3)\n total_samples = 0\n \n print(\"正在计算数据集统计量...\")\n for images, _ in temp_loader:\n batch_samples = images.size(0)\n images = images.view(batch_samples, images.size(1), -1)\n mean += images.mean(dim=2).sum(dim=0)\n std += images.std(dim=2).sum(dim=0)\n total_samples += batch_samples\n \n mean /= total_samples\n std /= total_samples\n \n # 恢复原始transform\n dataset.transform = original_transform\n \n return mean.tolist(), std.tolist()\n\n# 第一步：加载数据集（临时transform）\ntemp_transform = transforms.Compose([\n transforms.Resize((IMG_SIZE, IMG_SIZE)),\n transforms.ToTensor()\n])\nfull_dataset = ImageFolder(root=\"./rps\", transform=temp_transform)\n\n# 第二步：划分训练/验证索引\ntrain_size = int(0.8 * len(full_dataset))\nval_size = len(full_dataset) - train_size\n\ngenerator = torch.Generator().manual_seed(42)\ntrain_indices, val_indices = random_split(\n range(len(full_dataset)), [train_size, val_size],\n generator=generator\n)\n\n# 保存索引\ntrain_idx = list(train_indices.indices) # 转为list\nval_idx = list(val_indices.indices)\n\nprint(f\"训练集: {len(train_idx)} 张\")\nprint(f\"验证集: {len(val_idx)} 张\")\n\n# 第三步：使用自定义函数计算统计量\ntrain_mean, train_std = calculate_mean_std_v2(full_dataset, train_idx)\n\nprint(f\"\n训练集统计量:\")\nprint(f\"均值 (R, G, B): [{train_mean[0]:.4f}, {train_mean[1]:.4f}, {train_mean[2]:.4f}]\")\nprint(f\"标准差 (R, G, B): [{train_std[0]:.4f}, {train_std[1]:.4f}, {train_std[2]:.4f}]\")\n\nprint(f\"\nImageNet统计量（供对比）:\")\nprint(f\"均值: [0.485, 0.456, 0.406]\")\nprint(f\"标准差: [0.229, 0.224, 0.225]\")",
     "summary": "# ============================================================================ # Step 2: 数据增强与标准化 # ============================================================================ from torchvision import transforms from torchvision.datasets import ImageFolder from torch.utils.data import DataLoader, random_split import torch IMG_SIZE = 128 # 【方案】计算统计量时直接用底层dataset，避免Subset的transform问题 def calculate_mean_std_v2(dataset, indices, batch_size=64, num_workers=2): \"\"\" 计算指定索引数据的RGB通道均值和标准差 参数: dataset: ImageFolder数据集（有transform属性） indices: 要计算的样本索引列表 \"\"\" temp_transform = transforms.Compose([ transforms.Resize((IMG_SIZE, IMG_SIZE)), transforms.ToTensor() ]) # 保存原始transform original_...",
     "terms": [
-      "Batch",
       "标准化",
       "ImageFolder",
       "数据增强"
@@ -6243,7 +6225,6 @@
     "text": "# ============================================================================\n# Step 2 (续): 应用数据增强和标准化\n# ============================================================================\n\nfrom torchvision import transforms\nfrom torchvision.datasets import ImageFolder\nfrom torch.utils.data import DataLoader, Subset\nimport torch\n\n# 定义transform\ntrain_transform = transforms.Compose([\n transforms.Resize((IMG_SIZE, IMG_SIZE)),\n transforms.RandomHorizontalFlip(p=0.5),\n transforms.RandomRotation(15),\n transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),\n transforms.ToTensor(),\n transforms.Normalize(mean=train_mean, std=train_std)\n])\n\nval_transform = transforms.Compose([\n transforms.Resize((IMG_SIZE, IMG_SIZE)),\n transforms.ToTensor(),\n transforms.Normalize(mean=train_mean, std=train_std)\n])\n\n# 分别加载训练集和验证集（使用不同的transform）\ntrain_dataset_raw = ImageFolder(root=\"./rps\", transform=train_transform)\nval_dataset_raw = ImageFolder(root=\"./rps\", transform=val_transform)\n\n# 使用保存的索引创建Subset\ntrain_dataset = Subset(train_dataset_raw, train_idx)\nval_dataset = Subset(val_dataset_raw, val_idx)\n\n# 加载独立的测试集\ntest_dataset = ImageFolder(root=\"./rps-test-set\", transform=val_transform)\n\nBATCH_SIZE = 32\n\ntrain_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2, pin_memory=True)\nval_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=2, pin_memory=True)\ntest_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=2, pin_memory=True)\n\nclass_names = train_dataset_raw.classes\nprint(f\"类别映射: {class_names}\")\nprint(f\"训练集大小: {len(train_dataset)} 张图像\")\nprint(f\"验证集大小: {len(val_dataset)} 张图像\")\nprint(f\"测试集大小: {len(test_dataset)} 张图像（独立测试集）\")\nprint(f\"批次大小: {BATCH_SIZE}\")\nprint(f\"每轮训练迭代次数: {len(train_loader)}\")\n\nprint(f\"\n标准化使用的统计量:\")\nprint(f\"均值: {train_mean}\")\nprint(f\"标准差: {train_std}\")",
     "summary": "# ============================================================================ # Step 2 (续): 应用数据增强和标准化 # ============================================================================ from torchvision import transforms from torchvision.datasets import ImageFolder from torch.utils.data import DataLoader, Subset import torch # 定义transform train_transform = transforms.Compose([ transforms.Resize((IMG_SIZE, IMG_SIZE)), transforms.RandomHorizontalFlip(p=0.5), transforms.RandomRotation(15), transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2), transforms.ToTensor(), transforms.Normalize(mean=train_mean, std=train_std) ]) val_transform = transforms.Compose([ trans...",
     "terms": [
-      "Batch",
       "标准化",
       "ImageFolder",
       "数据增强"
@@ -6288,7 +6269,6 @@
     "text": "# ============================================================================\n# Step 3: 网络架构设计\n# ============================================================================\n\nclass RPS_CNN(nn.Module):\n \"\"\"\n RPS图像分类网络 - v12深度版本\n \n 设计特点：\n 1. 4个卷积块，每个块包含：Conv -> BN -> ReLU -> MaxPool\n 2. 逐步增加通道数：32 -> 64 -> 128 -> 256\n 3. 每个块后都有池化，快速减小空间尺寸\n 4. 极简全连接层：大大减少参数量\n \"\"\"\n \n def init(self, num_classes=3, dropout_rate=0.5):\n super(RPS_CNN, self).init()\n \n # 特征提取层 - 4个卷积块\n self.features = nn.Sequential(\n \n # ========== Block 1: 3 -> 32 ==========\n # 输入: 3 x 128 x 128\n nn.Conv2d(3, 32, kernel_size=3, padding=1),\n nn.BatchNorm2d(32),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=2, stride=2), # 128 -> 64\n \n # ========== Block 2: 32 -> 64 ==========\n # 输入: 32 x 64 x 64\n nn.Conv2d(32, 64, kernel_size=3, padding=1),\n nn.BatchNorm2d(64),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=2, stride=2), # 64 -> 32\n \n # ========== Block 3: 64 -> 128 ==========\n # 输入: 64 x 32 x 32\n nn.Conv2d(64, 128, kernel_size=3, padding=1),\n nn.BatchNorm2d(128),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=2, stride=2), # 32 -> 16\n \n # ========== Block 4: 128 -> 256 ==========\n # 输入: 128 x 16 x 16\n nn.Conv2d(128, 256, kernel_size=3, padding=1),\n nn.BatchNorm2d(256),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=2, stride=2), # 16 -> 8\n )\n \n # 全局平均池化 - 进一步减少参数\n self.global_pool = nn.AdaptiveAvgPool2d(1)\n \n # 极简全连接层\n # 输入: 256 (来自global pool)\n self.classifier = nn.Sequential(\n nn.Dropout(p=dropout_rate),\n nn.Linear(256, 64), # 极小中间层\n nn.ReLU(inplace=True),\n nn.Dropout(p=dropout_rate),\n nn.Linear(64, num_classes)\n )\n \n self._initialize_weights()\n \n def forward(self, x):\n x = self.features(x) # [B, 256, 8, 8]\n x = self.global_pool(x) # [B, 256, 1, 1]\n x = x.view(x.size(0), -1) # [B, 256]\n x = self.classifier(x) # [B, 3]\n return x\n \n def _initialize_weights(self):\n for m in self.modules():\n if isinstance(m, nn.Conv2d):\n nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')\n if m.bias is not None:\n nn.init.constant_(m.bias, 0)\n elif isinstance(m, nn.BatchNorm2d):\n nn.init.constant_(m.weight, 1)\n nn.init.constant_(m.bias, 0)\n elif isinstance(m, nn.Linear):\n nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')\n nn.init.constant_(m.bias, 0)\n\n# 模型实例化\ndevice = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')\nprint(f'使用设备: {device}')\n\nmodel = RPS_CNN(num_classes=3, dropout_rate=0.5).to(device)\n\n# 详细参数统计\nprint(\"\n\" + \"=\" * 60)\nprint(\"网络参数统计\")\nprint(\"=\" * 60)\n\ntotal_params = 0\nconv_params = 0\nbn_params = 0\nfc_params = 0\n\nfor name, module in model.named_modules():\n if isinstance(module, nn.Conv2d):\n p = sum(p.numel() for p in module.parameters())\n conv_params += p\n print(f\"Conv2d: {name:20s} - {p:>10,} params\")\n elif isinstance(module, nn.BatchNorm2d):\n p = sum(p.numel() for p in module.parameters())\n bn_params += p\n elif isinstance(module, nn.Linear):\n p = sum(p.numel() for p in module.parameters())\n fc_params += p\n print(f\"Linear: {name:20s} - {p:>10,} params\")\n\ntotal_params = sum(p.numel() for p in model.parameters())\n\nprint(\"-\" * 60)\nprint(f\"卷积层参数量: {conv_params:>10,} ({conv_params/total_params*100:>5.1f}%)\")\nprint(f\"BN层参数量: {bn_params:>10,} ({bn_params/total_params*100:>5.1f}%)\")\nprint(f\"全连接层参数量:{fc_params:>10,} ({fc_params/total_params*100:>5.1f}%)\")\nprint(\"=\" * 60)\nprint(f\"模型总参数量: {total_params:>10,}\")\nprint(\"=\" * 60)\n\nprint(\"\n【网络设计说明】\")\nprint(\"- 4个卷积块，每块包含Conv+BN+ReLU+MaxPool\")\nprint(\"- 使用Global Average Pooling替代Flatten\")\nprint(\"- 全连接层参数量大幅减少（约2万 vs 420万）\")\nprint(\"- 更适合小数据集，减少过拟合风险\")\n\n# 测试前向传播\ntest_input = torch.randn(4, 3, IMG_SIZE, IMG_SIZE).to(device)\ntest_output = model(test_input)\nprint(f\"\n输入形状: {test_input.shape}\")\nprint(f\"输出形状: {test_output.shape}\")\nprint(f\"输出示例: {test_output[0].detach().cpu().numpy()}\")",
     "summary": "# ============================================================================ # Step 3: 网络架构设计 # ============================================================================ class RPS_CNN(nn.Module): \"\"\" RPS图像分类网络 - v12深度版本 设计特点： 1. 4个卷积块，每个块包含：Conv -> BN -> ReLU -> MaxPool 2. 逐步增加通道数：32 -> 64 -> 128 -> 256 3. 每个块后都有池化，快速减小空间尺寸 4. 极简全连接层：大大减少参数量 \"\"\" def init(self, num_classes=3, dropout_rate=0.5): super(RPS_CNN, self).init() # 特征提取层 - 4个卷积块 self.features = nn.Sequential( # ========== Block 1: 3 -> 32 ========== # 输入: 3 x 128 x 128 nn.Conv2d(3, 32, kernel_size=3, padding=1), nn.BatchNorm2d(32), nn.ReLU(inplace=True), nn.MaxPool2d(kernel_size=2, stride=2), # 128 -> 64 # ==...",
     "terms": [
-      "Batch",
       "卷积",
       "池化",
       "Kaiming",
@@ -6314,7 +6294,6 @@
     "text": "# ============================================================================\n# 网络参数详细统计\n# ============================================================================\n\ndef count_parameters_detailed(model):\n \"\"\"\n 详细统计网络各层参数数量\n \"\"\"\n conv_params = 0\n bn_params = 0\n fc_params = 0\n other_params = 0\n \n print(\"=\" * 60)\n print(\"网络参数统计详情\")\n print(\"=\" * 60)\n print(f\"{'层类型':<20} {'层名称':<30} {'参数量':<15}\")\n print(\"-\" * 60)\n \n for name, module in model.named_modules():\n if isinstance(module, nn.Conv2d):\n params = sum(p.numel() for p in module.parameters())\n conv_params += params\n print(f\"{'Conv2d':<20} {name:<30} {params:<15,}\")\n elif isinstance(module, (nn.BatchNorm2d, nn.BatchNorm1d)):\n params = sum(p.numel() for p in module.parameters())\n bn_params += params\n print(f\"{'BatchNorm':<20} {name:<30} {params:<15,}\")\n elif isinstance(module, nn.Linear):\n params = sum(p.numel() for p in module.parameters())\n fc_params += params\n print(f\"{'Linear':<20} {name:<30} {params:<15,}\")\n \n total = sum(p.numel() for p in model.parameters())\n \n print(\"-\" * 60)\n print(f\"{'卷积层总参数量':<20} {'':<30} {conv_params:<15,} ({conv_params/total*100:.1f}%)\")\n print(f\"{'BN层总参数量':<20} {'':<30} {bn_params:<15,} ({bn_params/total*100:.1f}%)\")\n print(f\"{'全连接层总参数量':<20} {'':<30} {fc_params:<15,} ({fc_params/total*100:.1f}%)\")\n print(\"=\" * 60)\n print(f\"{'模型总参数量':<20} {'':<30} {total:<15,} (100.0%)\")\n print(\"=\" * 60)\n \n return {\n 'conv': conv_params,\n 'bn': bn_params,\n 'fc': fc_params,\n 'total': total\n }\n\n# 执行参数统计\nparam_stats = count_parameters_detailed(model)",
     "summary": "# ============================================================================ # 网络参数详细统计 # ============================================================================ def count_parameters_detailed(model): \"\"\" 详细统计网络各层参数数量 \"\"\" conv_params = 0 bn_params = 0 fc_params = 0 other_params = 0 print(\"=\" * 60) print(\"网络参数统计详情\") print(\"=\" * 60) print(f\"{'层类型':<20} {'层名称':<30} {'参数量':<15}\") print(\"-\" * 60) for name, module in model.named_modules(): if isinstance(module, nn.Conv2d): params = sum(p.numel() for p in module.parameters()) conv_params += params print(f\"{'Conv2d':<20} {name:<30} {params:<15,}\") elif isinstance(module, (nn.BatchNorm2d, nn.BatchNorm1d)): params = sum(p.num...",
     "terms": [
-      "Batch",
       "卷积",
       "BatchNorm"
     ]
@@ -6413,7 +6392,6 @@
     "terms": [
       "学习率",
       "Epoch",
-      "Batch",
       "早停"
     ]
   },
@@ -6896,7 +6874,6 @@
     "text": "# ============================================================================\n# GoogLeNet Inception模块实现（完整版）\n# ============================================================================\n\nclass InceptionModule(nn.Module):\n \"\"\"\n 经典Inception模块：并行多尺度特征提取\n 注意：原始GoogLeNet论文中使用AvgPool，无BatchNorm\n \"\"\"\n def init(self, in_channels, ch1x1, ch3x3red, ch3x3, ch5x5red, ch5x5, pool_proj):\n super(InceptionModule, self).init()\n\n # 分支1：1×1卷积\n self.branch1 = nn.Sequential(\n nn.Conv2d(in_channels, ch1x1, kernel_size=1),\n nn.ReLU(inplace=True)\n )\n\n # 分支2：1×1降维 → 3×3卷积\n self.branch2 = nn.Sequential(\n nn.Conv2d(in_channels, ch3x3red, kernel_size=1),\n nn.ReLU(inplace=True),\n nn.Conv2d(ch3x3red, ch3x3, kernel_size=3, padding=1),\n nn.ReLU(inplace=True)\n )\n\n # 分支3：1×1降维 → 5×5卷积\n self.branch3 = nn.Sequential(\n nn.Conv2d(in_channels, ch5x5red, kernel_size=1),\n nn.ReLU(inplace=True),\n nn.Conv2d(ch5x5red, ch5x5, kernel_size=5, padding=2),\n nn.ReLU(inplace=True)\n )\n\n # 分支4：平均池化 → 1×1投影（原始论文使用AvgPool）\n self.branch4 = nn.Sequential(\n nn.AvgPool2d(kernel_size=3, stride=1, padding=1),\n nn.Conv2d(in_channels, pool_proj, kernel_size=1),\n nn.ReLU(inplace=True)\n )\n\n def forward(self, x):\n b1 = self.branch1(x)\n b2 = self.branch2(x)\n b3 = self.branch3(x)\n b4 = self.branch4(x)\n\n # 通道拼接\n return torch.cat([b1, b2, b3, b4], dim=1)\n\nclass AuxiliaryClassifier(nn.Module):\n \"\"\"\n 辅助分类器：用于训练阶段缓解梯度消失并提供正则化\n 推理阶段丢弃不使用\n \"\"\"\n def init(self, in_channels, num_classes):\n super(AuxiliaryClassifier, self).init()\n self.classifier = nn.Sequential(\n nn.AvgPool2d(kernel_size=5, stride=3),\n nn.Conv2d(in_channels, 128, kernel_size=1),\n nn.ReLU(inplace=True),\n nn.Flatten(),\n nn.Linear(128 * 2 * 2, 1024),\n nn.ReLU(inplace=True),\n nn.Dropout(0.7),\n nn.Linear(1024, num_classes)\n )\n\n def forward(self, x):\n return self.classifier(x)\n\nclass SimpleGoogLeNet(nn.Module):\n \"\"\"\n 简化版GoogLeNet（适配128×128输入）\n 包含：初始卷积层、Inception模块、辅助分类器、全局平均池化\n \"\"\"\n def init(self, num_classes=3, use_aux=True):\n super(SimpleGoogLeNet, self).init()\n self.use_aux = use_aux\n\n # 初始卷积\n self.conv1 = nn.Sequential(\n nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(3, stride=2, padding=1)\n ) # 128→32\n\n self.conv2 = nn.Sequential(\n nn.Conv2d(64, 192, kernel_size=3, padding=1),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(3, stride=2, padding=1)\n ) # 32→16\n\n # Inception 3\n self.inception3a = InceptionModule(192, 64, 96, 128, 16, 32, 32) # 192→256\n self.inception3b = InceptionModule(256, 128, 128, 192, 32, 96, 64) # 256→480\n self.maxpool3 = nn.MaxPool2d(3, stride=2, padding=1) # 16→8\n\n # Inception 4\n self.inception4a = InceptionModule(480, 192, 96, 208, 16, 48, 64) # 480→512\n self.inception4b = InceptionModule(512, 160, 112, 224, 24, 64, 64) # 512→512\n self.inception4c = InceptionModule(512, 128, 128, 256, 24, 64, 64) # 512→512\n self.inception4d = InceptionModule(512, 112, 144, 288, 32, 64, 64) # 512→528\n self.inception4e = InceptionModule(528, 256, 160, 320, 32, 128, 128) # 528→832\n self.maxpool4 = nn.MaxPool2d(3, stride=2, padding=1) # 8→4\n\n # 辅助分类器1（接在inception4a之后，8×8特征图）\n if self.use_aux:\n self.aux1 = AuxiliaryClassifier(512, num_classes)\n # 辅助分类器2（接在inception4d之后，8×8特征图）\n self.aux2 = AuxiliaryClassifier(528, num_classes)\n\n # Inception 5\n self.inception5a = InceptionModule(832, 256, 160, 320, 32, 128, 128) # 832→832\n self.inception5b = InceptionModule(832, 384, 192, 384, 48, 128, 128) # 832→1024\n\n # 全局平均池化 + 分类器\n self.avgpool = nn.AdaptiveAvgPool2d((1, 1))\n self.dropout = nn.Dropout(0.4)\n self.fc = nn.Linear(1024, num_classes)\n\n self._initialize_weights()\n\n def _initialize_weights(self):\n for m in self.modules():\n if isinstance(m, nn.Conv2d):\n nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')\n if m.bias is not None:\n nn.init.constant_(m.bias, 0)\n elif isinstance(m, nn.Linear):\n nn.init.normal_(m.weight, 0, 0.01)\n nn.init.constant_(m.bias, 0)\n\n def forward(self, x):\n x = self.conv1(x)\n x = self.conv2(x)\n\n x = self.inception3a(x)\n x = self.inception3b(x)\n x = self.maxpool3(x)\n\n x = self.inception4a(x)\n aux1 = self.aux1(x) if self.training and self.use_aux else None\n\n x = self.inception4b(x)\n x = self.inception4c(x)\n x = self.inception4d(x)\n aux2 = self.aux2(x) if self.training and self.use_aux else None\n\n x = self.inception4e(x)\n x = self.maxpool4(x)\n\n x = self.inception5a(x)\n x = self.inception5b(x)\n\n x = self.avgpool(x)\n x = torch.flatten(x, 1)\n x = self.dropout(x)\n x = self.fc(x)\n\n # 训练时返回主输出+两个辅助输出；推理时只返回主输出\n if self.training and self.use_aux:\n return x, aux1, aux2\n return x\n\n# ========================= 测试代码 =========================\nif name == \"main\":\n print(\"=\" * 60)\n print(\"Inception Module Test\")\n print(\"=\" * 60)\n\n inception_test = InceptionModule(\n in_channels=192, ch1x1=64, ch3x3red=96, ch3x3=128,\n ch5x5red=16, ch5x5=32, pool_proj=32\n )\n test_input = torch.randn(2, 192, 28, 28)\n test_output = inception_test(test_input)\n print(f\"Input shape: {test_input.shape}\")\n print(f\"Output shape: {test_output.shape}\")\n print(f\"Channel calculation: 64+128+32+32 = {64+128+32+32}\")\n\n print(\"\n\" + \"=\" * 60)\n print(\"SimpleGoogLeNet Model\")\n print(\"=\" * 60)\n\n # 推理模式（关闭辅助分类器输出）\n googlenet_eval = SimpleGoogLeNet(num_classes=3, use_aux=True)\n googlenet_eval.eval()\n\n total_params = sum(p.numel() for p in googlenet_eval.parameters())\n print(f\"Total parameters: {total_params:,}\")\n\n test_input = torch.randn(2, 3, 128, 128)\n with torch.no_grad():\n test_output = googlenet_eval(test_input)\n print(f\"\n[Eval] Input shape: {test_input.shape}\")\n print(f\"[Eval] Output shape: {test_output.shape}\")\n\n # 训练模式（返回主输出+aux1+aux2）\n googlenet_train = SimpleGoogLeNet(num_classes=3, use_aux=True)\n googlenet_train.train()\n output_main, output_aux1, output_aux2 = googlenet_train(test_input)\n print(f\"\n[Train] Main output: {output_main.shape}\")\n print(f\"[Train] Aux1 output: {output_aux1.shape}\")\n print(f\"[Train] Aux2 output: {output_aux2.shape}\")\n\n # 计算总损失示例\n criterion = nn.CrossEntropyLoss()\n labels = torch.randint(0, 3, (2,))\n loss_main = criterion(output_main, labels)\n loss_aux1 = criterion(output_aux1, labels)\n loss_aux2 = criterion(output_aux2, labels)\n total_loss = loss_main + 0.3 * loss_aux1 + 0.3 * loss_aux2\n print(f\"\nLoss_main: {loss_main.item():.4f}\")\n print(f\"Loss_aux1: {loss_aux1.item():.4f}\")\n print(f\"Loss_aux2: {loss_aux2.item():.4f}\")\n print(f\"Total loss: {total_loss.item():.4f}\")",
     "summary": "# ============================================================================ # GoogLeNet Inception模块实现（完整版） # ============================================================================ class InceptionModule(nn.Module): \"\"\" 经典Inception模块：并行多尺度特征提取 注意：原始GoogLeNet论文中使用AvgPool，无BatchNorm \"\"\" def init(self, in_channels, ch1x1, ch3x3red, ch3x3, ch5x5red, ch5x5, pool_proj): super(InceptionModule, self).init() # 分支1：1×1卷积 self.branch1 = nn.Sequential( nn.Conv2d(in_channels, ch1x1, kernel_size=1), nn.ReLU(inplace=True) ) # 分支2：1×1降维 → 3×3卷积 self.branch2 = nn.Sequential( nn.Conv2d(in_channels, ch3x3red, kernel_size=1), nn.ReLU(inplace=True), nn.Conv2d(ch3x3red, ch3x3, kernel_si...",
     "terms": [
-      "Batch",
       "CrossEntropyLoss",
       "卷积",
       "池化",
@@ -6950,7 +6927,6 @@
     "text": "# ============================================================================\n# ResNet残差网络实现\n# ============================================================================\n\nclass BasicBlock(nn.Module):\n \"\"\"\n 基础残差块（用于ResNet-18/34）\n \"\"\"\n expansion = 1\n\n def init(self, in_channels, out_channels, stride=1, downsample=None):\n super(BasicBlock, self).init()\n\n self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3,\n stride=stride, padding=1, bias=False)\n self.bn1 = nn.BatchNorm2d(out_channels)\n self.relu = nn.ReLU(inplace=True)\n\n self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3,\n stride=1, padding=1, bias=False)\n self.bn2 = nn.BatchNorm2d(out_channels)\n\n self.downsample = downsample # 用于匹配尺寸\n self.stride = stride\n\n def forward(self, x):\n identity = x # 保存输入用于残差连接\n\n out = self.conv1(x)\n out = self.bn1(out)\n out = self.relu(out)\n\n out = self.conv2(out)\n out = self.bn2(out)\n\n # 如果尺寸不匹配，使用downsample\n if self.downsample is not None:\n identity = self.downsample(x)\n\n # 残差连接\n out += identity\n out = self.relu(out)\n\n return out\n\nclass Bottleneck(nn.Module):\n \"\"\"\n Bottleneck残差块（用于ResNet-50/101/152）\n \"\"\"\n expansion = 4 # 输出通道是输入的4倍\n\n def init(self, in_channels, out_channels, stride=1, downsample=None):\n super(Bottleneck, self).init()\n\n # 1×1降维\n self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=False)\n self.bn1 = nn.BatchNorm2d(out_channels)\n\n # 3×3卷积\n self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3,\n stride=stride, padding=1, bias=False)\n self.bn2 = nn.BatchNorm2d(out_channels)\n\n # 1×1升维\n self.conv3 = nn.Conv2d(out_channels, out_channels * self.expansion,\n kernel_size=1, bias=False)\n self.bn3 = nn.BatchNorm2d(out_channels * self.expansion)\n\n self.relu = nn.ReLU(inplace=True)\n self.downsample = downsample\n self.stride = stride\n\n def forward(self, x):\n identity = x\n\n out = self.conv1(x)\n out = self.bn1(out)\n out = self.relu(out)\n\n out = self.conv2(out)\n out = self.bn2(out)\n out = self.relu(out)\n\n out = self.conv3(out)\n out = self.bn3(out)\n\n if self.downsample is not None:\n identity = self.downsample(x)\n\n out += identity # ✅ 现在通道数匹配了\n out = self.relu(out)\n\n return out\n\nclass SimpleResNet(nn.Module):\n \"\"\"\n 简化版ResNet（适配128×128输入）\n \"\"\"\n def init(self, block, layers, num_classes=3):\n super(SimpleResNet, self).init()\n\n self.in_channels = 64\n\n # 初始卷积\n self.conv1 = nn.Sequential(\n nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3, bias=False),\n nn.BatchNorm2d(64),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=3, stride=2, padding=1)\n ) # 128→32\n\n # 残差层\n self.layer1 = self._make_layer(block, 64, layers[0]) # 32×32\n self.layer2 = self._make_layer(block, 128, layers[1], stride=2) # 16×16\n self.layer3 = self._make_layer(block, 256, layers[2], stride=2) # 8×8\n self.layer4 = self._make_layer(block, 512, layers[3], stride=2) # 4×4\n\n # 全局平均池化\n self.avgpool = nn.AdaptiveAvgPool2d((1, 1))\n self.fc = nn.Linear(512 * block.expansion, num_classes)\n\n # 权重初始化\n self._initialize_weights()\n\n def _make_layer(self, block, out_channels, num_blocks, stride=1):\n downsample = None\n\n # 当stride≠1或通道数变化时，需要downsample\n if stride != 1 or self.in_channels != out_channels * block.expansion:\n downsample = nn.Sequential(\n nn.Conv2d(self.in_channels, out_channels * block.expansion,\n kernel_size=1, stride=stride, bias=False),\n nn.BatchNorm2d(out_channels * block.expansion),\n )\n\n layers = []\n layers.append(block(self.in_channels, out_channels, stride, downsample))\n\n self.in_channels = out_channels * block.expansion\n\n for _ in range(1, num_blocks):\n layers.append(block(self.in_channels, out_channels))\n\n return nn.Sequential(*layers)\n\n def forward(self, x):\n x = self.conv1(x)\n\n x = self.layer1(x)\n x = self.layer2(x)\n x = self.layer3(x)\n x = self.layer4(x)\n\n x = self.avgpool(x)\n x = torch.flatten(x, 1)\n x = self.fc(x)\n\n return x\n\n def _initialize_weights(self):\n for m in self.modules():\n if isinstance(m, nn.Conv2d):\n nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')\n elif isinstance(m, nn.BatchNorm2d):\n nn.init.constant_(m.weight, 1)\n nn.init.constant_(m.bias, 0)\n\ndef create_resnet18(num_classes=3):\n \"\"\"创建ResNet-18\"\"\"\n return SimpleResNet(BasicBlock, [2, 2, 2, 2], num_classes)\n\ndef create_resnet34(num_classes=3):\n \"\"\"创建ResNet-34\"\"\"\n return SimpleResNet(BasicBlock, [3, 4, 6, 3], num_classes)\n\ndef create_resnet50(num_classes=3):\n \"\"\"创建ResNet-50\"\"\"\n return SimpleResNet(Bottleneck, [3, 4, 6, 3], num_classes)\n\n# 测试代码\nif name == \"main\":\n print(\"=\" * 60)\n print(\"Residual Block Test\")\n print(\"=\" * 60)\n\n # 测试BasicBlock\n basic_block = BasicBlock(in_channels=64, out_channels=64)\n test_input = torch.randn(2, 64, 56, 56)\n test_output = basic_block(test_input)\n print(f\"BasicBlock:\")\n print(f\" Input: {test_input.shape}\")\n print(f\" Output: {test_output.shape}\")\n print(f\" Has residual connection: {test_output.shape == test_input.shape}\")\n\n # 测试带降采样的BasicBlock\n downsample = nn.Sequential(\n nn.Conv2d(64, 128, kernel_size=1, stride=2, bias=False),\n nn.BatchNorm2d(128)\n )\n basic_block_down = BasicBlock(in_channels=64, out_channels=128, stride=2, downsample=downsample)\n test_output_down = basic_block_down(test_input)\n print(f\"\nBasicBlock with downsampling:\")\n print(f\" Input: {test_input.shape}\")\n print(f\" Output: {test_output_down.shape}\")\n\n # 测试Bottleneck\n print(\"\n\" + \"-\" * 40)\n\n # 添加 downsample，将 64 通道映射到 256 通道\n downsample_bt = nn.Sequential(\n nn.Conv2d(64, 256, kernel_size=1, bias=False),\n nn.BatchNorm2d(256)\n )\n bottleneck = Bottleneck(in_channels=64, out_channels=64, downsample=downsample_bt)\n test_input_bt = torch.randn(2, 64, 56, 56)\n test_output_bt = bottleneck(test_input_bt)\n print(f\"Bottleneck:\")\n print(f\" Input: {test_input_bt.shape}\")\n print(f\" Output: {test_output_bt.shape}\")\n print(f\" Channel expansion: 64 -> {64 * Bottleneck.expansion}\")\n\n # 测试带降采样的Bottleneck\n downsample_bt_down = nn.Sequential(\n nn.Conv2d(64, 256, kernel_size=1, stride=2, bias=False),\n nn.BatchNorm2d(256)\n )\n bottleneck_down = Bottleneck(in_channels=64, out_channels=64, stride=2, downsample=downsample_bt_down)\n test_output_bt_down = bottleneck_down(test_input_bt)\n print(f\"\nBottleneck with downsampling:\")\n print(f\" Input: {test_input_bt.shape}\")\n print(f\" Output: {test_output_bt_down.shape}\")\n\n # 测试完整ResNet-18\n print(\"\n\" + \"=\" * 60)\n print(\"ResNet-18 Model\")\n print(\"=\" * 60)\n\n resnet18 = create_resnet18(num_classes=3)\n total_params = sum(p.numel() for p in resnet18.parameters())\n print(f\"Total parameters: {total_params:,}\")\n\n test_input = torch.randn(2, 3, 128, 128)\n test_output = resnet18(test_input)\n print(f\"\nInput shape: {test_input.shape}\")\n print(f\"Output shape: {test_output.shape}\")\n\n # 测试完整ResNet-50\n print(\"\n\" + \"=\" * 60)\n print(\"ResNet-50 Model\")\n print(\"=\" * 60)\n\n resnet50 = create_resnet50(num_classes=3)\n total_params_50 = sum(p.numel() for p in resnet50.parameters())\n print(f\"Total parameters: {total_params_50:,}\")\n\n test_output_50 = resnet50(test_input)\n print(f\"\nInput shape: {test_input.shape}\")\n print(f\"Output shape: {test_output_50.shape}\")",
     "summary": "# ============================================================================ # ResNet残差网络实现 # ============================================================================ class BasicBlock(nn.Module): \"\"\" 基础残差块（用于ResNet-18/34） \"\"\" expansion = 1 def init(self, in_channels, out_channels, stride=1, downsample=None): super(BasicBlock, self).init() self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False) self.bn1 = nn.BatchNorm2d(out_channels) self.relu = nn.ReLU(inplace=True) self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False) self.bn2 = nn.BatchNorm2d(out_channels) self.downsample =...",
     "terms": [
-      "Batch",
       "卷积",
       "池化",
       "Kaiming",
@@ -7488,7 +7464,6 @@
     "summary": "# ============================================================================ # 迁移学习完整示例：ResNet18 on RPS Dataset # ============================================================================ import torch import torch.nn as nn import torch.optim as optim from torch.utils.data import DataLoader, TensorDataset from torchvision import models, transforms from torchvision.datasets import ImageFolder from sklearn.metrics import classification_report, confusion_matrix, accuracy_score import numpy as np import time print(\"=\" * 70) print(\"Transfer Learning: ResNet18 on RPS Dataset\") print(\"=\" * 70) # ============================================================================ # S...",
     "terms": [
       "Epoch",
-      "Batch",
       "CrossEntropyLoss",
       "ImageFolder",
       "数据增强",
@@ -7516,7 +7491,6 @@
     "terms": [
       "学习率",
       "Epoch",
-      "Batch",
       "CrossEntropyLoss",
       "ImageFolder",
       "Dropout",
@@ -7838,7 +7812,6 @@
     "text": "# ============================================================================\n# Step 2: 数据增强与标准化\n# ============================================================================\n\nfrom torchvision import transforms\nfrom torchvision.datasets import ImageFolder\nfrom torch.utils.data import DataLoader, random_split\nimport torch\n\nIMG_SIZE = 128\n\n# 【方案】计算统计量时直接用底层dataset，避免Subset的transform问题\ndef calculate_mean_std_v2(dataset, indices, batch_size=64, num_workers=2):\n \"\"\"\n 计算指定索引数据的RGB通道均值和标准差\n 参数:\n dataset: ImageFolder数据集（有transform属性）\n indices: 要计算的样本索引列表\n \"\"\"\n temp_transform = transforms.Compose([\n transforms.Resize((IMG_SIZE, IMG_SIZE)),\n transforms.ToTensor()\n ])\n \n # 保存原始transform\n original_transform = dataset.transform\n dataset.transform = temp_transform\n \n # 创建Subset用于DataLoader\n subset = torch.utils.data.Subset(dataset, indices)\n \n temp_loader = DataLoader(\n subset,\n batch_size=batch_size,\n shuffle=False,\n num_workers=num_workers\n )\n \n mean = torch.zeros(3)\n std = torch.zeros(3)\n total_samples = 0\n \n print(\"正在计算数据集统计量...\")\n for images, _ in temp_loader:\n batch_samples = images.size(0)\n images = images.view(batch_samples, images.size(1), -1)\n mean += images.mean(dim=2).sum(dim=0)\n std += images.std(dim=2).sum(dim=0)\n total_samples += batch_samples\n \n mean /= total_samples\n std /= total_samples\n \n # 恢复原始transform\n dataset.transform = original_transform\n \n return mean.tolist(), std.tolist()\n\n# 第一步：加载数据集（临时transform）\ntemp_transform = transforms.Compose([\n transforms.Resize((IMG_SIZE, IMG_SIZE)),\n transforms.ToTensor()\n])\nfull_dataset = ImageFolder(root=\"./rps\", transform=temp_transform)\n\n# 第二步：划分训练/验证索引\ntrain_size = int(0.8 * len(full_dataset))\nval_size = len(full_dataset) - train_size\n\ngenerator = torch.Generator().manual_seed(42)\ntrain_indices, val_indices = random_split(\n range(len(full_dataset)), [train_size, val_size],\n generator=generator\n)\n\n# 保存索引\ntrain_idx = list(train_indices.indices) # 转为list\nval_idx = list(val_indices.indices)\n\nprint(f\"训练集: {len(train_idx)} 张\")\nprint(f\"验证集: {len(val_idx)} 张\")\n\n# 第三步：使用自定义函数计算统计量\ntrain_mean, train_std = calculate_mean_std_v2(full_dataset, train_idx)\n\nprint(f\"\n训练集统计量:\")\nprint(f\"均值 (R, G, B): [{train_mean[0]:.4f}, {train_mean[1]:.4f}, {train_mean[2]:.4f}]\")\nprint(f\"标准差 (R, G, B): [{train_std[0]:.4f}, {train_std[1]:.4f}, {train_std[2]:.4f}]\")\n\nprint(f\"\nImageNet统计量（供对比）:\")\nprint(f\"均值: [0.485, 0.456, 0.406]\")\nprint(f\"标准差: [0.229, 0.224, 0.225]\")",
     "summary": "# ============================================================================ # Step 2: 数据增强与标准化 # ============================================================================ from torchvision import transforms from torchvision.datasets import ImageFolder from torch.utils.data import DataLoader, random_split import torch IMG_SIZE = 128 # 【方案】计算统计量时直接用底层dataset，避免Subset的transform问题 def calculate_mean_std_v2(dataset, indices, batch_size=64, num_workers=2): \"\"\" 计算指定索引数据的RGB通道均值和标准差 参数: dataset: ImageFolder数据集（有transform属性） indices: 要计算的样本索引列表 \"\"\" temp_transform = transforms.Compose([ transforms.Resize((IMG_SIZE, IMG_SIZE)), transforms.ToTensor() ]) # 保存原始transform original_...",
     "terms": [
-      "Batch",
       "标准化",
       "ImageFolder",
       "数据增强"
@@ -7861,7 +7834,6 @@
     "text": "# ============================================================================\n# Step 2 (续): 应用数据增强和标准化\n# ============================================================================\n\nfrom torchvision import transforms\nfrom torchvision.datasets import ImageFolder\nfrom torch.utils.data import DataLoader, Subset\nimport torch\n\n# 定义transform\ntrain_transform = transforms.Compose([\n transforms.Resize((IMG_SIZE, IMG_SIZE)),\n transforms.RandomHorizontalFlip(p=0.5),\n transforms.RandomRotation(15),\n transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2),\n transforms.ToTensor(),\n transforms.Normalize(mean=train_mean, std=train_std)\n])\n\nval_transform = transforms.Compose([\n transforms.Resize((IMG_SIZE, IMG_SIZE)),\n transforms.ToTensor(),\n transforms.Normalize(mean=train_mean, std=train_std)\n])\n\n# 分别加载训练集和验证集（使用不同的transform）\ntrain_dataset_raw = ImageFolder(root=\"./rps\", transform=train_transform)\nval_dataset_raw = ImageFolder(root=\"./rps\", transform=val_transform)\n\n# 使用保存的索引创建Subset\ntrain_dataset = Subset(train_dataset_raw, train_idx)\nval_dataset = Subset(val_dataset_raw, val_idx)\n\n# 加载独立的测试集\ntest_dataset = ImageFolder(root=\"./rps-test-set\", transform=val_transform)\n\nBATCH_SIZE = 32\n\ntrain_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2, pin_memory=True)\nval_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=2, pin_memory=True)\ntest_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=2, pin_memory=True)\n\nclass_names = train_dataset_raw.classes\nprint(f\"类别映射: {class_names}\")\nprint(f\"训练集大小: {len(train_dataset)} 张图像\")\nprint(f\"验证集大小: {len(val_dataset)} 张图像\")\nprint(f\"测试集大小: {len(test_dataset)} 张图像（独立测试集）\")\nprint(f\"批次大小: {BATCH_SIZE}\")\nprint(f\"每轮训练迭代次数: {len(train_loader)}\")\n\nprint(f\"\n标准化使用的统计量:\")\nprint(f\"均值: {train_mean}\")\nprint(f\"标准差: {train_std}\")",
     "summary": "# ============================================================================ # Step 2 (续): 应用数据增强和标准化 # ============================================================================ from torchvision import transforms from torchvision.datasets import ImageFolder from torch.utils.data import DataLoader, Subset import torch # 定义transform train_transform = transforms.Compose([ transforms.Resize((IMG_SIZE, IMG_SIZE)), transforms.RandomHorizontalFlip(p=0.5), transforms.RandomRotation(15), transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2), transforms.ToTensor(), transforms.Normalize(mean=train_mean, std=train_std) ]) val_transform = transforms.Compose([ trans...",
     "terms": [
-      "Batch",
       "标准化",
       "ImageFolder",
       "数据增强"
@@ -7906,7 +7878,6 @@
     "text": "# ============================================================================\n# Step 3: 网络架构设计\n# ============================================================================\n\nclass RPS_CNN(nn.Module):\n \"\"\"\n RPS图像分类网络 - v12深度版本\n \n 设计特点：\n 1. 4个卷积块，每个块包含：Conv -> BN -> ReLU -> MaxPool\n 2. 逐步增加通道数：32 -> 64 -> 128 -> 256\n 3. 每个块后都有池化，快速减小空间尺寸\n 4. 极简全连接层：大大减少参数量\n \"\"\"\n \n def init(self, num_classes=3, dropout_rate=0.5):\n super(RPS_CNN, self).init()\n \n # 特征提取层 - 4个卷积块\n self.features = nn.Sequential(\n \n # ========== Block 1: 3 -> 32 ==========\n # 输入: 3 x 128 x 128\n nn.Conv2d(3, 32, kernel_size=3, padding=1),\n nn.BatchNorm2d(32),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=2, stride=2), # 128 -> 64\n \n # ========== Block 2: 32 -> 64 ==========\n # 输入: 32 x 64 x 64\n nn.Conv2d(32, 64, kernel_size=3, padding=1),\n nn.BatchNorm2d(64),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=2, stride=2), # 64 -> 32\n \n # ========== Block 3: 64 -> 128 ==========\n # 输入: 64 x 32 x 32\n nn.Conv2d(64, 128, kernel_size=3, padding=1),\n nn.BatchNorm2d(128),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=2, stride=2), # 32 -> 16\n \n # ========== Block 4: 128 -> 256 ==========\n # 输入: 128 x 16 x 16\n nn.Conv2d(128, 256, kernel_size=3, padding=1),\n nn.BatchNorm2d(256),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=2, stride=2), # 16 -> 8\n )\n \n # 全局平均池化 - 进一步减少参数\n self.global_pool = nn.AdaptiveAvgPool2d(1)\n \n # 极简全连接层\n # 输入: 256 (来自global pool)\n self.classifier = nn.Sequential(\n nn.Dropout(p=dropout_rate),\n nn.Linear(256, 64), # 极小中间层\n nn.ReLU(inplace=True),\n nn.Dropout(p=dropout_rate),\n nn.Linear(64, num_classes)\n )\n \n self._initialize_weights()\n \n def forward(self, x):\n x = self.features(x) # [B, 256, 8, 8]\n x = self.global_pool(x) # [B, 256, 1, 1]\n x = x.view(x.size(0), -1) # [B, 256]\n x = self.classifier(x) # [B, 3]\n return x\n \n def _initialize_weights(self):\n for m in self.modules():\n if isinstance(m, nn.Conv2d):\n nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')\n if m.bias is not None:\n nn.init.constant_(m.bias, 0)\n elif isinstance(m, nn.BatchNorm2d):\n nn.init.constant_(m.weight, 1)\n nn.init.constant_(m.bias, 0)\n elif isinstance(m, nn.Linear):\n nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')\n nn.init.constant_(m.bias, 0)\n\n# 模型实例化\ndevice = torch.device('cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu')\nprint(f'使用设备: {device}')\n\nmodel = RPS_CNN(num_classes=3, dropout_rate=0.5).to(device)\n\n# 详细参数统计\nprint(\"\n\" + \"=\" * 60)\nprint(\"网络参数统计\")\nprint(\"=\" * 60)\n\ntotal_params = 0\nconv_params = 0\nbn_params = 0\nfc_params = 0\n\nfor name, module in model.named_modules():\n if isinstance(module, nn.Conv2d):\n p = sum(p.numel() for p in module.parameters())\n conv_params += p\n print(f\"Conv2d: {name:20s} - {p:>10,} params\")\n elif isinstance(module, nn.BatchNorm2d):\n p = sum(p.numel() for p in module.parameters())\n bn_params += p\n elif isinstance(module, nn.Linear):\n p = sum(p.numel() for p in module.parameters())\n fc_params += p\n print(f\"Linear: {name:20s} - {p:>10,} params\")\n\ntotal_params = sum(p.numel() for p in model.parameters())\n\nprint(\"-\" * 60)\nprint(f\"卷积层参数量: {conv_params:>10,} ({conv_params/total_params*100:>5.1f}%)\")\nprint(f\"BN层参数量: {bn_params:>10,} ({bn_params/total_params*100:>5.1f}%)\")\nprint(f\"全连接层参数量:{fc_params:>10,} ({fc_params/total_params*100:>5.1f}%)\")\nprint(\"=\" * 60)\nprint(f\"模型总参数量: {total_params:>10,}\")\nprint(\"=\" * 60)\n\nprint(\"\n【网络设计说明】\")\nprint(\"- 4个卷积块，每块包含Conv+BN+ReLU+MaxPool\")\nprint(\"- 使用Global Average Pooling替代Flatten\")\nprint(\"- 全连接层参数量大幅减少（约2万 vs 420万）\")\nprint(\"- 更适合小数据集，减少过拟合风险\")\n\n# 测试前向传播\ntest_input = torch.randn(4, 3, IMG_SIZE, IMG_SIZE).to(device)\ntest_output = model(test_input)\nprint(f\"\n输入形状: {test_input.shape}\")\nprint(f\"输出形状: {test_output.shape}\")\nprint(f\"输出示例: {test_output[0].detach().cpu().numpy()}\")",
     "summary": "# ============================================================================ # Step 3: 网络架构设计 # ============================================================================ class RPS_CNN(nn.Module): \"\"\" RPS图像分类网络 - v12深度版本 设计特点： 1. 4个卷积块，每个块包含：Conv -> BN -> ReLU -> MaxPool 2. 逐步增加通道数：32 -> 64 -> 128 -> 256 3. 每个块后都有池化，快速减小空间尺寸 4. 极简全连接层：大大减少参数量 \"\"\" def init(self, num_classes=3, dropout_rate=0.5): super(RPS_CNN, self).init() # 特征提取层 - 4个卷积块 self.features = nn.Sequential( # ========== Block 1: 3 -> 32 ========== # 输入: 3 x 128 x 128 nn.Conv2d(3, 32, kernel_size=3, padding=1), nn.BatchNorm2d(32), nn.ReLU(inplace=True), nn.MaxPool2d(kernel_size=2, stride=2), # 128 -> 64 # ==...",
     "terms": [
-      "Batch",
       "卷积",
       "池化",
       "Kaiming",
@@ -7932,7 +7903,6 @@
     "text": "# ============================================================================\n# 网络参数详细统计\n# ============================================================================\n\ndef count_parameters_detailed(model):\n \"\"\"\n 详细统计网络各层参数数量\n \"\"\"\n conv_params = 0\n bn_params = 0\n fc_params = 0\n other_params = 0\n \n print(\"=\" * 60)\n print(\"网络参数统计详情\")\n print(\"=\" * 60)\n print(f\"{'层类型':<20} {'层名称':<30} {'参数量':<15}\")\n print(\"-\" * 60)\n \n for name, module in model.named_modules():\n if isinstance(module, nn.Conv2d):\n params = sum(p.numel() for p in module.parameters())\n conv_params += params\n print(f\"{'Conv2d':<20} {name:<30} {params:<15,}\")\n elif isinstance(module, (nn.BatchNorm2d, nn.BatchNorm1d)):\n params = sum(p.numel() for p in module.parameters())\n bn_params += params\n print(f\"{'BatchNorm':<20} {name:<30} {params:<15,}\")\n elif isinstance(module, nn.Linear):\n params = sum(p.numel() for p in module.parameters())\n fc_params += params\n print(f\"{'Linear':<20} {name:<30} {params:<15,}\")\n \n total = sum(p.numel() for p in model.parameters())\n \n print(\"-\" * 60)\n print(f\"{'卷积层总参数量':<20} {'':<30} {conv_params:<15,} ({conv_params/total*100:.1f}%)\")\n print(f\"{'BN层总参数量':<20} {'':<30} {bn_params:<15,} ({bn_params/total*100:.1f}%)\")\n print(f\"{'全连接层总参数量':<20} {'':<30} {fc_params:<15,} ({fc_params/total*100:.1f}%)\")\n print(\"=\" * 60)\n print(f\"{'模型总参数量':<20} {'':<30} {total:<15,} (100.0%)\")\n print(\"=\" * 60)\n \n return {\n 'conv': conv_params,\n 'bn': bn_params,\n 'fc': fc_params,\n 'total': total\n }\n\n# 执行参数统计\nparam_stats = count_parameters_detailed(model)",
     "summary": "# ============================================================================ # 网络参数详细统计 # ============================================================================ def count_parameters_detailed(model): \"\"\" 详细统计网络各层参数数量 \"\"\" conv_params = 0 bn_params = 0 fc_params = 0 other_params = 0 print(\"=\" * 60) print(\"网络参数统计详情\") print(\"=\" * 60) print(f\"{'层类型':<20} {'层名称':<30} {'参数量':<15}\") print(\"-\" * 60) for name, module in model.named_modules(): if isinstance(module, nn.Conv2d): params = sum(p.numel() for p in module.parameters()) conv_params += params print(f\"{'Conv2d':<20} {name:<30} {params:<15,}\") elif isinstance(module, (nn.BatchNorm2d, nn.BatchNorm1d)): params = sum(p.num...",
     "terms": [
-      "Batch",
       "卷积",
       "BatchNorm"
     ]
@@ -8031,7 +8001,6 @@
     "terms": [
       "学习率",
       "Epoch",
-      "Batch",
       "早停"
     ]
   },
@@ -8512,7 +8481,6 @@
     "text": "# ============================================================================\n# GoogLeNet Inception模块实现（完整版）\n# ============================================================================\n\nclass InceptionModule(nn.Module):\n \"\"\"\n 经典Inception模块：并行多尺度特征提取\n 注意：原始GoogLeNet论文中使用AvgPool，无BatchNorm\n \"\"\"\n def init(self, in_channels, ch1x1, ch3x3red, ch3x3, ch5x5red, ch5x5, pool_proj):\n super(InceptionModule, self).init()\n\n # 分支1：1×1卷积\n self.branch1 = nn.Sequential(\n nn.Conv2d(in_channels, ch1x1, kernel_size=1),\n nn.ReLU(inplace=True)\n )\n\n # 分支2：1×1降维 → 3×3卷积\n self.branch2 = nn.Sequential(\n nn.Conv2d(in_channels, ch3x3red, kernel_size=1),\n nn.ReLU(inplace=True),\n nn.Conv2d(ch3x3red, ch3x3, kernel_size=3, padding=1),\n nn.ReLU(inplace=True)\n )\n\n # 分支3：1×1降维 → 5×5卷积\n self.branch3 = nn.Sequential(\n nn.Conv2d(in_channels, ch5x5red, kernel_size=1),\n nn.ReLU(inplace=True),\n nn.Conv2d(ch5x5red, ch5x5, kernel_size=5, padding=2),\n nn.ReLU(inplace=True)\n )\n\n # 分支4：平均池化 → 1×1投影（原始论文使用AvgPool）\n self.branch4 = nn.Sequential(\n nn.AvgPool2d(kernel_size=3, stride=1, padding=1),\n nn.Conv2d(in_channels, pool_proj, kernel_size=1),\n nn.ReLU(inplace=True)\n )\n\n def forward(self, x):\n b1 = self.branch1(x)\n b2 = self.branch2(x)\n b3 = self.branch3(x)\n b4 = self.branch4(x)\n\n # 通道拼接\n return torch.cat([b1, b2, b3, b4], dim=1)\n\nclass AuxiliaryClassifier(nn.Module):\n \"\"\"\n 辅助分类器：用于训练阶段缓解梯度消失并提供正则化\n 推理阶段丢弃不使用\n \"\"\"\n def init(self, in_channels, num_classes):\n super(AuxiliaryClassifier, self).init()\n self.classifier = nn.Sequential(\n nn.AvgPool2d(kernel_size=5, stride=3),\n nn.Conv2d(in_channels, 128, kernel_size=1),\n nn.ReLU(inplace=True),\n nn.Flatten(),\n nn.Linear(128 * 2 * 2, 1024),\n nn.ReLU(inplace=True),\n nn.Dropout(0.7),\n nn.Linear(1024, num_classes)\n )\n\n def forward(self, x):\n return self.classifier(x)\n\nclass SimpleGoogLeNet(nn.Module):\n \"\"\"\n 简化版GoogLeNet（适配128×128输入）\n 包含：初始卷积层、Inception模块、辅助分类器、全局平均池化\n \"\"\"\n def init(self, num_classes=3, use_aux=True):\n super(SimpleGoogLeNet, self).init()\n self.use_aux = use_aux\n\n # 初始卷积\n self.conv1 = nn.Sequential(\n nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(3, stride=2, padding=1)\n ) # 128→32\n\n self.conv2 = nn.Sequential(\n nn.Conv2d(64, 192, kernel_size=3, padding=1),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(3, stride=2, padding=1)\n ) # 32→16\n\n # Inception 3\n self.inception3a = InceptionModule(192, 64, 96, 128, 16, 32, 32) # 192→256\n self.inception3b = InceptionModule(256, 128, 128, 192, 32, 96, 64) # 256→480\n self.maxpool3 = nn.MaxPool2d(3, stride=2, padding=1) # 16→8\n\n # Inception 4\n self.inception4a = InceptionModule(480, 192, 96, 208, 16, 48, 64) # 480→512\n self.inception4b = InceptionModule(512, 160, 112, 224, 24, 64, 64) # 512→512\n self.inception4c = InceptionModule(512, 128, 128, 256, 24, 64, 64) # 512→512\n self.inception4d = InceptionModule(512, 112, 144, 288, 32, 64, 64) # 512→528\n self.inception4e = InceptionModule(528, 256, 160, 320, 32, 128, 128) # 528→832\n self.maxpool4 = nn.MaxPool2d(3, stride=2, padding=1) # 8→4\n\n # 辅助分类器1（接在inception4a之后，8×8特征图）\n if self.use_aux:\n self.aux1 = AuxiliaryClassifier(512, num_classes)\n # 辅助分类器2（接在inception4d之后，8×8特征图）\n self.aux2 = AuxiliaryClassifier(528, num_classes)\n\n # Inception 5\n self.inception5a = InceptionModule(832, 256, 160, 320, 32, 128, 128) # 832→832\n self.inception5b = InceptionModule(832, 384, 192, 384, 48, 128, 128) # 832→1024\n\n # 全局平均池化 + 分类器\n self.avgpool = nn.AdaptiveAvgPool2d((1, 1))\n self.dropout = nn.Dropout(0.4)\n self.fc = nn.Linear(1024, num_classes)\n\n self._initialize_weights()\n\n def _initialize_weights(self):\n for m in self.modules():\n if isinstance(m, nn.Conv2d):\n nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')\n if m.bias is not None:\n nn.init.constant_(m.bias, 0)\n elif isinstance(m, nn.Linear):\n nn.init.normal_(m.weight, 0, 0.01)\n nn.init.constant_(m.bias, 0)\n\n def forward(self, x):\n x = self.conv1(x)\n x = self.conv2(x)\n\n x = self.inception3a(x)\n x = self.inception3b(x)\n x = self.maxpool3(x)\n\n x = self.inception4a(x)\n aux1 = self.aux1(x) if self.training and self.use_aux else None\n\n x = self.inception4b(x)\n x = self.inception4c(x)\n x = self.inception4d(x)\n aux2 = self.aux2(x) if self.training and self.use_aux else None\n\n x = self.inception4e(x)\n x = self.maxpool4(x)\n\n x = self.inception5a(x)\n x = self.inception5b(x)\n\n x = self.avgpool(x)\n x = torch.flatten(x, 1)\n x = self.dropout(x)\n x = self.fc(x)\n\n # 训练时返回主输出+两个辅助输出；推理时只返回主输出\n if self.training and self.use_aux:\n return x, aux1, aux2\n return x\n\n# ========================= 测试代码 =========================\nif name == \"main\":\n print(\"=\" * 60)\n print(\"Inception Module Test\")\n print(\"=\" * 60)\n\n inception_test = InceptionModule(\n in_channels=192, ch1x1=64, ch3x3red=96, ch3x3=128,\n ch5x5red=16, ch5x5=32, pool_proj=32\n )\n test_input = torch.randn(2, 192, 28, 28)\n test_output = inception_test(test_input)\n print(f\"Input shape: {test_input.shape}\")\n print(f\"Output shape: {test_output.shape}\")\n print(f\"Channel calculation: 64+128+32+32 = {64+128+32+32}\")\n\n print(\"\n\" + \"=\" * 60)\n print(\"SimpleGoogLeNet Model\")\n print(\"=\" * 60)\n\n # 推理模式（关闭辅助分类器输出）\n googlenet_eval = SimpleGoogLeNet(num_classes=3, use_aux=True)\n googlenet_eval.eval()\n\n total_params = sum(p.numel() for p in googlenet_eval.parameters())\n print(f\"Total parameters: {total_params:,}\")\n\n test_input = torch.randn(2, 3, 128, 128)\n with torch.no_grad():\n test_output = googlenet_eval(test_input)\n print(f\"\n[Eval] Input shape: {test_input.shape}\")\n print(f\"[Eval] Output shape: {test_output.shape}\")\n\n # 训练模式（返回主输出+aux1+aux2）\n googlenet_train = SimpleGoogLeNet(num_classes=3, use_aux=True)\n googlenet_train.train()\n output_main, output_aux1, output_aux2 = googlenet_train(test_input)\n print(f\"\n[Train] Main output: {output_main.shape}\")\n print(f\"[Train] Aux1 output: {output_aux1.shape}\")\n print(f\"[Train] Aux2 output: {output_aux2.shape}\")\n\n # 计算总损失示例\n criterion = nn.CrossEntropyLoss()\n labels = torch.randint(0, 3, (2,))\n loss_main = criterion(output_main, labels)\n loss_aux1 = criterion(output_aux1, labels)\n loss_aux2 = criterion(output_aux2, labels)\n total_loss = loss_main + 0.3 * loss_aux1 + 0.3 * loss_aux2\n print(f\"\nLoss_main: {loss_main.item():.4f}\")\n print(f\"Loss_aux1: {loss_aux1.item():.4f}\")\n print(f\"Loss_aux2: {loss_aux2.item():.4f}\")\n print(f\"Total loss: {total_loss.item():.4f}\")",
     "summary": "# ============================================================================ # GoogLeNet Inception模块实现（完整版） # ============================================================================ class InceptionModule(nn.Module): \"\"\" 经典Inception模块：并行多尺度特征提取 注意：原始GoogLeNet论文中使用AvgPool，无BatchNorm \"\"\" def init(self, in_channels, ch1x1, ch3x3red, ch3x3, ch5x5red, ch5x5, pool_proj): super(InceptionModule, self).init() # 分支1：1×1卷积 self.branch1 = nn.Sequential( nn.Conv2d(in_channels, ch1x1, kernel_size=1), nn.ReLU(inplace=True) ) # 分支2：1×1降维 → 3×3卷积 self.branch2 = nn.Sequential( nn.Conv2d(in_channels, ch3x3red, kernel_size=1), nn.ReLU(inplace=True), nn.Conv2d(ch3x3red, ch3x3, kernel_si...",
     "terms": [
-      "Batch",
       "CrossEntropyLoss",
       "卷积",
       "池化",
@@ -8566,7 +8534,6 @@
     "text": "# ============================================================================\n# ResNet残差网络实现\n# ============================================================================\n\nclass BasicBlock(nn.Module):\n \"\"\"\n 基础残差块（用于ResNet-18/34）\n \"\"\"\n expansion = 1\n\n def init(self, in_channels, out_channels, stride=1, downsample=None):\n super(BasicBlock, self).init()\n\n self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3,\n stride=stride, padding=1, bias=False)\n self.bn1 = nn.BatchNorm2d(out_channels)\n self.relu = nn.ReLU(inplace=True)\n\n self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3,\n stride=1, padding=1, bias=False)\n self.bn2 = nn.BatchNorm2d(out_channels)\n\n self.downsample = downsample # 用于匹配尺寸\n self.stride = stride\n\n def forward(self, x):\n identity = x # 保存输入用于残差连接\n\n out = self.conv1(x)\n out = self.bn1(out)\n out = self.relu(out)\n\n out = self.conv2(out)\n out = self.bn2(out)\n\n # 如果尺寸不匹配，使用downsample\n if self.downsample is not None:\n identity = self.downsample(x)\n\n # 残差连接\n out += identity\n out = self.relu(out)\n\n return out\n\nclass Bottleneck(nn.Module):\n \"\"\"\n Bottleneck残差块（用于ResNet-50/101/152）\n \"\"\"\n expansion = 4 # 输出通道是输入的4倍\n\n def init(self, in_channels, out_channels, stride=1, downsample=None):\n super(Bottleneck, self).init()\n\n # 1×1降维\n self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=False)\n self.bn1 = nn.BatchNorm2d(out_channels)\n\n # 3×3卷积\n self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3,\n stride=stride, padding=1, bias=False)\n self.bn2 = nn.BatchNorm2d(out_channels)\n\n # 1×1升维\n self.conv3 = nn.Conv2d(out_channels, out_channels * self.expansion,\n kernel_size=1, bias=False)\n self.bn3 = nn.BatchNorm2d(out_channels * self.expansion)\n\n self.relu = nn.ReLU(inplace=True)\n self.downsample = downsample\n self.stride = stride\n\n def forward(self, x):\n identity = x\n\n out = self.conv1(x)\n out = self.bn1(out)\n out = self.relu(out)\n\n out = self.conv2(out)\n out = self.bn2(out)\n out = self.relu(out)\n\n out = self.conv3(out)\n out = self.bn3(out)\n\n if self.downsample is not None:\n identity = self.downsample(x)\n\n out += identity # ✅ 现在通道数匹配了\n out = self.relu(out)\n\n return out\n\nclass SimpleResNet(nn.Module):\n \"\"\"\n 简化版ResNet（适配128×128输入）\n \"\"\"\n def init(self, block, layers, num_classes=3):\n super(SimpleResNet, self).init()\n\n self.in_channels = 64\n\n # 初始卷积\n self.conv1 = nn.Sequential(\n nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3, bias=False),\n nn.BatchNorm2d(64),\n nn.ReLU(inplace=True),\n nn.MaxPool2d(kernel_size=3, stride=2, padding=1)\n ) # 128→32\n\n # 残差层\n self.layer1 = self._make_layer(block, 64, layers[0]) # 32×32\n self.layer2 = self._make_layer(block, 128, layers[1], stride=2) # 16×16\n self.layer3 = self._make_layer(block, 256, layers[2], stride=2) # 8×8\n self.layer4 = self._make_layer(block, 512, layers[3], stride=2) # 4×4\n\n # 全局平均池化\n self.avgpool = nn.AdaptiveAvgPool2d((1, 1))\n self.fc = nn.Linear(512 * block.expansion, num_classes)\n\n # 权重初始化\n self._initialize_weights()\n\n def _make_layer(self, block, out_channels, num_blocks, stride=1):\n downsample = None\n\n # 当stride≠1或通道数变化时，需要downsample\n if stride != 1 or self.in_channels != out_channels * block.expansion:\n downsample = nn.Sequential(\n nn.Conv2d(self.in_channels, out_channels * block.expansion,\n kernel_size=1, stride=stride, bias=False),\n nn.BatchNorm2d(out_channels * block.expansion),\n )\n\n layers = []\n layers.append(block(self.in_channels, out_channels, stride, downsample))\n\n self.in_channels = out_channels * block.expansion\n\n for _ in range(1, num_blocks):\n layers.append(block(self.in_channels, out_channels))\n\n return nn.Sequential(*layers)\n\n def forward(self, x):\n x = self.conv1(x)\n\n x = self.layer1(x)\n x = self.layer2(x)\n x = self.layer3(x)\n x = self.layer4(x)\n\n x = self.avgpool(x)\n x = torch.flatten(x, 1)\n x = self.fc(x)\n\n return x\n\n def _initialize_weights(self):\n for m in self.modules():\n if isinstance(m, nn.Conv2d):\n nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')\n elif isinstance(m, nn.BatchNorm2d):\n nn.init.constant_(m.weight, 1)\n nn.init.constant_(m.bias, 0)\n\ndef create_resnet18(num_classes=3):\n \"\"\"创建ResNet-18\"\"\"\n return SimpleResNet(BasicBlock, [2, 2, 2, 2], num_classes)\n\ndef create_resnet34(num_classes=3):\n \"\"\"创建ResNet-34\"\"\"\n return SimpleResNet(BasicBlock, [3, 4, 6, 3], num_classes)\n\ndef create_resnet50(num_classes=3):\n \"\"\"创建ResNet-50\"\"\"\n return SimpleResNet(Bottleneck, [3, 4, 6, 3], num_classes)\n\n# 测试代码\nif name == \"main\":\n print(\"=\" * 60)\n print(\"Residual Block Test\")\n print(\"=\" * 60)\n\n # 测试BasicBlock\n basic_block = BasicBlock(in_channels=64, out_channels=64)\n test_input = torch.randn(2, 64, 56, 56)\n test_output = basic_block(test_input)\n print(f\"BasicBlock:\")\n print(f\" Input: {test_input.shape}\")\n print(f\" Output: {test_output.shape}\")\n print(f\" Has residual connection: {test_output.shape == test_input.shape}\")\n\n # 测试带降采样的BasicBlock\n downsample = nn.Sequential(\n nn.Conv2d(64, 128, kernel_size=1, stride=2, bias=False),\n nn.BatchNorm2d(128)\n )\n basic_block_down = BasicBlock(in_channels=64, out_channels=128, stride=2, downsample=downsample)\n test_output_down = basic_block_down(test_input)\n print(f\"\nBasicBlock with downsampling:\")\n print(f\" Input: {test_input.shape}\")\n print(f\" Output: {test_output_down.shape}\")\n\n # 测试Bottleneck\n print(\"\n\" + \"-\" * 40)\n\n # 添加 downsample，将 64 通道映射到 256 通道\n downsample_bt = nn.Sequential(\n nn.Conv2d(64, 256, kernel_size=1, bias=False),\n nn.BatchNorm2d(256)\n )\n bottleneck = Bottleneck(in_channels=64, out_channels=64, downsample=downsample_bt)\n test_input_bt = torch.randn(2, 64, 56, 56)\n test_output_bt = bottleneck(test_input_bt)\n print(f\"Bottleneck:\")\n print(f\" Input: {test_input_bt.shape}\")\n print(f\" Output: {test_output_bt.shape}\")\n print(f\" Channel expansion: 64 -> {64 * Bottleneck.expansion}\")\n\n # 测试带降采样的Bottleneck\n downsample_bt_down = nn.Sequential(\n nn.Conv2d(64, 256, kernel_size=1, stride=2, bias=False),\n nn.BatchNorm2d(256)\n )\n bottleneck_down = Bottleneck(in_channels=64, out_channels=64, stride=2, downsample=downsample_bt_down)\n test_output_bt_down = bottleneck_down(test_input_bt)\n print(f\"\nBottleneck with downsampling:\")\n print(f\" Input: {test_input_bt.shape}\")\n print(f\" Output: {test_output_bt_down.shape}\")\n\n # 测试完整ResNet-18\n print(\"\n\" + \"=\" * 60)\n print(\"ResNet-18 Model\")\n print(\"=\" * 60)\n\n resnet18 = create_resnet18(num_classes=3)\n total_params = sum(p.numel() for p in resnet18.parameters())\n print(f\"Total parameters: {total_params:,}\")\n\n test_input = torch.randn(2, 3, 128, 128)\n test_output = resnet18(test_input)\n print(f\"\nInput shape: {test_input.shape}\")\n print(f\"Output shape: {test_output.shape}\")\n\n # 测试完整ResNet-50\n print(\"\n\" + \"=\" * 60)\n print(\"ResNet-50 Model\")\n print(\"=\" * 60)\n\n resnet50 = create_resnet50(num_classes=3)\n total_params_50 = sum(p.numel() for p in resnet50.parameters())\n print(f\"Total parameters: {total_params_50:,}\")\n\n test_output_50 = resnet50(test_input)\n print(f\"\nInput shape: {test_input.shape}\")\n print(f\"Output shape: {test_output_50.shape}\")",
     "summary": "# ============================================================================ # ResNet残差网络实现 # ============================================================================ class BasicBlock(nn.Module): \"\"\" 基础残差块（用于ResNet-18/34） \"\"\" expansion = 1 def init(self, in_channels, out_channels, stride=1, downsample=None): super(BasicBlock, self).init() self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=3, stride=stride, padding=1, bias=False) self.bn1 = nn.BatchNorm2d(out_channels) self.relu = nn.ReLU(inplace=True) self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, stride=1, padding=1, bias=False) self.bn2 = nn.BatchNorm2d(out_channels) self.downsample =...",
     "terms": [
-      "Batch",
       "卷积",
       "池化",
       "Kaiming",
@@ -9104,7 +9071,6 @@
     "summary": "# ============================================================================ # 迁移学习完整示例：ResNet18 on RPS Dataset # ============================================================================ import torch import torch.nn as nn import torch.optim as optim from torch.utils.data import DataLoader, TensorDataset from torchvision import models, transforms from torchvision.datasets import ImageFolder from sklearn.metrics import classification_report, confusion_matrix, accuracy_score import numpy as np import time print(\"=\" * 70) print(\"Transfer Learning: ResNet18 on RPS Dataset\") print(\"=\" * 70) # ============================================================================ # S...",
     "terms": [
       "Epoch",
-      "Batch",
       "CrossEntropyLoss",
       "ImageFolder",
       "数据增强",
@@ -9132,7 +9098,6 @@
     "terms": [
       "学习率",
       "Epoch",
-      "Batch",
       "CrossEntropyLoss",
       "ImageFolder",
       "Dropout",
@@ -9804,8 +9769,7 @@
     "summary": "Word2vec: Negative Sampling 假设，给定中心词 orange，我们要预测其上下文词中的juice。 计算词表内所有单词的概率->计算量大 Softmax 0.0003 0.005 0.001 0.6 alien at me happy juice out zero orange Negative Sampling（负采样） 正样本：（orange, juice） Y=1 Softmax -> Multiple sigmoid 负样本：（orange, alien）， （orange, happy）. （orange, zero） Y=0 只对正样本和选取的负样本进行分类，从而减少计算量 Word2vec: Distributed Representations of Words and Phrases and their Compositionality",
     "terms": [
       "Sigmoid",
-      "Softmax",
-      "GAT"
+      "Softmax"
     ]
   },
   {
@@ -9821,9 +9785,7 @@
     ],
     "text": "Word2vec：整体架构\nSentences\nNegative\nSkip Gram\nSampling\nWord\nEmbedding\nWord2vec: Distributed Representations of Words and Phrases and their Compositionality",
     "summary": "Word2vec：整体架构 Sentences Negative Skip Gram Sampling Word Embedding Word2vec: Distributed Representations of Words and Phrases and their Compositionality",
-    "terms": [
-      "GAT"
-    ]
+    "terms": []
   },
   {
     "id": "图学习课件_第一部分_20260602::slide-38",
@@ -9890,9 +9852,7 @@
     ],
     "text": "》图游走类模型\n—DeepWalk\nGraph-\nRandom\nWalk\nSkip Gram\n+\nNegative\nSampling\nNode\nDownstream\n-\nEmbeddings\nTask\nDeepWalk算法简单且有效！但也存在一定问题！",
     "summary": "》图游走类模型 —DeepWalk Graph- Random Walk Skip Gram + Negative Sampling Node Downstream - Embeddings Task DeepWalk算法简单且有效！但也存在一定问题！",
-    "terms": [
-      "GAT"
-    ]
+    "terms": []
   },
   {
     "id": "图学习课件_第一部分_20260602::slide-42",
@@ -9977,9 +9937,7 @@
     ],
     "text": "node2vec：整体框架\nBiased\nGraph •\nRandom\n＋\nSkip Gram\nNegative\nWalk\nSampling\nNode\nDownstream\nEmbeddings\nTask",
     "summary": "node2vec：整体框架 Biased Graph • Random ＋ Skip Gram Negative Walk Sampling Node Downstream Embeddings Task",
-    "terms": [
-      "GAT"
-    ]
+    "terms": []
   },
   {
     "id": "图学习课件_第一部分_20260602::slide-47",
@@ -10030,7 +9988,6 @@
     "text": "5 图神经网络（GNN）\nMLP层\nLayer N\nLayer N+1\ngraph in\ngraph out\n广\n• Eaxn\nGraph Independent Layer\nupdate functionf=2：\n节点，边和整体三者没有关联！",
     "summary": "5 图神经网络（GNN） MLP层 Layer N Layer N+1 graph in graph out 广 • Eaxn Graph Independent Layer update functionf=2： 节点，边和整体三者没有关联！",
     "terms": [
-      "MLP",
       "图神经网络",
       "节点",
       "边"
@@ -10536,7 +10493,6 @@
     "summary": "从序列建模瓶颈到 Transformer 序列到序列 （seq2seq）模型（2014） ENCODER Reply Yes， what's -em 〈END> thought vector Are YOU free tomorrow？ Incoming Email DECODER 3374093 • 编码器（Encoder）：把输入句子读懂，压 口 RNN/LSTM擅长处理序列 缩成一个内部表示 口 翻译、总结文本、简单问答需要： • 解码器（Decoder）：根据 Encoder 提供 变长输入序列 一 变长输出序列 的表示，逐步生成目标语言",
     "terms": [
       "RNN",
-      "LSTM",
       "Seq2Seq",
       "Transformer"
     ]
@@ -12174,7 +12130,8 @@
     "text": "计算代价函数Cost Function（一组数据点的误差和），我们可以采用什么策略呢？\n- loss function是一个数据的误差\n- 计算所有所有数据点(n=N)的损失——批量梯度下降\n- 计算一个数据点(n=1)的损失——随机梯度下降\n- 计算介于1和N之间的n个数据点的损失——小批量梯度下降",
     "summary": "计算代价函数Cost Function（一组数据点的误差和），我们可以采用什么策略呢？ - loss function是一个数据的误差 - 计算所有所有数据点(n=N)的损失——批量梯度下降 - 计算一个数据点(n=1)的损失——随机梯度下降 - 计算介于1和N之间的n个数据点的损失——小批量梯度下降",
     "terms": [
-      "梯度下降"
+      "梯度下降",
+      "Batch"
     ]
   },
   {
@@ -12194,7 +12151,8 @@
     "text": "接下来，我们使用批量梯度下降来计算损失，n=N=80\n- 对于回归问题，通常使用MSE计算损失，平方以后，损失会放大，除以之后和数据量关系不大，\n- mse和极大似然估计是等价的\n- loss surface（两个参数就是一个三位曲线图了）",
     "summary": "接下来，我们使用批量梯度下降来计算损失，n=N=80 - 对于回归问题，通常使用MSE计算损失，平方以后，损失会放大，除以之后和数据量关系不大， - mse和极大似然估计是等价的 - loss surface（两个参数就是一个三位曲线图了）",
     "terms": [
-      "梯度下降"
+      "梯度下降",
+      "Batch"
     ]
   },
   {
@@ -12385,7 +12343,8 @@
     "summary": "- 批量梯度下降(n=N)，一个Epoch更新_1_次参数； - 随机梯度下降(n=1)，一个Epoch更新_N_次参数； - 小批量梯度下降(n)，一个Epoch更新_N/n_次参数。 - 为什么同样的100个epoch之后，mini更快逼近 --因为更新参数更快，更接近 尽管稳定性不是太好 - 同样epoch后，随机梯度下降在初始逼近极快，但是之后很难稳定趋向极值 更新很快，稳定性最差，还有偏差",
     "terms": [
       "梯度下降",
-      "Epoch"
+      "Epoch",
+      "Batch"
     ]
   },
   {
@@ -13049,7 +13008,6 @@
       "梯度下降",
       "损失函数",
       "学习率",
-      "Batch",
       "CrossEntropyLoss",
       "Xavier",
       "BatchNorm",
@@ -13057,8 +13015,7 @@
       "权重衰减",
       "优化器",
       "RMSProp",
-      "Adam",
-      "RNN"
+      "Adam"
     ]
   },
   {
@@ -13465,7 +13422,8 @@
     "text": "#### DataLoader：实现小批量梯度下降",
     "summary": "#### DataLoader：实现小批量梯度下降",
     "terms": [
-      "梯度下降"
+      "梯度下降",
+      "Batch"
     ]
   },
   {
@@ -13562,9 +13520,7 @@
     ],
     "text": "# 为训练集和验证集分别创建DataLoader\ntrain_loader = DataLoader(\n dataset=train_data,\n batch_size=16,\n shuffle=True\n)\n\nval_loader = DataLoader(\n dataset=val_data,\n batch_size=16,\n shuffle=False # 验证集不需要打乱\n)\n\nprint(f'训练batch数量: {len(train_loader)}')\nprint(f'验证batch数量: {len(val_loader)}')",
     "summary": "# 为训练集和验证集分别创建DataLoader train_loader = DataLoader( dataset=train_data, batch_size=16, shuffle=True ) val_loader = DataLoader( dataset=val_data, batch_size=16, shuffle=False # 验证集不需要打乱 ) print(f'训练batch数量: {len(train_loader)}') print(f'验证batch数量: {len(val_loader)}')",
-    "terms": [
-      "Batch"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版::cell-94",
@@ -13582,9 +13538,7 @@
     ],
     "text": "#### 为什么训练时要对数据进行shuffle，测试时不需要\n- 打破排序顺序偏差 如果是一样的顺序，，模型会学习到这个顺序\n- 提高泛化能力 避免过拟合\n- 更好的梯度估计 随机打乱数据可以打破数据的有序性，使得模型在每个batch上的梯度估计更加稳定，有助于模型更快收敛",
     "summary": "#### 为什么训练时要对数据进行shuffle，测试时不需要 - 打破排序顺序偏差 如果是一样的顺序，，模型会学习到这个顺序 - 提高泛化能力 避免过拟合 - 更好的梯度估计 随机打乱数据可以打破数据的有序性，使得模型在每个batch上的梯度估计更加稳定，有助于模型更快收敛",
-    "terms": [
-      "Batch"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版::cell-95",
@@ -13641,9 +13595,7 @@
     ],
     "text": "# 辅助函数：处理mini-batch的内循环\ndef mini_batch(device, data_loader, step_fn):\n mini_batch_losses = []\n for x_batch, y_batch in data_loader:\n x_batch = x_batch.to(device)\n y_batch = y_batch.to(device)\n mini_batch_loss = step_fn(x_batch, y_batch)\n mini_batch_losses.append(mini_batch_loss)\n return sum(mini_batch_losses) / len(mini_batch_losses)",
     "summary": "# 辅助函数：处理mini-batch的内循环 def mini_batch(device, data_loader, step_fn): mini_batch_losses = [] for x_batch, y_batch in data_loader: x_batch = x_batch.to(device) y_batch = y_batch.to(device) mini_batch_loss = step_fn(x_batch, y_batch) mini_batch_losses.append(mini_batch_loss) return sum(mini_batch_losses) / len(mini_batch_losses)",
-    "terms": [
-      "Batch"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版::cell-98",
@@ -13662,8 +13614,7 @@
     "text": "# 模型配置\ntorch.manual_seed(42)\nmodel = nn.Sequential(nn.Linear(1, 1)).to(device)\noptimizer = optim.SGD(model.parameters(), lr=0.1)\nloss_fn = nn.MSELoss(reduction='mean')\n\ntrain_step_fn = make_train_step_fn(model, loss_fn, optimizer)\nval_step_fn = make_val_step_fn(model, loss_fn)\n\n# 训练循环\nn_epochs = 200\nlosses = []\nval_losses = []\n\nfor epoch in range(n_epochs):\n # 训练阶段\n loss = mini_batch(device, train_loader, train_step_fn)\n losses.append(loss)\n \n # 验证阶段（不计算梯度）\n with torch.no_grad():\n val_loss = mini_batch(device, val_loader, val_step_fn)\n val_losses.append(val_loss)\n\nprint(f'最终训练损失: {losses[-1]:.4f}')\nprint(f'最终验证损失: {val_losses[-1]:.4f}')\nprint(f'模型参数: {model.state_dict()}')",
     "summary": "# 模型配置 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) # 训练循环 n_epochs = 200 losses = [] val_losses = [] for epoch in range(n_epochs): # 训练阶段 loss = mini_batch(device, train_loader, train_step_fn) losses.append(loss) # 验证阶段（不计算梯度） with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) val_losses.append(val_loss) print(f'最终训练损失: {losses[-1]:.4f}') print(f'最终验证损失: {val_losses[-1]:.4f}') print(f'模型参数: {model.state_dict()}')",
     "terms": [
-      "Epoch",
-      "Batch"
+      "Epoch"
     ]
   },
   {
@@ -13681,9 +13632,7 @@
     ],
     "text": "- 数据要留在cpu mini-batch发送到gpu\n### 训练模式与验证模式",
     "summary": "- 数据要留在cpu mini-batch发送到gpu ### 训练模式与验证模式",
-    "terms": [
-      "Batch"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版::cell-100",
@@ -13806,9 +13755,7 @@
     ],
     "text": "# 获取一个mini-batch作为示例输入\nx_dummy, y_dummy = next(iter(train_loader))\n\n# 添加模型结构到TensorBoard\n# 需要先将模型和数据发送到同一设备\nwriter.add_graph(model, x_dummy.to(device))\n\nprint('模型结构已添加到TensorBoard')",
     "summary": "# 获取一个mini-batch作为示例输入 x_dummy, y_dummy = next(iter(train_loader)) # 添加模型结构到TensorBoard # 需要先将模型和数据发送到同一设备 writer.add_graph(model, x_dummy.to(device)) print('模型结构已添加到TensorBoard')",
-    "terms": [
-      "Batch"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版::cell-107",
@@ -13845,8 +13792,7 @@
     "text": "# 重新训练并记录到TensorBoard\ntorch.manual_seed(42)\nmodel = nn.Sequential(nn.Linear(1, 1)).to(device)\noptimizer = optim.SGD(model.parameters(), lr=0.1)\nloss_fn = nn.MSELoss(reduction='mean')\n\ntrain_step_fn = make_train_step_fn(model, loss_fn, optimizer)\nval_step_fn = make_val_step_fn(model, loss_fn)\n\nn_epochs = 200\n\nfor epoch in range(n_epochs):\n # 训练阶段\n loss = mini_batch(device, train_loader, train_step_fn)\n \n # 验证阶段\n with torch.no_grad():\n val_loss = mini_batch(device, val_loader, val_step_fn)\n \n # 记录损失到TensorBoard\n writer.add_scalars(\n main_tag='loss',\n tag_scalar_dict={\n 'training': loss,\n 'validation': val_loss\n },\n global_step=epoch\n )\n\n# 关闭writer\nwriter.close()\n\nprint('训练完成，数据已记录到TensorBoard')\nprint(f'最终模型参数: {model.state_dict()}')",
     "summary": "# 重新训练并记录到TensorBoard torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) n_epochs = 200 for epoch in range(n_epochs): # 训练阶段 loss = mini_batch(device, train_loader, train_step_fn) # 验证阶段 with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) # 记录损失到TensorBoard writer.add_scalars( main_tag='loss', tag_scalar_dict={ 'training': loss, 'validation': val_loss }, global_step=epoch ) # 关闭writer writer.close() print('训练完成，数据已记录到TensorBoard') p...",
     "terms": [
-      "Epoch",
-      "Batch"
+      "Epoch"
     ]
   },
   {
@@ -13884,8 +13830,7 @@
     "text": "import matplotlib.pyplot as plt\n# 重新训练并保存损失值\ntorch.manual_seed(42)\nmodel = nn.Sequential(nn.Linear(1, 1)).to(device)\noptimizer = optim.SGD(model.parameters(), lr=0.1)\nloss_fn = nn.MSELoss(reduction='mean')\n\ntrain_step_fn = make_train_step_fn(model, loss_fn, optimizer)\nval_step_fn = make_val_step_fn(model, loss_fn)\n\nn_epochs = 200\nlosses = []\nval_losses = []\n\nfor epoch in range(n_epochs):\n loss = mini_batch(device, train_loader, train_step_fn)\n losses.append(loss)\n \n with torch.no_grad():\n val_loss = mini_batch(device, val_loader, val_step_fn)\n val_losses.append(val_loss)\n\n# 绘制损失曲线\nfig, ax = plt.subplots(figsize=(10, 6))\nax.plot(losses, label='Training Loss', color='#4dabf7', linewidth=2)\nax.plot(val_losses, label='Validation Loss', color='#ff6b6b', linewidth=2)\nax.set_xlabel('Epoch', fontsize=12)\nax.set_ylabel('Loss', fontsize=12)\nax.set_title('Training and Validation Loss Over Time', fontsize=14)\nax.legend(loc='upper right')\nax.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()",
     "summary": "import matplotlib.pyplot as plt # 重新训练并保存损失值 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) n_epochs = 200 losses = [] val_losses = [] for epoch in range(n_epochs): loss = mini_batch(device, train_loader, train_step_fn) losses.append(loss) with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) val_losses.append(val_loss) # 绘制损失曲线 fig, ax = plt.subplots(figsize=(10, 6)) ax.plot(losses, label='Training Loss', color='#4dabf7', linewid...",
     "terms": [
-      "Epoch",
-      "Batch"
+      "Epoch"
     ]
   },
   {
@@ -14093,8 +14038,7 @@
     "text": "# ============ 完整训练流程示例 ============\n\n# 1. 数据准备\ntorch.manual_seed(13)\nx_tensor = torch.as_tensor(x).float()\ny_tensor = torch.as_tensor(y).float()\nfull_dataset = TensorDataset(x_tensor, y_tensor)\n\nn_total = len(full_dataset)\nn_train = int(n_total * 0.8)\nn_val = n_total - n_train\ntrain_data, val_data = random_split(full_dataset, [n_train, n_val])\n\ntrain_loader = DataLoader(train_data, batch_size=16, shuffle=True)\nval_loader = DataLoader(val_data, batch_size=16)\n\n# 2. 模型配置\ntorch.manual_seed(42)\nmodel = nn.Sequential(nn.Linear(1, 1)).to(device)\noptimizer = optim.SGD(model.parameters(), lr=0.1)\nloss_fn = nn.MSELoss(reduction='mean')\n\ntrain_step_fn = make_train_step_fn(model, loss_fn, optimizer)\nval_step_fn = make_val_step_fn(model, loss_fn)\n\n# 创建TensorBoard writer\nwriter = SummaryWriter('runs/final_training')\nx_dummy, _ = next(iter(train_loader))\nwriter.add_graph(model, x_dummy.to(device))\n\n# 3. 模型训练\nn_epochs = 200\nlosses = []\nval_losses = []\n\nfor epoch in range(n_epochs):\n # 训练\n loss = mini_batch(device, train_loader, train_step_fn)\n losses.append(loss)\n \n # 验证\n with torch.no_grad():\n val_loss = mini_batch(device, val_loader, val_step_fn)\n val_losses.append(val_loss)\n \n # 记录到TensorBoard\n writer.add_scalars('loss', {'training': loss, 'validation': val_loss}, epoch)\n\nwriter.close()\n\n# 4. 保存模型\ncheckpoint = {\n 'epoch': n_epochs,\n 'model_state_dict': model.state_dict(),\n 'optimizer_state_dict': optimizer.state_dict(),\n 'loss': losses,\n 'val_loss': val_losses\n}\ntorch.save(checkpoint, 'final_model.pth')\n\nprint('训练完成！')\nprint(f'最终训练损失: {losses[-1]:.4f}')\nprint(f'最终验证损失: {val_losses[-1]:.4f}')\nprint(f'模型参数: {model.state_dict()}')",
     "summary": "# ============ 完整训练流程示例 ============ # 1. 数据准备 torch.manual_seed(13) x_tensor = torch.as_tensor(x).float() y_tensor = torch.as_tensor(y).float() full_dataset = TensorDataset(x_tensor, y_tensor) n_total = len(full_dataset) n_train = int(n_total * 0.8) n_val = n_total - n_train train_data, val_data = random_split(full_dataset, [n_train, n_val]) train_loader = DataLoader(train_data, batch_size=16, shuffle=True) val_loader = DataLoader(val_data, batch_size=16) # 2. 模型配置 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_f...",
     "terms": [
-      "Epoch",
-      "Batch"
+      "Epoch"
     ]
   },
   {
@@ -14524,7 +14468,8 @@
     "text": "计算代价函数Cost Function（一组数据点的误差和），我们可以采用什么策略呢？\n- loss function是一个数据的误差\n- 计算所有所有数据点(n=N)的损失——批量梯度下降\n- 计算一个数据点(n=1)的损失——随机梯度下降\n- 计算介于1和N之间的n个数据点的损失——小批量梯度下降",
     "summary": "计算代价函数Cost Function（一组数据点的误差和），我们可以采用什么策略呢？ - loss function是一个数据的误差 - 计算所有所有数据点(n=N)的损失——批量梯度下降 - 计算一个数据点(n=1)的损失——随机梯度下降 - 计算介于1和N之间的n个数据点的损失——小批量梯度下降",
     "terms": [
-      "梯度下降"
+      "梯度下降",
+      "Batch"
     ]
   },
   {
@@ -14544,7 +14489,8 @@
     "text": "接下来，我们使用批量梯度下降来计算损失，n=N=80\n- 对于回归问题，通常使用MSE计算损失，平方以后，损失会放大，除以之后和数据量关系不大，\n- mse和极大似然估计是等价的\n- loss surface（两个参数就是一个三位曲线图了）",
     "summary": "接下来，我们使用批量梯度下降来计算损失，n=N=80 - 对于回归问题，通常使用MSE计算损失，平方以后，损失会放大，除以之后和数据量关系不大， - mse和极大似然估计是等价的 - loss surface（两个参数就是一个三位曲线图了）",
     "terms": [
-      "梯度下降"
+      "梯度下降",
+      "Batch"
     ]
   },
   {
@@ -14735,7 +14681,8 @@
     "summary": "- 批量梯度下降(n=N)，一个Epoch更新_1_次参数； - 随机梯度下降(n=1)，一个Epoch更新_N_次参数； - 小批量梯度下降(n)，一个Epoch更新_N/n_次参数。 - 为什么同样的100个epoch之后，mini更快逼近 --因为更新参数更快，更接近 尽管稳定性不是太好 - 同样epoch后，随机梯度下降在初始逼近极快，但是之后很难稳定趋向极值 更新很快，稳定性最差，还有偏差",
     "terms": [
       "梯度下降",
-      "Epoch"
+      "Epoch",
+      "Batch"
     ]
   },
   {
@@ -15399,7 +15346,6 @@
       "梯度下降",
       "损失函数",
       "学习率",
-      "Batch",
       "CrossEntropyLoss",
       "Xavier",
       "BatchNorm",
@@ -15407,8 +15353,7 @@
       "权重衰减",
       "优化器",
       "RMSProp",
-      "Adam",
-      "RNN"
+      "Adam"
     ]
   },
   {
@@ -15812,7 +15757,8 @@
     "text": "#### DataLoader：实现小批量梯度下降",
     "summary": "#### DataLoader：实现小批量梯度下降",
     "terms": [
-      "梯度下降"
+      "梯度下降",
+      "Batch"
     ]
   },
   {
@@ -15908,9 +15854,7 @@
     ],
     "text": "# 为训练集和验证集分别创建DataLoader\ntrain_loader = DataLoader(\n dataset=train_data,\n batch_size=16,\n shuffle=True\n)\n\nval_loader = DataLoader(\n dataset=val_data,\n batch_size=16,\n shuffle=False # 验证集不需要打乱\n)\n\nprint(f'训练batch数量: {len(train_loader)}')\nprint(f'验证batch数量: {len(val_loader)}')",
     "summary": "# 为训练集和验证集分别创建DataLoader train_loader = DataLoader( dataset=train_data, batch_size=16, shuffle=True ) val_loader = DataLoader( dataset=val_data, batch_size=16, shuffle=False # 验证集不需要打乱 ) print(f'训练batch数量: {len(train_loader)}') print(f'验证batch数量: {len(val_loader)}')",
-    "terms": [
-      "Batch"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版_副本::cell-94",
@@ -15984,9 +15928,7 @@
     ],
     "text": "# 辅助函数：处理mini-batch的内循环\ndef mini_batch(device, data_loader, step_fn):\n mini_batch_losses = []\n for x_batch, y_batch in data_loader:\n x_batch = x_batch.to(device)\n y_batch = y_batch.to(device)\n mini_batch_loss = step_fn(x_batch, y_batch)\n mini_batch_losses.append(mini_batch_loss)\n return sum(mini_batch_losses) / len(mini_batch_losses)",
     "summary": "# 辅助函数：处理mini-batch的内循环 def mini_batch(device, data_loader, step_fn): mini_batch_losses = [] for x_batch, y_batch in data_loader: x_batch = x_batch.to(device) y_batch = y_batch.to(device) mini_batch_loss = step_fn(x_batch, y_batch) mini_batch_losses.append(mini_batch_loss) return sum(mini_batch_losses) / len(mini_batch_losses)",
-    "terms": [
-      "Batch"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版_副本::cell-98",
@@ -16005,8 +15947,7 @@
     "text": "# 模型配置\ntorch.manual_seed(42)\nmodel = nn.Sequential(nn.Linear(1, 1)).to(device)\noptimizer = optim.SGD(model.parameters(), lr=0.1)\nloss_fn = nn.MSELoss(reduction='mean')\n\ntrain_step_fn = make_train_step_fn(model, loss_fn, optimizer)\nval_step_fn = make_val_step_fn(model, loss_fn)\n\n# 训练循环\nn_epochs = 200\nlosses = []\nval_losses = []\n\nfor epoch in range(n_epochs):\n # 训练阶段\n loss = mini_batch(device, train_loader, train_step_fn)\n losses.append(loss)\n \n # 验证阶段（不计算梯度）\n with torch.no_grad():\n val_loss = mini_batch(device, val_loader, val_step_fn)\n val_losses.append(val_loss)\n\nprint(f'最终训练损失: {losses[-1]:.4f}')\nprint(f'最终验证损失: {val_losses[-1]:.4f}')\nprint(f'模型参数: {model.state_dict()}')",
     "summary": "# 模型配置 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) # 训练循环 n_epochs = 200 losses = [] val_losses = [] for epoch in range(n_epochs): # 训练阶段 loss = mini_batch(device, train_loader, train_step_fn) losses.append(loss) # 验证阶段（不计算梯度） with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) val_losses.append(val_loss) print(f'最终训练损失: {losses[-1]:.4f}') print(f'最终验证损失: {val_losses[-1]:.4f}') print(f'模型参数: {model.state_dict()}')",
     "terms": [
-      "Epoch",
-      "Batch"
+      "Epoch"
     ]
   },
   {
@@ -16130,9 +16071,7 @@
     ],
     "text": "# 获取一个mini-batch作为示例输入\nx_dummy, y_dummy = next(iter(train_loader))\n\n# 添加模型结构到TensorBoard\n# 需要先将模型和数据发送到同一设备\nwriter.add_graph(model, x_dummy.to(device))\n\nprint('模型结构已添加到TensorBoard')",
     "summary": "# 获取一个mini-batch作为示例输入 x_dummy, y_dummy = next(iter(train_loader)) # 添加模型结构到TensorBoard # 需要先将模型和数据发送到同一设备 writer.add_graph(model, x_dummy.to(device)) print('模型结构已添加到TensorBoard')",
-    "terms": [
-      "Batch"
-    ]
+    "terms": []
   },
   {
     "id": "多层感知机1_学生分发版_副本::cell-106",
@@ -16169,8 +16108,7 @@
     "text": "# 重新训练并记录到TensorBoard\ntorch.manual_seed(42)\nmodel = nn.Sequential(nn.Linear(1, 1)).to(device)\noptimizer = optim.SGD(model.parameters(), lr=0.1)\nloss_fn = nn.MSELoss(reduction='mean')\n\ntrain_step_fn = make_train_step_fn(model, loss_fn, optimizer)\nval_step_fn = make_val_step_fn(model, loss_fn)\n\nn_epochs = 200\n\nfor epoch in range(n_epochs):\n # 训练阶段\n loss = mini_batch(device, train_loader, train_step_fn)\n \n # 验证阶段\n with torch.no_grad():\n val_loss = mini_batch(device, val_loader, val_step_fn)\n \n # 记录损失到TensorBoard\n writer.add_scalars(\n main_tag='loss',\n tag_scalar_dict={\n 'training': loss,\n 'validation': val_loss\n },\n global_step=epoch\n )\n\n# 关闭writer\nwriter.close()\n\nprint('训练完成，数据已记录到TensorBoard')\nprint(f'最终模型参数: {model.state_dict()}')",
     "summary": "# 重新训练并记录到TensorBoard torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) n_epochs = 200 for epoch in range(n_epochs): # 训练阶段 loss = mini_batch(device, train_loader, train_step_fn) # 验证阶段 with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) # 记录损失到TensorBoard writer.add_scalars( main_tag='loss', tag_scalar_dict={ 'training': loss, 'validation': val_loss }, global_step=epoch ) # 关闭writer writer.close() print('训练完成，数据已记录到TensorBoard') p...",
     "terms": [
-      "Epoch",
-      "Batch"
+      "Epoch"
     ]
   },
   {
@@ -16208,8 +16146,7 @@
     "text": "import matplotlib.pyplot as plt\n# 重新训练并保存损失值\ntorch.manual_seed(42)\nmodel = nn.Sequential(nn.Linear(1, 1)).to(device)\noptimizer = optim.SGD(model.parameters(), lr=0.1)\nloss_fn = nn.MSELoss(reduction='mean')\n\ntrain_step_fn = make_train_step_fn(model, loss_fn, optimizer)\nval_step_fn = make_val_step_fn(model, loss_fn)\n\nn_epochs = 200\nlosses = []\nval_losses = []\n\nfor epoch in range(n_epochs):\n loss = mini_batch(device, train_loader, train_step_fn)\n losses.append(loss)\n \n with torch.no_grad():\n val_loss = mini_batch(device, val_loader, val_step_fn)\n val_losses.append(val_loss)\n\n# 绘制损失曲线\nfig, ax = plt.subplots(figsize=(10, 6))\nax.plot(losses, label='Training Loss', color='#4dabf7', linewidth=2)\nax.plot(val_losses, label='Validation Loss', color='#ff6b6b', linewidth=2)\nax.set_xlabel('Epoch', fontsize=12)\nax.set_ylabel('Loss', fontsize=12)\nax.set_title('Training and Validation Loss Over Time', fontsize=14)\nax.legend(loc='upper right')\nax.grid(True, alpha=0.3)\nplt.tight_layout()\nplt.show()",
     "summary": "import matplotlib.pyplot as plt # 重新训练并保存损失值 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_fn, optimizer) val_step_fn = make_val_step_fn(model, loss_fn) n_epochs = 200 losses = [] val_losses = [] for epoch in range(n_epochs): loss = mini_batch(device, train_loader, train_step_fn) losses.append(loss) with torch.no_grad(): val_loss = mini_batch(device, val_loader, val_step_fn) val_losses.append(val_loss) # 绘制损失曲线 fig, ax = plt.subplots(figsize=(10, 6)) ax.plot(losses, label='Training Loss', color='#4dabf7', linewid...",
     "terms": [
-      "Epoch",
-      "Batch"
+      "Epoch"
     ]
   },
   {
@@ -16417,8 +16354,7 @@
     "text": "# ============ 完整训练流程示例 ============\n\n# 1. 数据准备\ntorch.manual_seed(13)\nx_tensor = torch.as_tensor(x).float()\ny_tensor = torch.as_tensor(y).float()\nfull_dataset = TensorDataset(x_tensor, y_tensor)\n\nn_total = len(full_dataset)\nn_train = int(n_total * 0.8)\nn_val = n_total - n_train\ntrain_data, val_data = random_split(full_dataset, [n_train, n_val])\n\ntrain_loader = DataLoader(train_data, batch_size=16, shuffle=True)\nval_loader = DataLoader(val_data, batch_size=16)\n\n# 2. 模型配置\ntorch.manual_seed(42)\nmodel = nn.Sequential(nn.Linear(1, 1)).to(device)\noptimizer = optim.SGD(model.parameters(), lr=0.1)\nloss_fn = nn.MSELoss(reduction='mean')\n\ntrain_step_fn = make_train_step_fn(model, loss_fn, optimizer)\nval_step_fn = make_val_step_fn(model, loss_fn)\n\n# 创建TensorBoard writer\nwriter = SummaryWriter('runs/final_training')\nx_dummy, _ = next(iter(train_loader))\nwriter.add_graph(model, x_dummy.to(device))\n\n# 3. 模型训练\nn_epochs = 200\nlosses = []\nval_losses = []\n\nfor epoch in range(n_epochs):\n # 训练\n loss = mini_batch(device, train_loader, train_step_fn)\n losses.append(loss)\n \n # 验证\n with torch.no_grad():\n val_loss = mini_batch(device, val_loader, val_step_fn)\n val_losses.append(val_loss)\n \n # 记录到TensorBoard\n writer.add_scalars('loss', {'training': loss, 'validation': val_loss}, epoch)\n\nwriter.close()\n\n# 4. 保存模型\ncheckpoint = {\n 'epoch': n_epochs,\n 'model_state_dict': model.state_dict(),\n 'optimizer_state_dict': optimizer.state_dict(),\n 'loss': losses,\n 'val_loss': val_losses\n}\ntorch.save(checkpoint, 'final_model.pth')\n\nprint('训练完成！')\nprint(f'最终训练损失: {losses[-1]:.4f}')\nprint(f'最终验证损失: {val_losses[-1]:.4f}')\nprint(f'模型参数: {model.state_dict()}')",
     "summary": "# ============ 完整训练流程示例 ============ # 1. 数据准备 torch.manual_seed(13) x_tensor = torch.as_tensor(x).float() y_tensor = torch.as_tensor(y).float() full_dataset = TensorDataset(x_tensor, y_tensor) n_total = len(full_dataset) n_train = int(n_total * 0.8) n_val = n_total - n_train train_data, val_data = random_split(full_dataset, [n_train, n_val]) train_loader = DataLoader(train_data, batch_size=16, shuffle=True) val_loader = DataLoader(val_data, batch_size=16) # 2. 模型配置 torch.manual_seed(42) model = nn.Sequential(nn.Linear(1, 1)).to(device) optimizer = optim.SGD(model.parameters(), lr=0.1) loss_fn = nn.MSELoss(reduction='mean') train_step_fn = make_train_step_fn(model, loss_f...",
     "terms": [
-      "Epoch",
-      "Batch"
+      "Epoch"
     ]
   },
   {
@@ -16520,7 +16456,6 @@
       "Sigmoid",
       "Softmax",
       "交叉熵",
-      "MLP",
       "多层感知机"
     ]
   },
@@ -17529,7 +17464,6 @@
     "text": "#### RNN的循环连接\n\nRNN通过引入隐藏状态（Hidden State）来传递序列信息\n\n关键特性：\n- 参数共享：同一组参数处理所有时间步\n- 记忆能力：隐藏状态保存历史信息\n- 变长处理：可处理任意长度的序列",
     "summary": "#### RNN的循环连接 RNN通过引入隐藏状态（Hidden State）来传递序列信息 关键特性： - 参数共享：同一组参数处理所有时间步 - 记忆能力：隐藏状态保存历史信息 - 变长处理：可处理任意长度的序列",
     "terms": [
-      "RNN",
       "隐藏状态"
     ]
   },
@@ -17549,9 +17483,7 @@
     ],
     "text": "RNN单元只有一个！它会学习一组特定的权重和偏置，并且会在序列的每一步中都以完全相同的方式对输入进行转换。",
     "summary": "RNN单元只有一个！它会学习一组特定的权重和偏置，并且会在序列的每一步中都以完全相同的方式对输入进行转换。",
-    "terms": [
-      "RNN"
-    ]
+    "terms": []
   },
   {
     "id": "循环神经网络-学生分发版-终版2026::cell-11",
@@ -17591,7 +17523,6 @@
     "text": "# RNN隐藏状态更新可视化\ndef rnn_step(x_t, h_prev, W_xh, W_hh, b_h):\n \"\"\"\n 单步RNN计算\n x_t: 当前输入 (input_size,)\n h_prev: 前一隐藏状态 (hidden_size,)\n W_xh: 输入到隐藏的权重\n W_hh: 隐藏到隐藏的权重\n b_h: 隐藏层偏置\n \"\"\"\n # 隐藏状态更新: h_t = tanh(W_xh @ x_t + W_hh @ h_prev + b_h)\n h_t = np.tanh(W_xh @ x_t + W_hh @ h_prev + b_h)\n return h_t\n\n# 示例参数\ninput_size = 3\nhidden_size = 4\n\n# 随机初始化权重\nW_xh = np.random.randn(hidden_size, input_size) * 0.1\nW_hh = np.random.randn(hidden_size, hidden_size) * 0.1\nb_h = np.zeros(hidden_size)\n\n# 序列数据 (3个时间步)\nsequence = [\n np.array([1.0, 0.5, -0.5]), # t=0\n np.array([0.8, 0.3, -0.3]), # t=1\n np.array([0.6, 0.2, -0.2]), # t=2\n]\n\n# 初始隐藏状态\nh = np.zeros(hidden_size)\n\nprint(\"=== RNN隐藏状态更新过程 ===\n\")\nprint(f\"初始隐藏状态 h_0: {h}\n\")\n\nhidden_states = [h.copy()]\n\nfor t, x_t in enumerate(sequence):\n h = rnn_step(x_t, h, W_xh, W_hh, b_h)\n hidden_states.append(h.copy())\n print(f\"时间步 {t+1}:\")\n print(f\" 输入 x_{t+1}: {x_t}\")\n print(f\" 隐藏状态 h_{t+1}: {h.round(4)}\")\n print()\n\nprint(\"注意：隐藏状态在每个时间步都在更新，携带了历史信息\")",
     "summary": "# RNN隐藏状态更新可视化 def rnn_step(x_t, h_prev, W_xh, W_hh, b_h): \"\"\" 单步RNN计算 x_t: 当前输入 (input_size,) h_prev: 前一隐藏状态 (hidden_size,) W_xh: 输入到隐藏的权重 W_hh: 隐藏到隐藏的权重 b_h: 隐藏层偏置 \"\"\" # 隐藏状态更新: h_t = tanh(W_xh @ x_t + W_hh @ h_prev + b_h) h_t = np.tanh(W_xh @ x_t + W_hh @ h_prev + b_h) return h_t # 示例参数 input_size = 3 hidden_size = 4 # 随机初始化权重 W_xh = np.random.randn(hidden_size, input_size) * 0.1 W_hh = np.random.randn(hidden_size, hidden_size) * 0.1 b_h = np.zeros(hidden_size) # 序列数据 (3个时间步) sequence = [ np.array([1.0, 0.5, -0.5]), # t=0 np.array([0.8, 0.3, -0.3]), # t=1 np.array([0.6, 0.2, -0.2]), # t=2 ] # 初始隐藏状态 h = np.zeros(hidden_size) print(\"=== RNN隐藏状态更新过程 === \") print(f\"初始隐藏状态...",
     "terms": [
-      "RNN",
       "隐藏状态"
     ]
   },
@@ -17613,7 +17544,6 @@
     "summary": "##### 输出结果分析 观察要点： 1. 隐藏状态的变化：每个时间步的隐藏状态 $h_t$ 都在变化，说明模型正在处理序列信息 2. 信息累积：后期的隐藏状态包含了前面所有时间步的信息 3. 数值范围：由于使用了 $\\tanh$ 激活函数，隐藏状态的值被限制在 $(-1, 1)$ 之间 关键理解： - 初始状态 $h_0$ 为零向量，表示\\\"没有历史信息\\\" - 随着时间步推进，隐藏状态逐渐携带更多上下文信息 - 这正是RNN能够处理序列数据的核心机制",
     "terms": [
       "激活函数",
-      "RNN",
       "隐藏状态"
     ]
   },
@@ -17674,7 +17604,6 @@
     "text": "#### RNN Layer vs RNN Cell：两种使用方式\n\nPyTorch 提供了两种 RNN 接口，适用于不同场景：\n\n| 特性 | nn.RNNCell | nn.RNN |\n|:---:|:---|:---|\n| 处理粒度 | 单个时间步 | 整个序列 |\n| 使用方式 | 手动循环 | 自动处理 |\n| 输入形状 | (N, F) - 单个时间步 | (L, N, F) 或 (N, L, F) - 整个序列 |\n| 隐藏状态 | 需手动传递 h_t | 自动管理，可返回最终状态 |\n| 典型场景 | 需自定义循环逻辑时 | 标准序列建模 |\n| 代码复杂度 | 较繁琐 | 简洁 |\n\n核心区别：\n- nn.RNNCell：底层接口，处理单个时间步，需要手动写循环，但灵活可控\n- nn.RNN：高层封装，处理整个序列，自动管理时间步循环\n\n---\n\n##### nn.RNNCell 的适用场景\n\n虽然 nn.RNN 更常用，但 nn.RNNCell 在以下场景不可替代：\n\n| 场景 | 说明 |\n|:---|:---|\n| 注意力机制 | 在循环中插入注意力计算（如 Seq2Seq + Attention） |\n| 自回归生成 | 下一步输入依赖当前输出（如 GPT 逐个 token 生成） |\n| 条件处理 | 循环中需要条件分支（如根据当前状态决定是否重置） |\n| 非标准结构 | 多模态融合、辅助任务等复杂架构 |\n\n类比：\n- nn.RNN = 全自动洗衣机，一键完成标准流程\n- nn.RNNCell = 手动洗衣，可在任意步骤加漂洗、脱水，适合特殊需求\n\n---\n\n##### nn.RNN 的主要参数\n\n| 参数 | 含义 | 默认值 | 备注 |\n|:-----|:-----|:------:|:-----|\n| input_size | 每个数据点的特征数 | - | 必须指定 |\n| hidden_size | 隐藏状态维度 | - | 决定模型容量 |\n| num_layers | 堆叠层数 | 1 | 多层 RNN |\n| bias | 是否使用偏置 | True | 通常保持默认 |\n| batch_first | 批次维度是否为第一维 | False | 建议设为 True |\n| bidirectional | 是否双向 | False | 双向 RNN |\n| dropout | 层间 dropout 概率 | 0 | 仅多层时有效 |\n| nonlinearity | 激活函数 | 'tanh' | 可选 'tanh' 或 'relu' |\n\n---\n\n##### 输入输出形状对比\n\nnn.RNNCell（单步）：\n\n输入: x_t (N, F) - 当前时间步输入\n h_prev (N, H) - 上一时刻隐藏状态\n输出: h_t (N, H) - 当前时刻隐藏状态\n\nnn.RNN（序列）：\n\n输入: x (L, N, F) 或 (N, L, F) - 整个序列\n h_0 (num_layers, N, H) - 初始隐藏状态（可选）\n输出: output (L, N, H) 或 (N, L, H) - 所有时间步的隐藏状态\n h_n (num_layers, N, H) - 最终隐藏状态\n\n其中：\n- N = batch_size（批次大小）\n- L = sequence_length（序列长度）\n- F = input_size（输入特征维度）\n- H = hidden_size（隐藏状态维度）",
     "summary": "#### RNN Layer vs RNN Cell：两种使用方式 PyTorch 提供了两种 RNN 接口，适用于不同场景： | 特性 | nn.RNNCell | nn.RNN | |:---:|:---|:---| | 处理粒度 | 单个时间步 | 整个序列 | | 使用方式 | 手动循环 | 自动处理 | | 输入形状 | (N, F) - 单个时间步 | (L, N, F) 或 (N, L, F) - 整个序列 | | 隐藏状态 | 需手动传递 h_t | 自动管理，可返回最终状态 | | 典型场景 | 需自定义循环逻辑时 | 标准序列建模 | | 代码复杂度 | 较繁琐 | 简洁 | 核心区别： - nn.RNNCell：底层接口，处理单个时间步，需要手动写循环，但灵活可控 - nn.RNN：高层封装，处理整个序列，自动管理时间步循环 --- ##### nn.RNNCell 的适用场景 虽然 nn.RNN 更常用，但 nn.RNNCell 在以下场景不可替代： | 场景 | 说明 | |:---|:---| | 注意力机制 | 在循环中插入注意力计算（如 Seq2Seq + Attention） | | 自回归生成 | 下一步输入依赖当前输出（如 GPT 逐个 token 生成） | | 条件处理 | 循环中需要条件分支（如根据当前状态决定是否重置） | | 非标准结构 | 多模态融合、辅助任务等复杂架构 | 类比： - nn.RNN = 全自动洗衣机，一键完成标准流程 - nn.RNNCell = 手动洗衣，可在任意步骤加...",
     "terms": [
-      "Batch",
       "激活函数",
       "Dropout",
       "RNN",
@@ -17742,8 +17671,6 @@
     "text": "#### 输出结果分析\n\n关键观察点：\n\n| 对比项 | batch_first=False | batch_first=True |\n|:---|:---|:---|\n| 输入shape | (L, N, F) 需手动转置 | (N, L, F) 与DataLoader一致 |\n| 输出shape | (L, N, H) | (N, L, H) |\n| 易错指数 | ⭐⭐⭐⭐⭐ | ⭐⭐ |\n\n核心结论：\n\n1. 务必使用 batch_first=True：与DataLoader输出保持一致，避免手动转置出错\n\n2. 隐藏状态形状始终为 (num_layers, N, H)：不受 batch_first 影响！\n\n3. output[:, -1] 与 final_hidden 的关系（以下基于 batch_first=True）：\n - 单向RNN：output[:, -1] == final_hidden[-1] ✓\n - 双向RNN：output[:, -1] 包含 [正向在 t=L-1 的状态 | 反向在 t=L-1 的状态] 的拼接，不等于 final_hidden\n - final_hidden[0] = 正向最后时刻（t=L-1）\n - final_hidden[1] = 反向最终状态（t=0，即原序列开头）",
     "summary": "#### 输出结果分析 关键观察点： | 对比项 | batch_first=False | batch_first=True | |:---|:---|:---| | 输入shape | (L, N, F) 需手动转置 | (N, L, F) 与DataLoader一致 | | 输出shape | (L, N, H) | (N, L, H) | | 易错指数 | ⭐⭐⭐⭐⭐ | ⭐⭐ | 核心结论： 1. 务必使用 batch_first=True：与DataLoader输出保持一致，避免手动转置出错 2. 隐藏状态形状始终为 (num_layers, N, H)：不受 batch_first 影响！ 3. output[:, -1] 与 final_hidden 的关系（以下基于 batch_first=True）： - 单向RNN：output[:, -1] == final_hidden[-1] ✓ - 双向RNN：output[:, -1] 包含 [正向在 t=L-1 的状态 | 反向在 t=L-1 的状态] 的拼接，不等于 final_hidden - final_hidden[0] = 正向最后时刻（t=L-1） - final_hidden[1] = 反向最终状态（t=0，即原序列开头）",
     "terms": [
-      "Batch",
-      "RNN",
       "隐藏状态",
       "双向RNN"
     ]
@@ -17784,7 +17711,6 @@
     "summary": "#### 堆叠RNN的原理 堆叠RNN：将多个RNN层堆叠在一起，前一层的输出作为后一层的输入。 注意： - 两层堆叠RNN已经计算代价很高（时间上的顺序依赖 + 层间的顺序依赖） - 输出是最后一层的隐藏状态序列 - 每层的最终隐藏状态会被保存 --- ##### 参数量计算 堆叠RNN的计算成本随层数线性增长： python # 单层RNN参数量（单向） 单层参数量 = (input_size + hidden_size) * hidden_size + hidden_size # 堆叠L层RNN参数量（单向） 总参数量 = [(input_size + hidden_size) * hidden_size + hidden_size] # 第1层 + (L-1) * [(hidden_size + hidden_size) * hidden_size + hidden_size] # 第2~L层 # 简化公式（假设 input_size ≈ hidden_size，常见于嵌入维度等于隐藏维度时） 总参数量 ≈ L × (2 * hidden_size² + hidden_size) 示例：input_size = hidden_size = 256 时，单层 ≈ 131K，层数每加 1 约增加 131K 关键洞察：层数增加带来表达能力提升，但也增加了梯度消失风险和过拟合可能。 --- ##### 代码示例：Shape演示",
     "terms": [
       "梯度消失",
-      "RNN",
       "隐藏状态",
       "堆叠RNN",
       "嵌入"
@@ -17805,7 +17731,6 @@
     "text": "# 堆叠RNN Shape演示\nimport torch\nimport torch.nn as nn\n\n# 参数设置\nN, L, F, H, num_layers = 2, 10, 32, 64, 3 # 3层堆叠\n\nprint(\"=\"*60)\nprint(\"堆叠RNN Shape演示\")\nprint(\"=\"*60)\n\n# 创建3层堆叠RNN\nstacked_rnn = nn.RNN(\n input_size=F,\n hidden_size=H,\n num_layers=num_layers, # 关键参数：堆叠层数\n batch_first=True,\n bidirectional=False\n)\n\n# 输入数据 (模拟DataLoader输出)\nx = torch.randn(N, L, F)\nprint(f\"\n输入 shape: {x.shape}\") # (N, L, F)\nprint(f\" N={N}: batch_size (批次大小)\")\nprint(f\" L={L}: sequence_length (序列长度)\")\nprint(f\" F={F}: input_size (输入特征维度)\")\n\n# 前向传播\noutput, final_hidden = stacked_rnn(x)\n\nprint(f\"\n输出 shape: {output.shape}\")\nprint(f\" → 最后一层所有时间步的隐藏状态 (N, L, H)\")\n\nprint(f\"\n最终隐藏状态: {final_hidden.shape}\")\nprint(f\" → 每层最后时刻的隐藏状态 (num_layers, N, H)\")\n\n# 逐层查看\nprint(\"\n逐层最终状态：\")\nfor i in range(num_layers):\n print(f\" 第{i+1}层: {final_hidden[i].shape} - 最后时刻状态\")",
     "summary": "# 堆叠RNN Shape演示 import torch import torch.nn as nn # 参数设置 N, L, F, H, num_layers = 2, 10, 32, 64, 3 # 3层堆叠 print(\"=\"*60) print(\"堆叠RNN Shape演示\") print(\"=\"*60) # 创建3层堆叠RNN stacked_rnn = nn.RNN( input_size=F, hidden_size=H, num_layers=num_layers, # 关键参数：堆叠层数 batch_first=True, bidirectional=False ) # 输入数据 (模拟DataLoader输出) x = torch.randn(N, L, F) print(f\" 输入 shape: {x.shape}\") # (N, L, F) print(f\" N={N}: batch_size (批次大小)\") print(f\" L={L}: sequence_length (序列长度)\") print(f\" F={F}: input_size (输入特征维度)\") # 前向传播 output, final_hidden = stacked_rnn(x) print(f\" 输出 shape: {output.shape}\") print(f\" → 最后一层所有时间步的隐藏状态 (N, L, H)\") print(f\" 最终隐藏状态: {final_hidden.shape}\") print(f\" → 每层最后时刻的...",
     "terms": [
-      "Batch",
       "RNN",
       "隐藏状态",
       "堆叠RNN"
@@ -17886,7 +17811,6 @@
     "text": "#### 双向RNN的结构\n\n关键操作：\n- 前向RNN（Forward）：处理原始序列 [x₁, x₂, x₃, ..., xₙ]，捕捉过去信息\n- 后向RNN（Backward）：处理反向序列 [xₙ, ..., x₃, x₂, x₁]，捕捉未来信息\n- 拼接（Concatenate）：将两个方向的隐藏状态在特征维度合并\n- 输出维度：2 × hidden_size（两个方向的拼接）\n\n---\n\n##### 参数量对比\n\n双向RNN的参数量是单向的2倍（两个独立的RNN）：\n\npython\n# 单向RNN参数量\n单向参数量 = (input_size + hidden_size) * hidden_size + hidden_size\n\n# 双向RNN参数量\n双向参数量 = 2 × 单向参数量\n = 2 × [(input_size + hidden_size) * hidden_size + hidden_size]\n\n注意：虽然参数量翻倍，但前向和后向RNN可以并行计算，不会增加时间复杂度。\n\n---\n\n##### 代码示例：Shape演示",
     "summary": "#### 双向RNN的结构 关键操作： - 前向RNN（Forward）：处理原始序列 [x₁, x₂, x₃, ..., xₙ]，捕捉过去信息 - 后向RNN（Backward）：处理反向序列 [xₙ, ..., x₃, x₂, x₁]，捕捉未来信息 - 拼接（Concatenate）：将两个方向的隐藏状态在特征维度合并 - 输出维度：2 × hidden_size（两个方向的拼接） --- ##### 参数量对比 双向RNN的参数量是单向的2倍（两个独立的RNN）： python # 单向RNN参数量 单向参数量 = (input_size + hidden_size) * hidden_size + hidden_size # 双向RNN参数量 双向参数量 = 2 × 单向参数量 = 2 × [(input_size + hidden_size) * hidden_size + hidden_size] 注意：虽然参数量翻倍，但前向和后向RNN可以并行计算，不会增加时间复杂度。 --- ##### 代码示例：Shape演示",
     "terms": [
-      "RNN",
       "隐藏状态",
       "双向RNN"
     ]
@@ -17928,7 +17852,6 @@
     "text": "#### 输出结果分析\n\n关键观察点：\n\n| 变量 | 单向RNN | 双向RNN | 说明 |\n|:---|:---:|:---:|:---|\n| output | (N, L, H) | (N, L, 2*H) | 所有时间步的隐藏状态 |\n| final_hidden | (1, N, H) | (2, N, H) | 每层/每方向的最终状态 |\n| 参数量 | ~131K (H=256) | ~262K (H=256) | 双向是单向的2倍 |\n\n参数命名规则（查看state_dict时）：\n- weight_ih_l0：第0层输入到隐藏权重（前向）\n- weight_ih_l0_reverse：第0层输入到隐藏权重（后向）\n\n使用建议：\n\n| 任务类型 | 推荐取法 | 原因 |\n|:---|:---|:---|\n| 序列分类 | output[:, -1] | 包含两个方向的完整信息 |\n| 句子编码 | torch.cat([hidden[0], hidden[1]], dim=-1) | 显式拼接两个方向最后时刻 |\n| 序列标注 | output (全部) | 每个位置都有双向上下文 |",
     "summary": "#### 输出结果分析 关键观察点： | 变量 | 单向RNN | 双向RNN | 说明 | |:---|:---:|:---:|:---| | output | (N, L, H) | (N, L, 2*H) | 所有时间步的隐藏状态 | | final_hidden | (1, N, H) | (2, N, H) | 每层/每方向的最终状态 | | 参数量 | ~131K (H=256) | ~262K (H=256) | 双向是单向的2倍 | 参数命名规则（查看state_dict时）： - weight_ih_l0：第0层输入到隐藏权重（前向） - weight_ih_l0_reverse：第0层输入到隐藏权重（后向） 使用建议： | 任务类型 | 推荐取法 | 原因 | |:---|:---|:---| | 序列分类 | output[:, -1] | 包含两个方向的完整信息 | | 句子编码 | torch.cat([hidden[0], hidden[1]], dim=-1) | 显式拼接两个方向最后时刻 | | 序列标注 | output (全部) | 每个位置都有双向上下文 |",
     "terms": [
-      "RNN",
       "隐藏状态",
       "双向RNN"
     ]
@@ -17949,7 +17872,6 @@
     "text": "### 六、深度双向RNN",
     "summary": "### 六、深度双向RNN",
     "terms": [
-      "RNN",
       "双向RNN"
     ]
   },
@@ -17970,10 +17892,8 @@
     "text": "#### 深度双向循环神经网络\n\n将堆叠RNN与双向RNN结合，形成深度双向RNN\n\n参数量计算：\n- 普通LSTM: 参数量 ≈ $4 \\times (IH + HH + bias)$\n- 双向LSTM: 参数量 × 2\n- 深度双向LSTM (L层): 参数量 × 2 × L\n\n应用场景：\n- 机器翻译编码器\n- 语音识别\n- 命名实体识别（NER）\n- 需要复杂特征提取的序列任务",
     "summary": "#### 深度双向循环神经网络 将堆叠RNN与双向RNN结合，形成深度双向RNN 参数量计算： - 普通LSTM: 参数量 ≈ $4 \\times (IH + HH + bias)$ - 双向LSTM: 参数量 × 2 - 深度双向LSTM (L层): 参数量 × 2 × L 应用场景： - 机器翻译编码器 - 语音识别 - 命名实体识别（NER） - 需要复杂特征提取的序列任务",
     "terms": [
-      "RNN",
       "双向RNN",
-      "堆叠RNN",
-      "LSTM"
+      "堆叠RNN"
     ]
   },
   {
@@ -17991,9 +17911,7 @@
     ],
     "text": "### 七、RNN的梯度问题",
     "summary": "### 七、RNN的梯度问题",
-    "terms": [
-      "RNN"
-    ]
+    "terms": []
   },
   {
     "id": "循环神经网络-学生分发版-终版2026::cell-32",
@@ -18012,8 +17930,7 @@
     "text": "#### 步骤1：建立核心直觉\n\n梯度 = 过去的信息对现在输出的影响\n\n---\n\n#### 步骤2：提出问题\n\nRNN在每个时间步都使用同一组权重 $W_{hh}$ 和 $W_{xh}$。现在我们要算：损失函数对 $W_{hh}$ 的导数是多少？",
     "summary": "#### 步骤1：建立核心直觉 梯度 = 过去的信息对现在输出的影响 --- #### 步骤2：提出问题 RNN在每个时间步都使用同一组权重 $W_{hh}$ 和 $W_{xh}$。现在我们要算：损失函数对 $W_{hh}$ 的导数是多少？",
     "terms": [
-      "损失函数",
-      "RNN"
+      "损失函数"
     ]
   },
   {
@@ -18052,9 +17969,7 @@
     ],
     "text": "#### 步骤4：分析长距离传递——连乘！\n\n$\\frac{\\partial h_n}{\\partial h_t}$ 是一个跨越多步的偏导数，根据链式法则，它等于每一步局部偏导数的连乘：\n\n$$\\frac{\\partial h_n}{\\partial h_t} = \\prod_{k=t+1}^{n} \\frac{\\partial h_k}{\\partial h_{k-1}}$$\n\n而对于标准RNN（$h_k = \\tanh(W_{xh}x_k + W_{hh}h_{k-1} + b_h)$），单步的偏导数为：\n\n$$\\frac{\\partial h_k}{\\partial h_{k-1}} = W_{hh}^T \\cdot \\text{diag}\\left(1 - \\tanh^2(W_{xh}x_k + W_{hh}h_{k-1} + b_h)\\right)$$\n\n所以长距离梯度变成了：\n\n$$\\frac{\\partial h_n}{\\partial h_t} = \\prod_{k=t+1}^{n} \\underbrace{\\left[ W_{hh}^T \\cdot \\text{diag}(1 - \\tanh^2(...)) \\right]}_{\\text{每一步的梯度传递系数}}$$",
     "summary": "#### 步骤4：分析长距离传递——连乘！ $\\frac{\\partial h_n}{\\partial h_t}$ 是一个跨越多步的偏导数，根据链式法则，它等于每一步局部偏导数的连乘： $$\\frac{\\partial h_n}{\\partial h_t} = \\prod_{k=t+1}^{n} \\frac{\\partial h_k}{\\partial h_{k-1}}$$ 而对于标准RNN（$h_k = \\tanh(W_{xh}x_k + W_{hh}h_{k-1} + b_h)$），单步的偏导数为： $$\\frac{\\partial h_k}{\\partial h_{k-1}} = W_{hh}^T \\cdot \\text{diag}\\left(1 - \\tanh^2(W_{xh}x_k + W_{hh}h_{k-1} + b_h)\\right)$$ 所以长距离梯度变成了： $$\\frac{\\partial h_n}{\\partial h_t} = \\prod_{k=t+1}^{n} \\underbrace{\\left[ W_{hh}^T \\cdot \\text{diag}(1 - \\tanh^2(...)) \\right]}_{\\text{每一步的梯度传递系数}}$$",
-    "terms": [
-      "RNN"
-    ]
+    "terms": []
   },
   {
     "id": "循环神经网络-学生分发版-终版2026::cell-35",
@@ -18134,8 +18049,7 @@
     "terms": [
       "Sigmoid",
       "激活函数",
-      "GRU",
-      "GAT"
+      "GRU"
     ]
   },
   {
@@ -18154,8 +18068,7 @@
     "text": "### 二、GRU的数学表示\n\n1. 重置门（控制保留多少过去的信息），更新门（控制新信息对当前状态的贡献）\n\n3. 候选隐藏状态：计算新的候选状态\n\n$$h_{\\mathrm{new}}=n=\\tanh \\left(r * t_{h}+t_{x}\\right)$$\n\n4. 最终隐藏状态：新旧状态的加权平均\n\n$$h^{\\prime}=h_{\\mathrm{new}} *(1-z)+h_{\\mathrm{old}} * z$$",
     "summary": "### 二、GRU的数学表示 1. 重置门（控制保留多少过去的信息），更新门（控制新信息对当前状态的贡献） 3. 候选隐藏状态：计算新的候选状态 $$h_{\\mathrm{new}}=n=\\tanh \\left(r * t_{h}+t_{x}\\right)$$ 4. 最终隐藏状态：新旧状态的加权平均 $$h^{\\prime}=h_{\\mathrm{new}} *(1-z)+h_{\\mathrm{old}} * z$$",
     "terms": [
-      "隐藏状态",
-      "GRU"
+      "隐藏状态"
     ]
   },
   {
@@ -18173,9 +18086,7 @@
     ],
     "text": "### 三、GRU门控的直观理解\n\n重置门 $r_t$：\"要忘记多少过去？\"\n\n$$h^{\\prime}=\\tanh \\left(r * t_{h n}+t_{x n}\\right) *(1-z)+h * z$$\n\n更新门 $z_t$：\"要保留多少过去？\"",
     "summary": "### 三、GRU门控的直观理解 重置门 $r_t$：\"要忘记多少过去？\" $$h^{\\prime}=\\tanh \\left(r * t_{h n}+t_{x n}\\right) *(1-z)+h * z$$ 更新门 $z_t$：\"要保留多少过去？\"",
-    "terms": [
-      "GRU"
-    ]
+    "terms": []
   },
   {
     "id": "循环神经网络-学生分发版-终版2026::cell-41",
@@ -18211,7 +18122,6 @@
     "text": "### 一、LSTM简介\n\nJürgen Schmidhuber，众多论文的原理和理论，启发或者独立发现了例如GAN、Transformer等著名算法。\n誉为人工智能领域年轻科学家的“成人礼”。发表超过400篇同行评审论文，Google Scholar引用超过10万次。",
     "summary": "### 一、LSTM简介 Jürgen Schmidhuber，众多论文的原理和理论，启发或者独立发现了例如GAN、Transformer等著名算法。 誉为人工智能领域年轻科学家的“成人礼”。发表超过400篇同行评审论文，Google Scholar引用超过10万次。",
     "terms": [
-      "LSTM",
       "Transformer"
     ]
   },
@@ -18233,10 +18143,7 @@
     "summary": "#### LSTM的核心组件 LSTM使用两个状态和三个门控： 状态： - Hidden State ($h_t$)：短期记忆，与RNN相同 - Cell State ($C_t$)：长期记忆，贯穿整个链条 门控： | 门控 | 功能 | 激活函数 | |:----:|:----:|:--------:| | 遗忘门（Forget Gate） | 控制丢弃多少旧信息 | Sigmoid | | 输入门（Input Gate） | 控制添加多少新信息 | Sigmoid | | 输出门（Output Gate） | 控制输出多少信息 | Sigmoid | 核心思想：\"旧的忘记多少，新的输入多少\"",
     "terms": [
       "Sigmoid",
-      "激活函数",
-      "RNN",
-      "LSTM",
-      "GAT"
+      "激活函数"
     ]
   },
   {
@@ -18254,9 +18161,7 @@
     ],
     "text": "### 二、细胞状态：LSTM的核心\n\n记忆比喻：\n\n| 组件 | 比喻 | 特点 |\n|:----:|:----:|:----:|\n| Cell State ($C_t$) | 长期记忆 | 无界、线性传播、信息损失少 |\n| Hidden State ($h_t$) | 短期记忆/工作记忆 | 有界、受门控调节、输出用 |",
     "summary": "### 二、细胞状态：LSTM的核心 记忆比喻： | 组件 | 比喻 | 特点 | |:----:|:----:|:----:| | Cell State ($C_t$) | 长期记忆 | 无界、线性传播、信息损失少 | | Hidden State ($h_t$) | 短期记忆/工作记忆 | 有界、受门控调节、输出用 |",
-    "terms": [
-      "LSTM"
-    ]
+    "terms": []
   },
   {
     "id": "循环神经网络-学生分发版-终版2026::cell-45",
@@ -18274,8 +18179,7 @@
     "text": "### 三、LSTM的数学表示\n\n1. 遗忘门：\"要忘记多少过去？\"\n\n$$f_t = \\sigma(W_f \\cdot [h_{t-1}, x_t] + b_f)$$\n\n2. 输入门：\"要添加多少新信息？\"\n\n$$i_t = \\sigma(W_i \\cdot [h_{t-1}, x_t] + b_i)$$\n\n候选细胞状态：\n\n$$\\tilde{C}_t = \\tanh(W_C \\cdot [h_{t-1}, x_t] + b_C)$$\n\n3. 更新细胞状态：\n\n$$C_t = f_t \\odot C_{t-1} + i_t \\odot \\tilde{C}_t$$\n\n4. 输出门：\"要输出多少信息？\"\n\n$$o_t = \\sigma(W_o \\cdot [h_{t-1}, x_t] + b_o)$$\n\n5. 最终隐藏状态：\n\n$$h_t = o_t \\odot \\tanh(C_t)$$\n\n其中 $\\odot$ 表示逐元素乘法",
     "summary": "### 三、LSTM的数学表示 1. 遗忘门：\"要忘记多少过去？\" $$f_t = \\sigma(W_f \\cdot [h_{t-1}, x_t] + b_f)$$ 2. 输入门：\"要添加多少新信息？\" $$i_t = \\sigma(W_i \\cdot [h_{t-1}, x_t] + b_i)$$ 候选细胞状态： $$\\tilde{C}_t = \\tanh(W_C \\cdot [h_{t-1}, x_t] + b_C)$$ 3. 更新细胞状态： $$C_t = f_t \\odot C_{t-1} + i_t \\odot \\tilde{C}_t$$ 4. 输出门：\"要输出多少信息？\" $$o_t = \\sigma(W_o \\cdot [h_{t-1}, x_t] + b_o)$$ 5. 最终隐藏状态： $$h_t = o_t \\odot \\tanh(C_t)$$ 其中 $\\odot$ 表示逐元素乘法",
     "terms": [
-      "隐藏状态",
-      "LSTM"
+      "隐藏状态"
     ]
   },
   {
@@ -18295,8 +18199,7 @@
     "summary": "### RNN、GRU、LSTM对比",
     "terms": [
       "RNN",
-      "GRU",
-      "LSTM"
+      "GRU"
     ]
   },
   {
@@ -18418,7 +18321,6 @@
     "summary": "#### Padding原理 Padding意味着用零填充序列，使所有序列达到相同长度。 Padding的问题： 填充的零值会影响RNN的隐藏状态！即使输入是零，RNN的变换和偏置仍会产生非零输出。",
     "terms": [
       "填充",
-      "RNN",
       "隐藏状态",
       "Padding"
     ]
@@ -18440,7 +18342,6 @@
     "text": "# Padding示例\nimport torch\nfrom torch.nn.utils import rnn as rnn_utils\n\n# 三个不同长度的序列\nx0 = torch.tensor([[1.0349, 0.9661],\n [0.8055, -0.9169],\n [-0.8251, -0.9499],\n [-0.8670, 0.9342]])\nx1 = torch.tensor([[-1.0911, 0.9254],\n [-1.0771, -1.0414]])\nx2 = torch.tensor([[-1.1247, -0.9683],\n [0.8182, -0.9944],\n [1.0081, 0.7680]])\n\nseq_tensors = [x0, x1, x2]\n\nprint(\"=== Padding示例 ===\n\")\nprint(\"原始序列长度:\")\nfor i, seq in enumerate(seq_tensors):\n print(f\" x{i}: {seq.shape[0]} 个时间步\")\n\n# 使用pad_sequence进行填充\npadded = rnn_utils.pad_sequence(seq_tensors, batch_first=True)\n\nprint(f\"\n填充后的张量形状: {padded.shape} (N, L, F)\")\nprint(\"\n填充后的张量:\")\nprint(padded)",
     "summary": "# Padding示例 import torch from torch.nn.utils import rnn as rnn_utils # 三个不同长度的序列 x0 = torch.tensor([[1.0349, 0.9661], [0.8055, -0.9169], [-0.8251, -0.9499], [-0.8670, 0.9342]]) x1 = torch.tensor([[-1.0911, 0.9254], [-1.0771, -1.0414]]) x2 = torch.tensor([[-1.1247, -0.9683], [0.8182, -0.9944], [1.0081, 0.7680]]) seq_tensors = [x0, x1, x2] print(\"=== Padding示例 === \") print(\"原始序列长度:\") for i, seq in enumerate(seq_tensors): print(f\" x{i}: {seq.shape[0]} 个时间步\") # 使用pad_sequence进行填充 padded = rnn_utils.pad_sequence(seq_tensors, batch_first=True) print(f\" 填充后的张量形状: {padded.shape} (N, L, F)\") print(\" 填充后的张量:\") print(padded)",
     "terms": [
-      "Batch",
       "填充",
       "RNN",
       "Padding"
@@ -18463,7 +18364,6 @@
     "text": "# 演示Padding的问题：填充值会影响隐藏状态\ntorch.manual_seed(11)\n\nprint(\"=== Padding的问题演示 ===\n\")\n\nrnn = nn.RNN(2, 2, batch_first=True)\n\n# 使用填充后的序列\noutput_padded, hidden_padded = rnn(padded)\n\nprint(\"填充序列的输出（最后4个时间步的隐藏状态）:\")\nfor i in range(3):\n print(f\"\n序列 {i}:\")\n print(f\" 隐藏状态序列:\n{output_padded[i].detach().numpy().round(4)}\")\n\nprint(\"\n注意：即使序列1和2后面填充了0，它们的隐藏状态仍在变化！\")",
     "summary": "# 演示Padding的问题：填充值会影响隐藏状态 torch.manual_seed(11) print(\"=== Padding的问题演示 === \") rnn = nn.RNN(2, 2, batch_first=True) # 使用填充后的序列 output_padded, hidden_padded = rnn(padded) print(\"填充序列的输出（最后4个时间步的隐藏状态）:\") for i in range(3): print(f\" 序列 {i}:\") print(f\" 隐藏状态序列: {output_padded[i].detach().numpy().round(4)}\") print(\" 注意：即使序列1和2后面填充了0，它们的隐藏状态仍在变化！\")",
     "terms": [
-      "Batch",
       "填充",
       "RNN",
       "隐藏状态",
@@ -18527,8 +18427,6 @@
     "text": "# Packing示例\nprint(\"=== Packing示例 ===\n\")\n\n# 使用pack_sequence进行打包\npacked = rnn_utils.pack_sequence(seq_tensors, enforce_sorted=False)\n\nprint(\"PackedSequence对象:\")\nprint(f\" data形状: {packed.data.shape}\")\nprint(f\" batch_sizes: {packed.batch_sizes}\")\nprint(f\" sorted_indices: {packed.sorted_indices}\")\nprint(f\" unsorted_indices: {packed.unsorted_indices}\")\n\nprint(\"\n解读:\")\nprint(\"- sorted_indices=[0,2,1]: 按长度排序后，原序列0(4步)最长\")\nprint(\"- batch_sizes=[3,3,2,1]: 第1-2时间步有3个序列\")\nprint(\"- data按列优先存储\")",
     "summary": "# Packing示例 print(\"=== Packing示例 === \") # 使用pack_sequence进行打包 packed = rnn_utils.pack_sequence(seq_tensors, enforce_sorted=False) print(\"PackedSequence对象:\") print(f\" data形状: {packed.data.shape}\") print(f\" batch_sizes: {packed.batch_sizes}\") print(f\" sorted_indices: {packed.sorted_indices}\") print(f\" unsorted_indices: {packed.unsorted_indices}\") print(\" 解读:\") print(\"- sorted_indices=[0,2,1]: 按长度排序后，原序列0(4步)最长\") print(\"- batch_sizes=[3,3,2,1]: 第1-2时间步有3个序列\") print(\"- data按列优先存储\")",
     "terms": [
-      "Batch",
-      "RNN",
       "Packing",
       "PackedSequence"
     ]
@@ -18572,7 +18470,6 @@
     "summary": "#### Padding vs Packing：对比总结 | 对比项 | Padding | Packing | |:---:|:---|:---| | 处理方式 | 填充到固定长度 | 拼接序列，记录长度 | | 内存效率 | 低（填充浪费空间） | 高（无填充） | | 计算效率 | 低（RNN处理填充位置） | 高（跳过填充位置） | | 实现复杂度 | 简单 | 稍复杂 | | 适用场景 | 短序列、快速原型 | 长序列、生产环境 | | 与CNN配合 | 可用 | 推荐 | | 与RNN配合 | 可用但有副作用 | 强烈推荐 | 选型建议： - 教学/实验：Padding足够 - 生产/长序列：务必使用Packing",
     "terms": [
       "填充",
-      "RNN",
       "Padding",
       "Packing"
     ]
@@ -18754,9 +18651,7 @@
     ],
     "text": "### 一、任务介绍：IMDB情感分类\n\n#### 任务目标\n\n构建一个完整的文本情感分类系统，将电影评论分类为正面或负面。\n\n#### IMDB 数据集简介\n\nIMDB（Internet Movie Database） 是全球最大的电影数据库网站（www.imdb.com）。本案例使用的 Stanford Large Movie Review Dataset 由 Stanford AI Lab 基于 IMDB 网站评论构建，是自然语言处理领域最经典的基准数据集之一。\n\n数据集基本信息：\n\n| 属性 | 说明 |\n|:---|:---|\n| 来源 | Stanford AI Lab（Maas et al., ACL 2011）|\n| 总规模 | 50,000 条英文电影评论 |\n| 训练集 | 25,000 条（12,500 正面 + 12,500 负面）|\n| 测试集 | 25,000 条（12,500 正面 + 12,500 负面）|\n| 标签 | 二元分类：正面（Positive）/ 负面（Negative）|\n| 平均长度 | 约 200–300 词/评论 |\n| 文件大小 | 压缩包约 80MB，解压后约 150MB |\n| 格式 | 纯文本文件，每条评论一个 .txt 文件 |",
     "summary": "### 一、任务介绍：IMDB情感分类 #### 任务目标 构建一个完整的文本情感分类系统，将电影评论分类为正面或负面。 #### IMDB 数据集简介 IMDB（Internet Movie Database） 是全球最大的电影数据库网站（www.imdb.com）。本案例使用的 Stanford Large Movie Review Dataset 由 Stanford AI Lab 基于 IMDB 网站评论构建，是自然语言处理领域最经典的基准数据集之一。 数据集基本信息： | 属性 | 说明 | |:---|:---| | 来源 | Stanford AI Lab（Maas et al., ACL 2011）| | 总规模 | 50,000 条英文电影评论 | | 训练集 | 25,000 条（12,500 正面 + 12,500 负面）| | 测试集 | 25,000 条（12,500 正面 + 12,500 负面）| | 标签 | 二元分类：正面（Positive）/ 负面（Negative）| | 平均长度 | 约 200–300 词/评论 | | 文件大小 | 压缩包约 80MB，解压后约 150MB | | 格式 | 纯文本文件，每条评论一个 .txt 文件 |",
-    "terms": [
-      "GAT"
-    ]
+    "terms": []
   },
   {
     "id": "循环神经网络-学生分发版-终版2026::cell-68",
@@ -18953,9 +18848,7 @@
     "summary": "# ==================== 可视化 ==================== print(\" \" + \"=\" * 50) print(\"步骤8: 训练过程可视化\") print(\"=\" * 50) def plot_training_history(history): \"\"\"绘制训练历史曲线，分析模型训练质量\"\"\" fig, axes = plt.subplots(1, 2, figsize=(14, 4)) epochs_range = range(1, len(history['train_loss']) + 1) # 左图：损失曲线 axes[0].plot(epochs_range, history['train_loss'], 'b-o', label='Train Loss', markersize=6, linewidth=2) axes[0].plot(epochs_range, history['val_loss'], 'r-s', label='Val Loss', markersize=6, linewidth=2) axes[0].set_xlabel('Epoch', fontsize=12) axes[0].set_ylabel('Loss (BCEWithLogits)', fontsize=12) axes[0].set_title('Training & Validation Loss', fontsize=14) axes[0].legend(fontsize=10) axes[0]....",
     "terms": [
       "Epoch",
-      "Batch",
       "Sigmoid",
-      "RNN",
       "Padding",
       "PackedSequence"
     ]
@@ -18984,7 +18877,6 @@
       "早停",
       "Adam",
       "ReduceLROnPlateau",
-      "LSTM",
       "Attention",
       "Transformer"
     ]
@@ -19171,6 +19063,7 @@
     "text": "### 六、Source Mask（源掩码）\n\n在实际应用中，我们通常会批量处理多个序列。但不同序列的长度往往不同，为了让它们能组成一个张量，我们需要填充Padding短序列。\n\n问题：\n模型不应该\"关注\" 这些无意义的填充符！如果注意力机制给 分配了权重，就会引入噪声。\n\n#### Source Mask 的作用\n\nSource Mask 是一种填充掩码（Padding Mask），用于告诉注意力机制：\n\n> \"这些位置是填充的，请忽略它们。\"\n\n实现方式：\n1. 为每个序列创建一个布尔掩码\n2. 真实数据的位置 = True（或 1）\n3. 填充位置 = False（或 0）\n4. 在计算 softmax 之前，将填充位置对应的分数设为 -infinity\n5. Softmax 后，这些位置的权重自然变为 0",
     "summary": "### 六、Source Mask（源掩码） 在实际应用中，我们通常会批量处理多个序列。但不同序列的长度往往不同，为了让它们能组成一个张量，我们需要填充Padding短序列。 问题： 模型不应该\"关注\" 这些无意义的填充符！如果注意力机制给 分配了权重，就会引入噪声。 #### Source Mask 的作用 Source Mask 是一种填充掩码（Padding Mask），用于告诉注意力机制： > \"这些位置是填充的，请忽略它们。\" 实现方式： 1. 为每个序列创建一个布尔掩码 2. 真实数据的位置 = True（或 1） 3. 填充位置 = False（或 0） 4. 在计算 softmax 之前，将填充位置对应的分数设为 -infinity 5. Softmax 后，这些位置的权重自然变为 0",
     "terms": [
+      "Batch",
       "Softmax",
       "填充",
       "Padding",
@@ -19195,7 +19088,6 @@
     "text": "# ============================================================================\n# Source Mask（填充掩码）实现示例\n# ============================================================================\n\ndef create_padding_mask(seq, pad_idx=0):\n \"\"\"\n 创建填充掩码\n 参数:\n seq: [batch_size, seq_len] 输入序列（填充后的）\n pad_idx: 填充标记的索引（默认0）\n 返回:\n mask: [batch_size, 1, 1, seq_len] 布尔掩码\n \"\"\"\n mask = (seq != pad_idx).unsqueeze(1).unsqueeze(2)\n return mask\n\n# ==================== 测试 ====================\nprint(\"=\" * 60)\nprint(\"Source Mask 测试\")\nprint(\"=\" * 60)\n\nseq = torch.tensor([\n [101, 234, 456, 0, 0],\n [101, 567, 890, 123, 0],\n [101, 345, 0, 0, 0],\n])\n\nmask = create_padding_mask(seq, pad_idx=0)\nprint(f\"输入序列形状: {seq.shape}\")\nprint(f\"Mask形状: {mask.shape}\")\nprint(f\"\n序列:\n{seq}\")\nprint(f\"\nMask (True=真实, False=填充):\n{mask.squeeze()}\")\n\nscores = torch.randn(3, 1, 5)\nscores_masked = scores.masked_fill(mask.squeeze(1) == 0, float('-inf'))\nweights = F.softmax(scores_masked, dim=-1)\nprint(f\"\nMask后Softmax权重:\n{weights.squeeze()}\")\nprint(f\"\n填充位置的权重全部变为0！\")",
     "summary": "# ============================================================================ # Source Mask（填充掩码）实现示例 # ============================================================================ def create_padding_mask(seq, pad_idx=0): \"\"\" 创建填充掩码 参数: seq: [batch_size, seq_len] 输入序列（填充后的） pad_idx: 填充标记的索引（默认0） 返回: mask: [batch_size, 1, 1, seq_len] 布尔掩码 \"\"\" mask = (seq != pad_idx).unsqueeze(1).unsqueeze(2) return mask # ==================== 测试 ==================== print(\"=\" * 60) print(\"Source Mask 测试\") print(\"=\" * 60) seq = torch.tensor([ [101, 234, 456, 0, 0], [101, 567, 890, 123, 0], [101, 345, 0, 0, 0], ]) mask = create_padding_mask(seq, pad_idx=0) print(f\"输入序列形状: {seq.shape}\") prin...",
     "terms": [
-      "Batch",
       "Softmax",
       "填充",
       "Padding",
@@ -19242,7 +19134,6 @@
     "text": "# ============================================================================\n# Multi-Head Attention 简洁实现（Narrow Attention）\n# ============================================================================\n\nclass MultiHeadAttention(nn.Module):\n \"\"\"\n 多头注意力机制（Narrow Attention实现）\n \"\"\"\n def init(self, d_model=512, n_heads=8, dropout=0.1):\n super().init()\n assert d_model % n_heads == 0, \"d_model 必须能被 n_heads 整除\"\n \n self.d_model = d_model\n self.n_heads = n_heads\n self.d_k = d_model // n_heads\n \n self.W_q = nn.Linear(d_model, d_model)\n self.W_k = nn.Linear(d_model, d_model)\n self.W_v = nn.Linear(d_model, d_model)\n self.W_o = nn.Linear(d_model, d_model)\n \n self.dropout = nn.Dropout(dropout)\n self.attention = ScaledDotProductAttention(dropout)\n \n def forward(self, query, key, value, mask=None):\n batch_size = query.size(0)\n \n # 1. 线性投影\n Q = self.W_q(query)\n K = self.W_k(key)\n V = self.W_v(value)\n \n # 2. 变形为多头\n Q = Q.view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)\n K = K.view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)\n V = V.view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)\n \n # 3. 应用Scaled Dot-Product Attention\n output, attn_weights = self.attention(Q, K, V, mask)\n \n # 4. 拼接多头输出\n output = output.transpose(1, 2).contiguous().view(\n batch_size, -1, self.d_model\n )\n \n # 5. 最终线性变换\n output = self.W_o(output)\n \n return output, attn_weights\n\n# ==================== 测试 ====================\nprint(\"=\" * 60)\nprint(\"Multi-Head Attention 测试\")\nprint(\"=\" * 60)\n\nbatch_size = 2\nseq_len = 10\nd_model = 512\nn_heads = 8\n\nx = torch.randn(batch_size, seq_len, d_model)\n\nmha = MultiHeadAttention(d_model=d_model, n_heads=n_heads, dropout=0.1)\noutput, weights = mha(x, x, x)\n\nprint(f\"输入形状: {x.shape}\")\nprint(f\"输出形状: {output.shape}\")\nprint(f\"注意力权重: {weights.shape}\")\nprint(f\"\nMulti-Head Attention 验证通过！\")\nprint(f\" {n_heads} 个头，每个头维度 {d_model // n_heads}\")",
     "summary": "# ============================================================================ # Multi-Head Attention 简洁实现（Narrow Attention） # ============================================================================ class MultiHeadAttention(nn.Module): \"\"\" 多头注意力机制（Narrow Attention实现） \"\"\" def init(self, d_model=512, n_heads=8, dropout=0.1): super().init() assert d_model % n_heads == 0, \"d_model 必须能被 n_heads 整除\" self.d_model = d_model self.n_heads = n_heads self.d_k = d_model // n_heads self.W_q = nn.Linear(d_model, d_model) self.W_k = nn.Linear(d_model, d_model) self.W_v = nn.Linear(d_model, d_model) self.W_o = nn.Linear(d_model, d_model) self.dropout = nn.Dropout(dropout) self.attent...",
     "terms": [
-      "Batch",
       "Dropout",
       "注意力机制",
       "Attention",
@@ -19442,7 +19333,6 @@
     "text": "# ============================================================================\n# 位置编码（Positional Encoding）实现与可视化\n# ============================================================================\n\nclass PositionalEncoding(nn.Module):\n \"\"\"\n 正弦位置编码\n \"\"\"\n def init(self, d_model, max_len=5000):\n super().init()\n self.d_model = d_model\n \n # 创建位置编码矩阵 [max_len, d_model]\n pe = torch.zeros(max_len, d_model)\n \n # 位置索引: [max_len, 1]\n position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)\n \n # 计算角速度（不同维度的频率）\n div_term = torch.exp(\n torch.arange(0, d_model, 2).float() *\n (-np.log(10000.0) / d_model)\n )\n \n # 偶数维度用 sin\n pe[:, 0::2] = torch.sin(position * div_term)\n # 奇数维度用 cos\n pe[:, 1::2] = torch.cos(position * div_term)\n \n # 注册为 buffer（不参与梯度更新）\n pe = pe.unsqueeze(0) # [1, max_len, d_model]\n self.register_buffer('pe', pe)\n \n def forward(self, x):\n \"\"\"\n 参数:\n x: [batch_size, seq_len, d_model]\n \"\"\"\n # 将词向量缩放后与位置编码相加\n # 原因：原始论文中，embedding 的方差约为 1/d_model\n # 乘以 sqrt(d_model) 后，词向量和位置编码的尺度相当，\n # 避免位置编码淹没词向量的语义信息\n x = x * np.sqrt(self.d_model)\n x = x + self.pe[:, :x.size(1), :]\n return x\n\n# ==================== 测试 ====================\nprint(\"=\" * 60)\nprint(\"位置编码测试\")\nprint(\"=\" * 60)\n\nd_model = 8\nmax_len = 10\n\npe_layer = PositionalEncoding(d_model=d_model, max_len=max_len)\n\n# 查看前4个位置的位置编码\nprint(f\"模型维度: {d_model}\")\nprint(f\"最大长度: {max_len}\")\nprint(f\"\n前4个位置的位置编码:\")\nprint(np.round(pe_layer.pe[0, :4].numpy(), 4))\n\nprint(\"\n注意：\")\nprint(\" 位置0: [0, 1, 0, 1, 0, 1, 0, 1] (sin(0)=0, cos(0)=1)\")\nprint(\" 位置1: [sin(1), cos(1), sin(小角度), cos(小角度), ...]\")\nprint(\" 越靠后的维度，角度变化越慢\")",
     "summary": "# ============================================================================ # 位置编码（Positional Encoding）实现与可视化 # ============================================================================ class PositionalEncoding(nn.Module): \"\"\" 正弦位置编码 \"\"\" def init(self, d_model, max_len=5000): super().init() self.d_model = d_model # 创建位置编码矩阵 [max_len, d_model] pe = torch.zeros(max_len, d_model) # 位置索引: [max_len, 1] position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1) # 计算角速度（不同维度的频率） div_term = torch.exp( torch.arange(0, d_model, 2).float() * (-np.log(10000.0) / d_model) ) # 偶数维度用 sin pe[:, 0::2] = torch.sin(position * div_term) # 奇数维度用 cos pe[:, 1::2] = torch.cos(posi...",
     "terms": [
-      "Batch",
       "位置编码",
       "Positional Encoding"
     ]
@@ -19555,7 +19445,6 @@
     "text": "# 第六章（二）Self-Attention 与完整 Transformer 架构\n\n## 本章内容\n\n> 1. 回顾与过渡：承接上一章，明确本章学习目标\n> 2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它\n> 3. Transformer Encoder：从单层到多层堆叠\n> 4. Transformer Decoder：Masked Self-Attention + Cross-Attention\n> 5. Layer Normalization 深度讲解：为什么 Transformer 不用 BatchNorm？\n> 6. 完整 Transformer 架构 + 端到端训练：IMDB 情感分类实战（对比 LSTM vs Transformer）\n> 7. PyTorch 内置 Transformer：nn.Transformer 的使用方法\n> 8. Vision Transformer（ViT）：Transformer 进军计算机视觉\n\n学习目标：\n通过本章学习，你将理解 完整的 Transformer 架构——从 Narrow Attention 的细节，到 Encoder-Decoder 的堆叠方式，再到 LayerNorm 的深层原理。最后通过 IMDB 情感分类实战，亲身体验 Transformer 相比传统 LSTM 的优势。",
     "summary": "# 第六章（二）Self-Attention 与完整 Transformer 架构 ## 本章内容 > 1. 回顾与过渡：承接上一章，明确本章学习目标 > 2. Narrow Attention 深度解析：投影切分（chunking）原理——为什么大模型都用它 > 3. Transformer Encoder：从单层到多层堆叠 > 4. Transformer Decoder：Masked Self-Attention + Cross-Attention > 5. Layer Normalization 深度讲解：为什么 Transformer 不用 BatchNorm？ > 6. 完整 Transformer 架构 + 端到端训练：IMDB 情感分类实战（对比 LSTM vs Transformer） > 7. PyTorch 内置 Transformer：nn.Transformer 的使用方法 > 8. Vision Transformer（ViT）：Transformer 进军计算机视觉 学习目标： 通过本章学习，你将理解 完整的 Transformer 架构——从 Narrow Attention 的细节，到 Encoder-Decoder 的堆叠方式，再到 LayerNorm 的深层原理。最后通过 IMDB 情感分类实战，亲身体验 Transformer 相比传统 LSTM 的优势。",
     "terms": [
-      "Batch",
       "BatchNorm",
       "LSTM",
       "Encoder-Decoder",
@@ -19632,7 +19521,6 @@
     "text": "# ============================================================================\n# Narrow Attention 完整实现\n# ============================================================================\n\nclass MultiHeadedAttention(nn.Module):\n # Narrow Attention 实现（参考 PDF Chapter 10）\n # 核心：先投影到 d_model 维，再切分成 h 段给不同头\n \n def init(self, n_heads, d_model, dropout=0.1):\n super().init()\n self.n_heads = n_heads\n self.d_model = d_model\n self.d_k = d_model // n_heads\n \n # 投影矩阵：注意维度是 d_model x d_model（不是 d_model x d_k）\n self.linear_query = nn.Linear(d_model, d_model)\n self.linear_key = nn.Linear(d_model, d_model)\n self.linear_value = nn.Linear(d_model, d_model)\n self.linear_out = nn.Linear(d_model, d_model)\n \n self.dropout = nn.Dropout(p=dropout)\n self.alphas = None\n \n def make_chunks(self, x):\n batch_size, seq_len = x.size(0), x.size(1)\n x = x.view(batch_size, seq_len, self.n_heads, self.d_k)\n x = x.transpose(1, 2)\n return x\n \n def init_keys(self, key):\n self.proj_key = self.make_chunks(self.linear_key(key))\n self.proj_value = self.make_chunks(self.linear_value(key))\n \n def score_function(self, query):\n proj_query = self.make_chunks(self.linear_query(query))\n dot_products = torch.matmul(proj_query, self.proj_key.transpose(-2, -1))\n scores = dot_products / math.sqrt(self.d_k)\n return scores\n \n def attn(self, query, mask=None):\n scores = self.score_function(query)\n if mask is not None:\n scores = scores.masked_fill(mask == 0, -1e9)\n alphas = F.softmax(scores, dim=-1)\n alphas = self.dropout(alphas)\n self.alphas = alphas.detach()\n context = torch.matmul(alphas, self.proj_value)\n return context\n \n def output_function(self, contexts):\n return self.linear_out(contexts)\n \n def forward(self, query, mask=None):\n if mask is not None:\n mask = mask.unsqueeze(1)\n context = self.attn(query, mask=mask)\n context = context.transpose(1, 2).contiguous()\n context = context.view(query.size(0), -1, self.d_model)\n out = self.output_function(context)\n return out\n\n# ==================== 测试 Narrow Attention ====================\nprint('=' * 60)\nprint('Narrow Attention 测试')\nprint('=' * 60)\n\ndummy_points = torch.randn(16, 2, 4)\nmha = MultiHeadedAttention(n_heads=2, d_model=4, dropout=0.0)\nmha.init_keys(dummy_points)\nout = mha(dummy_points)\n\nprint(f'输入形状: {dummy_points.shape}')\nprint(f'输出形状: {out.shape}')\nprint(f'每个头维度 d_k: {mha.d_k}')\nprint(f'参数量: {sum(p.numel() for p in mha.parameters()):,}')\nprint('\n✅ Narrow Attention 验证通过！')",
     "summary": "# ============================================================================ # Narrow Attention 完整实现 # ============================================================================ class MultiHeadedAttention(nn.Module): # Narrow Attention 实现（参考 PDF Chapter 10） # 核心：先投影到 d_model 维，再切分成 h 段给不同头 def init(self, n_heads, d_model, dropout=0.1): super().init() self.n_heads = n_heads self.d_model = d_model self.d_k = d_model // n_heads # 投影矩阵：注意维度是 d_model x d_model（不是 d_model x d_k） self.linear_query = nn.Linear(d_model, d_model) self.linear_key = nn.Linear(d_model, d_model) self.linear_value = nn.Linear(d_model, d_model) self.linear_out = nn.Linear(d_model, d_model) self.dropo...",
     "terms": [
-      "Batch",
       "Softmax",
       "Dropout",
       "Attention",
@@ -19756,7 +19644,6 @@
     "text": "# ============================================================================\n# LayerNorm vs BatchNorm 可视化对比\n# ============================================================================\n\ntorch.manual_seed(23)\nbatch_size, seq_len, d_model = 4, 1, 256\ndummy_points = torch.randn(batch_size, seq_len, d_model)\n\n# 添加位置编码（模拟实际场景）\npe = PositionalEncoding(d_model, max_len=seq_len, dropout=0.0)\ndummy_enc = pe(dummy_points)\n\n# LayerNorm\nlayer_norm = nn.LayerNorm(d_model)\ndummy_ln = layer_norm(dummy_enc)\n\n# BatchNorm（需要调整维度）\nbn = nn.BatchNorm1d(d_model)\ndummy_bn = bn(dummy_enc.transpose(1, 2)).transpose(1, 2)\n\n# 可视化\nfig, axes = plt.subplots(1, 3, figsize=(18, 4))\n\naxes[0].hist(dummy_enc.flatten().numpy(), bins=50, color='cyan', edgecolor='white', alpha=0.7)\naxes[0].set_title('Original + Positional Encoding', fontsize=13)\naxes[0].set_xlabel('Value')\naxes[0].set_ylabel('Frequency')\naxes[0].axvline(x=0, color='red', linestyle='--', alpha=0.5)\n\naxes[1].hist(dummy_ln.detach().flatten().numpy(), bins=50, color='lime', edgecolor='white', alpha=0.7)\naxes[1].set_title('After LayerNorm', fontsize=13)\naxes[1].set_xlabel('Value')\naxes[1].axvline(x=0, color='red', linestyle='--', alpha=0.5)\n\naxes[2].hist(dummy_bn.detach().flatten().numpy(), bins=50, color='orange', edgecolor='white', alpha=0.7)\naxes[2].set_title('After BatchNorm', fontsize=13)\naxes[2].set_xlabel('Value')\naxes[2].axvline(x=0, color='red', linestyle='--', alpha=0.5)\n\nplt.tight_layout()\nplt.show()\n\nprint('=' * 60)\nprint('LayerNorm vs BatchNorm 统计对比')\nprint('=' * 60)\nprint(f'原始数据 均值: {dummy_enc.mean():.4f}, 标准差: {dummy_enc.std():.4f}')\nprint(f'LayerNorm 后 均值: {dummy_ln.mean():.6f}, 标准差: {dummy_ln.std():.4f}')\nprint(f'BatchNorm 后 均值: {dummy_bn.mean():.6f}, 标准差: {dummy_bn.std():.4f}')\nprint('\n✅ LayerNorm 让每个数据点内部均值为0、标准差为1！')\nprint(' 注意：与BatchNorm不同，LayerNorm不依赖batch统计量')",
     "summary": "# ============================================================================ # LayerNorm vs BatchNorm 可视化对比 # ============================================================================ torch.manual_seed(23) batch_size, seq_len, d_model = 4, 1, 256 dummy_points = torch.randn(batch_size, seq_len, d_model) # 添加位置编码（模拟实际场景） pe = PositionalEncoding(d_model, max_len=seq_len, dropout=0.0) dummy_enc = pe(dummy_points) # LayerNorm layer_norm = nn.LayerNorm(d_model) dummy_ln = layer_norm(dummy_enc) # BatchNorm（需要调整维度） bn = nn.BatchNorm1d(d_model) dummy_bn = bn(dummy_enc.transpose(1, 2)).transpose(1, 2) # 可视化 fig, axes = plt.subplots(1, 3, figsize=(18, 4)) axes[0].hist(dummy_enc...",
     "terms": [
-      "Batch",
       "BatchNorm",
       "Dropout",
       "Value",
@@ -20152,8 +20039,7 @@
     "summary": "# ============================================================================ # GloVe 预训练词向量：Embedding Arithmetic + PCA 可视化 # ============================================================================ import os import numpy as np import matplotlib.pyplot as plt print(\"=\" * 60) print(\"GloVe 词向量：语义类比 + 可视化\") print(\"=\" * 60) # ---------- 加载 GloVe 词向量 ---------- GLOVE_DIR = \"glove\" GLOVE_DIM = 100 GLOVE_FILE = os.path.join(GLOVE_DIR, f\"glove.6B.{GLOVE_DIM}d.txt\") def load_glove_embeddings(glove_file, vocab_limit=50000): embeddings = {} with open(glove_file, 'r', encoding='utf-8') as f: for i, line in enumerate(f): if i >= vocab_limit: break values = line.strip().split() wo...",
     "terms": [
       "Key",
-      "Value",
-      "GAT"
+      "Value"
     ]
   },
   {
@@ -20315,7 +20201,6 @@
     "terms": [
       "Epoch",
       "早停",
-      "LSTM",
       "Attention",
       "Self-Attention",
       "Transformer",
@@ -20528,8 +20413,7 @@
       "Attention",
       "Query",
       "Transformer",
-      "RoPE",
-      "GAT"
+      "RoPE"
     ]
   }
 ]
