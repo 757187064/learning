@@ -325,33 +325,148 @@ function renderAnswer(q, idx) {
   return `<div class="answer-item"><strong>${idx}. [${escapeHtml(q.id)}] ${escapeHtml(q.answer)}</strong><p>${escapeHtml(q.explanation)}</p><span class="muted">来源：${escapeHtml(q.source)} · ${escapeHtml(q.topic)}</span></div>`;
 }
 
-function renderReview() {
-  const r = DB.review;
-  const guideBlock = DB.guides ? `
-    <section class="review-section">
-      <h2>考试版 Markdown 讲义下载</h2>
-      <p class="muted">每份课件一份讲义，按“问题动机 -> 学习路线 -> 章节详解 -> 考法提醒 -> 自测”整理。Markdown 内置小页边距打印样式。</p>
-      <p><a class="btn secondary" href="${escapeHtml(DB.guides.index)}" download>下载总目录</a></p>
-      <div class="guide-grid">
-        ${(DB.guides.items || []).map(g => `
-          <div class="guide-card">
-            <strong>${escapeHtml(g.title)}</strong>
-            <span class="muted">${escapeHtml(g.file)} · ${g.chapter_count} 章块</span>
-            <br><a class="btn secondary" href="${escapeHtml(g.href)}" download>下载讲义 .md</a>
-          </div>
-        `).join("")}
-      </div>
-    </section>` : "";
-  $("reviewBody").innerHTML = guideBlock + (r.sections || []).map(sec => `
-    <section class="review-section">
-      <h2>${escapeHtml(sec.title)}</h2>
-      <ul>${(sec.points || []).map(p => `<li>${escapeHtml(p)}</li>`).join("")}</ul>
-      ${(sec.details || []).length ? `<h3>详细知识点</h3><ul>${sec.details.map(p => `<li>${escapeHtml(p)}</li>`).join("")}</ul>` : ""}
-      ${(sec.must_memorize || []).length ? `<h3>必背结论</h3><ul>${sec.must_memorize.map(p => `<li>${escapeHtml(p)}</li>`).join("")}</ul>` : ""}
-      ${(sec.formulas || []).map(f => `<div class="formula">${escapeHtml(f)}</div>`).join("")}
-      ${(sec.exam_focus || []).length ? `<p><strong>常考点：</strong>${escapeHtml(sec.exam_focus.join("；"))}</p>` : ""}
-    </section>
+function inlineMarkdown(text) {
+  return escapeHtml(text)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+}
+
+function markdownToHtml(md) {
+  const lines = (md || "").split(/\r?\n/);
+  const html = [];
+  let listOpen = false;
+  let inCode = false;
+  let codeLines = [];
+  const closeList = () => {
+    if (listOpen) {
+      html.push("</ul>");
+      listOpen = false;
+    }
+  };
+  lines.forEach(line => {
+    if (line.trim().startsWith("```")) {
+      if (inCode) {
+        html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+        codeLines = [];
+        inCode = false;
+      } else {
+        closeList();
+        inCode = true;
+      }
+      return;
+    }
+    if (inCode) {
+      codeLines.push(line);
+      return;
+    }
+    if (!line.trim()) {
+      closeList();
+      return;
+    }
+    const heading = line.match(/^(#{1,4})\s+(.+)$/);
+    if (heading) {
+      closeList();
+      const level = Math.min(heading[1].length + 1, 5);
+      const id = safeFileName(heading[2]).toLowerCase();
+      html.push(`<h${level} id="${escapeHtml(id)}">${inlineMarkdown(heading[2])}</h${level}>`);
+      return;
+    }
+    if (/^\s*[-*]\s+/.test(line)) {
+      if (!listOpen) {
+        html.push("<ul>");
+        listOpen = true;
+      }
+      html.push(`<li>${inlineMarkdown(line.replace(/^\s*[-*]\s+/, ""))}</li>`);
+      return;
+    }
+    if (/^\s*\d+\.\s+/.test(line)) {
+      closeList();
+      html.push(`<p>${inlineMarkdown(line)}</p>`);
+      return;
+    }
+    if (/^\|.+\|$/.test(line)) {
+      closeList();
+      html.push(`<p class="table-line">${inlineMarkdown(line)}</p>`);
+      return;
+    }
+    closeList();
+    html.push(`<p>${inlineMarkdown(line)}</p>`);
+  });
+  closeList();
+  if (inCode) html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+  return html.join("");
+}
+
+function renderTopicGuideNav(items) {
+  return items.map((g, i) => `
+    <button class="book-nav-item ${i === 0 ? "active" : ""}" data-guide="${escapeHtml(g.id)}">
+      <strong>${escapeHtml(g.label)}</strong>
+      <span>${g.exists ? `${g.wordCount} 字` : "待生成"}</span>
+    </button>
   `).join("");
+}
+
+function renderTopicGuideContent(guide) {
+  if (!guide || !guide.exists) {
+    return `<div class="panel"><h2>讲义还在生成</h2><p class="muted">这个主题的 Markdown 文件尚未写入，完成后会自动显示在这里。</p></div>`;
+  }
+  const toc = (guide.headings || []).filter(h => h.level <= 3).slice(0, 28);
+  return `
+    <article class="book-reader">
+      <div class="book-toolbar">
+        <div>
+          <h2>${escapeHtml(guide.title)}</h2>
+          <p class="muted">${guide.wordCount} 字 · Markdown 讲义 · 可打印</p>
+        </div>
+        <div class="quiz-actions">
+          <a class="btn secondary" href="${escapeHtml(guide.href)}" download>下载 Markdown</a>
+          <button class="btn secondary" data-print-guide>打印本讲义</button>
+        </div>
+      </div>
+      ${(guide.tocImages || []).length ? `
+        <div class="toc-image-strip">
+          ${guide.tocImages.map(img => `
+            <figure>
+              <a href="${escapeHtml(img)}" target="_blank"><img src="${escapeHtml(img)}" alt="${escapeHtml(guide.title)} 书本式目录图"></a>
+              <figcaption><a href="${escapeHtml(img)}" download>下载目录图</a></figcaption>
+            </figure>
+          `).join("")}
+        </div>
+      ` : ""}
+      <div class="book-layout">
+        <aside class="book-toc">
+          <h3>本讲义目录</h3>
+          ${toc.map(h => `<a class="toc-level-${h.level}" href="#${escapeHtml(safeFileName(h.title).toLowerCase())}">${escapeHtml(h.title)}</a>`).join("")}
+        </aside>
+        <div class="markdown-body">${markdownToHtml(guide.content)}</div>
+      </div>
+    </article>
+  `;
+}
+
+function renderReview() {
+  const library = DB.topicGuides || {items: []};
+  const items = library.items || [];
+  $("reviewBody").innerHTML = `
+    <div class="book-shell">
+      <aside class="panel book-sidebar">
+        <h3>主题书库</h3>
+        <p class="muted">按学习主题重新组织，不再按课件文件硬拆。</p>
+        <div id="topicGuideNav">${renderTopicGuideNav(items)}</div>
+      </aside>
+      <div id="topicGuideReader">${renderTopicGuideContent(items[0])}</div>
+    </div>
+  `;
+  $("topicGuideNav").querySelectorAll("button[data-guide]").forEach(btn => btn.addEventListener("click", () => {
+    $("topicGuideNav").querySelectorAll("button").forEach(b => b.classList.toggle("active", b === btn));
+    const guide = items.find(g => g.id === btn.dataset.guide);
+    $("topicGuideReader").innerHTML = renderTopicGuideContent(guide);
+    const printBtn = $("topicGuideReader").querySelector("[data-print-guide]");
+    if (printBtn) printBtn.addEventListener("click", () => window.print());
+  }));
+  const printBtn = $("topicGuideReader").querySelector("[data-print-guide]");
+  if (printBtn) printBtn.addEventListener("click", () => window.print());
 }
 
 function init() {

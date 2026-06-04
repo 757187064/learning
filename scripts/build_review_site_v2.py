@@ -18,6 +18,8 @@ ASSETS = SITE / "assets"
 IMAGE_OUT = SITE / "image"
 MINDMAP_OUT = SITE / "mindmaps"
 GUIDE_OUT = SITE / "guides"
+TOPIC_GUIDE_OUT = SITE / "topic_guides"
+TOC_IMAGE_OUT = SITE / "guide_toc_images"
 CACHE_VERSION = 6
 
 
@@ -1475,6 +1477,43 @@ def quiz_stage(term, family):
     }.get(family, "课程知识脉络")
 
 
+def beginner_wrong_options(term, family, stage):
+    by_family = {
+        "cnn": [
+            f"{term}主要依靠把图像完全展平成一维向量来保留空间结构。",
+            f"{term}的作用通常是增加无关参数量，而不是改善特征提取或训练。",
+            f"{term}只影响最后输出类别，不会影响中间特征图或训练流程。",
+        ],
+        "mlp": [
+            f"{term}只在测试阶段使用，训练阶段不需要考虑。",
+            f"{term}不会影响损失、梯度或参数更新。",
+            f"{term}可以脱离输入、输出和训练循环单独判断。",
+        ],
+        "rnn": [
+            f"{term}说明序列中每个时间步完全独立，不需要前后顺序。",
+            f"{term}只适合固定长度表格特征，不能放到序列流程里理解。",
+            f"{term}不会影响隐藏状态、时间步或 batch 维度的判断。",
+        ],
+        "transformer": [
+            f"{term}可以完全脱离 Q/K/V、位置关系和 mask 来判断。",
+            f"{term}说明 Transformer 不需要处理序列位置和上下文关系。",
+            f"{term}只改变标签格式，不影响注意力信息流动。",
+        ],
+        "graph": [
+            f"{term}只看单个样本特征，不需要考虑边、邻居或图结构。",
+            f"{term}把节点之间的连接关系全部丢掉，再独立分类。",
+            f"{term}只用于普通表格数据，不参与图上的消息传递或表示学习。",
+        ],
+    }
+    generic = [
+        f"{term}只需要记住中文名称，放在哪个流程环节不影响答题。",
+        f"{term}和{stage}没有关系，复习时可以跳过它的作用。",
+        f"{term}只改变题目文字，不改变模型、数据或训练过程。",
+    ]
+    options = by_family.get(family, generic)
+    return options[:3]
+
+
 def build_beginner_quiz(outline):
     questions = []
     idx = 1
@@ -1491,12 +1530,10 @@ def build_beginner_quiz(outline):
                 questions.append(q_mc(
                     f"BMC{idx:04d}",
                     topic,
-                    f"复习{term}时，下列哪种理解最符合本章要求？",
+                    f"刚开始复习{term}时，下列哪种理解最准确？",
                     [
                         f"A. {compact(plain, 92)}",
-                        "B. 只用于装饰课件标题，不参与模型或训练理解",
-                        "C. 只在测试集上修改标签，训练阶段不需要关注",
-                        "D. 与输入、模型、损失或评估都没有关系",
+                        *[f"{label}. {text}" for label, text in zip("BCD", beginner_wrong_options(term, course.get("family", "general"), stage))],
                     ],
                     "A",
                     f"A正确。{compact(row['exam'], 150)}",
@@ -1505,15 +1542,15 @@ def build_beginner_quiz(outline):
                 questions.append(q_tf(
                     f"BTF{idx:04d}",
                     topic,
-                    f"{term}不能只背定义，还要能说明它在“{stage}”中的作用。",
+                    f"复习{term}时，需要把它放回“{stage}”这一环节中理解。",
                     "正确",
-                    "基础阶段先把知识点放回课程脉络中，后面再做标准题会更稳。",
+                    "基础阶段先判断它属于数据、结构、训练还是输出环节，再去记细节会更稳。",
                     source,
                 ))
                 questions.append(q_fill(
                     f"BF{idx:04d}",
                     topic,
-                    f"学习{term}时，除了记定义，还要判断它属于课程流程中的哪一环节：____。",
+                    f"{term}主要应放在课程流程中的____这一环节理解。",
                     stage,
                     f"答案是{stage}。{compact(row['memory'], 150)}",
                     source,
@@ -1844,10 +1881,154 @@ tr:last-child td { border-bottom: 0; }
 }
 .guide-card strong { display: block; margin-bottom: 6px; }
 .guide-card .btn { display: inline-block; margin-top: 10px; padding: 8px 10px; font-size: 13px; }
+.book-shell {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.book-sidebar {
+  position: sticky;
+  top: 92px;
+  max-height: calc(100vh - 112px);
+  overflow: auto;
+}
+.book-nav-item {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: #334155;
+  border-radius: 8px;
+  padding: 10px 11px;
+  margin: 7px 0;
+  text-align: left;
+  cursor: pointer;
+}
+.book-nav-item strong { display: block; font-size: 14px; }
+.book-nav-item span { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+.book-nav-item.active {
+  border-color: #9dd8f3;
+  background: #eaf7fd;
+  color: #0f5f8c;
+}
+.book-reader {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px;
+}
+.book-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+}
+.toc-image-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 16px 0 22px;
+}
+.toc-image-strip figure {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fbff;
+  padding: 10px;
+}
+.toc-image-strip img {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+.toc-image-strip figcaption { margin-top: 8px; font-size: 13px; font-weight: 700; }
+.book-layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.book-toc {
+  position: sticky;
+  top: 104px;
+  max-height: calc(100vh - 130px);
+  overflow: auto;
+  border-right: 1px solid var(--line);
+  padding-right: 12px;
+}
+.book-toc h3 { margin-top: 0; }
+.book-toc a {
+  display: block;
+  padding: 5px 0;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.book-toc .toc-level-3 { padding-left: 12px; color: #64748b; }
+.markdown-body {
+  max-width: 860px;
+  font-size: 16px;
+  line-height: 1.86;
+}
+.markdown-body h2 {
+  font-size: 28px;
+  margin: 28px 0 12px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+}
+.markdown-body h3 { font-size: 22px; margin: 24px 0 10px; }
+.markdown-body h4 { font-size: 18px; margin: 20px 0 8px; color: #334155; }
+.markdown-body p { margin: 10px 0; }
+.markdown-body ul { padding-left: 22px; }
+.markdown-body li { margin: 5px 0; }
+.markdown-body code {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+.markdown-body pre {
+  overflow: auto;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+  line-height: 1.55;
+}
+.markdown-body pre code {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  padding: 0;
+}
+.table-line {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 8px;
+  overflow-wrap: anywhere;
+}
+@media print {
+  header, .book-sidebar, .book-toc, .quiz-actions, .toc-image-strip figcaption { display: none !important; }
+  body { background: #fff; }
+  main { max-width: none; padding: 0; }
+  .panel, .book-reader { border: 0; padding: 0; }
+  .book-shell, .book-layout { display: block; }
+  .markdown-body { max-width: none; font-size: 10.5pt; line-height: 1.35; }
+  .markdown-body h2, .markdown-body h3, .markdown-body h4 { page-break-after: avoid; }
+  @page { margin: 7mm; }
+}
 @media (max-width: 920px) {
-  .topbar, .hero-grid, .layout, .course-layout, .toolbar { grid-template-columns: 1fr; }
+  .topbar, .hero-grid, .layout, .course-layout, .toolbar, .book-shell, .book-layout { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
-  .side-index { position: static; max-height: none; }
+  .side-index, .book-sidebar, .book-toc { position: static; max-height: none; }
+  .book-toc { border-right: 0; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
 }
 """
 
@@ -2180,33 +2361,148 @@ function renderAnswer(q, idx) {
   return `<div class="answer-item"><strong>${idx}. [${escapeHtml(q.id)}] ${escapeHtml(q.answer)}</strong><p>${escapeHtml(q.explanation)}</p><span class="muted">来源：${escapeHtml(q.source)} · ${escapeHtml(q.topic)}</span></div>`;
 }
 
-function renderReview() {
-  const r = DB.review;
-  const guideBlock = DB.guides ? `
-    <section class="review-section">
-      <h2>考试版 Markdown 讲义下载</h2>
-      <p class="muted">每份课件一份讲义，按“问题动机 -> 学习路线 -> 章节详解 -> 考法提醒 -> 自测”整理。Markdown 内置小页边距打印样式。</p>
-      <p><a class="btn secondary" href="${escapeHtml(DB.guides.index)}" download>下载总目录</a></p>
-      <div class="guide-grid">
-        ${(DB.guides.items || []).map(g => `
-          <div class="guide-card">
-            <strong>${escapeHtml(g.title)}</strong>
-            <span class="muted">${escapeHtml(g.file)} · ${g.chapter_count} 章块</span>
-            <br><a class="btn secondary" href="${escapeHtml(g.href)}" download>下载讲义 .md</a>
-          </div>
-        `).join("")}
-      </div>
-    </section>` : "";
-  $("reviewBody").innerHTML = guideBlock + (r.sections || []).map(sec => `
-    <section class="review-section">
-      <h2>${escapeHtml(sec.title)}</h2>
-      <ul>${(sec.points || []).map(p => `<li>${escapeHtml(p)}</li>`).join("")}</ul>
-      ${(sec.details || []).length ? `<h3>详细知识点</h3><ul>${sec.details.map(p => `<li>${escapeHtml(p)}</li>`).join("")}</ul>` : ""}
-      ${(sec.must_memorize || []).length ? `<h3>必背结论</h3><ul>${sec.must_memorize.map(p => `<li>${escapeHtml(p)}</li>`).join("")}</ul>` : ""}
-      ${(sec.formulas || []).map(f => `<div class="formula">${escapeHtml(f)}</div>`).join("")}
-      ${(sec.exam_focus || []).length ? `<p><strong>常考点：</strong>${escapeHtml(sec.exam_focus.join("；"))}</p>` : ""}
-    </section>
+function inlineMarkdown(text) {
+  return escapeHtml(text)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+}
+
+function markdownToHtml(md) {
+  const lines = (md || "").split(/\r?\n/);
+  const html = [];
+  let listOpen = false;
+  let inCode = false;
+  let codeLines = [];
+  const closeList = () => {
+    if (listOpen) {
+      html.push("</ul>");
+      listOpen = false;
+    }
+  };
+  lines.forEach(line => {
+    if (line.trim().startsWith("```")) {
+      if (inCode) {
+        html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+        codeLines = [];
+        inCode = false;
+      } else {
+        closeList();
+        inCode = true;
+      }
+      return;
+    }
+    if (inCode) {
+      codeLines.push(line);
+      return;
+    }
+    if (!line.trim()) {
+      closeList();
+      return;
+    }
+    const heading = line.match(/^(#{1,4})\s+(.+)$/);
+    if (heading) {
+      closeList();
+      const level = Math.min(heading[1].length + 1, 5);
+      const id = safeFileName(heading[2]).toLowerCase();
+      html.push(`<h${level} id="${escapeHtml(id)}">${inlineMarkdown(heading[2])}</h${level}>`);
+      return;
+    }
+    if (/^\s*[-*]\s+/.test(line)) {
+      if (!listOpen) {
+        html.push("<ul>");
+        listOpen = true;
+      }
+      html.push(`<li>${inlineMarkdown(line.replace(/^\s*[-*]\s+/, ""))}</li>`);
+      return;
+    }
+    if (/^\s*\d+\.\s+/.test(line)) {
+      closeList();
+      html.push(`<p>${inlineMarkdown(line)}</p>`);
+      return;
+    }
+    if (/^\|.+\|$/.test(line)) {
+      closeList();
+      html.push(`<p class="table-line">${inlineMarkdown(line)}</p>`);
+      return;
+    }
+    closeList();
+    html.push(`<p>${inlineMarkdown(line)}</p>`);
+  });
+  closeList();
+  if (inCode) html.push(`<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`);
+  return html.join("");
+}
+
+function renderTopicGuideNav(items) {
+  return items.map((g, i) => `
+    <button class="book-nav-item ${i === 0 ? "active" : ""}" data-guide="${escapeHtml(g.id)}">
+      <strong>${escapeHtml(g.label)}</strong>
+      <span>${g.exists ? `${g.wordCount} 字` : "待生成"}</span>
+    </button>
   `).join("");
+}
+
+function renderTopicGuideContent(guide) {
+  if (!guide || !guide.exists) {
+    return `<div class="panel"><h2>讲义还在生成</h2><p class="muted">这个主题的 Markdown 文件尚未写入，完成后会自动显示在这里。</p></div>`;
+  }
+  const toc = (guide.headings || []).filter(h => h.level <= 3).slice(0, 28);
+  return `
+    <article class="book-reader">
+      <div class="book-toolbar">
+        <div>
+          <h2>${escapeHtml(guide.title)}</h2>
+          <p class="muted">${guide.wordCount} 字 · Markdown 讲义 · 可打印</p>
+        </div>
+        <div class="quiz-actions">
+          <a class="btn secondary" href="${escapeHtml(guide.href)}" download>下载 Markdown</a>
+          <button class="btn secondary" data-print-guide>打印本讲义</button>
+        </div>
+      </div>
+      ${(guide.tocImages || []).length ? `
+        <div class="toc-image-strip">
+          ${guide.tocImages.map(img => `
+            <figure>
+              <a href="${escapeHtml(img)}" target="_blank"><img src="${escapeHtml(img)}" alt="${escapeHtml(guide.title)} 书本式目录图"></a>
+              <figcaption><a href="${escapeHtml(img)}" download>下载目录图</a></figcaption>
+            </figure>
+          `).join("")}
+        </div>
+      ` : ""}
+      <div class="book-layout">
+        <aside class="book-toc">
+          <h3>本讲义目录</h3>
+          ${toc.map(h => `<a class="toc-level-${h.level}" href="#${escapeHtml(safeFileName(h.title).toLowerCase())}">${escapeHtml(h.title)}</a>`).join("")}
+        </aside>
+        <div class="markdown-body">${markdownToHtml(guide.content)}</div>
+      </div>
+    </article>
+  `;
+}
+
+function renderReview() {
+  const library = DB.topicGuides || {items: []};
+  const items = library.items || [];
+  $("reviewBody").innerHTML = `
+    <div class="book-shell">
+      <aside class="panel book-sidebar">
+        <h3>主题书库</h3>
+        <p class="muted">按学习主题重新组织，不再按课件文件硬拆。</p>
+        <div id="topicGuideNav">${renderTopicGuideNav(items)}</div>
+      </aside>
+      <div id="topicGuideReader">${renderTopicGuideContent(items[0])}</div>
+    </div>
+  `;
+  $("topicGuideNav").querySelectorAll("button[data-guide]").forEach(btn => btn.addEventListener("click", () => {
+    $("topicGuideNav").querySelectorAll("button").forEach(b => b.classList.toggle("active", b === btn));
+    const guide = items.find(g => g.id === btn.dataset.guide);
+    $("topicGuideReader").innerHTML = renderTopicGuideContent(guide);
+    const printBtn = $("topicGuideReader").querySelector("[data-print-guide]");
+    if (printBtn) printBtn.addEventListener("click", () => window.print());
+  }));
+  const printBtn = $("topicGuideReader").querySelector("[data-print-guide]");
+  if (printBtn) printBtn.addEventListener("click", () => window.print());
 }
 
 function init() {
@@ -2246,7 +2542,7 @@ HTML = """<!doctype html>
     <div class="topbar">
       <div class="brand">
         <h1>深度学习期末复习资料库</h1>
-        <p>检索 · 教材目录 · 思维导图 · 基础练习 · 标准组卷</p>
+        <p>检索 · 主题书库 · 思维导图 · 基础练习 · 标准组卷</p>
       </div>
       <nav aria-label="主导航">
         <button class="active" data-view="search">搜索</button>
@@ -2254,7 +2550,7 @@ HTML = """<!doctype html>
         <button data-view="mindmaps">思维导图</button>
         <button data-view="beginner">基础练习</button>
         <button data-view="quiz">标准组卷</button>
-        <button data-view="review">综合资料</button>
+        <button data-view="review">主题书库</button>
       </nav>
     </div>
   </header>
@@ -2343,8 +2639,8 @@ HTML = """<!doctype html>
 
     <section id="view-review" class="view">
       <div class="panel">
-        <h2>综合复习资料</h2>
-        <p class="muted">这一页保留章节化讲义；从零开始复习建议优先看“教材目录”。</p>
+        <h2>主题学习讲义书库</h2>
+        <p class="muted">这里按 MLP、CNN、RNN、Transformer、图学习、NLP、LLM 重新组织，像电子书一样阅读，也可以下载 Markdown 打印。</p>
         <div id="reviewBody"></div>
       </div>
     </section>
@@ -2360,12 +2656,98 @@ def write_json(path: Path, obj):
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+TOPIC_GUIDE_SPECS = [
+    {
+        "id": "mlp",
+        "title": "MLP学习资料-通俗版",
+        "label": "MLP",
+        "href": "topic_guides/MLP学习资料-通俗版.md",
+        "tocImages": ["guide_toc_images/mlp-toc.png"],
+    },
+    {
+        "id": "cnn",
+        "title": "CNN学习资料-通俗版",
+        "label": "CNN",
+        "href": "topic_guides/CNN学习资料-通俗版.md",
+        "tocImages": ["guide_toc_images/cnn-toc.png"],
+    },
+    {
+        "id": "rnn",
+        "title": "RNN学习资料-通俗版",
+        "label": "RNN",
+        "href": "topic_guides/RNN学习资料-通俗版.md",
+        "tocImages": ["guide_toc_images/rnn-toc.png"],
+    },
+    {
+        "id": "transformer",
+        "title": "Transformer学习资料-通俗版",
+        "label": "Transformer",
+        "href": "topic_guides/Transformer学习资料-通俗版.md",
+        "tocImages": ["guide_toc_images/transformer-toc.png"],
+    },
+    {
+        "id": "graph",
+        "title": "图学习资料-通俗版",
+        "label": "图学习",
+        "href": "topic_guides/图学习资料-通俗版.md",
+        "tocImages": ["guide_toc_images/graph-toc.png"],
+    },
+    {
+        "id": "nlp",
+        "title": "NLP学习资料-通俗版",
+        "label": "NLP 扩展",
+        "href": "topic_guides/NLP学习资料-通俗版.md",
+        "tocImages": ["guide_toc_images/nlp-toc.png"],
+    },
+    {
+        "id": "llm",
+        "title": "LLM学习资料-通俗版",
+        "label": "LLM 扩展",
+        "href": "topic_guides/LLM学习资料-通俗版.md",
+        "tocImages": ["guide_toc_images/llm-toc.png"],
+    },
+    {
+        "id": "practice_questions",
+        "title": "课堂练习册-题目",
+        "label": "练习题册",
+        "href": "topic_guides/课堂练习册-题目.md",
+        "tocImages": [],
+    },
+    {
+        "id": "practice_answers",
+        "title": "课堂练习册-答案解析",
+        "label": "答案解析册",
+        "href": "topic_guides/课堂练习册-答案解析.md",
+        "tocImages": [],
+    },
+]
+
+
+def load_topic_guides():
+    items = []
+    for spec in TOPIC_GUIDE_SPECS:
+        path = SITE / spec["href"]
+        content = path.read_text(encoding="utf-8") if path.exists() else ""
+        headings = re.findall(r"^(#{1,3})\s+(.+)$", content, flags=re.M)
+        items.append({
+            **spec,
+            "content": content,
+            "wordCount": len(re.sub(r"\s+", "", content)),
+            "headings": [{"level": len(mark), "title": title.strip()} for mark, title in headings[:80]],
+            "exists": path.exists(),
+            "tocImages": [img for img in spec["tocImages"] if (SITE / img).exists()],
+        })
+    return {"title": "主题学习讲义书库", "items": items}
+
+
 def main():
     DATABASE.mkdir(parents=True, exist_ok=True)
     ASSETS.mkdir(parents=True, exist_ok=True)
     IMAGE_OUT.mkdir(parents=True, exist_ok=True)
     MINDMAP_OUT.mkdir(parents=True, exist_ok=True)
     GUIDE_OUT.mkdir(parents=True, exist_ok=True)
+    TOPIC_GUIDE_OUT.mkdir(parents=True, exist_ok=True)
+    TOC_IMAGE_OUT.mkdir(parents=True, exist_ok=True)
 
     standard_quiz = load_standard_quiz()
     manifest, chunks, source_cache = extract_sources()
@@ -2375,6 +2757,7 @@ def main():
     mindmaps = build_mindmaps(outline)
     guides = build_study_guides(outline)
     beginner_quiz = build_beginner_quiz(outline)
+    topic_guides = load_topic_guides()
 
     for img in (ROOT / "image").glob("*.png"):
         if img.name.startswith("截屏"):
@@ -2391,6 +2774,7 @@ def main():
     write_json(DATABASE / "beginner_quiz_bank.json", beginner_quiz)
     write_json(DATABASE / "mindmaps.json", mindmaps)
     write_json(DATABASE / "study_guides.json", guides)
+    write_json(DATABASE / "topic_guides.json", topic_guides)
 
     bundle = {
         "manifest": manifest,
@@ -2400,6 +2784,7 @@ def main():
         "review": review,
         "mindmaps": mindmaps,
         "guides": guides,
+        "topicGuides": topic_guides,
         "quizBank": standard_quiz,
         "beginnerQuizBank": beginner_quiz,
     }
@@ -2411,7 +2796,8 @@ def main():
     print(
         f"sources={len(manifest)} chunks={len(chunks)} terms={len(terms)} "
         f"standard_quiz={len(standard_quiz)} beginner_quiz={len(beginner_quiz)} "
-        f"mindmaps={sum(len(m['maps']) for m in mindmaps)} guides={len(guides['items'])}"
+        f"mindmaps={sum(len(m['maps']) for m in mindmaps)} guides={len(guides['items'])} "
+        f"topic_guides={sum(1 for g in topic_guides['items'] if g['exists'])}"
     )
     print(SITE / "index.html")
 
