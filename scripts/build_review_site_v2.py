@@ -20,7 +20,10 @@ MINDMAP_OUT = SITE / "mindmaps"
 GUIDE_OUT = SITE / "guides"
 TOPIC_GUIDE_OUT = SITE / "topic_guides"
 TOC_IMAGE_OUT = SITE / "guide_toc_images"
-CACHE_VERSION = 6
+CACHE_VERSION = 7
+EXCLUDED_SOURCE_MD = {"深度学习期末复习_仅基于原始课件版.md"}
+FINAL_REVIEW_MD = ROOT / "深度学习期末复习_仅基于原始课件版.md"
+FINAL_REVIEW_SITE_MD = TOPIC_GUIDE_OUT / "深度学习期末复习-总复习资料.md"
 
 
 KEY_TERMS = [
@@ -445,6 +448,66 @@ def extract_notebook(path: Path):
     return manifest, chunks
 
 
+def extract_markdown(path: Path):
+    text = path.read_text(encoding="utf-8")
+    lines = text.splitlines()
+    headings = []
+    for i, line in enumerate(lines, 1):
+        parsed = heading_level(line)
+        if parsed:
+            level, title = parsed
+            headings.append((i, level, title))
+    manifest = {
+        "file": path.name,
+        "kind": "markdown",
+        "size_bytes": path.stat().st_size,
+        "line_count": len(lines),
+        "heading_count": len(headings),
+    }
+    chunks = []
+    if not headings:
+        clean = strip_html(text)
+        if clean:
+            chunks.append({
+                "id": f"{path.stem}::section-1",
+                "file": path.name,
+                "kind": "markdown",
+                "cell_index": None,
+                "slide_index": None,
+                "line_start": 1,
+                "type": "markdown",
+                "title": path.stem,
+                "heading_path": [path.stem],
+                "text": clean,
+                "summary": compact(clean, 680),
+                "terms": terms_in(clean),
+            })
+        return manifest, chunks
+
+    for idx, (line_no, level, title) in enumerate(headings):
+        next_line = headings[idx + 1][0] if idx + 1 < len(headings) else len(lines) + 1
+        section = "\n".join(lines[line_no - 1: next_line - 1])
+        clean = strip_html(section)
+        if not clean:
+            continue
+        parent_titles = [h_title for h_line, h_level, h_title in headings[: idx + 1] if h_level <= level][-4:]
+        chunks.append({
+            "id": f"{path.stem}::section-{idx + 1}",
+            "file": path.name,
+            "kind": "markdown",
+            "cell_index": None,
+            "slide_index": None,
+            "line_start": line_no,
+            "type": "markdown",
+            "title": title,
+            "heading_path": parent_titles,
+            "text": clean,
+            "summary": compact(clean, 680),
+            "terms": terms_in(clean),
+        })
+    return manifest, chunks
+
+
 def ensure_ocr_binary():
     swiftc = shutil.which("swiftc")
     swift = OUT / "scripts" / "ocr_image.swift"
@@ -493,6 +556,8 @@ def graph_fallback_text(path_name, slide_index):
         return f"图学习课件第一部分，第 {slide_index} 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
     if "第二部分" in path_name:
         return f"图学习课件第二部分，第 {slide_index} 页。复习重点围绕图神经网络、图卷积、GCN、GAT、GraphSAGE、消息传递、邻居聚合和节点表示学习。"
+    if "图神经网络" in path_name:
+        return f"图神经网络课件最后部分，第 {slide_index} 页。复习重点围绕图神经网络模型、消息传递、节点表示、图任务、材料科学图数据应用和课件中的 GNN 公式。"
     return f"{path_name} 第 {slide_index} 页，图片型 PPT 页面。"
 
 
@@ -572,7 +637,11 @@ def extract_sources():
     cache = load_cache()
     manifest = []
     chunks = []
-    files = sorted(list(ROOT.glob("*.ipynb")) + list(ROOT.glob("*.pptx")))
+    files = sorted(
+        list(ROOT.glob("*.ipynb"))
+        + list(ROOT.glob("*.pptx"))
+        + [p for p in ROOT.glob("*.md") if p.name not in EXCLUDED_SOURCE_MD]
+    )
     new_cache = {"version": CACHE_VERSION, "files": {}}
     for path in files:
         sha = file_hash(path)
@@ -586,6 +655,8 @@ def extract_sources():
         else:
             if path.suffix.lower() == ".pptx":
                 item_manifest, item_chunks = extract_pptx(path)
+            elif path.suffix.lower() == ".md":
+                item_manifest, item_chunks = extract_markdown(path)
             else:
                 item_manifest, item_chunks = extract_notebook(path)
             item_manifest["sha256"] = sha
@@ -1412,28 +1483,310 @@ def q_mc(id_, topic, stem, options, answer, explanation, source, difficulty="易
     return {"id": id_, "type": "mcq", "topic": topic, "stem": stem, "options": options, "answer": answer, "explanation": explanation, "source": source, "difficulty": difficulty}
 
 
-def q_fill(id_, topic, stem, answer, explanation, source, difficulty="易"):
-    return {"id": id_, "type": "fill", "topic": topic, "stem": stem, "answer": answer, "explanation": explanation, "source": source, "difficulty": difficulty}
-
-
-def q_tf(id_, topic, stem, answer, explanation, source, difficulty="易"):
-    return {"id": id_, "type": "tf", "topic": topic, "stem": stem, "answer": answer, "explanation": explanation, "source": source, "difficulty": difficulty}
-
-
 def q_short(id_, topic, stem, answer, explanation, source, difficulty="易"):
     return {"id": id_, "type": "short", "topic": topic, "stem": stem, "answer": answer, "explanation": explanation, "source": source, "difficulty": difficulty}
 
 
+def q_material(id_, topic, material, questions, answer, explanation, source, difficulty="中"):
+    return {
+        "id": id_,
+        "type": "material",
+        "topic": topic,
+        "stem": "阅读材料并回答问题。",
+        "material": material,
+        "questions": questions,
+        "answer": answer,
+        "explanation": explanation,
+        "source": source,
+        "difficulty": difficulty,
+    }
+
+
 def has_bad_question_text(q):
-    text = " ".join(str(q.get(k, "")) for k in ["stem", "answer", "explanation"])
+    text = " ".join(str(q.get(k, "")) for k in ["stem", "material", "questions", "answer", "explanation"])
     return any(p in text for p in BAD_QUESTION_PATTERNS)
 
 
-def load_standard_quiz():
-    path = DATABASE / "quiz_bank.json"
-    if not path.exists():
-        return []
-    data = json.loads(path.read_text(encoding="utf-8"))
+EXAM_TOPIC_BLUEPRINTS = [
+    {
+        "key": "neuron",
+        "tier": "重点",
+        "topic": "神经元与感知机",
+        "source": "深度学习导学_20260609.md",
+        "fact": "TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
+        "trap": "单层感知机不能直接解决 XOR 这类非线性可分问题，多层结构或非线性变换才是关键。",
+        "wrong": [
+            "单层感知机可以不加隐藏层直接表达任意 XOR 逻辑",
+            "阈值逻辑单元不需要权重，输入只要相加即可完成所有分类",
+            "ADALINE 与感知机完全相同，训练时都只看二值阶跃输出",
+        ],
+        "short": "说明 TLU、感知机和 ADALINE 之间的递进关系。",
+        "answer": "TLU 强调用加权求和和阈值产生二值输出；感知机把它用于线性分类，决策边界是超平面；ADALINE 进一步用连续线性输出和误差最小化引出损失函数、梯度下降和参数更新。它们共同铺垫了后续神经网络训练流程。",
+    },
+    {
+        "key": "training",
+        "tier": "重点",
+        "topic": "训练流程与自动微分",
+        "source": "多层感知机1_学生分发版.ipynb",
+        "fact": "训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
+        "trap": "清零梯度、训练/评估模式、no_grad 与 scheduler 的位置经常被混淆。",
+        "wrong": [
+            "反向传播发生在优化器更新参数之后",
+            "计算图只保存输入数据，不能用于自动求导",
+            "训练时不需要清零梯度，PyTorch 会自动丢弃旧梯度",
+        ],
+        "short": "按顺序写出 PyTorch 中一个 batch 的标准训练步骤，并说明每一步作用。",
+        "answer": "标准顺序是 optimizer.zero_grad() 清旧梯度，model(x) 前向得到预测，loss_fn 计算损失，loss.backward() 沿计算图求梯度，optimizer.step() 更新参数。验证时要 model.eval()，通常配合 torch.no_grad()，避免梯度记录和训练态层产生干扰。",
+    },
+    {
+        "key": "mlp",
+        "tier": "重点",
+        "topic": "MLP 与分类损失",
+        "source": "多层感知机2-学生分发版-终版2026.ipynb",
+        "fact": "MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
+        "trap": "没有激活函数时，多层线性层仍可合并为一个线性变换；CrossEntropyLoss 应输入 logits。",
+        "wrong": [
+            "只要全连接层足够多，即使没有激活函数也能拟合任意非线性边界",
+            "CrossEntropyLoss 前必须先手动 Softmax",
+            "BCEWithLogitsLoss 的输入应该是 Sigmoid 后的概率",
+        ],
+        "short": "解释为什么 MLP 必须依赖激活函数，并比较二分类和多分类常用损失。",
+        "answer": "仿射变换只做线性组合和平移，多层线性结构没有激活函数仍等价于一个线性变换，无法表达复杂非线性边界。二分类或多标签常用 BCEWithLogitsLoss，输入 logits；单标签多分类常用 CrossEntropyLoss，输入每类 logits，内部完成 LogSoftmax/NLLLoss 类计算。",
+    },
+    {
+        "key": "cnn",
+        "tier": "重点",
+        "topic": "CNN 卷积、池化与架构",
+        "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
+        "fact": "CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
+        "trap": "输出尺寸由输入、卷积核、步长、填充共同决定；CNN 实践里常做互相关而不是翻转卷积核。",
+        "wrong": [
+            "CNN 为了保留图像结构必须把所有像素全连接到每个神经元",
+            "卷积输出大小与卷积核大小、步长和填充无关",
+            "池化层的主要作用是增加大量可学习参数",
+        ],
+        "short": "说明 CNN 相比 MLP 处理图像的优势，并写出卷积输出尺寸公式。",
+        "answer": "MLP 展平图像会破坏空间结构且参数量巨大；CNN 通过局部连接保留邻域关系，通过参数共享减少参数，通过池化压缩空间尺寸并增强一定平移不变性。常用输出尺寸公式为 (输入尺寸 + 2P - K) / S + 1。",
+    },
+    {
+        "key": "cnn_train",
+        "tier": "重点",
+        "topic": "CNN 训练技巧",
+        "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
+        "fact": "BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
+        "trap": "不同技巧解决的问题不同：梯度裁剪偏向梯度爆炸，Dropout/权重衰减偏向过拟合，BatchNorm 偏向稳定训练。",
+        "wrong": [
+            "Dropout 在推理阶段仍应随机丢弃神经元来保持训练一致",
+            "BatchNorm 推理时一定使用当前 batch 的均值方差",
+            "梯度裁剪主要用于让梯度消失得更快",
+        ],
+        "short": "比较 BatchNorm、Dropout、权重衰减和数据增强分别解决什么问题。",
+        "answer": "BatchNorm 标准化中间激活，使训练更稳定；Dropout 训练时随机失活，降低对少数神经元的依赖；权重衰减惩罚过大参数，缓解过拟合；数据增强扩充训练分布，让模型见到合理变化。答题时要写出训练/推理阶段差异。",
+    },
+    {
+        "key": "rnn",
+        "tier": "重点",
+        "topic": "RNN、GRU、LSTM",
+        "source": "循环神经网络-学生分发版-终版2026.ipynb",
+        "fact": "RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
+        "trap": "LSTM 有细胞状态和输入/遗忘/输出门；GRU 通常只有更新门和重置门，没有独立细胞状态。",
+        "wrong": [
+            "RNN 每个时间步完全独立，不需要隐藏状态",
+            "LSTM 没有门控结构，只是普通线性层堆叠",
+            "Padding 补出来的位置都是真实有效时间步，不需要 mask 或 packing",
+        ],
+        "short": "解释 RNN 的隐藏状态作用，并比较 GRU 与 LSTM 的门控差异。",
+        "answer": "隐藏状态把过去时间步的信息带到当前时间步，使模型能处理序列。GRU 用更新门和重置门控制保留和重置历史信息，结构较简洁；LSTM 有输入门、遗忘门、输出门和细胞状态，长期记忆通道更明确。变长序列要注意 padding、packing 或 mask。",
+    },
+    {
+        "key": "transformer",
+        "tier": "重点",
+        "topic": "Attention 与 Transformer",
+        "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+        "fact": "注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
+        "trap": "sqrt(d_k) 是缩放项，不是可学习参数；Target Mask 用于防止解码器看到未来。",
+        "wrong": [
+            "Value 用来和 Query 点积计算匹配分数，Key 不参与匹配",
+            "Transformer 不需要任何位置信息也能天然知道词序",
+            "Target Mask 的作用是屏蔽源序列 padding，而不是防止看未来",
+        ],
+        "short": "写出缩放点积注意力的计算流程，并说明多头注意力和位置编码的作用。",
+        "answer": "流程是 Q 与 K 转置点积得到相关性分数，除以 sqrt(d_k) 稳定 softmax，再用 softmax 权重对 V 加权求和。多头注意力让模型在不同子空间学习不同关系；位置编码补充序列顺序，因为自注意力本身不含天然位置信息。",
+    },
+    {
+        "key": "llm",
+        "tier": "次重点",
+        "topic": "大语言模型与 Prompt",
+        "source": "图学习课件_第二部分_20260602.pptx",
+        "fact": "大语言模型以 Transformer 为核心，通过大规模预训练获得语言生成和理解能力，Prompt 用自然语言引导模型完成任务。",
+        "trap": "LLM 不是重新定义 Transformer 基础结构，考试更可能考演进脉络、Prompt 作用、MoE/DeepSeek R1 等概念层理解。",
+        "wrong": [
+            "Prompt 只用于装饰输入文字，不影响模型输出方向",
+            "大语言模型完全不依赖 Transformer 或注意力机制",
+            "MoE 的核心是让所有专家每次都完整参与计算",
+        ],
+        "short": "说明 Prompt、MoE 和推理型模型在大语言模型中的基本作用。",
+        "answer": "Prompt 是任务指令和上下文，会影响模型生成方向；MoE 用路由选择部分专家参与计算，在参数规模和计算成本之间折中；推理型模型强调更长的思考链路或强化学习后训练，让模型在复杂问题上生成更可靠的中间推理。",
+    },
+    {
+        "key": "generative",
+        "tier": "次重点",
+        "topic": "生成式算法",
+        "source": "图学习课件_第二部分_20260602.pptx",
+        "fact": "生成式算法关注学习数据分布并产生新样本，常见思想包括自回归生成、扩散式逐步去噪和表示空间生成。",
+        "trap": "生成式模型不是只做分类；它要建模数据如何被生成或如何从噪声恢复。",
+        "wrong": [
+            "生成式算法的目标只是给已有样本贴标签",
+            "自回归生成可以在生成当前 token 时直接使用未来 token",
+            "扩散模型不需要学习从噪声恢复数据的过程",
+        ],
+        "short": "用分类模型和生成式模型的目标差异解释生成式算法。",
+        "answer": "分类模型主要学习输入到标签的映射，回答“这是什么”；生成式模型要学习数据分布或生成过程，回答“怎样生成像这样的数据”。自回归模型逐步预测下一个 token，扩散模型学习逐步去噪，二者都服务于生成新内容。",
+    },
+    {
+        "key": "graph",
+        "tier": "次重点",
+        "topic": "图学习与图神经网络",
+        "source": "图神经网络课件_20260609.pptx",
+        "fact": "图神经网络在节点、边和邻接关系上做消息传递，通过邻居聚合更新节点表示。",
+        "trap": "图卷积不能简单理解成固定方形卷积核在规则图像网格上滑动，图的邻域由边决定。",
+        "wrong": [
+            "图学习只看节点自身特征，不需要边或邻接矩阵",
+            "GCN 的邻居聚合与图结构无关",
+            "GAT 和 GCN 完全一样，都不能区分不同邻居重要性",
+        ],
+        "short": "说明 GCN、GAT、GraphSAGE 的共同点和差异。",
+        "answer": "共同点是都利用邻居信息更新节点表示，属于消息传递/邻居聚合思想。GCN 常用归一化邻接矩阵聚合邻居；GAT 学习不同邻居的注意力权重；GraphSAGE 通过邻居采样和聚合支持较大图或归纳式节点表示学习。",
+    },
+    {
+        "key": "pinn",
+        "tier": "次重点",
+        "topic": "PINN",
+        "source": "图神经网络课件_20260609.pptx",
+        "fact": "PINN 把物理方程约束加入神经网络训练，使模型不仅拟合数据，也尽量满足物理规律。",
+        "trap": "PINN 的关键不是换一种激活函数，而是把方程残差、边界条件或初始条件写进损失。",
+        "wrong": [
+            "PINN 完全不需要物理方程，只要数据越多越好",
+            "PINN 的物理约束只在测试阶段检查，不参与训练损失",
+            "PINN 与普通 MLP 的差别只是网络层数更深",
+        ],
+        "short": "解释 PINN 中数据损失和物理损失分别起什么作用。",
+        "answer": "数据损失让模型拟合观测样本，物理损失把微分方程残差、边界条件或初始条件纳入优化目标。这样模型在数据较少时也能利用先验规律，输出更符合物理约束的解。",
+    },
+    {
+        "key": "materials",
+        "tier": "次重点",
+        "topic": "AI for material science",
+        "source": "图神经网络课件_20260609.pptx",
+        "fact": "材料科学中的 AI 常把分子、晶体或结构关系表示为图，再用 GNN/PINN 等模型预测性质或辅助设计。",
+        "trap": "材料科学不是孤立的应用名词，关键是把结构、关系、物理约束和预测目标联系起来。",
+        "wrong": [
+            "材料科学应用中图结构没有意义，只需要普通表格特征",
+            "GNN 不能处理原子之间的连接关系",
+            "材料性质预测不需要考虑结构或物理先验",
+        ],
+        "short": "说明为什么材料科学问题适合和图学习或物理约束模型结合。",
+        "answer": "材料由原子、键、晶格和空间关系构成，天然可以表示为图；GNN 能聚合局部邻域和结构信息，预测性质或筛选材料。若任务涉及物理规律，PINN 或物理约束损失可以补充纯数据学习的不足。",
+    },
+]
+
+
+def q_options(correct, wrongs):
+    opts = [correct] + wrongs[:3]
+    return [f"{label}. {text}" for label, text in zip("ABCD", opts)]
+
+
+def make_exam_banks():
+    standard = []
+    beginner = []
+    material_templates = []
+    idx = 1
+    for item in EXAM_TOPIC_BLUEPRINTS:
+        repeat = 4 if item["tier"] == "重点" else 2
+        difficulty = "中" if item["tier"] == "重点" else "易"
+        for n in range(repeat):
+            standard.append(q_mc(
+                f"MC{idx:04d}",
+                item["topic"],
+                f"关于{item['topic']}，下列说法错误的是",
+                q_options(item["fact"], item["wrong"][n % len(item["wrong"]):] + item["wrong"][:n % len(item["wrong"])]),
+                chr(ord("B") + (n % 3)),
+                f"A正确：{item['fact']}；错误选项把关键点说反。{item['trap']}",
+                item["source"],
+                difficulty,
+            ))
+            beginner.append(q_mc(
+                f"BMC{idx:04d}",
+                item["topic"],
+                f"复习{item['topic']}时，最应该先掌握的是哪一项？",
+                q_options(item["fact"], item["wrong"]),
+                "A",
+                f"A正确。基础阶段先抓主线：{item['fact']}",
+                item["source"],
+                "易",
+            ))
+            idx += 1
+        standard.append(q_short(
+            f"S{idx:04d}",
+            item["topic"],
+            item["short"],
+            item["answer"],
+            f"简答题要写出定义、作用、位置和易错点。{item['trap']}",
+            item["source"],
+            difficulty,
+        ))
+        beginner.append(q_short(
+            f"BS{idx:04d}",
+            item["topic"],
+            f"用自己的话解释{item['topic']}的核心作用。",
+            item["fact"],
+            "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
+            item["source"],
+            "易",
+        ))
+        material_templates.append(item)
+        idx += 1
+    for m, item in enumerate(material_templates, 1):
+        if item["key"] in {"cnn", "rnn", "transformer", "graph", "training", "mlp", "pinn", "materials"}:
+            material = (
+                f"某同学复习{item['topic']}时，只记住了名词，但没有把它放回课程流程。"
+                f"课件中的关键说法是：{item['fact']} 常见误区是：{item['trap']}"
+            )
+            questions = [
+                "指出材料中最核心的模型或训练思想。",
+                "写出一个最容易被选择题设置成错误选项的说法。",
+                "如果作为简答题，答案中至少应包含哪两个要点？",
+            ]
+            answer = (
+                f"核心思想：{item['fact']} "
+                f"易错说法：{item['wrong'][0]}。"
+                "简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。"
+            )
+            q = q_material(
+                f"M{m:04d}",
+                item["topic"],
+                material,
+                questions,
+                answer,
+                f"资料题不是背单词，要先读出材料所处环节，再把概念作用和误区对应起来。{item['trap']}",
+                item["source"],
+                "中" if item["tier"] == "重点" else "易",
+            )
+            standard.append(q)
+            beginner.append(q_material(
+                f"BM{m:04d}",
+                item["topic"],
+                material,
+                questions[:2],
+                answer,
+                "基础资料题只要求读懂材料主线和一个易错点。",
+                item["source"],
+                "易",
+            ))
+    return clean_quiz(standard), clean_quiz(beginner)
+
+
+def clean_quiz(data):
     cleaned = []
     seen = set()
     for q in data:
@@ -1445,127 +1798,6 @@ def load_standard_quiz():
         cleaned.append(q)
         seen.add(qid)
     return cleaned
-
-
-def quiz_stage(term, family):
-    input_terms = {"Padding", "Packing", "PackedSequence", "标准化", "归一化", "数据增强", "ImageFolder", "WeightedRandomSampler", "Batch"}
-    structure_terms = {
-        "卷积", "互相关", "卷积核", "步长", "填充", "Valid", "Same", "Full", "感受野", "池化",
-        "激活函数", "BatchNorm", "Dropout", "RNN", "隐藏状态", "双向RNN", "堆叠RNN", "GRU", "LSTM",
-        "1D卷积", "TCN", "Seq2Seq", "Encoder-Decoder", "注意力机制", "Attention", "Query", "Key",
-        "Value", "Q/K/V", "上下文向量", "Scaled Dot-Product Attention", "sqrt(d_k)", "Multi-Head Attention",
-        "Self-Attention", "Cross-Attention", "位置编码", "Positional Encoding", "Transformer", "RoPE",
-        "图学习", "图神经网络", "节点", "边", "邻接矩阵", "度矩阵", "拉普拉斯矩阵", "图卷积", "GCN",
-        "GAT", "GraphSAGE", "消息传递", "聚合", "Vertex", "Edge",
-    }
-    training_terms = {"梯度下降", "学习率", "Epoch", "反向传播", "计算图", "自动微分", "梯度消失", "梯度爆炸", "梯度裁剪", "优化器", "Adam", "RMSProp", "Momentum", "权重衰减", "超参数", "消融实验"}
-    output_terms = {"损失函数", "Logistic", "Sigmoid", "Softmax", "交叉熵", "BCEWithLogitsLoss", "CrossEntropyLoss", "类别不平衡", "pos_weight", "class weight"}
-    if term in input_terms:
-        return "数据输入或预处理"
-    if term in output_terms:
-        return "输出层、损失函数或评价目标"
-    if term in training_terms:
-        return "训练优化过程"
-    if term in structure_terms:
-        return "模型结构或信息流动"
-    return {
-        "cnn": "卷积网络结构",
-        "mlp": "前向传播与训练流程",
-        "rnn": "序列建模结构",
-        "transformer": "注意力结构",
-        "graph": "图结构表示与邻居聚合",
-    }.get(family, "课程知识脉络")
-
-
-def beginner_wrong_options(term, family, stage):
-    by_family = {
-        "cnn": [
-            f"{term}主要依靠把图像完全展平成一维向量来保留空间结构。",
-            f"{term}的作用通常是增加无关参数量，而不是改善特征提取或训练。",
-            f"{term}只影响最后输出类别，不会影响中间特征图或训练流程。",
-        ],
-        "mlp": [
-            f"{term}只在测试阶段使用，训练阶段不需要考虑。",
-            f"{term}不会影响损失、梯度或参数更新。",
-            f"{term}可以脱离输入、输出和训练循环单独判断。",
-        ],
-        "rnn": [
-            f"{term}说明序列中每个时间步完全独立，不需要前后顺序。",
-            f"{term}只适合固定长度表格特征，不能放到序列流程里理解。",
-            f"{term}不会影响隐藏状态、时间步或 batch 维度的判断。",
-        ],
-        "transformer": [
-            f"{term}可以完全脱离 Q/K/V、位置关系和 mask 来判断。",
-            f"{term}说明 Transformer 不需要处理序列位置和上下文关系。",
-            f"{term}只改变标签格式，不影响注意力信息流动。",
-        ],
-        "graph": [
-            f"{term}只看单个样本特征，不需要考虑边、邻居或图结构。",
-            f"{term}把节点之间的连接关系全部丢掉，再独立分类。",
-            f"{term}只用于普通表格数据，不参与图上的消息传递或表示学习。",
-        ],
-    }
-    generic = [
-        f"{term}只需要记住中文名称，放在哪个流程环节不影响答题。",
-        f"{term}和{stage}没有关系，复习时可以跳过它的作用。",
-        f"{term}只改变题目文字，不改变模型、数据或训练过程。",
-    ]
-    options = by_family.get(family, generic)
-    return options[:3]
-
-
-def build_beginner_quiz(outline):
-    questions = []
-    idx = 1
-    for course in outline["courses"]:
-        for chapter in course["chapters"]:
-            for row in chapter["rows"][:10]:
-                term = row["term"]
-                source = course["file"]
-                topic = f"{course['title']} / {chapter['title']}"
-                plain = row["plain"] or row["memory"]
-                stage = quiz_stage(term, course.get("family", "general"))
-                if not plain:
-                    continue
-                questions.append(q_mc(
-                    f"BMC{idx:04d}",
-                    topic,
-                    f"刚开始复习{term}时，下列哪种理解最准确？",
-                    [
-                        f"A. {compact(plain, 92)}",
-                        *[f"{label}. {text}" for label, text in zip("BCD", beginner_wrong_options(term, course.get("family", "general"), stage))],
-                    ],
-                    "A",
-                    f"A正确。{compact(row['exam'], 150)}",
-                    source,
-                ))
-                questions.append(q_tf(
-                    f"BTF{idx:04d}",
-                    topic,
-                    f"复习{term}时，需要把它放回“{stage}”这一环节中理解。",
-                    "正确",
-                    "基础阶段先判断它属于数据、结构、训练还是输出环节，再去记细节会更稳。",
-                    source,
-                ))
-                questions.append(q_fill(
-                    f"BF{idx:04d}",
-                    topic,
-                    f"{term}主要应放在课程流程中的____这一环节理解。",
-                    stage,
-                    f"答案是{stage}。{compact(row['memory'], 150)}",
-                    source,
-                ))
-                if idx % 3 == 0:
-                    questions.append(q_short(
-                        f"BS{idx:04d}",
-                        topic,
-                        f"用两句话说明{term}在本章中的作用，并写出一个复习时容易忽略的点。",
-                        f"{term}的作用可以概括为：{compact(plain, 160)} 容易忽略的是：{compact(row['pitfall'], 130)}",
-                        "基础简答不追求展开太深，先讲清“它是什么、放在哪里、容易错在哪里”。",
-                        source,
-                    ))
-                idx += 1
-    return [q for q in questions if not has_bad_question_text(q)]
 
 
 def fallback_review(outline):
@@ -2139,11 +2371,8 @@ function questionMarkdown(q, idx) {
   if (q.type === "mcq") {
     return `${idx}. ${q.stem}\n\n${q.options.map(o => `   ${o}`).join("\n")}`;
   }
-  if (q.type === "tf") {
-    return `${idx}. ${q.stem}\n\n   A. 正确\n   B. 错误`;
-  }
-  if (q.type === "fill") {
-    return `${idx}. ${q.stem} <span class="blank"></span>`;
+  if (q.type === "material") {
+    return `${idx}. ${q.stem}\n\n材料：${q.material || ""}\n\n${(q.questions || []).map((x, i) => `   ${i + 1}. ${x}`).join("\n")}\n\n答题区：\n\n\n`;
   }
   return `${idx}. ${q.stem}\n\n答题区：\n\n\n`;
 }
@@ -2157,7 +2386,7 @@ function exportQuizMarkdown(mode, part) {
   if (!state || !state.chosen.length) return;
   const modeName = mode === "beginner" ? "基础练习" : "标准组卷";
   const title = `${modeName}${state.topic ? "：" + state.topic : ""}`;
-  const labels = {mcq: "单选题", tf: "判断题", fill: "填空题", short: "简答题"};
+  const labels = {mcq: "单选题", short: "简答题", material: "资料题"};
   const lines = [
     printStyleBlock(),
     `# ${title}${part === "questions" ? "（题目版）" : "（答案解析版）"}`,
