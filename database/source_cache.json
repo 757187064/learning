@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "files": {
     "卷积神经网络1-学生分发版-终版2026.ipynb": {
       "sha256": "a4a3d93e254a5854046e7b597c5dde4af6682e53c555585f8a47ffbfc169dca9",
@@ -11882,6 +11882,1152 @@
         }
       ]
     },
+    "图神经网络课件_20260609.pptx": {
+      "sha256": "0f3c111118c51a04908a245efc42ed2e9f367e5a7c3d53664a7a122f8089be6c",
+      "manifest": {
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "size_bytes": 10881192,
+        "slide_count": 71,
+        "sha256": "0f3c111118c51a04908a245efc42ed2e9f367e5a7c3d53664a7a122f8089be6c"
+      },
+      "chunks": [
+        {
+          "id": "图神经网络课件_20260609::slide-1",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 1,
+          "type": "slide",
+          "title": "图卷积网络（GCN）",
+          "heading_path": [
+            "图卷积网络（GCN）"
+          ],
+          "text": "图卷积网络（GCN）\nAHT（ 公式的物理含义是什么\nH（+1）\nA\n第0节点表示 口\n日100\n0\n0\n◎\n《",
+          "summary": "图卷积网络（GCN） AHT（ 公式的物理含义是什么 H（+1） A 第0节点表示 口 日100 0 0 ◎ 《",
+          "terms": [
+            "卷积",
+            "节点",
+            "图卷积",
+            "GCN"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-2",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 2,
+          "type": "slide",
+          "title": "）图神经网络（GNN）",
+          "heading_path": [
+            "）图神经网络（GNN）"
+          ],
+          "text": "）图神经网络（GNN）\nMLP层\nLayer N\nLayer N+1\ngTopn in\ngraph out\n广\n• Ents\nGraph Independent Layer\nupdate function f=：\n节点，边和整体三者没有关联！",
+          "summary": "）图神经网络（GNN） MLP层 Layer N Layer N+1 gTopn in graph out 广 • Ents Graph Independent Layer update function f=： 节点，边和整体三者没有关联！",
+          "terms": [
+            "图神经网络",
+            "节点",
+            "边"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-3",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 3,
+          "type": "slide",
+          "title": "规则性数据",
+          "heading_path": [
+            "规则性数据"
+          ],
+          "text": "规则性数据\n排列整齐的数据\n不规则数据\nGrid-Like Data\n文本\n树\n.^\n图像\n图",
+          "summary": "规则性数据 排列整齐的数据 不规则数据 Grid-Like Data 文本 树 .^ 图像 图",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-4",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 4,
+          "type": "slide",
+          "title": "9 图卷积网络（GCN）",
+          "heading_path": [
+            "9 图卷积网络（GCN）"
+          ],
+          "text": "9 图卷积网络（GCN）\n叉又叉\n区\n区\n×××\n囚•\n凶凶\n区\n如何从圈像卷积，类比到圈结构卷积\n怎么用消息传递方式实现图卷积网络\n怎么用多层图网络完成节点分类任务\nSEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）\nAQ",
+          "summary": "9 图卷积网络（GCN） 叉又叉 区 区 ××× 囚• 凶凶 区 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017） AQ",
+          "terms": [
+            "卷积",
+            "节点",
+            "图卷积",
+            "GCN",
+            "消息传递",
+            "节点分类"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-5",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 5,
+          "type": "slide",
+          "title": "图卷积网络（GCN）",
+          "heading_path": [
+            "图卷积网络（GCN）"
+          ],
+          "text": "图卷积网络（GCN）\nGraph Convolutional Network\n图卷积网络的计算公式\n红框\n是图卷积网络的核心公式\n。\nA\n邻接矩阵\n1\n1\n1\n0\n1\n1\n1\n1\n0\nD一 与度矩阵相关\n0\n0\n1\n1\n1\n0\n0\n1\n0\n0\n0\n-\nH（0每一层的节点表示\n0\n0\n邻接矩阵\n《",
+          "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 。 A 邻接矩阵 1 1 1 0 1 1 1 1 0 D一 与度矩阵相关 0 0 1 1 1 0 0 1 0 0 0 - H（0每一层的节点表示 0 0 邻接矩阵 《",
+          "terms": [
+            "卷积",
+            "节点",
+            "邻接矩阵",
+            "度矩阵",
+            "图卷积",
+            "GCN"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-6",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 6,
+          "type": "slide",
+          "title": "图卷积网络（GCN）-消息传递",
+          "heading_path": [
+            "图卷积网络（GCN）-消息传递"
+          ],
+          "text": "图卷积网络（GCN）-消息传递\n消息传递\nMessage Passing\n发送Send\n1.边上的源节点，往目标节点发送特征\n0号\n1号\nASKRT CHKOTHERE\n0号\n2号",
+          "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASKRT CHKOTHERE 0号 2号",
+          "terms": [
+            "卷积",
+            "节点",
+            "边",
+            "图卷积",
+            "GCN",
+            "消息传递"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-7",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 7,
+          "type": "slide",
+          "title": "图卷积网络（GCN）-消息传递",
+          "heading_path": [
+            "图卷积网络（GCN）-消息传递"
+          ],
+          "text": "图卷积网络（GCN）-消息传递\n消息传递\nMessage Passing\n接收Recv\n2. 目标节点对收到的特征进行聚合\n0号\n1号\n0号\n2号",
+          "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 2号",
+          "terms": [
+            "卷积",
+            "节点",
+            "图卷积",
+            "GCN",
+            "消息传递",
+            "聚合"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-8",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 8,
+          "type": "slide",
+          "title": "图卷积网络（GCN）",
+          "heading_path": [
+            "图卷积网络（GCN）"
+          ],
+          "text": "图卷积网络（GCN）\nGraph Convolutional Network\n给边加权\nAHT\nD- AD- H（\n•\nd越大，信息量越小，言越小\n1\n0号\n13v3\n0号\n1\n1号\nV3v3\n1号\n0号\n0号\n2号\n1\n2号\nV3v4",
+          "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AHT D- AD- H（ • d越大，信息量越小，言越小 1 0号 13v3 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号 V3v4",
+          "terms": [
+            "卷积",
+            "图卷积",
+            "GCN"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-9",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 9,
+          "type": "slide",
+          "title": "图卷积网络（GCN）",
+          "heading_path": [
+            "图卷积网络（GCN）"
+          ],
+          "text": "图卷积网络（GCN）\nGraph Convolutional Network\nGCN算法全流程\nH（+1） o（ - AD- H（W（）\n获取的最终表示\nFT（L） 作为最终节点表示\nHL）\nY",
+          "summary": "图卷积网络（GCN） Graph Convolutional Network GCN算法全流程 H（+1） o（ - AD- H（W（） 获取的最终表示 FT（L） 作为最终节点表示 HL） Y",
+          "terms": [
+            "卷积",
+            "节点",
+            "图卷积",
+            "GCN"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-10",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 10,
+          "type": "slide",
+          "title": "） 图卷积网络（GCN）",
+          "heading_path": [
+            "） 图卷积网络（GCN）"
+          ],
+          "text": "） 图卷积网络（GCN）\nhz\nOutpu\nconcat/avg\n•\nReLU\n-0.\ndis\naiis\nhia\nFne\n图卷积网络（GCN）\n图注意力网络（GAT）\nKipf. Thomas N and Welling. Max\nPetar Velitkovit, cutem Cucvdt Ararta Csarov. Adrian Romere Peto Ls and Yoshua\nSemi-Supervised Classification with Graph Convolutional Networks\nBengio\nICLR 2017\nGraph Attention Networks.\nICLR 2018",
+          "summary": "） 图卷积网络（GCN） hz Outpu concat/avg • ReLU -0. dis aiis hia Fne 图卷积网络（GCN） 图注意力网络（GAT） Kipf. Thomas N and Welling. Max Petar Velitkovit, cutem Cucvdt Ararta Csarov. Adrian Romere Peto Ls and Yoshua Semi-Supervised Classification with Graph Convolutional Networks Bengio ICLR 2017 Graph Attention Networks. ICLR 2018",
+          "terms": [
+            "卷积",
+            "Attention",
+            "图卷积",
+            "GCN",
+            "GAT"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-11",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 11,
+          "type": "slide",
+          "title": "） 信息传递",
+          "heading_path": [
+            "） 信息传递"
+          ],
+          "text": "） 信息传递\n1\n0号\nGCN. GAT都是基于邻居聚合的模型\n1\nV3v3\n1号\n1\n2号\n称为 Spatial（空间）GNN\nGCN\n大部分的Spatial GNN都可以用\nJ（e. ）\n0号\nMessage Passing实现\n•\n1（••）\n1号\nJ（ ）\n2号\n• 消息的发送\nGAT\n• 消息的接收",
+          "summary": "） 信息传递 1 0号 GCN. GAT都是基于邻居聚合的模型 1 V3v3 1号 1 2号 称为 Spatial（空间）GNN GCN 大部分的Spatial GNN都可以用 J（e. ） 0号 Message Passing实现 • 1（••） 1号 J（ ） 2号 • 消息的发送 GAT • 消息的接收",
+          "terms": [
+            "GCN",
+            "GAT",
+            "聚合"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-12",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 12,
+          "type": "slide",
+          "title": "信息传递",
+          "heading_path": [
+            "信息传递"
+          ],
+          "text": "信息传递\n基于消息传递的 Graph Neural Network的通用公式\n多层MLP\n邻居消息发送\nF可以是聚合函数\n通常是Mean/Max/Sum",
+          "summary": "信息传递 基于消息传递的 Graph Neural Network的通用公式 多层MLP 邻居消息发送 F可以是聚合函数 通常是Mean/Max/Sum",
+          "terms": [
+            "消息传递",
+            "聚合"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-13",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 13,
+          "type": "slide",
+          "title": "丿信息传递",
+          "heading_path": [
+            "丿信息传递"
+          ],
+          "text": "丿信息传递\nLayer N\nLayer N+1\ngraph in|\ngraph out\nU\n•V\n•一声\nPr.-E.\nPE.\nMessage Passing Layer\nupdate function f=您......\npooling function p",
+          "summary": "丿信息传递 Layer N Layer N+1 graph in| graph out U •V •一声 Pr.-E. PE. Message Passing Layer update function f=您...... pooling function p",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-14",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 14,
+          "type": "slide",
+          "title": "学习资料",
+          "heading_path": [
+            "学习资料"
+          ],
+          "text": "学习资料\n• 斯坦福CS224W课程：http://cs224w.stanford.edu\n• 图学习库 PGL:https://github.com/PaddlePaddle/PGL\n宝藏可视化期刊：https://distill.pub\nACS Appl.Mater. Interfaces 2023, 15, 16, 20520-20530\nComputational Materials Science, 2023, 230: 112461.\nA Semi-supervised Graph Altentive Network for Financial Fraud Detection\nPoint-GNN: Graph Neural Network for 3D Object Detection in a Point Cloud\nWord2vec: Distributed Representations of Words and Phrases and their Compositionality\nnode2vec: Scalable Feature Learning for Networks\nSEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）",
+          "summary": "学习资料 • 斯坦福CS224W课程：http://cs224w.stanford.edu • 图学习库 PGL:https://github.com/PaddlePaddle/PGL 宝藏可视化期刊：https://distill.pub ACS Appl.Mater. Interfaces 2023, 15, 16, 20520-20530 Computational Materials Science, 2023, 230: 112461. A Semi-supervised Graph Altentive Network for Financial Fraud Detection Point-GNN: Graph Neural Network for 3D Object Detection in a Point Cloud Word2vec: Distributed Representations of Words and Phrases and their Compositionality node2vec: Scalable Feature Learning for Networks SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）",
+          "terms": [
+            "图学习"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-15",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 15,
+          "type": "slide",
+          "title": "生成式模型算法概述",
+          "heading_path": [
+            "生成式模型算法概述"
+          ],
+          "text": "生成式模型算法概述",
+          "summary": "生成式模型算法概述",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-16",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 16,
+          "type": "slide",
+          "title": "大纲• 生成式模型的基本概念",
+          "heading_path": [
+            "大纲• 生成式模型的基本概念"
+          ],
+          "text": "大纲• 生成式模型的基本概念\n• 四种主要生成式模型\n• GAN\n• VAE\n• Flow-based model\n• Diffusion model\n||\n•总结",
+          "summary": "大纲• 生成式模型的基本概念 • 四种主要生成式模型 • GAN • VAE • Flow-based model • Diffusion model || •总结",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-17",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 17,
+          "type": "slide",
+          "title": "生成模型与判别模型",
+          "heading_path": [
+            "生成模型与判别模型"
+          ],
+          "text": "生成模型与判别模型\nDiscriminative models\nGenerative models\nFeatures\nClass\nNoise Class\nFeatures\nX Y\n5,Y X\nP（YIX）\nP（XY）",
+          "summary": "生成模型与判别模型 Discriminative models Generative models Features Class Noise Class Features X Y 5,Y X P（YIX） P（XY）",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-18",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 18,
+          "type": "slide",
+          "title": "常见的生成式模型",
+          "heading_path": [
+            "常见的生成式模型"
+          ],
+          "text": "常见的生成式模型\nGAN: Adversarial\ntraining\nx'\nX\nDiscriminator\nD（x）\n0/\nGenerator\nC（z）\nx'\nVAE: maximize\nX\nEncoder\nDecoder\nvariational lower bound\n94（z|×）\nPo（x|z）\nFlow-based models：\nInvertible transform of\nX\nFlow\nInverse\nf（x）\nf一1（z）\ndistributions\nDiffusion models：\nGradually add Gaussian\nXo\nX1\nX2\nZ\nnoise and then reverse",
+          "summary": "常见的生成式模型 GAN: Adversarial training x' X Discriminator D（x） 0/ Generator C（z） x' VAE: maximize X Encoder Decoder variational lower bound 94（z|×） Po（x|z） Flow-based models： Invertible transform of X Flow Inverse f（x） f一1（z） distributions Diffusion models： Gradually add Gaussian Xo X1 X2 Z noise and then reverse",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-19",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 19,
+          "type": "slide",
+          "title": "/ Generative Adversarial Nets （GAN）",
+          "heading_path": [
+            "/ Generative Adversarial Nets （GAN）"
+          ],
+          "text": "/ Generative Adversarial Nets （GAN）\nGenerative Adversarial Nets\nIan J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley，\nSherjil Ozair, Aaron Courville, Yoshua Bengios\nDipartement d'informatique et de recherche operationnelle\nUniversile de Montrfal\nMontreal. QC H3C317\nAbstract\nWe propose a new framework for estimating gencrative models via an adversar-\nthat captures the data distribution, and a discriminative model D that estimates\nial process, in which we simuluaneously train two models: a gcnerative model G\ning procedure for G is to maximize the probability of D making a mistake. This\nthe probability that a sample camc from the training data rather than G. The train-\nframework corresponds to a minimax two-player game. In the space of arbitrary\ndistribution and D cqual to everywhere. In the case where G and D are defincd\nfunctions G and D. a unique solution exists. with G recovering the uraining data\nGoodfellow 1, Pouget-\nby multilayer perceptrons, the entire system can be trained with backpropagation.\nAbadie J, Mirza M, et al.\nThere is no nced for any Markoy chains or unrolled approximatc infcrence net-\nGenerative adversarial\nworks during either training or generation of samples. Experiments demonstrate\nnets［J）. Advances in\nthe potential of the framework through qualitative and quantitative evaluation of\nneural information\nthe gcnerated samples.\nprocessing systems, 2014，\n◎",
+          "summary": "/ Generative Adversarial Nets （GAN） Generative Adversarial Nets Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley， Sherjil Ozair, Aaron Courville, Yoshua Bengios Dipartement d'informatique et de recherche operationnelle Universile de Montrfal Montreal. QC H3C317 Abstract We propose a new framework for estimating gencrative models via an adversar- that captures the data distribution, and a discriminative model D that estimates ial process, in which we simuluaneously train two models: a gcnerative model G ing procedure for G is to maximize the probability of D making a mistake. This the probability that a sample camc from the training data rath...",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-20",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 20,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nIan Goodfellow\n@goodfellow_ian\n4.5 years of GAN progress on face generation.\narxiv.org/abs/1406.2661 arxiv.org/abs/1511.06434\narxiv.org/abs/1606.07536 arxiv.org/abs/1710.10196\n2014\nBlack and white\narxiv.org/abs/1812.04948\nColored\n2018\nphoto-realistic\n2014\n2015\n2016.\n2017\n2018.",
+          "summary": "GAN的成长史 Ian Goodfellow @goodfellow_ian 4.5 years of GAN progress on face generation. arxiv.org/abs/1406.2661 arxiv.org/abs/1511.06434 arxiv.org/abs/1606.07536 arxiv.org/abs/1710.10196 2014 Black and white arxiv.org/abs/1812.04948 Colored 2018 photo-realistic 2014 2015 2016. 2017 2018.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-21",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 21,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nhttps://thispersondoesnotexist.com\nFace Generation\nStyleGAN2\nThese people do\nnot exist！\nKarras, Tero, et al. \"Analyzing and improving the image quality of stylegan.\" Proceedings of the /EEE/CVF\n◎\n◎\nConference on Computer Vision and Patter Recognition. 2020.\n《",
+          "summary": "GAN的成长史 https://thispersondoesnotexist.com Face Generation StyleGAN2 These people do not exist！ Karras, Tero, et al. \"Analyzing and improving the image quality of stylegan.\" Proceedings of the /EEE/CVF ◎ ◎ Conference on Computer Vision and Patter Recognition. 2020. 《",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-22",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 22,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nStyleGAN2\nRAPID APPEARANCEAND\nDISAPPEARANCE OF RED DOT\nALIENS\nMimics the\ndistribution ofthe\ntraining data\nKarras, Tero, et al. \"Analyzing and improving the image quality of stylegan.\" Proceedings of the IEEE/CVF\nConference on Computer Vision and Patter Recognition. 2020.",
+          "summary": "GAN的成长史 StyleGAN2 RAPID APPEARANCEAND DISAPPEARANCE OF RED DOT ALIENS Mimics the distribution ofthe training data Karras, Tero, et al. \"Analyzing and improving the image quality of stylegan.\" Proceedings of the IEEE/CVF Conference on Computer Vision and Patter Recognition. 2020.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-23",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 23,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nCycleGAN\n0:00 ：\n0:06\n•川）\nPark, Taesung, et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the IEEE\n•Conference on Computer Vision and Pattem Recognition. 2019.",
+          "summary": "GAN的成长史 CycleGAN 0:00 ： 0:06 •川） Park, Taesung, et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the IEEE •Conference on Computer Vision and Pattem Recognition. 2019.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-24",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 24,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nGauGAN\nPark, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the /EEE Conference on\n◎\namguter Vison and Pattem Recogntion. 2019",
+          "summary": "GAN的成长史 GauGAN Park, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the /EEE Conference on ◎ amguter Vison and Pattem Recogntion. 2019",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-25",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 25,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nGauGAN\nsky\ntree\ncloud\nmountain\nTaI%S\nSCa\nriver\nrick\nplant\nsind\nsnow\nwalcr\nhill\ndirt\nroad\nslone\nbush\nwood.\nPark, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the IEEE Conference on\nfamputer Veen end Pattem Recogntion. 2019.",
+          "summary": "GAN的成长史 GauGAN sky tree cloud mountain TaI%S SCa river rick plant sind snow walcr hill dirt road slone bush wood. Park, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the IEEE Conference on famputer Veen end Pattem Recogntion. 2019.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-26",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 26,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nGauGAN\nTEKEES图N\nsky\ntree\ncloud\nmnounlain\nSCa\nriver\nrock\nplant\nsind\nSnoW\nwalcr\nhill\ndirt\nroad\nslone\nbush\nwood\nPark, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the IEEE Conference on\nSamguter Vston and Pattem Recogntion. 2019",
+          "summary": "GAN的成长史 GauGAN TEKEES图N sky tree cloud mnounlain SCa river rock plant sind SnoW walcr hill dirt road slone bush wood Park, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the IEEE Conference on Samguter Vston and Pattem Recogntion. 2019",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-27",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 27,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nGauGAN\nQ\nsky\nIree\ncloud\nmounlain\nTaISS\nnIVer\nrock\nplant\nsind\nSnow\nwilcr\nhill\ndirt\nroad\nstome\nbush\nwood\nPark, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the /EEE Conference on\nSamputer Vaen end Pattem Recognition. 2019",
+          "summary": "GAN的成长史 GauGAN Q sky Iree cloud mounlain TaISS nIVer rock plant sind Snow wilcr hill dirt road stome bush wood Park, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the /EEE Conference on Samputer Vaen end Pattem Recognition. 2019",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-28",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 28,
+          "type": "slide",
+          "title": "）GAN的成长史",
+          "heading_path": [
+            "）GAN的成长史"
+          ],
+          "text": "）GAN的成长史\nGauGAN\nPark, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the IEEE Conference on\no fomgutr Veen end Pattem Recogmtion. 2019.",
+          "summary": "）GAN的成长史 GauGAN Park, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the IEEE Conference on o fomgutr Veen end Pattem Recogmtion. 2019.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-29",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 29,
+          "type": "slide",
+          "title": "） GAN的成长史",
+          "heading_path": [
+            "） GAN的成长史"
+          ],
+          "text": "） GAN的成长史\nGauGAN\nPark, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the /EEE Conference on\no fomguter Vgon end Pattem Recogmtion. 2019.",
+          "summary": "） GAN的成长史 GauGAN Park, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normalization.\" Proceedings of the /EEE Conference on o fomguter Vgon end Pattem Recogmtion. 2019.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-30",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 30,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nGauGAN\n十\nsky\nurce\ncloud\nmounlain\ngTaSS\nsCa\nTIVCT\nrock\nplant\nwaand\nsnOW\nwater\nhill\ndint\nroad\nstonc\nbushi\nwood\nPark, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normaization.\" Proceedings of the /EEE Conference on\namputer Viston and Pattem Recogntion.2019.",
+          "summary": "GAN的成长史 GauGAN 十 sky urce cloud mounlain gTaSS sCa TIVCT rock plant waand snOW water hill dint road stonc bushi wood Park, Taesung. et al. \"Semantic image synthesis with spatially-adaptive normaization.\" Proceedings of the /EEE Conference on amputer Viston and Pattem Recogntion.2019.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-31",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 31,
+          "type": "slide",
+          "title": "• 主要几种生成式模型",
+          "heading_path": [
+            "• 主要几种生成式模型"
+          ],
+          "text": "• 主要几种生成式模型\n•GAN\n15\n◎",
+          "summary": "• 主要几种生成式模型 •GAN 15 ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-32",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 32,
+          "type": "slide",
+          "title": "分布逼近vs样本逼近",
+          "heading_path": [
+            "分布逼近vs样本逼近"
+          ],
+          "text": "分布逼近vs样本逼近\n•方法一：大量阅读Nature文章，总结Nature上所发文章的特征，并根据特征进行文章写作。\nrth anticles\n找规律\n照着规律去写paper\n•方法二：大量阅读收集Nature文章，自己不停修改paper，比对文章是否接近Nature上的paper接近。\nGeoer ative Adversrial Ne\n相互比对\n不断修改\n◎",
+          "summary": "分布逼近vs样本逼近 •方法一：大量阅读Nature文章，总结Nature上所发文章的特征，并根据特征进行文章写作。 rth anticles 找规律 照着规律去写paper •方法二：大量阅读收集Nature文章，自己不停修改paper，比对文章是否接近Nature上的paper接近。 Geoer ative Adversrial Ne 相互比对 不断修改 ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-33",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 33,
+          "type": "slide",
+          "title": "举一个栗子",
+          "heading_path": [
+            "举一个栗子"
+          ],
+          "text": "举一个栗子\nArticle\nReproduciblegraphene synthesis by\noxygen-free chemical vapour deposition\n新手学生\n新手老师\nMps/Vki ong/109058/41586-004-07454.5\nRecwived 2Jume 2023\nYe''，Chriastegieer & DMroe,PieneL\nAadven Holbrock, Chrietian Cupa.zhuyn\nAccapted 22 Apll 2024\nChf,Cory R Din'， Angela R. Iight W lbar, Katayuin Bamak\nwaeiteE. Wion-Slae , Kaeri Watal\nPAned onlie: 29 Mey 2024\n目标只有一个：发Nature！\n◎\n◎",
+          "summary": "举一个栗子 Article Reproduciblegraphene synthesis by oxygen-free chemical vapour deposition 新手学生 新手老师 Mps/Vki ong/109058/41586-004-07454.5 Recwived 2Jume 2023 Ye''，Chriastegieer & DMroe,PieneL Aadven Holbrock, Chrietian Cupa.zhuyn Accapted 22 Apll 2024 Chf,Cory R Din'， Angela R. Iight W lbar, Katayuin Bamak waeiteE. Wion-Slae , Kaeri Watal PAned onlie: 29 Mey 2024 目标只有一个：发Nature！ ◎ ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-34",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 34,
+          "type": "slide",
+          "title": "GAN的应用",
+          "heading_path": [
+            "GAN的应用"
+          ],
+          "text": "GAN的应用\nNext-gen\nText\nGoogle\nAdobe\nPhotoshop\nGeneration\nData\nAugmentation\nImage Filters\niewpp\nSuper-resolution",
+          "summary": "GAN的应用 Next-gen Text Google Adobe Photoshop Generation Data Augmentation Image Filters iewpp Super-resolution",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-35",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 35,
+          "type": "slide",
+          "title": "GAN的成长史",
+          "heading_path": [
+            "GAN的成长史"
+          ],
+          "text": "GAN的成长史\nChair\n五小兩光文离\n3D-GAN\nCar\nGenerative\nDesign\nSofa\nTable\nWu. Jiajun, et al. \"Leaming a probabilistic latent space of object shapes via 3d generative-adversarial\nmodelina. \" Advances in neural information orocessina svstemns. 2016.",
+          "summary": "GAN的成长史 Chair 五小兩光文离 3D-GAN Car Generative Design Sofa Table Wu. Jiajun, et al. \"Leaming a probabilistic latent space of object shapes via 3d generative-adversarial modelina. \" Advances in neural information orocessina svstemns. 2016.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-36",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 36,
+          "type": "slide",
+          "title": "分布逼近vs样本逼近",
+          "heading_path": [
+            "分布逼近vs样本逼近"
+          ],
+          "text": "分布逼近vs样本逼近\n• 方法二：大量阅读收集Nature文章，自己不停修改paper，比对文章是否接近Nature上的paper接近。\nGeeratie Adverarinl Nes\n相互比对\n不断修改\n比对样本差异，优化样本\n样本逼近：通过不断优化样本，逼近真实样本特征！\n◎",
+          "summary": "分布逼近vs样本逼近 • 方法二：大量阅读收集Nature文章，自己不停修改paper，比对文章是否接近Nature上的paper接近。 Geeratie Adverarinl Nes 相互比对 不断修改 比对样本差异，优化样本 样本逼近：通过不断优化样本，逼近真实样本特征！ ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-37",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 37,
+          "type": "slide",
+          "title": "GAN的框架",
+          "heading_path": [
+            "GAN的框架"
+          ],
+          "text": "GAN的框架\n生成对抗网络，英文是Generative Adversarial Networks， 简称GAN.\nGAN是一种无监督的深度学习模型，于2014年首次被提出。\n口一\nD\nCorrect？\nIs D\nDiscriminator\nG\nFine Tune Training",
+          "summary": "GAN的框架 生成对抗网络，英文是Generative Adversarial Networks， 简称GAN. GAN是一种无监督的深度学习模型，于2014年首次被提出。 口一 D Correct？ Is D Discriminator G Fine Tune Training",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-38",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 38,
+          "type": "slide",
+          "title": "GAN的算法目标",
+          "heading_path": [
+            "GAN的算法目标"
+          ],
+          "text": "GAN的算法目标\n该算法通过竞争学习的方式生成新的、且与原始数据集相似的数据。\n这些生成的图像和原始的真实图像相差无几。\n竞争学习\n原始数据\n生成数据\n◎",
+          "summary": "GAN的算法目标 该算法通过竞争学习的方式生成新的、且与原始数据集相似的数据。 这些生成的图像和原始的真实图像相差无几。 竞争学习 原始数据 生成数据 ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-39",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 39,
+          "type": "slide",
+          "title": "GAN的实现",
+          "heading_path": [
+            "GAN的实现"
+          ],
+          "text": "GAN的实现\n生成对抗网络的训练是一个博弈过程，在这个过程中，生成器和判別器相互对抗竟争。\n生成器会不断学习如何更好地模拟真实数据，判别器则学习识别真假数据。\n生成器的目标是生成判別器无法区分的假数据。而判别器的目标是准确区分真实数据和生成数据。\n博弈过程\n生成器\n判别器\nG\nD\n相互对抗竞争\n学习更好地模拟真实数据\n学习识别真假数据的能力\n生成判别器无法区分的假数据\n准确区分真实数据和生成数据",
+          "summary": "GAN的实现 生成对抗网络的训练是一个博弈过程，在这个过程中，生成器和判別器相互对抗竟争。 生成器会不断学习如何更好地模拟真实数据，判别器则学习识别真假数据。 生成器的目标是生成判別器无法区分的假数据。而判别器的目标是准确区分真实数据和生成数据。 博弈过程 生成器 判别器 G D 相互对抗竞争 学习更好地模拟真实数据 学习识别真假数据的能力 生成判别器无法区分的假数据 准确区分真实数据和生成数据",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-40",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 40,
+          "type": "slide",
+          "title": "整体架构",
+          "heading_path": [
+            "整体架构"
+          ],
+          "text": "整体架构\n生成对抗网络与传统的神经网络不同，它由两个主要的网络构成。\n这两个网络被称为生成网络和判别网络。或者称为生成器和判别器。\nTraining set\n判别网络（判别器）\nDiscriminator\nReal\nRandom\nnoise\nLFake\nJ二\nGenerator\nFake image\n生成网络（生成器）\n◎",
+          "summary": "整体架构 生成对抗网络与传统的神经网络不同，它由两个主要的网络构成。 这两个网络被称为生成网络和判别网络。或者称为生成器和判别器。 Training set 判别网络（判别器） Discriminator Real Random noise LFake J二 Generator Fake image 生成网络（生成器） ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-41",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 41,
+          "type": "slide",
+          "title": "生成器",
+          "heading_path": [
+            "生成器"
+          ],
+          "text": "生成器\n生成器，英文是Generator，生成器的主要功能是，基于随机噪声，生成逼真的数据实例。\n这些数据实例可以是，普通数据、图片、音频等等各种形式。\n噪声数据\nGenerator\n生成器\n数据实例\n◎ ◎\n《",
+          "summary": "生成器 生成器，英文是Generator，生成器的主要功能是，基于随机噪声，生成逼真的数据实例。 这些数据实例可以是，普通数据、图片、音频等等各种形式。 噪声数据 Generator 生成器 数据实例 ◎ ◎ 《",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-42",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 42,
+          "type": "slide",
+          "title": "2 usages",
+          "heading_path": [
+            "2 usages"
+          ],
+          "text": "2 usages\nclass\nGenerator（nn.Module）：\n选网络的初始化勇敗init，传入输入层，晚藏展和幾出展的神经元介影\ndef init（self, input_size, hidden.size, output_size）：\nsuper（Generator, self）.-_init--0\n# 定义了3个线性层fc1、fc2、fc3\nself.fcl = nn.Linear（input_size, hidden_s1ze）\nself.fc2 = nn.Linear （hidden_size, hidden_s1ze）\nself.fc3 = nn.Linear（hidden_size, output_size）\n# 神经网络的前向传摇函数forward，\n函数传入张量x\ndef\nforward（self, X）：\n# ×会经过fc1、fc2、fc3三个线性层\nx = self.fc1（x）\nx = torch.relu（x）\nself.fc2（x）\ntorch.relu（x）\nself.fc3（x）\n# 生成器的最后一个激活函数，一般会使用双曲正切函数tanh\n# tanh的输出范用在［-1,11，可以使生成的图像数据\n# 更容易匹配到真实图像数据的分布\ntorch.tanhCx）\nreturn\nX",
+          "summary": "2 usages class Generator（nn.Module）： 选网络的初始化勇敗init，传入输入层，晚藏展和幾出展的神经元介影 def init（self, input_size, hidden.size, output_size）： super（Generator, self）.-_init--0 # 定义了3个线性层fc1、fc2、fc3 self.fcl = nn.Linear（input_size, hidden_s1ze） self.fc2 = nn.Linear （hidden_size, hidden_s1ze） self.fc3 = nn.Linear（hidden_size, output_size） # 神经网络的前向传摇函数forward， 函数传入张量x def forward（self, X）： # ×会经过fc1、fc2、fc3三个线性层 x = self.fc1（x） x = torch.relu（x） self.fc2（x） torch.relu（x） self.fc3（x） # 生成器的最后一个激活函数，一般会使用双曲正切函数tanh # tanh的输出范用在［-1,11，可以使生成的图像数据 # 更容易匹配到真实图像数据的分布 torch.tanhCx） return X",
+          "terms": [
+            "激活函数"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-43",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 43,
+          "type": "slide",
+          "title": "判别器",
+          "heading_path": [
+            "判别器"
+          ],
+          "text": "判别器\n判别器的目标是，区分真实的手写数字图片和生成器产生的手写数字图片。\n其中真实的手写数字图片，即为人工收集的训练数据。例如，可以从MNIST数据集中取得。\n判別器实际上是一个用于图片分类的神经网络，\n我们会使用真实的手写数字图片，作为正样本，生成器生成的图片作为负样本，来训练判别器。\n真实的手写数字图片\n如MNIST数据集，正样本\nDiscriminator\nReal\nFake\nGenerator\n判别器，图片分类的神经网络\n生成器产生的手写数字图片，负样本\n◎",
+          "summary": "判别器 判别器的目标是，区分真实的手写数字图片和生成器产生的手写数字图片。 其中真实的手写数字图片，即为人工收集的训练数据。例如，可以从MNIST数据集中取得。 判別器实际上是一个用于图片分类的神经网络， 我们会使用真实的手写数字图片，作为正样本，生成器生成的图片作为负样本，来训练判别器。 真实的手写数字图片 如MNIST数据集，正样本 Discriminator Real Fake Generator 判别器，图片分类的神经网络 生成器产生的手写数字图片，负样本 ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-44",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 44,
+          "type": "slide",
+          "title": "# 定义判别器",
+          "heading_path": [
+            "# 定义判别器"
+          ],
+          "text": "# 定义判别器\n2 usages\neless.Discriminator（nn.Module）：\n#.初始化函效init，传入输入层，隐藏层和输出展的神经示介数\ndef init（self, input_size, hidden.size, output.slze）：\nsuper（Discriminator, self）.-_init.-（）\n# 定义了3个线性层fc1、fc2、fc3\nself.fc1\n= nn.Linear （input_size, hidden_size）\nself.fc2 = nn. Linear（hidden_size, hidden_size）\nself.fc3 = nn.Linear（hidden.s1z0, output.size）\n# 实现神经网络的前向传播函数forward，函數传入张量x\ndef forward（seLf,x）：\n# 使用view函数，将x转为一维的向量\nx = x.view（x.size（0），-1）\n# x会经过fc1、fc2、fc3三个线性层\nx =self.fc1（x）\nx = torch.reLu（x）\nx self.fc2（x）\nx = torch.reLuCx）\nx = self.fc3（x）\n# 输入至sigmoid函数，得到生成器的输出\nreturn torch.sigmoid（x）",
+          "summary": "# 定义判别器 2 usages eless.Discriminator（nn.Module）： #.初始化函效init，传入输入层，隐藏层和输出展的神经示介数 def init（self, input_size, hidden.size, output.slze）： super（Discriminator, self）.-_init.-（） # 定义了3个线性层fc1、fc2、fc3 self.fc1 = nn.Linear （input_size, hidden_size） self.fc2 = nn. Linear（hidden_size, hidden_size） self.fc3 = nn.Linear（hidden.s1z0, output.size） # 实现神经网络的前向传播函数forward，函數传入张量x def forward（seLf,x）： # 使用view函数，将x转为一维的向量 x = x.view（x.size（0），-1） # x会经过fc1、fc2、fc3三个线性层 x =self.fc1（x） x = torch.reLu（x） x self.fc2（x） x = torch.reLuCx） x = self.fc3（x） # 输入至sigmoid函数，得到生成器的输出 return torch.sigmoid（x）",
+          "terms": [
+            "Sigmoid"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-45",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 45,
+          "type": "slide",
+          "title": "训练过程",
+          "heading_path": [
+            "训练过程"
+          ],
+          "text": "训练过程\ngata...0ata,tokdevice）\nbatch_size = data.size（0）\nnetb.zero_grad（）\nnoise2 = torch.randn（batch_size, noise_size, device=device）\nnetD.zero_gradC\nfake2 = net6（noise2）\noutput = netD（fake2）\noutput = netb（data）\n0_6_z2 = output.meanC）.1tem（）\nD_x = output.meanC）.itemC）\nLabel -get.Labei（batch.size，\niabe\nLabel = get_label （batch_size, lbel, 1）\nerrD_real = criterion（output, LabeL）\nerrG = criterion（output, LabeL）\nerrG.backward（）\nnoise1 = torch.randn（batch.size, noise_size, devlce=device）\noptinizer6.stepC）\nfakel = net6（noise1）\noutput = netD（fake1）\nD.G_z1 = output.nean（）.item（）\nLabel = get_label（batch_size, label: 0）\nerrD_fake = criterion（output, Label）\nerrD = errD_real + errD_fake\nerrD.backward（）\noptinizerD.step（）\n◎",
+          "summary": "训练过程 gata...0ata,tokdevice） batch_size = data.size（0） netb.zero_grad（） noise2 = torch.randn（batch_size, noise_size, device=device） netD.zero_gradC fake2 = net6（noise2） output = netD（fake2） output = netb（data） 0_6_z2 = output.meanC）.1tem（） D_x = output.meanC）.itemC） Label -get.Labei（batch.size， iabe Label = get_label （batch_size, lbel, 1） errD_real = criterion（output, LabeL） errG = criterion（output, LabeL） errG.backward（） noise1 = torch.randn（batch.size, noise_size, devlce=device） optinizer6.stepC） fakel = net6（noise1） output = netD（fake1） D.G_z1 = output.nean（）.item（） Label = get_label（batch_size, label: 0） errD_fake = criterion（output, Label） errD = errD_real + errD_fake...",
+          "terms": [
+            "Batch"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-46",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 46,
+          "type": "slide",
+          "title": "总体思路",
+          "heading_path": [
+            "总体思路"
+          ],
+          "text": "总体思路\n有时还会\n加入重构损失\n令生成数据\nGAN\n和真实数据\nLa=E（D（G（）） ］+a×-G②）\n尽可能相似\nreal\nfake\nGgg\n生成器G与鉴别器D依次交替更新。\nG\n竞争\n「更新D时，固定G，令D能区别输入的是真实/real 或者 虚假/fake的数据\n简单分布\n训练\n更新G时，固定D，令G生的虚假数据能够欺骗鉴别器D\nGAN的作用：使生成的采样数据\n和真实分布的采样数据尽可能相似\n◎0",
+          "summary": "总体思路 有时还会 加入重构损失 令生成数据 GAN 和真实数据 La=E（D（G（）） ］+a×-G②） 尽可能相似 real fake Ggg 生成器G与鉴别器D依次交替更新。 G 竞争 「更新D时，固定G，令D能区别输入的是真实/real 或者 虚假/fake的数据 简单分布 训练 更新G时，固定D，令G生的虚假数据能够欺骗鉴别器D GAN的作用：使生成的采样数据 和真实分布的采样数据尽可能相似 ◎0",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-47",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 47,
+          "type": "slide",
+          "title": "完成训练",
+          "heading_path": [
+            "完成训练"
+          ],
+          "text": "完成训练\n最终，经过多轮的交替迭代，生成器可以生成逼真的手写数字图片，而判別器也能准确的判断出真实图片和生成图片。\n总结来说，生成对抗网络的训练是一个动态的学习过程。\n生成器和判别器都会根据对方的表现来调整自身的策略，从而提升整体的效果。\n多轮的交替迭代\n生成器\n判别器\nG\nD\n个\n生成逼真的手写数字图片\n准确的判断真实图片和生成图片\n◎",
+          "summary": "完成训练 最终，经过多轮的交替迭代，生成器可以生成逼真的手写数字图片，而判別器也能准确的判断出真实图片和生成图片。 总结来说，生成对抗网络的训练是一个动态的学习过程。 生成器和判别器都会根据对方的表现来调整自身的策略，从而提升整体的效果。 多轮的交替迭代 生成器 判别器 G D 个 生成逼真的手写数字图片 准确的判断真实图片和生成图片 ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-48",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 48,
+          "type": "slide",
+          "title": "常见的生成式模型",
+          "heading_path": [
+            "常见的生成式模型"
+          ],
+          "text": "常见的生成式模型\nGAN: Adversarial\ntraining\nX\nDiscriminator\nD（x）\nO/\nGenerator\nG（z）\nx'\nVAE:maximize\nX\nEncoder\nDecoder\nvariational lower bound\n94（z|×）\nPo（xlz）\nFlow-based models：\nInvertible transform of\nX\nFlow\nInverse\nf（x）\nf一1（z）\nx'\ndistributions\nDiffusion models：\nGradually add Gaussian\nXo\nX1\nX2\nZ\nnoise and then reverse",
+          "summary": "常见的生成式模型 GAN: Adversarial training X Discriminator D（x） O/ Generator G（z） x' VAE:maximize X Encoder Decoder variational lower bound 94（z|×） Po（xlz） Flow-based models： Invertible transform of X Flow Inverse f（x） f一1（z） x' distributions Diffusion models： Gradually add Gaussian Xo X1 X2 Z noise and then reverse",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-49",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 49,
+          "type": "slide",
+          "title": "） Variational Auto-encoder （VAE）",
+          "heading_path": [
+            "） Variational Auto-encoder （VAE）"
+          ],
+          "text": "） Variational Auto-encoder （VAE）\n变分自编码器\n数据x 符合复杂分布 P。（x）。根据x直接建模 P。（x）比较困难，因此引入一个较为简单的先验分布 P。（z）\n先从简单分布中采样z，再利用z生成x\n根据贝叶斯公式\n生成网络（G）\n•简单先验 P，（z）\nPo（x）=Po（x2）P，（=）\nPo（zx）\n难以求解\n设计一个 q。（=lx）尽可能的逼近 Po（zx）\nP。（z×）\nEncoder 编码网络\n◎0",
+          "summary": "） Variational Auto-encoder （VAE） 变分自编码器 数据x 符合复杂分布 P。（x）。根据x直接建模 P。（x）比较困难，因此引入一个较为简单的先验分布 P。（z） 先从简单分布中采样z，再利用z生成x 根据贝叶斯公式 生成网络（G） •简单先验 P，（z） Po（x）=Po（x2）P，（=） Po（zx） 难以求解 设计一个 q。（=lx）尽可能的逼近 Po（zx） P。（z×） Encoder 编码网络 ◎0",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-50",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 50,
+          "type": "slide",
+          "title": "/ Variational Auto-encoder （VAE）",
+          "heading_path": [
+            "/ Variational Auto-encoder （VAE）"
+          ],
+          "text": "/ Variational Auto-encoder （VAE）\nSmile: 0.99\nSkin tone: 0.85\nGender:Q73\nencoder\nBeard:0.85\ndecoder\nGlasses: 0.002\nHair color: 0.68\nLatent attributes\n◎",
+          "summary": "/ Variational Auto-encoder （VAE） Smile: 0.99 Skin tone: 0.85 Gender:Q73 encoder Beard:0.85 decoder Glasses: 0.002 Hair color: 0.68 Latent attributes ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-51",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 51,
+          "type": "slide",
+          "title": "材料领域的应用",
+          "heading_path": [
+            "材料领域的应用"
+          ],
+          "text": "材料领域的应用\nGenerated\nMaterial\nGenerated\nfeature\n（，Cgon）\nWasserstein Distance\nGenerator\nCritic\nD（x）-D（x）\nCamm\nComn（forz）\nReal Material Real feature\nCreal （for x）\n（x,Croai）\nKim S, Noh J, Gu G H, et al. Generative adversarial networks for crystal\nstructure prediction（J）. ACS central science, 2020, 6（8）： 1412-1420.",
+          "summary": "材料领域的应用 Generated Material Generated feature （，Cgon） Wasserstein Distance Generator Critic D（x）-D（x） Camm Comn（forz） Real Material Real feature Creal （for x） （x,Croai） Kim S, Noh J, Gu G H, et al. Generative adversarial networks for crystal structure prediction（J）. ACS central science, 2020, 6（8）： 1412-1420.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-52",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 52,
+          "type": "slide",
+          "title": "材料领域的应用",
+          "heading_path": [
+            "材料领域的应用"
+          ],
+          "text": "材料领域的应用\nGenerative adversarial networks and diffusion\nmodels in material discovery\nMichael Alverson， © *ac Sterling G. Baird，* Ryan Murdock.® （Enoch） Sin-Hang Ho.®\nJeremy Johnson O° and Taylor D. Sparks\nThe idea of materials discovery has excited and perplexed research scientists for centuries. Several different\nmethods have been employed to find new types of materials, ranging from the arbitrary replacement of\natoms in a crystal structure to advanced machine learning methods for predicting entirely new crystal\nstructures. In this work, we pursue three primary objectives. （I） Introduce CrysTens, a crystal encoding\nthat can be used in a wide variety of deep learning generative models. （I） Investigate and analyze the\nrelative performance of Generative Adversarial Networks （GANs） and Diffusion Models to find an\ninnovative and effective way of generating theoretical crystal structures that are synthesizable and stable.\n（I） Show that the models that have a better 'understanding' of the structure of CrysTens produce more\nsymmetrical and realistic crystals and exhibit a better apprehension of the dataset as a whole. We\naccomplish these objectives using over fifty thousand Crystallographic Information Files （CIFs） from\nPearson's Crystal Database.\nThe dataset used was Pearson's Crystal Data. All code and data can be found\nat https://github.com/michaeldalverson/ CrysTens.\n◎0、。",
+          "summary": "材料领域的应用 Generative adversarial networks and diffusion models in material discovery Michael Alverson， © *ac Sterling G. Baird，* Ryan Murdock.® （Enoch） Sin-Hang Ho.® Jeremy Johnson O° and Taylor D. Sparks The idea of materials discovery has excited and perplexed research scientists for centuries. Several different methods have been employed to find new types of materials, ranging from the arbitrary replacement of atoms in a crystal structure to advanced machine learning methods for predicting entirely new crystal structures. In this work, we pursue three primary objectives. （I） Introduce CrysTens, a crystal encoding that can be used in a wide variety of deep learning genera...",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-53",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 53,
+          "type": "slide",
+          "title": "材料领域的应用",
+          "heading_path": [
+            "材料领域的应用"
+          ],
+          "text": "材料领域的应用\nembedding\nSpace group\nParameter tuning\n216/221|225\nGenerator\ncoordinates\nembedding\nElement\nLengths\n• Space group\nandom noise Z\nElements\nDiscriminator\nReal Material/\nCoordinates\nLengths\nWasserstein\ndistance\nSpace group\nElements\nGAN training\nZhao Y, Al-Fahdi M. Hu M, et al. High-throughput discovery of novel cubic crystal materials using\ndeep generative neural networksfJ］. Advanced Science, 2021, 8（20）： 2100566",
+          "summary": "材料领域的应用 embedding Space group Parameter tuning 216/221|225 Generator coordinates embedding Element Lengths • Space group andom noise Z Elements Discriminator Real Material/ Coordinates Lengths Wasserstein distance Space group Elements GAN training Zhao Y, Al-Fahdi M. Hu M, et al. High-throughput discovery of novel cubic crystal materials using deep generative neural networksfJ］. Advanced Science, 2021, 8（20）： 2100566",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-54",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 54,
+          "type": "slide",
+          "title": "材料领域的应用",
+          "heading_path": [
+            "材料领域的应用"
+          ],
+          "text": "材料领域的应用\nGenerated\nMaterial\nGenerated\nfeature\n（，Cgom）\nWasserstein Distance\nGenerator\nCritic\nD（£）-D（x）\nCaen\nComn（for z）\n•—\nReal Material Real feature\nCreal （for x）\n（x,Croal）\nKim S, Noh J, Gu G H, et al. Generative adversarial networks for crystal\nstructure prediction［J）. ACS central science, 2020, 6（8）： 1412-1420.",
+          "summary": "材料领域的应用 Generated Material Generated feature （，Cgom） Wasserstein Distance Generator Critic D（£）-D（x） Caen Comn（for z） •— Real Material Real feature Creal （for x） （x,Croal） Kim S, Noh J, Gu G H, et al. Generative adversarial networks for crystal structure prediction［J）. ACS central science, 2020, 6（8）： 1412-1420.",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-55",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 55,
+          "type": "slide",
+          "title": "常见的生成式模型",
+          "heading_path": [
+            "常见的生成式模型"
+          ],
+          "text": "常见的生成式模型\nGAN: Adversarial\ntraining\nx'\nX\nDiscriminator|\nD（x）\n0/\nGenerator\nG（z）\nx'\nVAE: maximize\nX\nEncoder\nDecoder\nvariational lower bound\n9¢（z|×）\nPo（x|z）\nFlow-based models：\nInvertible transform of\nX\nFlow\nInverse\nf（x）\nf一1（z）\ndistributions\nDiffusion models：\nGradually add Gaussian\nX0\nX1\nX2\nZ\nnoise and then reverse",
+          "summary": "常见的生成式模型 GAN: Adversarial training x' X Discriminator| D（x） 0/ Generator G（z） x' VAE: maximize X Encoder Decoder variational lower bound 9¢（z|×） Po（x|z） Flow-based models： Invertible transform of X Flow Inverse f（x） f一1（z） distributions Diffusion models： Gradually add Gaussian X0 X1 X2 Z noise and then reverse",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-56",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 56,
+          "type": "slide",
+          "title": "• 主要几种生成式模型",
+          "heading_path": [
+            "• 主要几种生成式模型"
+          ],
+          "text": "• 主要几种生成式模型\n• VAE",
+          "summary": "• 主要几种生成式模型 • VAE",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-57",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 57,
+          "type": "slide",
+          "title": "/ Variational Auto-encoder （VAE）",
+          "heading_path": [
+            "/ Variational Auto-encoder （VAE）"
+          ],
+          "text": "/ Variational Auto-encoder （VAE）\nSmile: 0.99\nSkin tone: 0.85\nGender：-Q73\nencoder\nBeard:0.85\ndecoder\nGlasses: 0.002\nHair color: 0.68\nLatent attributes\n◎\n◎",
+          "summary": "/ Variational Auto-encoder （VAE） Smile: 0.99 Skin tone: 0.85 Gender：-Q73 encoder Beard:0.85 decoder Glasses: 0.002 Hair color: 0.68 Latent attributes ◎ ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-58",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 58,
+          "type": "slide",
+          "title": "Variational Auto-encoder （VAE）",
+          "heading_path": [
+            "Variational Auto-encoder （VAE）"
+          ],
+          "text": "Variational Auto-encoder （VAE）\nSmile （discrete value）\nSmile （probability distribution）\n•",
+          "summary": "Variational Auto-encoder （VAE） Smile （discrete value） Smile （probability distribution） •",
+          "terms": [
+            "Value"
+          ]
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-59",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 59,
+          "type": "slide",
+          "title": "Variational Auto-encoder （VAE）",
+          "heading_path": [
+            "Variational Auto-encoder （VAE）"
+          ],
+          "text": "Variational Auto-encoder （VAE）\nSkin tone：\nA\nencoder\ndecoder\nGlasses：\nLatent attributes\n◎\n◎",
+          "summary": "Variational Auto-encoder （VAE） Skin tone： A encoder decoder Glasses： Latent attributes ◎ ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-60",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 60,
+          "type": "slide",
+          "title": "5/ Variational Auto-encoder （VAE）",
+          "heading_path": [
+            "5/ Variational Auto-encoder （VAE）"
+          ],
+          "text": "5/ Variational Auto-encoder （VAE）\nSmile: 023\nSkin tone: 0.02\nGender:0.18|\nSkin tone\nsample\nBeard:0.71\ndecoder\nGlasses：：0.19|\nencoder\nMalr color:0.33\nSmle: 0.17\nGlse\nSkin tonve:0.28\nsample\nGenden-0.11\ndecoder\nBeard: 0.66\nGlasses: 0.14\nHair color: 0.26\nWe expect an accurate\nreconstruction for any\nLatent distributions\nSampled latent attributes\nsample from the latent\nstate distributions",
+          "summary": "5/ Variational Auto-encoder （VAE） Smile: 023 Skin tone: 0.02 Gender:0.18| Skin tone sample Beard:0.71 decoder Glasses：：0.19| encoder Malr color:0.33 Smle: 0.17 Glse Skin tonve:0.28 sample Genden-0.11 decoder Beard: 0.66 Glasses: 0.14 Hair color: 0.26 We expect an accurate reconstruction for any Latent distributions Sampled latent attributes sample from the latent state distributions",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-61",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 61,
+          "type": "slide",
+          "title": "2 Variational Auto-encoder （VAE）",
+          "heading_path": [
+            "2 Variational Auto-encoder （VAE）"
+          ],
+          "text": "2 Variational Auto-encoder （VAE）\n变分自编码器\n数据x 符合复杂分布 P。（x）。根据x直接建模 P。（x）比较困难，因此引入一个较为简单的先验分布 P。（z）\n先从简单分布中采样z，再利用z生成x\n根据贝叶斯公式\n生成网络（G）\n•简单先验 P。（z）\nPo（x）=Po（x/2）P，（=）\nPo（zx）\n难以求解\n设计一个 9。（=lx）尽可能的逼近 P。（z×）\nPo（z×）\nEncoder 编码网络\n◎\n◎\n《",
+          "summary": "2 Variational Auto-encoder （VAE） 变分自编码器 数据x 符合复杂分布 P。（x）。根据x直接建模 P。（x）比较困难，因此引入一个较为简单的先验分布 P。（z） 先从简单分布中采样z，再利用z生成x 根据贝叶斯公式 生成网络（G） •简单先验 P。（z） Po（x）=Po（x/2）P，（=） Po（zx） 难以求解 设计一个 9。（=lx）尽可能的逼近 P。（z×） Po（z×） Encoder 编码网络 ◎ ◎ 《",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-62",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 62,
+          "type": "slide",
+          "title": "•主要几种生成式模型",
+          "heading_path": [
+            "•主要几种生成式模型"
+          ],
+          "text": "•主要几种生成式模型\n• Flow-based model\n||\n◎",
+          "summary": "•主要几种生成式模型 • Flow-based model || ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-63",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 63,
+          "type": "slide",
+          "title": "/ Flow-based model",
+          "heading_path": [
+            "/ Flow-based model"
+          ],
+          "text": "/ Flow-based model\n直接构建 分布A到分布B的转换函数\nm（z）\nJn（）dz=1\nT（z） 较为简单0-1之间均匀分布\n0\n-2\np（x）\nJpc）dx=1\np（x）较为复杂1-3之间均匀分布\n1\n3\n实现两个分布之间的转换？\n×=f（z）\n从z中采样一个点\n乘一个数加一个数\n= 2z +1\n◎",
+          "summary": "/ Flow-based model 直接构建 分布A到分布B的转换函数 m（z） Jn（）dz=1 T（z） 较为简单0-1之间均匀分布 0 -2 p（x） Jpc）dx=1 p（x）较为复杂1-3之间均匀分布 1 3 实现两个分布之间的转换？ ×=f（z） 从z中采样一个点 乘一个数加一个数 = 2z +1 ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-64",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 64,
+          "type": "slide",
+          "title": "/ Flow-based model",
+          "heading_path": [
+            "/ Flow-based model"
+          ],
+          "text": "/ Flow-based model\nf1\nJc\nPz\nd\nD\n2\n×1\n|\n（Identity）\n（zero）\nXd\nXd+1\nIdon't\nDiagonal\ncare.\nXD",
+          "summary": "/ Flow-based model f1 Jc Pz d D 2 ×1 | （Identity） （zero） Xd Xd+1 Idon't Diagonal care. XD",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-65",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 65,
+          "type": "slide",
+          "title": "•主要几种生成式模型",
+          "heading_path": [
+            "•主要几种生成式模型"
+          ],
+          "text": "•主要几种生成式模型\n• Diffusion model",
+          "summary": "•主要几种生成式模型 • Diffusion model",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-66",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 66,
+          "type": "slide",
+          "title": "Diffusion model",
+          "heading_path": [
+            "Diffusion model"
+          ],
+          "text": "Diffusion model\n前向扩散\n逆向扩散",
+          "summary": "Diffusion model 前向扩散 逆向扩散",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-67",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 67,
+          "type": "slide",
+          "title": "/ Diffusion model",
+          "heading_path": [
+            "/ Diffusion model"
+          ],
+          "text": "/ Diffusion model\n加噪\n加噪\n加噪\n加噪\n加噪\n加噪\n前向扩散\n逆向扩散\n去暻\n去燥\n去噪\n去臊\n去燥\n去噪\n◎\n◎",
+          "summary": "/ Diffusion model 加噪 加噪 加噪 加噪 加噪 加噪 前向扩散 逆向扩散 去暻 去燥 去噪 去臊 去燥 去噪 ◎ ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-68",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 68,
+          "type": "slide",
+          "title": "Diffusion model",
+          "heading_path": [
+            "Diffusion model"
+          ],
+          "text": "Diffusion model\nXo\nX1\nX3\n4（4z 1）\n9（rIT-1\n输入：Xt-1\n（加噪前的图像）\nq（x:lxt-1）\n输出：xc\n（加噪后的图像）\n方差\nq（x.lxe-1） = N（xeV1-Bexe-1.B.l）\n均值\nq（Xi:rIxo）=\nq（xelxe-1）\n◎\n◎",
+          "summary": "Diffusion model Xo X1 X3 4（4z 1） 9（rIT-1 输入：Xt-1 （加噪前的图像） q（x:lxt-1） 输出：xc （加噪后的图像） 方差 q（x.lxe-1） = N（xeV1-Bexe-1.B.l） 均值 q（Xi:rIxo）= q（xelxe-1） ◎ ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-69",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 69,
+          "type": "slide",
+          "title": "Diffusion model",
+          "heading_path": [
+            "Diffusion model"
+          ],
+          "text": "Diffusion model\nX0\nX1\n×2\nXg\nXT\nq（KolNg\nq（xglxg）\n4（×zl×g）\n4（*aIxg）\n4（1-11xe）\nq（xy-ulxp）\n输入：Xz\n输出：Xe-1\n（帶有噪声的图像）\nq（Xt-1|xp）\n（去噪后的图像）\n输入：xt\nPo（Xe-1lxe）\n输出：Xe-1\n（带有噪声的图像）\n（神经网络）\n（去噪后的图像）\n可认齻的柛经网縮\n（主演为UNet+Atfgntion）\n固定佰\nPo（Xe-1lxe）= N（Xt-1,Mo（Ke,t）， Zg（Ke,t））\n◎0 。、",
+          "summary": "Diffusion model X0 X1 ×2 Xg XT q（KolNg q（xglxg） 4（×zl×g） 4（*aIxg） 4（1-11xe） q（xy-ulxp） 输入：Xz 输出：Xe-1 （帶有噪声的图像） q（Xt-1|xp） （去噪后的图像） 输入：xt Po（Xe-1lxe） 输出：Xe-1 （带有噪声的图像） （神经网络） （去噪后的图像） 可认齻的柛经网縮 （主演为UNet+Atfgntion） 固定佰 Po（Xe-1lxe）= N（Xt-1,Mo（Ke,t）， Zg（Ke,t）） ◎0 。、",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-70",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 70,
+          "type": "slide",
+          "title": "3 Diffusion model",
+          "heading_path": [
+            "3 Diffusion model"
+          ],
+          "text": "3 Diffusion model\n目标函数\n1\n1-at\nHa（zt,t）=Va\n-Eo（at,t）\n1\nA-ane （ieo-Bo（ ）\n◎\n◎",
+          "summary": "3 Diffusion model 目标函数 1 1-at Ha（zt,t）=Va -Eo（at,t） 1 A-ane （ieo-Bo（ ） ◎ ◎",
+          "terms": []
+        },
+        {
+          "id": "图神经网络课件_20260609::slide-71",
+          "file": "图神经网络课件_20260609.pptx",
+          "kind": "pptx",
+          "cell_index": null,
+          "slide_index": 71,
+          "type": "slide",
+          "title": "总结",
+          "heading_path": [
+            "总结"
+          ],
+          "text": "总结\nGAN: Adversarial\ntraining\nx'\nX\nDiscriminator\nD（x）\n0/1\nGenerator\nC（z）\nVAE:maximize\nX\nEncoder\nDecoder\nvariational lower bound\n9+（z|×）\nPo（xIz）\nx'\nFlow-based models：\nInvertible transform of\nX\nFlow\nInverse\nf（x）\nf一1（z）\ndistributions\nDiffusion models：\nGradually add Gaussian\nX0\nX1\nX2\nnoise and then reverse",
+          "summary": "总结 GAN: Adversarial training x' X Discriminator D（x） 0/1 Generator C（z） VAE:maximize X Encoder Decoder variational lower bound 9+（z|×） Po（xIz） x' Flow-based models： Invertible transform of X Flow Inverse f（x） f一1（z） distributions Diffusion models： Gradually add Gaussian X0 X1 X2 noise and then reverse",
+          "terms": []
+        }
+      ]
+    },
     "多层感知机1_学生分发版.ipynb": {
       "sha256": "1bdf1a67e869b9845e4ec1d4272b643efaa99bf29c46d78d015ac2e9e685cbfd",
       "manifest": {
@@ -20649,6 +21795,188 @@
             "Transformer",
             "RoPE"
           ]
+        }
+      ]
+    },
+    "深度学习导学_20260609.md": {
+      "sha256": "9a48e0d29b81b653cfff3d9a53c280ea99c54ba8d9616d5dc89fc49518339914",
+      "manifest": {
+        "file": "深度学习导学_20260609.md",
+        "kind": "markdown",
+        "size_bytes": 6306,
+        "line_count": 158,
+        "heading_count": 9,
+        "sha256": "9a48e0d29b81b653cfff3d9a53c280ea99c54ba8d9616d5dc89fc49518339914"
+      },
+      "chunks": [
+        {
+          "id": "深度学习导学_20260609::section-1",
+          "file": "深度学习导学_20260609.md",
+          "kind": "markdown",
+          "cell_index": null,
+          "slide_index": null,
+          "line_start": 1,
+          "type": "markdown",
+          "title": "深度学习导学",
+          "heading_path": [
+            "深度学习导学"
+          ],
+          "text": "# 深度学习导学\n\n> 根据 录屏2026-06-09 14.13.15.mov 复原。原始内容是 Jupyter Notebook 讲解，本文件按 notebook 的阅读顺序整理：标题、讲解要点、可辨认代码/公式和对应输出图示。",
+          "summary": "# 深度学习导学 > 根据 录屏2026-06-09 14.13.15.mov 复原。原始内容是 Jupyter Notebook 讲解，本文件按 notebook 的阅读顺序整理：标题、讲解要点、可辨认代码/公式和对应输出图示。",
+          "terms": []
+        },
+        {
+          "id": "深度学习导学_20260609::section-2",
+          "file": "深度学习导学_20260609.md",
+          "kind": "markdown",
+          "cell_index": null,
+          "slide_index": null,
+          "line_start": 5,
+          "type": "markdown",
+          "title": "1. 阈值逻辑单元（Threshold Logic Unit, TLU）",
+          "heading_path": [
+            "深度学习导学",
+            "1. 阈值逻辑单元（Threshold Logic Unit, TLU）"
+          ],
+          "text": "## 1. 阈值逻辑单元（Threshold Logic Unit, TLU）\n\n阈值逻辑单元把多个二值输入汇总后，通过阶跃函数输出二值结果。讲义中用神经元示意图连接到形式化模型：\n\n- 兴奋性输入：x_i\n- 抑制性输入：z_j\n- 阈值：theta\n- 输出：y in {0, 1}\n\n \n\n可用下面的抽象形式理解 TLU：\n\npython\ndef step(v):\n return 1 if v >= 0 else 0\n\ndef tlu(x, w, theta=0):\n return step(sum(x_i * w_i for x_i, w_i in zip(x, w)) - theta)\n\n其中，权重为正可以看作兴奋性输入，权重为负可以看作抑制性输入。",
+          "summary": "## 1. 阈值逻辑单元（Threshold Logic Unit, TLU） 阈值逻辑单元把多个二值输入汇总后，通过阶跃函数输出二值结果。讲义中用神经元示意图连接到形式化模型： - 兴奋性输入：x_i - 抑制性输入：z_j - 阈值：theta - 输出：y in {0, 1} 可用下面的抽象形式理解 TLU： python def step(v): return 1 if v >= 0 else 0 def tlu(x, w, theta=0): return step(sum(x_i * w_i for x_i, w_i in zip(x, w)) - theta) 其中，权重为正可以看作兴奋性输入，权重为负可以看作抑制性输入。",
+          "terms": []
+        },
+        {
+          "id": "深度学习导学_20260609::section-3",
+          "file": "深度学习导学_20260609.md",
+          "kind": "markdown",
+          "cell_index": null,
+          "slide_index": null,
+          "line_start": 28,
+          "type": "markdown",
+          "title": "2. 用 TLU 表示基本逻辑门",
+          "heading_path": [
+            "深度学习导学",
+            "1. 阈值逻辑单元（Threshold Logic Unit, TLU）",
+            "2. 用 TLU 表示基本逻辑门"
+          ],
+          "text": "## 2. 用 TLU 表示基本逻辑门\n\nTLU 可以实现常见布尔逻辑。Notebook 中先展示了 AND、OR、NOT 等基本结构，再给出真值表。\n\n \n\n \n\n一个简化写法如下：\n\npython\ndef AND(x1, x2):\n return 1 if x1 + x2 >= 2 else 0\n\ndef OR(x1, x2):\n return 1 if x1 + x2 >= 1 else 0\n\ndef NOT(x1):\n return 1 if x1 == 0 else 0",
+          "summary": "## 2. 用 TLU 表示基本逻辑门 TLU 可以实现常见布尔逻辑。Notebook 中先展示了 AND、OR、NOT 等基本结构，再给出真值表。 一个简化写法如下： python def AND(x1, x2): return 1 if x1 + x2 >= 2 else 0 def OR(x1, x2): return 1 if x1 + x2 >= 1 else 0 def NOT(x1): return 1 if x1 == 0 else 0",
+          "terms": []
+        },
+        {
+          "id": "深度学习导学_20260609::section-4",
+          "file": "深度学习导学_20260609.md",
+          "kind": "markdown",
+          "cell_index": null,
+          "slide_index": null,
+          "line_start": 53,
+          "type": "markdown",
+          "title": "3. 构造性合成（Constructive Synthesis）",
+          "heading_path": [
+            "深度学习导学",
+            "1. 阈值逻辑单元（Threshold Logic Unit, TLU）",
+            "2. 用 TLU 表示基本逻辑门",
+            "3. 构造性合成（Constructive Synthesis）"
+          ],
+          "text": "## 3. 构造性合成（Constructive Synthesis）\n\nNotebook 接着说明：如果一个布尔函数可以写成若干“满足条件的输入组合”，就能用多层 TLU 网络构造出来。\n\n核心思路：\n\n- 第一层：每个隐藏单元识别一种特定输入模式；\n- 第二层：把这些模式用 OR 合并；\n- 因此，多层 TLU 可以组合出比单个 TLU 更复杂的布尔函数。\n\n \n\n \n\nXOR 是典型例子：单个线性阈值单元无法完成，但两层结构可以通过“两个局部模式 + 一个输出合并单元”来表示。\n\n \n\nNotebook 中也穿插了用代码/矩阵表达该构造过程的说明。",
+          "summary": "## 3. 构造性合成（Constructive Synthesis） Notebook 接着说明：如果一个布尔函数可以写成若干“满足条件的输入组合”，就能用多层 TLU 网络构造出来。 核心思路： - 第一层：每个隐藏单元识别一种特定输入模式； - 第二层：把这些模式用 OR 合并； - 因此，多层 TLU 可以组合出比单个 TLU 更复杂的布尔函数。 XOR 是典型例子：单个线性阈值单元无法完成，但两层结构可以通过“两个局部模式 + 一个输出合并单元”来表示。 Notebook 中也穿插了用代码/矩阵表达该构造过程的说明。",
+          "terms": []
+        },
+        {
+          "id": "深度学习导学_20260609::section-5",
+          "file": "深度学习导学_20260609.md",
+          "kind": "markdown",
+          "cell_index": null,
+          "slide_index": null,
+          "line_start": 75,
+          "type": "markdown",
+          "title": "4. 感知机（Perceptron）",
+          "heading_path": [
+            "1. 阈值逻辑单元（Threshold Logic Unit, TLU）",
+            "2. 用 TLU 表示基本逻辑门",
+            "3. 构造性合成（Constructive Synthesis）",
+            "4. 感知机（Perceptron）"
+          ],
+          "text": "## 4. 感知机（Perceptron）\n\n导学部分随后过渡到感知机。感知机可以看作带权重、偏置和阈值判断的线性分类器：\n\ntext\ny = 1, if w · x + b > 0\ny = 0, otherwise\n\n \n\n \n\n讲义中强调了早期感知机的局限：单层感知机只能表达线性可分问题，无法直接解决 XOR 这类非线性可分任务。",
+          "summary": "## 4. 感知机（Perceptron） 导学部分随后过渡到感知机。感知机可以看作带权重、偏置和阈值判断的线性分类器： text y = 1, if w · x + b > 0 y = 0, otherwise 讲义中强调了早期感知机的局限：单层感知机只能表达线性可分问题，无法直接解决 XOR 这类非线性可分任务。",
+          "terms": []
+        },
+        {
+          "id": "深度学习导学_20260609::section-6",
+          "file": "深度学习导学_20260609.md",
+          "kind": "markdown",
+          "cell_index": null,
+          "slide_index": null,
+          "line_start": 96,
+          "type": "markdown",
+          "title": "5. ADALINE 与线性/非线性边界",
+          "heading_path": [
+            "2. 用 TLU 表示基本逻辑门",
+            "3. 构造性合成（Constructive Synthesis）",
+            "4. 感知机（Perceptron）",
+            "5. ADALINE 与线性/非线性边界"
+          ],
+          "text": "## 5. ADALINE 与线性/非线性边界\n\nNotebook 继续介绍 ADALINE（Adaptive Linear Neuron）。它和感知机相近，但训练目标更偏向连续误差最小化，便于引出损失函数和梯度更新。\n\n \n\n讲义中用二维图对比线性边界和非线性边界，说明为什么多层网络或非线性变换是必要的。",
+          "summary": "## 5. ADALINE 与线性/非线性边界 Notebook 继续介绍 ADALINE（Adaptive Linear Neuron）。它和感知机相近，但训练目标更偏向连续误差最小化，便于引出损失函数和梯度更新。 讲义中用二维图对比线性边界和非线性边界，说明为什么多层网络或非线性变换是必要的。",
+          "terms": [
+            "损失函数"
+          ]
+        },
+        {
+          "id": "深度学习导学_20260609::section-7",
+          "file": "深度学习导学_20260609.md",
+          "kind": "markdown",
+          "cell_index": null,
+          "slide_index": null,
+          "line_start": 110,
+          "type": "markdown",
+          "title": "6. 学习规则与梯度更新",
+          "heading_path": [
+            "3. 构造性合成（Constructive Synthesis）",
+            "4. 感知机（Perceptron）",
+            "5. ADALINE 与线性/非线性边界",
+            "6. 学习规则与梯度更新"
+          ],
+          "text": "## 6. 学习规则与梯度更新\n\n这一段从“输出错了如何修正权重”引入学习规则。讲义里多次展示同一类公式，核心关系可以概括为：\n\ntext\nprediction = f(w · x + b)\nerror = target - prediction\nw <- w + learning_rate * error * x\nb <- b + learning_rate * error",
+          "summary": "## 6. 学习规则与梯度更新 这一段从“输出错了如何修正权重”引入学习规则。讲义里多次展示同一类公式，核心关系可以概括为： text prediction = f(w · x + b) error = target - prediction w <- w + learning_rate * error * x b <- b + learning_rate * error",
+          "terms": []
+        },
+        {
+          "id": "深度学习导学_20260609::section-8",
+          "file": "深度学习导学_20260609.md",
+          "kind": "markdown",
+          "cell_index": null,
+          "slide_index": null,
+          "line_start": 133,
+          "type": "markdown",
+          "title": "7. 深度学习发展脉络",
+          "heading_path": [
+            "4. 感知机（Perceptron）",
+            "5. ADALINE 与线性/非线性边界",
+            "6. 学习规则与梯度更新",
+            "7. 深度学习发展脉络"
+          ],
+          "text": "## 7. 深度学习发展脉络\n\n最后一段转向深度学习历史。Notebook 中出现了 Geoffrey Hinton、Yann LeCun、Yoshua Bengio、Jürgen Schmidhuber 等人物，以及深度学习发展的关键节点。",
+          "summary": "## 7. 深度学习发展脉络 最后一段转向深度学习历史。Notebook 中出现了 Geoffrey Hinton、Yann LeCun、Yoshua Bengio、Jürgen Schmidhuber 等人物，以及深度学习发展的关键节点。",
+          "terms": [
+            "节点"
+          ]
+        },
+        {
+          "id": "深度学习导学_20260609::section-9",
+          "file": "深度学习导学_20260609.md",
+          "kind": "markdown",
+          "cell_index": null,
+          "slide_index": null,
+          "line_start": 143,
+          "type": "markdown",
+          "title": "8. 课程小结",
+          "heading_path": [
+            "5. ADALINE 与线性/非线性边界",
+            "6. 学习规则与梯度更新",
+            "7. 深度学习发展脉络",
+            "8. 课程小结"
+          ],
+          "text": "## 8. 课程小结\n\n本段导学的主线可以整理为：\n\n1. 从生物神经元类比到 TLU；\n2. 用 TLU 表示基本布尔逻辑；\n3. 用多层组合解决单层阈值单元不能表达的问题；\n4. 从感知机过渡到 ADALINE 和学习规则；\n5. 用线性/非线性边界说明深层模型的必要性；\n6. 回顾深度学习的发展与代表人物。",
+          "summary": "## 8. 课程小结 本段导学的主线可以整理为： 1. 从生物神经元类比到 TLU； 2. 用 TLU 表示基本布尔逻辑； 3. 用多层组合解决单层阈值单元不能表达的问题； 4. 从感知机过渡到 ADALINE 和学习规则； 5. 用线性/非线性边界说明深层模型的必要性； 6. 回顾深度学习的发展与代表人物。",
+          "terms": []
         }
       ]
     }

@@ -24,12 +24,11 @@
     <div class="topbar">
       <div class="brand">
         <h1>深度学习期末复习资料库</h1>
-        <p>检索 · 主题书库 · 思维导图 · 基础练习 · 标准组卷</p>
+        <p>检索 · 主题书库 · 基础练习 · 标准组卷</p>
       </div>
       <nav aria-label="主导航">
         <button class="active" data-view="search">搜索</button>
         <button data-view="outline">教材目录</button>
-        <button data-view="mindmaps">思维导图</button>
         <button data-view="beginner">基础练习</button>
         <button data-view="quiz">标准组卷</button>
         <button data-view="review">主题书库</button>
@@ -41,7 +40,7 @@
       <div class="hero-grid">
         <div class="panel">
           <h2>从一个词条开始复习</h2>
-          <p class="muted">搜索会回到课件原文位置，也能继续跳到基础题、标准题、目录和导图。</p>
+          <p class="muted">搜索会回到课件原文位置，也能继续跳到基础题、标准题、目录和主题书库。</p>
           <div class="toolbar">
             <input id="searchInput" type="search" placeholder="输入词条：如 感受野、BatchNorm、LSTM、CrossEntropyLoss">
             <button id="makeBeginnerQuiz" class="btn secondary">基础练习</button>
@@ -75,14 +74,6 @@
         </aside>
         <div id="outlineBody"></div>
       </div>
-    </section>
-
-    <section id="view-mindmaps" class="view">
-      <div class="panel" style="margin-bottom:14px">
-        <h2>课件思维导图</h2>
-        <p class="muted">每份课件先给整份总览蜘蛛网；可打开 SVG 大图，也可下载 Markdown 大纲后导入 Markmap、XMind 等工具继续美化。</p>
-      </div>
-      <div id="mindmapBody" class="mindmap-grid"></div>
     </section>
 
     <section id="view-beginner" class="view">

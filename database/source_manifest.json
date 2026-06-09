@@ -68,6 +68,13 @@
     "sha256": "d1b7ff5d01f42987987960d9674dbcfe98a211f58d7554dffb90e3a60ece4c15"
   },
   {
+    "file": "图神经网络课件_20260609.pptx",
+    "kind": "pptx",
+    "size_bytes": 10881192,
+    "slide_count": 71,
+    "sha256": "0f3c111118c51a04908a245efc42ed2e9f367e5a7c3d53664a7a122f8089be6c"
+  },
+  {
     "file": "多层感知机1_学生分发版.ipynb",
     "kind": "ipynb",
     "size_bytes": 66696,
@@ -147,5 +154,13 @@
     "markdown_cells": 16,
     "code_cells": 6,
     "sha256": "09ba224da677bd6cb40cbc4ac38579af8d82f5f262dfc2dfbdc0828d681edc54"
+  },
+  {
+    "file": "深度学习导学_20260609.md",
+    "kind": "markdown",
+    "size_bytes": 6306,
+    "line_count": 158,
+    "heading_count": 9,
+    "sha256": "9a48e0d29b81b653cfff3d9a53c280ea99c54ba8d9616d5dc89fc49518339914"
   }
 ]

@@ -746,6 +746,8 @@ def concept_lookup_from_quiz(existing_quiz):
 def source_label(file_name, chunk):
     if chunk.get("slide_index"):
         return f"{file_name} · 第 {chunk['slide_index']} 页"
+    if chunk.get("kind") == "markdown":
+        return f"{file_name} · 第 {chunk.get('line_start', 1)} 行"
     return f"{file_name} · cell {chunk.get('cell_index')}"
 
 
@@ -1075,7 +1077,7 @@ def guide_intro_for_family(family):
     if family == "mlp":
         return [
             "这一类课件是深度学习入门骨架：先理解线性变换和激活函数，再理解损失函数、反向传播、优化器和训练流程。",
-            "考试常围绕“为什么需要非线性”“分类输出层和损失函数怎么匹配”“训练循环每一步做什么”来考。",
+            "考试常考为什么需要非线性、分类输出层和损失函数怎么匹配、训练循环每一步做什么。",
         ]
     if family == "rnn":
         return [
@@ -1336,9 +1338,9 @@ def guide_exam_check(rows, family):
     if len(rows) >= 2:
         row = rows[1]
         lines.extend([
-            f"2. **填空题：** {row['term']} 的复习重点不是只写名称，而是写清它的作用：____。",
+            f"2. **资料题：** 材料中出现 {row['term']}，请判断它在本节属于数据、模型结构、训练优化还是输出目标，并说明理由。",
             "",
-            f"   **参考答案：** {compact(row['plain'], 120)}",
+            f"   **参考答案：** {compact(row['plain'], 120)} 答题时还要结合课件语境：{compact(row['exam'], 90)}",
             "",
         ])
     if len(rows) >= 3:
@@ -1494,7 +1496,7 @@ def q_material(id_, topic, material, questions, answer, explanation, source, dif
         "topic": topic,
         "stem": "阅读材料并回答问题。",
         "material": material,
-        "questions": questions,
+        "subquestions": questions,
         "answer": answer,
         "explanation": explanation,
         "source": source,
@@ -1503,7 +1505,7 @@ def q_material(id_, topic, material, questions, answer, explanation, source, dif
 
 
 def has_bad_question_text(q):
-    text = " ".join(str(q.get(k, "")) for k in ["stem", "material", "questions", "answer", "explanation"])
+    text = " ".join(str(q.get(k, "")) for k in ["stem", "material", "subquestions", "questions", "answer", "explanation"])
     return any(p in text for p in BAD_QUESTION_PATTERNS)
 
 
@@ -1705,13 +1707,19 @@ def make_exam_banks():
         repeat = 4 if item["tier"] == "重点" else 2
         difficulty = "中" if item["tier"] == "重点" else "易"
         for n in range(repeat):
+            wrong = item["wrong"][n % len(item["wrong"])]
             standard.append(q_mc(
                 f"MC{idx:04d}",
                 item["topic"],
                 f"关于{item['topic']}，下列说法错误的是",
-                q_options(item["fact"], item["wrong"][n % len(item["wrong"]):] + item["wrong"][:n % len(item["wrong"])]),
-                chr(ord("B") + (n % 3)),
-                f"A正确：{item['fact']}；错误选项把关键点说反。{item['trap']}",
+                [
+                    f"A. {item['fact']}",
+                    f"B. 复习这一部分时，要说明它解决什么问题，并把它放回数据、模型结构、训练或输出流程中。",
+                    f"C. 答题时需要避开这个常见误区：{item['trap']}",
+                    f"D. {wrong}",
+                ],
+                "D",
+                f"D错误：{wrong}。A、B、C正确，其中A是课程主线，C提示了常见易错方向。",
                 item["source"],
                 difficulty,
             ))
@@ -1800,6 +1808,110 @@ def clean_quiz(data):
     return cleaned
 
 
+def extend_quiz_from_outline(standard, beginner, outline):
+    standard_limits = {"mlp": 34, "cnn": 42, "rnn": 24, "transformer": 30, "graph": 22, "general": 10}
+    beginner_limits = {"mlp": 18, "cnn": 22, "rnn": 14, "transformer": 16, "graph": 12, "general": 8}
+    used_terms = set()
+    counts = Counter()
+    idx = 1
+    material_idx = 1
+    for course in outline.get("courses", []):
+        family = course.get("family", "general")
+        limit = standard_limits.get(family, 10)
+        beginner_limit = beginner_limits.get(family, 8)
+        for chapter in course.get("chapters", []):
+            chapter_rows = []
+            for row in chapter.get("rows", []):
+                key = (family, row.get("term"))
+                if key in used_terms or counts[family] >= limit:
+                    continue
+                used_terms.add(key)
+                counts[family] += 1
+                chapter_rows.append(row)
+                standard.append(q_mc(
+                    f"OMC{idx:04d}",
+                    f"{course['title']} / {chapter['title']}",
+                    f"根据课件内容，关于{row['term']}的理解，下列说法错误的是",
+                    [
+                        f"A. {compact(row['plain'], 96)}",
+                        f"B. {compact(row['memory'], 96)}",
+                        f"C. {compact(row['exam'], 96)}",
+                        f"D. {narrative_bad_claim(row, family)}",
+                    ],
+                    "D",
+                    f"D错误：它把{row['term']}的作用或位置说反。A、B、C分别对应通俗解释、必记句和考试抓法。",
+                    course["file"],
+                    "中" if family in {"mlp", "cnn", "rnn", "transformer"} else "易",
+                ))
+                if counts[family] <= beginner_limit:
+                    beginner.append(q_mc(
+                        f"OBMC{idx:04d}",
+                        f"{course['title']} / {chapter['title']}",
+                        f"初学复习{row['term']}时，哪种说法最准确？",
+                        [
+                            f"A. {compact(row['plain'], 96)}",
+                            f"B. {narrative_bad_claim(row, family)}",
+                            f"C. {row['term']}只需要记名称，不需要结合模型或训练流程。",
+                            f"D. {row['term']}与本章其它知识点没有关系。",
+                        ],
+                        "A",
+                        f"A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：{compact(row['pitfall'], 100)}",
+                        course["file"],
+                        "易",
+                    ))
+                if idx % 2 == 0:
+                    standard.append(q_short(
+                        f"OS{idx:04d}",
+                        f"{course['title']} / {chapter['title']}",
+                        f"简述{row['term']}在本章中的作用，并写出一个容易混淆的点。",
+                        f"{row['term']}的作用：{compact(row['plain'], 170)} 易混点：{compact(row['pitfall'], 140)}",
+                        f"简答题不能只写定义，要补出它在课件中的位置和考试抓法：{compact(row['exam'], 120)}",
+                        course["file"],
+                        "中",
+                    ))
+                idx += 1
+            if len(chapter_rows) >= 2 and material_idx <= 36:
+                a, b = chapter_rows[0], chapter_rows[1]
+                material = (
+                    f"某同学复习“{chapter['title']}”时，把 {a['term']} 和 {b['term']} 都当成孤立名词背。"
+                    f"课件中 {a['term']} 的核心是：{compact(a['plain'], 100)}；"
+                    f"{b['term']} 的核心是：{compact(b['plain'], 100)}。"
+                )
+                questions = [
+                    f"分别说明 {a['term']} 和 {b['term']} 的作用。",
+                    "指出材料中两个知识点最容易被混淆的地方。",
+                    "如果出成简答题，答案中应该补充哪类考试抓法？",
+                ]
+                answer = (
+                    f"{a['term']}：{compact(a['plain'], 130)}；{b['term']}：{compact(b['plain'], 130)}。"
+                    f"易混点分别是：{compact(a['pitfall'], 90)}；{compact(b['pitfall'], 90)}。"
+                    "简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。"
+                )
+                standard.append(q_material(
+                    f"OM{material_idx:04d}",
+                    f"{course['title']} / {chapter['title']}",
+                    material,
+                    questions,
+                    answer,
+                    "资料题要先读材料定位知识点，再比较作用和易错点，不能只复述名词。",
+                    course["file"],
+                    "中",
+                ))
+                if material_idx <= 18:
+                    beginner.append(q_material(
+                        f"OBM{material_idx:04d}",
+                        f"{course['title']} / {chapter['title']}",
+                        material,
+                        questions[:2],
+                        answer,
+                        "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
+                        course["file"],
+                        "易",
+                    ))
+                material_idx += 1
+    return clean_quiz(standard), clean_quiz(beginner)
+
+
 def fallback_review(outline):
     return {
         "title": "深度学习课件综合复习资料",
@@ -1809,7 +1921,7 @@ def fallback_review(outline):
                 "title": course["title"],
                 "points": [
                     f"本课件包含 {course['chapter_count']} 个章节块、{course['chunk_count']} 个可检索片段。",
-                    "建议先看本页教材目录表格，再进入思维导图按知识脉络回忆，最后做基础练习和标准组卷。",
+                    "建议先看本页教材目录表格，再进入主题书库按考试重点复习，最后做基础练习和标准组卷。",
                 ],
                 "exam_focus": [row["term"] for ch in course["chapters"] for row in ch["rows"][:3]][:12],
             }
@@ -1828,6 +1940,164 @@ def load_review_or_fallback(outline):
         except json.JSONDecodeError:
             pass
     return fallback_review(outline)
+
+
+def rows_for_focus(outline, families=None, keywords=None, limit=12):
+    families = set(families or [])
+    keywords = keywords or []
+    rows = []
+    for course in outline.get("courses", []):
+        if families and course.get("family") not in families:
+            pass_family = False
+        else:
+            pass_family = True
+        for chapter in course.get("chapters", []):
+            for row in chapter.get("rows", []):
+                text = " ".join([course.get("title", ""), chapter.get("title", ""), row.get("term", ""), row.get("plain", ""), row.get("memory", "")])
+                if pass_family or any(k.lower() in text.lower() for k in keywords):
+                    rows.append((course, chapter, row))
+                if len(rows) >= limit:
+                    return rows
+    return rows[:limit]
+
+
+def manual_foundation_rows():
+    rows = [
+        {
+            "term": "TLU 阈值逻辑单元",
+            "plain": "把多个输入加权求和，再和阈值比较，输出 0 或 1，是早期神经元模型的抽象形式。",
+            "exam": "常考权重、阈值、阶跃函数分别起什么作用，以及它为什么只能形成线性边界。",
+            "pitfall": "不要把 TLU 说成能直接表达所有非线性逻辑；XOR 是典型反例。",
+            "memory": "TLU = 加权求和 + 阈值判断 + 二值输出。",
+        },
+        {
+            "term": "逻辑门",
+            "plain": "AND、OR、NOT 可以用不同权重和阈值的 TLU 表示，说明简单神经元能模拟基本布尔逻辑。",
+            "exam": "常考给定权重和阈值判断它对应哪个逻辑门，或解释为什么 XOR 需要多层组合。",
+            "pitfall": "不要把能表示 AND/OR 推成能单层表示任意逻辑。",
+            "memory": "基本逻辑门可由 TLU 实现，复杂逻辑通常需要组合。",
+        },
+        {
+            "term": "构造性合成",
+            "plain": "先用第一层识别若干输入模式，再用后一层把模式合并，从而构造更复杂的布尔函数。",
+            "exam": "常考多层结构为什么比单层 TLU 表达能力更强。",
+            "pitfall": "不要只说层数变多；关键是隐藏层能表示中间模式。",
+            "memory": "多层网络可以先识别局部模式，再组合成最终输出。",
+        },
+        {
+            "term": "感知机",
+            "plain": "感知机是带权重和偏置的线性分类器，通过符号判断把输入分到超平面两侧。",
+            "exam": "常考线性可分、决策边界、XOR 局限。",
+            "pitfall": "单层感知机只能处理线性可分问题。",
+            "memory": "感知机决策边界是线性的。",
+        },
+        {
+            "term": "ADALINE",
+            "plain": "ADALINE 使用连续线性输出计算误差，更自然地引出损失函数、梯度下降和参数更新。",
+            "exam": "常考它和感知机的区别：训练时关注连续误差，而不是只看阶跃后的类别。",
+            "pitfall": "不要把 ADALINE 完全等同于感知机的二值输出学习。",
+            "memory": "ADALINE 把神经元学习和误差最小化连接起来。",
+        },
+    ]
+    return [(None, None, row) for row in rows]
+
+
+def add_focus_section(lines, title, why, rows, exam_hint):
+    lines.extend([f"## {title}", "", why, ""])
+    if rows:
+        lines.extend(["### 先抓主线", ""])
+        for _, _, row in rows[:5]:
+            lines.append(f"- **{row['term']}**：{row['plain']}")
+        lines.append("")
+        lines.extend(["### 考试怎么写", ""])
+        for _, _, row in rows[:5]:
+            lines.append(f"- {row['term']}：{row['exam']} 易错点：{row['pitfall']}")
+        lines.append("")
+        lines.extend(["### 必背句", ""])
+        for _, _, row in rows[:5]:
+            lines.append(f"- {row['memory']}")
+        lines.append("")
+    lines.extend(["### 题型提醒", "", exam_hint, ""])
+
+
+def build_final_review_markdown(outline, manifest):
+    source_names = [m["file"] for m in manifest]
+    lines = [
+        "# 深度学习期末复习（仅基于原始课件版）",
+        "",
+        "> 本文件由当前课件根目录中的原始 Jupyter Notebook、PPT OCR 文本和导学 Markdown 重建；不引用网站旧讲义、旧题库或旧解释文件。",
+        "",
+        "## 资料来源说明",
+        "",
+    ]
+    for name in source_names:
+        lines.append(f"- {name}")
+    lines.extend([
+        "",
+        "## 老师给出的考试权重",
+        "",
+        "- **重点**：神经元、MLP、CNN、RNN、Transformer。",
+        "- **偏弱但仍要覆盖**：大语言模型、生成式算法、图神经网络、PINN、AI for material science。",
+        "- **题型**：单选题、简答题、资料题。",
+        "",
+        "复习时不要平均用力。第一梯队必须能解释、会判断、能写简答；第二梯队要抓概念主线、典型应用和材料题读法。",
+        "",
+        "## 总学习路线",
+        "",
+        "1. 从神经元和感知机理解“加权求和 + 阈值/偏置”的起点。",
+        "2. 用训练流程串起前向传播、损失、反向传播、优化器和自动微分。",
+        "3. 用 MLP 掌握分类问题、激活函数、Logits、Sigmoid/Softmax、BCE/CE。",
+        "4. 用 CNN 掌握图像的局部连接、参数共享、卷积/互相关、池化、感受野和训练技巧。",
+        "5. 用 RNN/GRU/LSTM 掌握序列、隐藏状态、门控、变长序列处理。",
+        "6. 用 Attention/Transformer 掌握 Q/K/V、缩放点积注意力、多头、Mask、位置编码。",
+        "7. 第二梯队只抓课程主线：LLM/生成式算法/GNN/PINN/材料科学应用如何从前面模型自然延伸。",
+        "",
+    ])
+    focus_specs = [
+        ("第一梯队 1：神经元、TLU、感知机、ADALINE", "这部分是课程最早的导学内容，用来说明神经网络不是凭空出现的，而是从阈值逻辑、线性分类和误差更新一路发展出来。", manual_foundation_rows(), "单选题常把“单层感知机能否解决 XOR”“ADALINE 是否只看阶跃输出”说反；简答题要写出从 TLU 到感知机再到 ADALINE 的递进。"),
+        ("第一梯队 2：训练流程与 MLP", "MLP 是后面所有模型的训练基础。你要把数据、模型、输出、损失、反向传播、参数更新连成闭环，而不是孤立背函数名。", rows_for_focus(outline, families=["mlp"], keywords=["梯度下降", "损失函数", "激活函数", "Softmax", "CrossEntropyLoss"], limit=14), "资料题可能给一段 PyTorch 训练代码，让你指出缺少 zero_grad、loss.backward、optimizer.step 或损失函数输入错误。"),
+        ("第一梯队 3：CNN 与图像建模", "CNN 的核心动机是图像有空间结构，不能像普通表格一样随便展平。局部连接、参数共享、卷积核、池化和感受野是整章骨架。", rows_for_focus(outline, families=["cnn"], keywords=["卷积", "池化", "感受野", "BatchNorm", "Dropout"], limit=16), "单选题常考输出尺寸、Same/Valid/Full、互相关、池化是否有参数；简答题要能比较 MLP 处理图像和 CNN 的差别。"),
+        ("第一梯队 4：RNN、GRU、LSTM", "RNN 解决的是序列问题：当前输入不是孤立样本，而要结合历史隐藏状态。GRU/LSTM 的门控是为长序列记忆和梯度传播服务。", rows_for_focus(outline, families=["rnn"], keywords=["RNN", "GRU", "LSTM", "Padding", "Packing"], limit=14), "资料题可能给变长序列 batch，让你判断 padding、packing、hidden state 或 LSTM 门控作用。"),
+        ("第一梯队 5：Attention 与 Transformer", "Transformer 的主线是用注意力直接建立序列位置之间的联系。Q/K/V、softmax 权重、mask、位置编码和多头注意力要连起来看。", rows_for_focus(outline, families=["transformer"], keywords=["Attention", "Transformer", "Query", "Key", "Value", "Mask", "位置编码"], limit=16), "单选题常把 Q/K/V 角色、sqrt(d_k)、Target Mask 和 Source Mask 混淆；简答题要能写出注意力公式流程。"),
+        ("第二梯队：LLM、生成式算法、GNN、PINN、材料科学", "这些内容老师说偏弱，但不能完全放弃。复习目标不是深推导，而是能把它们和前面模型主线连接起来。", rows_for_focus(outline, families=["graph"], keywords=["大语言模型", "生成式", "图神经网络", "GCN", "GAT", "GraphSAGE", "PINN", "material"], limit=18), "资料题可能给一段应用场景，让你判断为什么适合 GNN、为什么需要物理约束、Prompt/MoE 在 LLM 中起什么作用。"),
+    ]
+    for spec in focus_specs:
+        add_focus_section(lines, *spec)
+    lines.extend([
+        "## 三类题型作答方法",
+        "",
+        "### 单选题",
+        "",
+        "先判断题干问“正确”还是“错误”。常见错误选项有四类：把概念放错流程位置、把训练/推理说反、把输入输出形状说反、把模型作用夸大成万能。",
+        "",
+        "### 简答题",
+        "",
+        "推荐四句式：第一句写定义，第二句写作用，第三句写在模型或训练流程中的位置，第四句写一个易错点或与相近概念的区别。",
+        "",
+        "### 资料题",
+        "",
+        "先圈材料中的任务类型、输入数据、模型结构、损失/训练配置，再回答问题。不要先背定义；资料题考的是你能否把定义放回具体情境。",
+        "",
+        "## 考前最后一遍",
+        "",
+        "- 神经元/MLP：会解释线性、非线性、激活函数、损失函数匹配。",
+        "- CNN：会算输出尺寸，会说清局部连接、参数共享、池化、感受野。",
+        "- RNN：会说隐藏状态、GRU/LSTM 门控、padding/packing。",
+        "- Transformer：会写 Q/K/V 流程、mask、位置编码、多头注意力。",
+        "- GNN/LLM/PINN/材料科学：抓“为什么需要它”和“它利用了什么结构或先验”。",
+        "",
+        "<style>@media print { @page { margin: 8mm; } body { font-size: 10.5pt; line-height: 1.35; } h1, h2, h3 { page-break-after: avoid; } }</style>",
+        "",
+    ])
+    return "\n".join(lines)
+
+
+def write_final_review_markdown(outline, manifest):
+    md = build_final_review_markdown(outline, manifest)
+    FINAL_REVIEW_MD.write_text(md, encoding="utf-8")
+    TOPIC_GUIDE_OUT.mkdir(parents=True, exist_ok=True)
+    FINAL_REVIEW_SITE_MD.write_text(md, encoding="utf-8")
+    return md
 
 
 CSS = r"""
@@ -2060,35 +2330,6 @@ tr:last-child td { border-bottom: 0; }
   border-bottom: 1px solid #9aa6b2;
 }
 .answers { background: #f8fbff; }
-.mindmap-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-.map-card h3 { margin-bottom: 4px; }
-.map-preview {
-  margin-top: 12px;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fbfdff;
-  overflow: auto;
-  max-height: 760px;
-}
-.map-preview img { display: block; width: 100%; min-width: 1180px; height: auto; }
-.map-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-.submaps { margin-top: 12px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: #fff; }
-.submaps summary { cursor: pointer; font-weight: 750; color: #334155; }
-.submap-row { display: flex; gap: 12px; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
-.submap-row:first-of-type { border-top: 0; }
-.submap-row a { font-size: 13px; font-weight: 700; }
-.map-tree ul { list-style: none; padding-left: 18px; border-left: 1px solid #dce6f2; }
-.map-tree li { margin: 7px 0; line-height: 1.45; }
-.compact-tree { margin-top: 10px; max-height: 190px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: #fff; }
-.map-node {
-  display: inline-block;
-  background: #fff;
-  border: 1px solid #d8e0ea;
-  border-radius: 8px;
-  padding: 5px 8px;
-}
-.map-node.term { color: #174ea6; cursor: pointer; }
 .formula {
   font-family: "SFMono-Regular", Consolas, monospace;
   background: #f1f5f9;
@@ -2372,7 +2613,8 @@ function questionMarkdown(q, idx) {
     return `${idx}. ${q.stem}\n\n${q.options.map(o => `   ${o}`).join("\n")}`;
   }
   if (q.type === "material") {
-    return `${idx}. ${q.stem}\n\n材料：${q.material || ""}\n\n${(q.questions || []).map((x, i) => `   ${i + 1}. ${x}`).join("\n")}\n\n答题区：\n\n\n`;
+    const subs = q.subquestions || q.questions || [];
+    return `${idx}. ${q.stem}\n\n材料：${q.material || ""}\n\n${subs.map((x, i) => `   ${i + 1}. ${x}`).join("\n")}\n\n答题区：\n\n\n`;
   }
   return `${idx}. ${q.stem}\n\n答题区：\n\n\n`;
 }
@@ -2462,7 +2704,7 @@ function runSearch(query) {
     <h2>${escapeHtml(fuzzy.term)}</h2>
     <p class="muted">出现 ${fuzzy.total_count} 次，分布在 ${fuzzy.files.length} 个课件文件中。</p>
     <div class="chips">${(fuzzy.related || []).map(r => `<button class="chip" data-term="${escapeHtml(r)}">${escapeHtml(r)}</button>`).join("")}</div>
-  ` : `<h2>搜索说明</h2><p class="muted">搜索会定位到课件原文片段、相关词条和来源位置。适合先查概念，再回到教材目录和导图复习。</p>`;
+  ` : `<h2>搜索说明</h2><p class="muted">搜索会定位到课件原文片段、相关词条和来源位置。适合先查概念，再回到教材目录和主题书库复习。</p>`;
   $("explainBox").querySelectorAll(".chip[data-term]").forEach(chip => chip.addEventListener("click", () => {
     $("searchInput").value = chip.dataset.term;
     runSearch(chip.dataset.term);
@@ -2479,7 +2721,6 @@ function renderOutline() {
           <h2>${escapeHtml(course.title)}</h2>
           <p class="muted">${escapeHtml(course.file)} · ${course.chapter_count} 个章节块 · ${course.chunk_count} 个片段</p>
         </div>
-        <button class="btn secondary" data-map="${escapeHtml(course.file)}">看导图</button>
       </div>
       ${course.chapters.map(ch => `
         <div class="chapter">
@@ -2501,61 +2742,6 @@ function renderOutline() {
       `).join("")}
     </section>
   `).join("");
-  $("outlineBody").querySelectorAll("button[data-map]").forEach(btn => btn.addEventListener("click", () => {
-    showView("mindmaps");
-    const card = document.querySelector(`[data-map-card="${CSS.escape(btn.dataset.map)}"]`);
-    if (card) card.scrollIntoView({behavior: "smooth", block: "start"});
-  }));
-}
-
-function renderMapTree(map) {
-  return `<div class="map-tree"><ul>${map.chapters.map(ch => `
-    <li><span class="map-node">${escapeHtml(ch.title)}</span>
-      <ul>${(ch.terms || []).slice(0, 16).map(t => `<li><span class="map-node term" data-term="${escapeHtml(t)}">${escapeHtml(t)}</span></li>`).join("")}</ul>
-    </li>
-  `).join("")}</ul></div>`;
-}
-
-function renderMindmaps() {
-  $("mindmapBody").innerHTML = DB.mindmaps.map(course => `
-    <article class="panel map-card" data-map-card="${escapeHtml(course.file)}">
-      <h3>${escapeHtml(course.title)}</h3>
-      <p class="muted">${escapeHtml(course.file)} · ${course.maps.length} 张蜘蛛网导图${course.maps.length > 1 ? "，已按章节拆分" : ""}</p>
-      ${course.maps.slice(0, 1).map(map => `
-        <div class="chapter">
-          <div class="result-title">
-            <strong>${escapeHtml(map.title)} <span class="badge">${map.node_count} 节点</span></strong>
-            <span class="map-actions">
-              <a class="btn secondary" href="${escapeHtml(map.svg)}" target="_blank">打开大图</a>
-              <a class="btn secondary" href="${escapeHtml(map.svg)}" download>下载 SVG</a>
-              <a class="btn secondary" href="${escapeHtml(map.markdown)}" download>下载大纲</a>
-            </span>
-          </div>
-          <div class="map-preview"><img src="${escapeHtml(map.svg)}" alt="${escapeHtml(map.title)} 思维导图"></div>
-          <div class="map-tree compact-tree">${renderMapTree(map)}</div>
-        </div>
-      `).join("")}
-      ${course.maps.length > 1 ? `
-        <details class="submaps">
-          <summary>展开章节小图和大纲下载（${course.maps.length - 1} 张）</summary>
-          ${course.maps.slice(1).map(map => `
-            <div class="submap-row">
-              <strong>${escapeHtml(map.title)}</strong>
-              <span class="map-actions">
-                <a href="${escapeHtml(map.svg)}" target="_blank">打开</a>
-                <a href="${escapeHtml(map.svg)}" download>下载 SVG</a>
-                <a href="${escapeHtml(map.markdown)}" download>下载大纲</a>
-              </span>
-            </div>
-          `).join("")}
-        </details>` : ""}
-    </article>
-  `).join("");
-  $("mindmapBody").querySelectorAll(".map-node.term").forEach(node => node.addEventListener("click", () => {
-    $("searchInput").value = node.dataset.term;
-    runSearch(node.dataset.term);
-    showView("search");
-  }));
 }
 
 function pickQuestions(bank, type, topic, count) {
@@ -2568,9 +2754,9 @@ function pickQuestions(bank, type, topic, count) {
 
 function generateQuiz(bank, mode, topic = "") {
   const spec = mode === "beginner"
-    ? [["mcq", 10], ["tf", 10], ["fill", 10], ["short", 3]]
-    : [["mcq", 20], ["fill", 10], ["short", 5]];
-  const labels = {mcq: "单选题", tf: "判断题", fill: "填空题", short: "简答题"};
+    ? [["mcq", 10], ["short", 4], ["material", 1]]
+    : [["mcq", 20], ["short", 6], ["material", 2]];
+  const labels = {mcq: "单选题", short: "简答题", material: "资料题"};
   const chosen = spec.flatMap(([type, count]) => pickQuestions(bank, type, topic, count));
   const title = mode === "beginner" ? "基础练习随机题" : "标准综合随机题";
   const targetTitle = mode === "beginner" ? $("beginnerTitle") : $("quizTitle");
@@ -2605,11 +2791,9 @@ function renderQuestion(q, idx) {
   if (q.type === "mcq") {
     return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="badge">${escapeHtml(q.difficulty)}</span></div><ul class="options">${q.options.map(o => `<li>${escapeHtml(o)}</li>`).join("")}</ul></div>`;
   }
-  if (q.type === "tf") {
-    return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="badge">${escapeHtml(q.difficulty)}</span></div><ul class="options"><li>A. 正确</li><li>B. 错误</li></ul></div>`;
-  }
-  if (q.type === "fill") {
-    return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="blank-answer"></span> <span class="badge">${escapeHtml(q.difficulty)}</span></div></div>`;
+  if (q.type === "material") {
+    const subs = q.subquestions || q.questions || [];
+    return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="badge">${escapeHtml(q.difficulty)}</span></div><p class="snippet"><strong>材料：</strong>${escapeHtml(q.material || "")}</p><ol>${subs.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ol><p class="muted">答题区：</p><p style="height:78px;border-bottom:1px solid var(--line)"></p></div>`;
   }
   return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="badge">${escapeHtml(q.difficulty)}</span></div><p class="muted">答题区：</p><p style="height:54px;border-bottom:1px solid var(--line)"></p></div>`;
 }
@@ -2803,7 +2987,6 @@ function init() {
   renderStats();
   renderTermCloud();
   renderOutline();
-  renderMindmaps();
   renderReview();
   runSearch("");
   generateBeginnerQuiz("", false);
@@ -2839,12 +3022,11 @@ HTML = """<!doctype html>
     <div class="topbar">
       <div class="brand">
         <h1>深度学习期末复习资料库</h1>
-        <p>检索 · 主题书库 · 思维导图 · 基础练习 · 标准组卷</p>
+        <p>检索 · 主题书库 · 基础练习 · 标准组卷</p>
       </div>
       <nav aria-label="主导航">
         <button class="active" data-view="search">搜索</button>
         <button data-view="outline">教材目录</button>
-        <button data-view="mindmaps">思维导图</button>
         <button data-view="beginner">基础练习</button>
         <button data-view="quiz">标准组卷</button>
         <button data-view="review">主题书库</button>
@@ -2856,7 +3038,7 @@ HTML = """<!doctype html>
       <div class="hero-grid">
         <div class="panel">
           <h2>从一个词条开始复习</h2>
-          <p class="muted">搜索会回到课件原文位置，也能继续跳到基础题、标准题、目录和导图。</p>
+          <p class="muted">搜索会回到课件原文位置，也能继续跳到基础题、标准题、目录和主题书库。</p>
           <div class="toolbar">
             <input id="searchInput" type="search" placeholder="输入词条：如 感受野、BatchNorm、LSTM、CrossEntropyLoss">
             <button id="makeBeginnerQuiz" class="btn secondary">基础练习</button>
@@ -2890,14 +3072,6 @@ HTML = """<!doctype html>
         </aside>
         <div id="outlineBody"></div>
       </div>
-    </section>
-
-    <section id="view-mindmaps" class="view">
-      <div class="panel" style="margin-bottom:14px">
-        <h2>课件思维导图</h2>
-        <p class="muted">每份课件先给整份总览蜘蛛网；可打开 SVG 大图，也可下载 Markdown 大纲后导入 Markmap、XMind 等工具继续美化。</p>
-      </div>
-      <div id="mindmapBody" class="mindmap-grid"></div>
     </section>
 
     <section id="view-beginner" class="view">
@@ -3017,6 +3191,13 @@ TOPIC_GUIDE_SPECS = [
         "href": "topic_guides/课堂练习册-答案解析.md",
         "tocImages": [],
     },
+    {
+        "id": "final_review",
+        "title": "深度学习期末复习-总复习资料",
+        "label": "总复习资料",
+        "href": "topic_guides/深度学习期末复习-总复习资料.md",
+        "tocImages": [],
+    },
 ]
 
 
@@ -3041,19 +3222,23 @@ def main():
     DATABASE.mkdir(parents=True, exist_ok=True)
     ASSETS.mkdir(parents=True, exist_ok=True)
     IMAGE_OUT.mkdir(parents=True, exist_ok=True)
-    MINDMAP_OUT.mkdir(parents=True, exist_ok=True)
     GUIDE_OUT.mkdir(parents=True, exist_ok=True)
     TOPIC_GUIDE_OUT.mkdir(parents=True, exist_ok=True)
     TOC_IMAGE_OUT.mkdir(parents=True, exist_ok=True)
+    if MINDMAP_OUT.exists():
+        shutil.rmtree(MINDMAP_OUT)
+    mindmap_db = DATABASE / "mindmaps.json"
+    if mindmap_db.exists():
+        mindmap_db.unlink()
 
-    standard_quiz = load_standard_quiz()
+    standard_quiz, beginner_quiz = make_exam_banks()
     manifest, chunks, source_cache = extract_sources()
     terms = build_term_index(chunks)
     outline = build_course_outline(manifest, chunks, concept_lookup_from_quiz(standard_quiz))
+    standard_quiz, beginner_quiz = extend_quiz_from_outline(standard_quiz, beginner_quiz, outline)
     review = load_review_or_fallback(outline)
-    mindmaps = build_mindmaps(outline)
     guides = build_study_guides(outline)
-    beginner_quiz = build_beginner_quiz(outline)
+    write_final_review_markdown(outline, manifest)
     topic_guides = load_topic_guides()
 
     for img in (ROOT / "image").glob("*.png"):
@@ -3069,7 +3254,6 @@ def main():
     write_json(DATABASE / "review_material.json", review)
     write_json(DATABASE / "quiz_bank.json", standard_quiz)
     write_json(DATABASE / "beginner_quiz_bank.json", beginner_quiz)
-    write_json(DATABASE / "mindmaps.json", mindmaps)
     write_json(DATABASE / "study_guides.json", guides)
     write_json(DATABASE / "topic_guides.json", topic_guides)
 
@@ -3079,7 +3263,6 @@ def main():
         "terms": terms,
         "outline": outline,
         "review": review,
-        "mindmaps": mindmaps,
         "guides": guides,
         "topicGuides": topic_guides,
         "quizBank": standard_quiz,
@@ -3093,7 +3276,7 @@ def main():
     print(
         f"sources={len(manifest)} chunks={len(chunks)} terms={len(terms)} "
         f"standard_quiz={len(standard_quiz)} beginner_quiz={len(beginner_quiz)} "
-        f"mindmaps={sum(len(m['maps']) for m in mindmaps)} guides={len(guides['items'])} "
+        f"guides={len(guides['items'])} "
         f"topic_guides={sum(1 for g in topic_guides['items'] if g['exists'])}"
     )
     print(SITE / "index.html")

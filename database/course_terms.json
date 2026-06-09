@@ -406,7 +406,7 @@
   },
   "损失函数": {
     "term": "损失函数",
-    "total_count": 76,
+    "total_count": 77,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
@@ -416,7 +416,8 @@
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "多层感知机2-学生分发版-终版2026.ipynb",
-      "循环神经网络-学生分发版-终版2026.ipynb"
+      "循环神经网络-学生分发版-终版2026.ipynb",
+      "深度学习导学_20260609.md"
     ],
     "hits": [
       {
@@ -848,6 +849,16 @@
         "title": "训练技巧详解",
         "count": 3,
         "summary": "# ==================== 训练函数 ==================== def train_epoch(model, dataloader, criterion, optimizer, device, clip_norm): \"\"\" 单个epoch的训练 Args: model: 神经网络模型 dataloader: 训练数据加载器 criterion: 损失函数 optimizer: 优化器 device: 计算设备 clip_norm: 梯度裁剪阈值 Returns: avg_loss: 该epoch的平均损失 \"\"\" model.train() # 启用训练模式（Dropout生效，BatchNorm更新统计量） total_loss = 0.0 total_samples = 0 for batch_idx, (packed_texts, labels, lengths) in enumerate(dataloader): # 将数据移至目标设备（MPS/GPU/CPU） # 注意：PackedSequence需要先移到设备，再用于计算 packed_texts = packed_texts.to(device) labels = labels.to(device) # --- 前向传播 --- # outputs shape: (batch_size,) 每个样本的logit分数 outputs = model(packed_texts) # 计算二元交叉熵损失（BCEWithLogitsLoss =..."
+      },
+      {
+        "chunk_id": "深度学习导学_20260609::section-6",
+        "file": "深度学习导学_20260609.md",
+        "kind": "markdown",
+        "cell_index": null,
+        "slide_index": null,
+        "title": "5. ADALINE 与线性/非线性边界",
+        "count": 1,
+        "summary": "## 5. ADALINE 与线性/非线性边界 Notebook 继续介绍 ADALINE（Adaptive Linear Neuron）。它和感知机相近，但训练目标更偏向连续误差最小化，便于引出损失函数和梯度更新。 讲义中用二维图对比线性边界和非线性边界，说明为什么多层网络或非线性变换是必要的。"
       }
     ],
     "related": [
@@ -2450,13 +2461,14 @@
   },
   "Batch": {
     "term": "Batch",
-    "total_count": 485,
+    "total_count": 491,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
+      "图神经网络课件_20260609.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
@@ -3056,6 +3068,16 @@
         "summary": "# ============================================================================ # 支持 Fine-tuning的迁移学习代码 # ============================================================================ import torch import torch.nn as nn import torch.optim as optim from torch.utils.data import DataLoader from torchvision import models, transforms from torchvision.datasets import ImageFolder from torch.utils.data import random_split, Subset from sklearn.metrics import classification_report, confusion_matrix, accuracy_score import numpy as np import time print(\"=\" * 70) print(\"Transfer Learning: ResNet18 with Fine-tuning\") print(\"=\" * 70) # ======================================================..."
       },
       {
+        "chunk_id": "图神经网络课件_20260609::slide-45",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 45,
+        "title": "训练过程",
+        "count": 6,
+        "summary": "训练过程 gata...0ata,tokdevice） batch_size = data.size（0） netb.zero_grad（） noise2 = torch.randn（batch_size, noise_size, device=device） netD.zero_gradC fake2 = net6（noise2） output = netD（fake2） output = netb（data） 0_6_z2 = output.meanC）.1tem（） D_x = output.meanC）.itemC） Label -get.Labei（batch.size， iabe Label = get_label （batch_size, lbel, 1） errD_real = criterion（output, LabeL） errG = criterion（output, LabeL） errG.backward（） noise1 = torch.randn（batch.size, noise_size, devlce=device） optinizer6.stepC） fakel = net6（noise1） output = netD（fake1） D.G_z1 = output.nean（）.item（） Label = get_label（batch_size, label: 0） errD_fake = criterion（output, Label） errD = errD_real + errD_fake..."
+      },
+      {
         "chunk_id": "多层感知机1_学生分发版::cell-6",
         "file": "多层感知机1_学生分发版.ipynb",
         "kind": "ipynb",
@@ -3254,16 +3276,6 @@
         "title": "7. 完整训练流程框架",
         "count": 4,
         "summary": "### 核心概念清单 #### 1. 优化器（Optimizer） - [ ] 优化器 的定义：用于更新和调整神经网络权重的算法 - [ ] 优化器的作用：计算梯度 → 引导参数向损失减小方向更新 - [ ] 优化器的使用模式：optimizer.step() + optimizer.zero_grad() --- #### 2. 常见优化算法 | 优化器 | 特点 | 适用场景 | |--------|------|---------| | SGD | 随机梯度下降，简单稳定 | 基础训练 | | Adam | 自适应学习率，收敛快 | 大多数场景（最常用） | | AdamW | 带权重衰减的Adam | 需要正则化时 | | RMSprop | 适合非平稳目标 | RNN训练 | - [ ] 后续会详细介绍各种优化器及其算法的设计 创建优化器：optimizer = optim.SGD(model.parameters(), lr=0.1) --- #### 3. 损失函数 - [ ] PyTorch内置损失函数：nn.MSELoss(), nn.CrossEntropyLoss() 等 - [ ] 损失函数的参数：reduction='mean' 或 'sum' 创建损失函数：loss_fn = nn.MSELoss(reduction='mean') --- #### 4. 模型定义（nn.Module） - [ ] 继承 nn.Module 类定义模型 - [ ] init() 方法：定义模型结构和参数 - [ ] forwa..."
-      },
-      {
-        "chunk_id": "多层感知机1_学生分发版_副本::cell-89",
-        "file": "多层感知机1_学生分发版_副本.ipynb",
-        "kind": "ipynb",
-        "cell_index": 89,
-        "slide_index": null,
-        "title": "DataLoader：实现小批量梯度下降",
-        "count": 2,
-        "summary": "💡 关于batch size的选择： 通常使用2的幂次方（如16, 32, 64, 128），32是最常见的选择。batch size受硬件内存限制。"
       }
     ],
     "related": [
@@ -3993,12 +4005,13 @@
   },
   "Sigmoid": {
     "term": "Sigmoid",
-    "total_count": 71,
+    "total_count": 73,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx",
       "多层感知机2-学生分发版-终版2026.ipynb",
       "多层感知机2-课堂练习-终版2026.ipynb",
       "多层感知机2-课堂练习答案-终版2026.ipynb",
@@ -4144,6 +4157,16 @@
         "title": "Word2vec: Negative Sampling",
         "count": 1,
         "summary": "Word2vec: Negative Sampling 假设，给定中心词 orange，我们要预测其上下文词中的juice。 计算词表内所有单词的概率->计算量大 Softmax 0.0003 0.005 0.001 0.6 alien at me happy juice out zero orange Negative Sampling（负采样） 正样本：（orange, juice） Y=1 Softmax -> Multiple sigmoid 负样本：（orange, alien）， （orange, happy）. （orange, zero） Y=0 只对正样本和选取的负样本进行分类，从而减少计算量 Word2vec: Distributed Representations of Words and Phrases and their Compositionality"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-44",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 44,
+        "title": "# 定义判别器",
+        "count": 2,
+        "summary": "# 定义判别器 2 usages eless.Discriminator（nn.Module）： #.初始化函效init，传入输入层，隐藏层和输出展的神经示介数 def init（self, input_size, hidden.size, output.slze）： super（Discriminator, self）.-_init.-（） # 定义了3个线性层fc1、fc2、fc3 self.fc1 = nn.Linear （input_size, hidden_size） self.fc2 = nn. Linear（hidden_size, hidden_size） self.fc3 = nn.Linear（hidden.s1z0, output.size） # 实现神经网络的前向传播函数forward，函數传入张量x def forward（seLf,x）： # 使用view函数，将x转为一维的向量 x = x.view（x.size（0），-1） # x会经过fc1、fc2、fc3三个线性层 x =self.fc1（x） x = torch.reLu（x） x self.fc2（x） x = torch.reLuCx） x = self.fc3（x） # 输入至sigmoid函数，得到生成器的输出 return torch.sigmoid（x）"
       },
       {
         "chunk_id": "多层感知机2-学生分发版-终版2026::cell-2",
@@ -5331,10 +5354,11 @@
   },
   "MLP": {
     "term": "MLP",
-    "total_count": 22,
+    "total_count": 24,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx",
       "多层感知机2-学生分发版-终版2026.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
@@ -5380,6 +5404,26 @@
         "title": "5 图神经网络（GNN）",
         "count": 1,
         "summary": "5 图神经网络（GNN） MLP层 Layer N Layer N+1 graph in graph out 广 • Eaxn Graph Independent Layer update functionf=2： 节点，边和整体三者没有关联！"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-2",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 2,
+        "title": "）图神经网络（GNN）",
+        "count": 1,
+        "summary": "）图神经网络（GNN） MLP层 Layer N Layer N+1 gTopn in graph out 广 • Ents Graph Independent Layer update function f=： 节点，边和整体三者没有关联！"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-12",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "信息传递",
+        "count": 1,
+        "summary": "信息传递 基于消息传递的 Graph Neural Network的通用公式 多层MLP 邻居消息发送 F可以是聚合函数 通常是Mean/Max/Sum"
       },
       {
         "chunk_id": "多层感知机2-学生分发版-终版2026::cell-2",
@@ -5567,12 +5611,13 @@
   },
   "激活函数": {
     "term": "激活函数",
-    "total_count": 64,
+    "total_count": 65,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络1-课堂练习-终版2026.ipynb",
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
+      "图神经网络课件_20260609.pptx",
       "多层感知机2-学生分发版-终版2026.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
@@ -5850,6 +5895,16 @@
         "summary": "## 本章总结 ### 核心知识点回顾 第一部分：梯度消失与梯度爆炸及解决方案 - 梯度消失：深层网络中靠近输入层的梯度逐层减小→0，导致浅层无法学习 - 梯度爆炸：梯度指数级增长，损失变为NaN，常见于深层网络和RNN - 梯度裁剪：Value Clipping（元素级）、Norm Clipping（范数裁剪）、Backward Hooks（RNN专用） - 梯度爆炸治本方案：批归一化（BN/LN）、权重正则化、改进初始化（Fixup/正交初始化） - 梯度消失解决方案：Xavier初始化（Tanh/Sigmoid）、Kaiming/He初始化（ReLU）、批归一化（补偿不良初始化） - BN核心机制：训练用batch统计量，推理用移动平均；对每个通道独立归一化 第二部分：优化器与学习率调整 - 病态曲率：损失函数在某些方向变化陡峭，某些方向平缓，SGD呈锯齿状下降 - 动量（Momentum）：引入速度概念，加速收敛，减少震荡，γ通常设为0.9 - Nesterov加速梯度（NAG）：先展望再计算梯度，提前感知变化，避免冲过头 - 自适应学习率：Adagrad（累积梯度平方，学习率单调递减）、RMSProp（指数移动平均EMA解决Adagrad问题）、Adam（Momentum+RMSProp+偏差修正） - 学习率调度器：StepLR、MultiStepLR、ExponentialLR、ReduceLROnPlateau（最实用，推荐首选）、CosineAnnealingLR - 优化器与调度器配合：优化器负责'怎么走'（自适应梯度..."
       },
       {
+        "chunk_id": "图神经网络课件_20260609::slide-42",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 42,
+        "title": "2 usages",
+        "count": 1,
+        "summary": "2 usages class Generator（nn.Module）： 选网络的初始化勇敗init，传入输入层，晚藏展和幾出展的神经元介影 def init（self, input_size, hidden.size, output_size）： super（Generator, self）.-_init--0 # 定义了3个线性层fc1、fc2、fc3 self.fcl = nn.Linear（input_size, hidden_s1ze） self.fc2 = nn.Linear （hidden_size, hidden_s1ze） self.fc3 = nn.Linear（hidden_size, output_size） # 神经网络的前向传摇函数forward， 函数传入张量x def forward（self, X）： # ×会经过fc1、fc2、fc3三个线性层 x = self.fc1（x） x = torch.relu（x） self.fc2（x） torch.relu（x） self.fc3（x） # 生成器的最后一个激活函数，一般会使用双曲正切函数tanh # tanh的输出范用在［-1,11，可以使生成的图像数据 # 更容易匹配到真实图像数据的分布 torch.tanhCx） return X"
+      },
+      {
         "chunk_id": "多层感知机2-学生分发版-终版2026::cell-3",
         "file": "多层感知机2-学生分发版-终版2026.ipynb",
         "kind": "ipynb",
@@ -6060,7 +6115,7 @@
   },
   "卷积": {
     "term": "卷积",
-    "total_count": 349,
+    "total_count": 363,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络1-课堂练习-终版2026.ipynb",
@@ -6069,6 +6124,7 @@
       "卷积神经网络3-学生分发版-终版2026(1).ipynb",
       "卷积神经网络3-学生分发版-终版2026.ipynb",
       "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
@@ -6881,11 +6937,11 @@
       "卷积核",
       "池化",
       "Dropout",
+      "图卷积",
       "感受野",
+      "GCN",
       "Inception",
-      "VGG",
-      "归一化",
-      "Padding"
+      "VGG"
     ]
   },
   "互相关": {
@@ -20978,10 +21034,11 @@
   },
   "Attention": {
     "term": "Attention",
-    "total_count": 195,
+    "total_count": 196,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "图学习课件_第二部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
@@ -21057,6 +21114,16 @@
         "title": "deepscckv3",
         "count": 1,
         "summary": "deepscckv3 3374093 000〇 outed Enpen Transformer Block x Output Hidcen h： Shared Epe • 基础架构与v2一致，参数量提高到 Feed-Fonward Neswork 671B； RMS Norm hih Top-K， • MOE采用一种无辅助损失的负载均衡 000〇 Input Hidden u， ntion（MLAL 策略，进一步提升性能； ① Cached During Infer Output Hicden u，［OO〇C 0000 • 多词元预测训练目标（MTP）：模型 Muli-Head Attention RMS Norm 不仅预测紧随其后的下一个词元，还 3314093 （Tki:kF 会预测再往后的1个额外词元； • FP8 混合精度训练。 00 Latentc UatentC Input Hidden h, 0000 47"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-10",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 10,
+        "title": "） 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "） 图卷积网络（GCN） hz Outpu concat/avg • ReLU -0. dis aiis hia Fne 图卷积网络（GCN） 图注意力网络（GAT） Kipf. Thomas N and Welling. Max Petar Velitkovit, cutem Cucvdt Ararta Csarov. Adrian Romere Peto Ls and Yoshua Semi-Supervised Classification with Graph Convolutional Networks Bengio ICLR 2017 Graph Attention Networks. ICLR 2018"
       },
       {
         "chunk_id": "循环神经网络-学生分发版-终版2026::cell-16",
@@ -21798,12 +21865,13 @@
   },
   "Value": {
     "term": "Value",
-    "total_count": 74,
+    "total_count": 75,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "图学习课件_第一部分_20260602.pptx",
       "图学习课件_第二部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx",
       "多层感知机2-课堂练习-终版2026.ipynb",
       "多层感知机2-课堂练习答案-终版2026.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
@@ -21951,6 +22019,16 @@
         "title": "从序列建模瓶颈到 Transformer",
         "count": 1,
         "summary": "从序列建模瓶颈到 Transformer Attention Is All You Need！ RNN-Attention模型的问题： • 顺序计算：必须处理完前一个时间步才能处理 后一个，训练速度较慢 • 信息长距离依赖：Attention 可让 Decoder 回看源句信息，但序列内部的信息仍主要依赖 RNN 逐步传递，长距离关系建模效率较低。 Ouputs 自注意力机制： teed rkgte Transformer架构： 3374093 • Query （Q）：用于发起查询，寻找相关性。 • Encoder：多头自注意力层+前馈神经网络+残差连 • Key （IO：用于响应查询，表明自身特征以供匹配。 接与层归一化 • Value （V）：用于提供信息，一旦匹配成功，其信息 • Decoder：带掩码的多头自注意力层＋交叉注意力 就会被更多地采纳。 层+前馈网络＋残差连接与层归一化 11"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-58",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 58,
+        "title": "Variational Auto-encoder （VAE）",
+        "count": 1,
+        "summary": "Variational Auto-encoder （VAE） Smile （discrete value） Smile （probability distribution） •"
       },
       {
         "chunk_id": "多层感知机2-课堂练习-终版2026::cell-5",
@@ -23947,9 +24025,10 @@
   },
   "图学习": {
     "term": "图学习",
-    "total_count": 18,
+    "total_count": 19,
     "files": [
-      "图学习课件_第一部分_20260602.pptx"
+      "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx"
     ],
     "hits": [
       {
@@ -24061,6 +24140,16 @@
         "title": "图学习课件第一部分，第 66 页",
         "count": 2,
         "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-14",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 14,
+        "title": "学习资料",
+        "count": 1,
+        "summary": "学习资料 • 斯坦福CS224W课程：http://cs224w.stanford.edu • 图学习库 PGL:https://github.com/PaddlePaddle/PGL 宝藏可视化期刊：https://distill.pub ACS Appl.Mater. Interfaces 2023, 15, 16, 20520-20530 Computational Materials Science, 2023, 230: 112461. A Semi-supervised Graph Altentive Network for Financial Fraud Detection Point-GNN: Graph Neural Network for 3D Object Detection in a Point Cloud Word2vec: Distributed Representations of Words and Phrases and their Compositionality node2vec: Scalable Feature Learning for Networks SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）"
       }
     ],
     "related": [
@@ -24076,9 +24165,10 @@
   },
   "图神经网络": {
     "term": "图神经网络",
-    "total_count": 1,
+    "total_count": 2,
     "files": [
-      "图学习课件_第一部分_20260602.pptx"
+      "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx"
     ],
     "hits": [
       {
@@ -24090,6 +24180,16 @@
         "title": "5 图神经网络（GNN）",
         "count": 1,
         "summary": "5 图神经网络（GNN） MLP层 Layer N Layer N+1 graph in graph out 广 • Eaxn Graph Independent Layer update functionf=2： 节点，边和整体三者没有关联！"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-2",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 2,
+        "title": "）图神经网络（GNN）",
+        "count": 1,
+        "summary": "）图神经网络（GNN） MLP层 Layer N Layer N+1 gTopn in graph out 广 • Ents Graph Independent Layer update function f=： 节点，边和整体三者没有关联！"
       }
     ],
     "related": [
@@ -24099,14 +24199,16 @@
   },
   "节点": {
     "term": "节点",
-    "total_count": 57,
+    "total_count": 66,
     "files": [
       "卷积神经网络2-学生分发版-终版2026(1).ipynb",
       "卷积神经网络2-学生分发版-终版2026.ipynb",
       "图学习课件_第一部分_20260602.pptx",
       "图学习课件_第二部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx",
       "多层感知机1_学生分发版.ipynb",
-      "多层感知机1_学生分发版_副本.ipynb"
+      "多层感知机1_学生分发版_副本.ipynb",
+      "深度学习导学_20260609.md"
     ],
     "hits": [
       {
@@ -24430,6 +24532,76 @@
         "summary": "Kagome结构Co3SnlnS2研究背景调查案例 3. 磁输运：从巨大 AHE 到非单调响应再到抑制 3.1 Co,Sn,S：大本征 AHE 的参照系 Co,Sn,S，的 AHE 是理解 Co,SninS，的參瓶。Nature Communications 2018 研究显示， Co,Sn,S，的大反常在 我的Prompt： 尔效应主要是本征机制，即动量空间 Berry 曲率贡献；理论计算得到的反常霍尔电导与 Weyl 节点位置和磁矩 大小强相关。Ne 帮我详细调研一下Kagome结构 更具体地说，Co,Sn,S，的AHE 不只是“装留金属常见的霍尔信号变大”，而是 kagome 舵带、SOC、铁礎破缺 的Co3SnInS2的研究情况。着重 时间反演对称性共同产生的拓扑 Berry 曲事晚应。文献中还指出，Weyl 点、Fermi arc 和拓扑表通态已经被识 别，且 AHC 随磁矩减小而近似线性降低。wces 关注其磁输运和新奇量子性质的 3.2少量 In 播杂：碳化下降，但 AHC反而增强 知识，关注上述性能与 Co,Snwain.S，最反直觉的一点是：In挣杂一开始降低避化，却可以提高本征反常霍尔电导。PRB 2020时 x=0到x=1的单品研究发现，温化随×增大而降低，琴态从饺磁 Weyl 半金属走向非磁绝缘体；但本征 AHC Co3Sn2S2的对比。并分析其性 在 x20.15 附近出现最大情。作者将其归因于 Berry 曲率分布的演化，尤其是礎性拓扑 nodal-ring gap 对 AHC 能变化的内在机制。注意资料需 的..."
       },
       {
+        "chunk_id": "图神经网络课件_20260609::slide-1",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 1,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） AHT（ 公式的物理含义是什么 H（+1） A 第0节点表示 口 日100 0 0 ◎ 《"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-2",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 2,
+        "title": "）图神经网络（GNN）",
+        "count": 1,
+        "summary": "）图神经网络（GNN） MLP层 Layer N Layer N+1 gTopn in graph out 广 • Ents Graph Independent Layer update function f=： 节点，边和整体三者没有关联！"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-4",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 4,
+        "title": "9 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "9 图卷积网络（GCN） 叉又叉 区 区 ××× 囚• 凶凶 区 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017） AQ"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-5",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 5,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 。 A 邻接矩阵 1 1 1 0 1 1 1 1 0 D一 与度矩阵相关 0 0 1 1 1 0 0 1 0 0 0 - H（0每一层的节点表示 0 0 邻接矩阵 《"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-6",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 6,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 2,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASKRT CHKOTHERE 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-7",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 7,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-9",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network GCN算法全流程 H（+1） o（ - AD- H（W（） 获取的最终表示 FT（L） 作为最终节点表示 HL） Y"
+      },
+      {
         "chunk_id": "多层感知机1_学生分发版::cell-55",
         "file": "多层感知机1_学生分发版.ipynb",
         "kind": "ipynb",
@@ -24448,6 +24620,16 @@
         "title": "5. 动态计算图（Define-by-Run）",
         "count": 2,
         "summary": "### 核心概念清单 #### 1. 反向传播的核心目的 - [ ] 神经网络训练本质：找到使损失函数最小的权重 - [ ] 梯度指向损失函数上升最快的方向 - [ ] 沿梯度反方向更新权重（梯度下降） --- #### 2. 链式法则（Chain Rule） - [ ] 链式法则的数学表达 - [ ] 反向传播 = 多变量复合函数的链式法则在计算机程序中的应用 - [ ] 局部敏感度的概念 --- #### 3. 前向传播 vs 反向传播 | 阶段 | 方向 | 计算内容 | 目的 | |------|------|---------|------| | 前向传播 | 输入 → 输出 | 计算预测值和损失 | 得到损失值 | | 反向传播 | 输出 → 输入 | 计算梯度 | 得到参数更新方向 | 两阶段流程： 1. 前向传播：构建计算图，计算损失 2. 反向传播：沿计算图反向传播梯度 --- #### 4. 计算图（Computational Graph） - [ ] 计算图 的定义：描述数学运算的有向无环图（DAG） - [ ] 计算图的组成元素： - 节点：变量（蓝色框 = 需要梯度的参数） - 边：运算操作（灰色框） - 叶子节点：计算起点（绿色框） 注意：计算图只包含参与梯度计算的张量 --- #### 5. 动态计算图（Define-by-Run） - [ ] 动态计算图 的定义：每次前向传播时实时构建计算图 - [ ] PyTorch的动态计算图特点： - 每次前向传播可以不同 - 支持条件分支、循环等动态结构 - 内存效..."
+      },
+      {
+        "chunk_id": "深度学习导学_20260609::section-8",
+        "file": "深度学习导学_20260609.md",
+        "kind": "markdown",
+        "cell_index": null,
+        "slide_index": null,
+        "title": "7. 深度学习发展脉络",
+        "count": 1,
+        "summary": "## 7. 深度学习发展脉络 最后一段转向深度学习历史。Notebook 中出现了 Geoffrey Hinton、Yann LeCun、Yoshua Bengio、Jürgen Schmidhuber 等人物，以及深度学习发展的关键节点。"
       }
     ],
     "related": [
@@ -24456,14 +24638,14 @@
       "GCN",
       "边",
       "邻接矩阵",
-      "图学习",
+      "消息传递",
       "度矩阵",
       "节点分类"
     ]
   },
   "边": {
     "term": "边",
-    "total_count": 74,
+    "total_count": 81,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "卷积神经网络1-课堂练习-终版2026.ipynb",
@@ -24472,12 +24654,14 @@
       "卷积神经网络3-学生分发版-终版2026.ipynb",
       "图学习课件_第一部分_20260602.pptx",
       "图学习课件_第二部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx",
       "多层感知机1_学生分发版.ipynb",
       "多层感知机1_学生分发版_副本.ipynb",
       "多层感知机2-学生分发版-终版2026.ipynb",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
-      "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
+      "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
+      "深度学习导学_20260609.md"
     ],
     "hits": [
       {
@@ -24891,6 +25075,36 @@
         "summary": "Prompt工程的核心任务 374093 意图表达 输出引导 把需求、目标和期望转化为模型可理解的语言 控制模型输出的方向、格式与质量 • 清晰描述任务目标 • 指定输出结构（列表/表格/ JSON） • 提供必要背景信息 • 定义长度与详细程度 • 设定合适约束条件 • 设定语气、风格和专业程度 能力激发 风险控制 充分利用模型在预训练中获得的知识与能力 降低错误、偏见与不当内容的风险 23374083 • 用提示激活推理能力 • 减少“幻觉”和虚假信息 • 用示例引导特定模式 • 不确定时承认知识边界 • 通过角色设定调整行为方式 • 防止提示词注入等安全风险 83"
       },
       {
+        "chunk_id": "图神经网络课件_20260609::slide-2",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 2,
+        "title": "）图神经网络（GNN）",
+        "count": 1,
+        "summary": "）图神经网络（GNN） MLP层 Layer N Layer N+1 gTopn in graph out 广 • Ents Graph Independent Layer update function f=： 节点，边和整体三者没有关联！"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-6",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 6,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASKRT CHKOTHERE 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-8",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 8,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AHT D- AD- H（ • d越大，信息量越小，言越小 1 0号 13v3 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号 V3v4"
+      },
+      {
         "chunk_id": "多层感知机1_学生分发版::cell-55",
         "file": "多层感知机1_学生分发版.ipynb",
         "kind": "ipynb",
@@ -24999,6 +25213,26 @@
         "title": "四、BERT vs GPT 对比",
         "count": 3,
         "summary": "# ============================================================================ # BERT MLM 现场演示：用预训练模型玩\"填空游戏\" # ============================================================================ try: from transformers import pipeline HAS_TRANSFORMERS = True except ImportError: print(\"⚠️ 需要安装: pip install transformers\") HAS_TRANSFORMERS = False if HAS_TRANSFORMERS: print(\"=\" * 60) print(\"BERT MLM 演示：掩码语言模型\") print(\"=\" * 60) print(\" BERT 的预训练任务就是'填空'：\") print(\" 输入: 'The cat sat on the [MASK].'\") print(\" BERT 要猜: [MASK] 是什么词？\") print(\" 同时看左边'The cat sat on the'和右边的标点\") print(\" → 猜出 'mat'、'floor'、'chair' 等 \") # 加载英文 BERT 的 fill-mask pipeline（英文更适合演示一词多义） try: unmasker = pipeline(\"fi..."
+      },
+      {
+        "chunk_id": "深度学习导学_20260609::section-6",
+        "file": "深度学习导学_20260609.md",
+        "kind": "markdown",
+        "cell_index": null,
+        "slide_index": null,
+        "title": "5. ADALINE 与线性/非线性边界",
+        "count": 3,
+        "summary": "## 5. ADALINE 与线性/非线性边界 Notebook 继续介绍 ADALINE（Adaptive Linear Neuron）。它和感知机相近，但训练目标更偏向连续误差最小化，便于引出损失函数和梯度更新。 讲义中用二维图对比线性边界和非线性边界，说明为什么多层网络或非线性变换是必要的。"
+      },
+      {
+        "chunk_id": "深度学习导学_20260609::section-9",
+        "file": "深度学习导学_20260609.md",
+        "kind": "markdown",
+        "cell_index": null,
+        "slide_index": null,
+        "title": "8. 课程小结",
+        "count": 1,
+        "summary": "## 8. 课程小结 本段导学的主线可以整理为： 1. 从生物神经元类比到 TLU； 2. 用 TLU 表示基本布尔逻辑； 3. 用多层组合解决单层阈值单元不能表达的问题； 4. 从感知机过渡到 ADALINE 和学习规则； 5. 用线性/非线性边界说明深层模型的必要性； 6. 回顾深度学习的发展与代表人物。"
       }
     ],
     "related": [
@@ -25014,9 +25248,10 @@
   },
   "邻接矩阵": {
     "term": "邻接矩阵",
-    "total_count": 9,
+    "total_count": 11,
     "files": [
-      "图学习课件_第一部分_20260602.pptx"
+      "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx"
     ],
     "hits": [
       {
@@ -25078,24 +25313,35 @@
         "title": "图学习课件第一部分，第 66 页",
         "count": 1,
         "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-5",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 5,
+        "title": "图卷积网络（GCN）",
+        "count": 2,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 。 A 邻接矩阵 1 1 1 0 1 1 1 1 0 D一 与度矩阵相关 0 0 1 1 1 0 0 1 0 0 0 - H（0每一层的节点表示 0 0 邻接矩阵 《"
       }
     ],
     "related": [
       "节点",
       "度矩阵",
-      "边",
       "卷积",
       "图卷积",
       "GCN",
+      "边",
       "图学习",
       "拉普拉斯矩阵"
     ]
   },
   "度矩阵": {
     "term": "度矩阵",
-    "total_count": 5,
+    "total_count": 6,
     "files": [
-      "图学习课件_第一部分_20260602.pptx"
+      "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx"
     ],
     "hits": [
       {
@@ -25147,6 +25393,16 @@
         "title": "图学习课件第一部分，第 66 页",
         "count": 1,
         "summary": "图学习课件第一部分，第 66 页。复习重点围绕图数据的基本概念、节点、边、邻接矩阵、度矩阵、拉普拉斯矩阵、图任务类型和图学习算法概述。"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-5",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 5,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 。 A 邻接矩阵 1 1 1 0 1 1 1 1 0 D一 与度矩阵相关 0 0 1 1 1 0 0 1 0 0 0 - H（0每一层的节点表示 0 0 邻接矩阵 《"
       }
     ],
     "related": [
@@ -25198,9 +25454,10 @@
   },
   "图卷积": {
     "term": "图卷积",
-    "total_count": 21,
+    "total_count": 33,
     "files": [
-      "图学习课件_第一部分_20260602.pptx"
+      "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx"
     ],
     "hits": [
       {
@@ -25352,6 +25609,86 @@
         "title": "图卷积网络（GCN）",
         "count": 1,
         "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AH（L D-号AD-号H（0 d越大，信息量越小，言越小’ 1 0号 V3vS 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-1",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 1,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） AHT（ 公式的物理含义是什么 H（+1） A 第0节点表示 口 日100 0 0 ◎ 《"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-4",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 4,
+        "title": "9 图卷积网络（GCN）",
+        "count": 2,
+        "summary": "9 图卷积网络（GCN） 叉又叉 区 区 ××× 囚• 凶凶 区 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017） AQ"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-5",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 5,
+        "title": "图卷积网络（GCN）",
+        "count": 3,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 。 A 邻接矩阵 1 1 1 0 1 1 1 1 0 D一 与度矩阵相关 0 0 1 1 1 0 0 1 0 0 0 - H（0每一层的节点表示 0 0 邻接矩阵 《"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-6",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 6,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASKRT CHKOTHERE 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-7",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 7,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-8",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 8,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AHT D- AD- H（ • d越大，信息量越小，言越小 1 0号 13v3 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号 V3v4"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-9",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network GCN算法全流程 H（+1） o（ - AD- H（W（） 获取的最终表示 FT（L） 作为最终节点表示 HL） Y"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-10",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 10,
+        "title": "） 图卷积网络（GCN）",
+        "count": 2,
+        "summary": "） 图卷积网络（GCN） hz Outpu concat/avg • ReLU -0. dis aiis hia Fne 图卷积网络（GCN） 图注意力网络（GAT） Kipf. Thomas N and Welling. Max Petar Velitkovit, cutem Cucvdt Ararta Csarov. Adrian Romere Peto Ls and Yoshua Semi-Supervised Classification with Graph Convolutional Networks Bengio ICLR 2017 Graph Attention Networks. ICLR 2018"
       }
     ],
     "related": [
@@ -25362,14 +25699,15 @@
       "邻接矩阵",
       "度矩阵",
       "聚合",
-      "图学习"
+      "节点分类"
     ]
   },
   "GCN": {
     "term": "GCN",
-    "total_count": 14,
+    "total_count": 28,
     "files": [
-      "图学习课件_第一部分_20260602.pptx"
+      "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx"
     ],
     "hits": [
       {
@@ -25511,6 +25849,106 @@
         "title": "图卷积网络（GCN）",
         "count": 1,
         "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AH（L D-号AD-号H（0 d越大，信息量越小，言越小’ 1 0号 V3vS 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-1",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 1,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） AHT（ 公式的物理含义是什么 H（+1） A 第0节点表示 口 日100 0 0 ◎ 《"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-4",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 4,
+        "title": "9 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "9 图卷积网络（GCN） 叉又叉 区 区 ××× 囚• 凶凶 区 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017） AQ"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-5",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 5,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 图卷积网络的计算公式 红框 是图卷积网络的核心公式 。 A 邻接矩阵 1 1 1 0 1 1 1 1 0 D一 与度矩阵相关 0 0 1 1 1 0 0 1 0 0 0 - H（0每一层的节点表示 0 0 邻接矩阵 《"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-6",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 6,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASKRT CHKOTHERE 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-7",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 7,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-8",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 8,
+        "title": "图卷积网络（GCN）",
+        "count": 1,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network 给边加权 AHT D- AD- H（ • d越大，信息量越小，言越小 1 0号 13v3 0号 1 1号 V3v3 1号 0号 0号 2号 1 2号 V3v4"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-9",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 9,
+        "title": "图卷积网络（GCN）",
+        "count": 2,
+        "summary": "图卷积网络（GCN） Graph Convolutional Network GCN算法全流程 H（+1） o（ - AD- H（W（） 获取的最终表示 FT（L） 作为最终节点表示 HL） Y"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-10",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 10,
+        "title": "） 图卷积网络（GCN）",
+        "count": 2,
+        "summary": "） 图卷积网络（GCN） hz Outpu concat/avg • ReLU -0. dis aiis hia Fne 图卷积网络（GCN） 图注意力网络（GAT） Kipf. Thomas N and Welling. Max Petar Velitkovit, cutem Cucvdt Ararta Csarov. Adrian Romere Peto Ls and Yoshua Semi-Supervised Classification with Graph Convolutional Networks Bengio ICLR 2017 Graph Attention Networks. ICLR 2018"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-11",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "） 信息传递",
+        "count": 2,
+        "summary": "） 信息传递 1 0号 GCN. GAT都是基于邻居聚合的模型 1 V3v3 1号 1 2号 称为 Spatial（空间）GNN GCN 大部分的Spatial GNN都可以用 J（e. ） 0号 Message Passing实现 • 1（••） 1号 J（ ） 2号 • 消息的发送 GAT • 消息的接收"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-19",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 19,
+        "title": "/ Generative Adversarial Nets （GAN）",
+        "count": 2,
+        "summary": "/ Generative Adversarial Nets （GAN） Generative Adversarial Nets Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley， Sherjil Ozair, Aaron Courville, Yoshua Bengios Dipartement d'informatique et de recherche operationnelle Universile de Montrfal Montreal. QC H3C317 Abstract We propose a new framework for estimating gencrative models via an adversar- that captures the data distribution, and a discriminative model D that estimates ial process, in which we simuluaneously train two models: a gcnerative model G ing procedure for G is to maximize the probability of D making a mistake. This the probability that a sample camc from the training data rath..."
       }
     ],
     "related": [
@@ -25526,10 +25964,11 @@
   },
   "GAT": {
     "term": "GAT",
-    "total_count": 20,
+    "total_count": 26,
     "files": [
       "卷积神经网络1-学生分发版-终版2026.ipynb",
       "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx",
       "循环神经网络-学生分发版-终版2026.ipynb",
       "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb"
     ],
@@ -25595,6 +26034,56 @@
         "summary": "node2vec：整体框架 Biased Graph • Random ＋ Skip Gram Negative Walk Sampling Node Downstream Embeddings Task"
       },
       {
+        "chunk_id": "图神经网络课件_20260609::slide-10",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 10,
+        "title": "） 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "） 图卷积网络（GCN） hz Outpu concat/avg • ReLU -0. dis aiis hia Fne 图卷积网络（GCN） 图注意力网络（GAT） Kipf. Thomas N and Welling. Max Petar Velitkovit, cutem Cucvdt Ararta Csarov. Adrian Romere Peto Ls and Yoshua Semi-Supervised Classification with Graph Convolutional Networks Bengio ICLR 2017 Graph Attention Networks. ICLR 2018"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-11",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "） 信息传递",
+        "count": 2,
+        "summary": "） 信息传递 1 0号 GCN. GAT都是基于邻居聚合的模型 1 V3v3 1号 1 2号 称为 Spatial（空间）GNN GCN 大部分的Spatial GNN都可以用 J（e. ） 0号 Message Passing实现 • 1（••） 1号 J（ ） 2号 • 消息的发送 GAT • 消息的接收"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-19",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 19,
+        "title": "/ Generative Adversarial Nets （GAN）",
+        "count": 1,
+        "summary": "/ Generative Adversarial Nets （GAN） Generative Adversarial Nets Ian J. Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley， Sherjil Ozair, Aaron Courville, Yoshua Bengios Dipartement d'informatique et de recherche operationnelle Universile de Montrfal Montreal. QC H3C317 Abstract We propose a new framework for estimating gencrative models via an adversar- that captures the data distribution, and a discriminative model D that estimates ial process, in which we simuluaneously train two models: a gcnerative model G ing procedure for G is to maximize the probability of D making a mistake. This the probability that a sample camc from the training data rath..."
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-45",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 45,
+        "title": "训练过程",
+        "count": 1,
+        "summary": "训练过程 gata...0ata,tokdevice） batch_size = data.size（0） netb.zero_grad（） noise2 = torch.randn（batch_size, noise_size, device=device） netD.zero_gradC fake2 = net6（noise2） output = netD（fake2） output = netb（data） 0_6_z2 = output.meanC）.1tem（） D_x = output.meanC）.itemC） Label -get.Labei（batch.size， iabe Label = get_label （batch_size, lbel, 1） errD_real = criterion（output, LabeL） errG = criterion（output, LabeL） errG.backward（） noise1 = torch.randn（batch.size, noise_size, devlce=device） optinizer6.stepC） fakel = net6（noise1） output = netD（fake1） D.G_z1 = output.nean（）.item（） Label = get_label（batch_size, label: 0） errD_fake = criterion（output, Label） errD = errD_real + errD_fake..."
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-52",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 52,
+        "title": "材料领域的应用",
+        "count": 1,
+        "summary": "材料领域的应用 Generative adversarial networks and diffusion models in material discovery Michael Alverson， © *ac Sterling G. Baird，* Ryan Murdock.® （Enoch） Sin-Hang Ho.® Jeremy Johnson O° and Taylor D. Sparks The idea of materials discovery has excited and perplexed research scientists for centuries. Several different methods have been employed to find new types of materials, ranging from the arbitrary replacement of atoms in a crystal structure to advanced machine learning methods for predicting entirely new crystal structures. In this work, we pursue three primary objectives. （I） Introduce CrysTens, a crystal encoding that can be used in a wide variety of deep learning genera..."
+      },
+      {
         "chunk_id": "循环神经网络-学生分发版-终版2026::cell-38",
         "file": "循环神经网络-学生分发版-终版2026.ipynb",
         "kind": "ipynb",
@@ -25647,20 +26136,21 @@
     ],
     "related": [
       "Sigmoid",
+      "Attention",
+      "GCN",
       "激活函数",
       "损失函数",
       "BCEWithLogitsLoss",
       "CrossEntropyLoss",
-      "归一化",
-      "WeightedRandomSampler",
-      "类别不平衡"
+      "归一化"
     ]
   },
   "消息传递": {
     "term": "消息传递",
-    "total_count": 6,
+    "total_count": 12,
     "files": [
-      "图学习课件_第一部分_20260602.pptx"
+      "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx"
     ],
     "hits": [
       {
@@ -25702,6 +26192,46 @@
         "title": "5 图卷积网络（GCN）-消息传递",
         "count": 2,
         "summary": "5 图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 之 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-4",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 4,
+        "title": "9 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "9 图卷积网络（GCN） 叉又叉 区 区 ××× 囚• 凶凶 区 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017） AQ"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-6",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 6,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 2,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 发送Send 1.边上的源节点，往目标节点发送特征 0号 1号 ASKRT CHKOTHERE 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-7",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 7,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 2,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-12",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "信息传递",
+        "count": 1,
+        "summary": "信息传递 基于消息传递的 Graph Neural Network的通用公式 多层MLP 邻居消息发送 F可以是聚合函数 通常是Mean/Max/Sum"
       }
     ],
     "related": [
@@ -25709,16 +26239,17 @@
       "图卷积",
       "GCN",
       "节点",
+      "聚合",
       "节点分类",
-      "边",
-      "聚合"
+      "边"
     ]
   },
   "聚合": {
     "term": "聚合",
-    "total_count": 2,
+    "total_count": 5,
     "files": [
-      "图学习课件_第一部分_20260602.pptx"
+      "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx"
     ],
     "hits": [
       {
@@ -25740,21 +26271,53 @@
         "title": "图卷积网络（GCN）",
         "count": 1,
         "summary": "图卷积网络（GCN） AH （） 将邻居的特征接收、聚合 是否所有的人对自己的评价都是有用的？ You 如何衡量邻属的重要性度"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-7",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 7,
+        "title": "图卷积网络（GCN）-消息传递",
+        "count": 1,
+        "summary": "图卷积网络（GCN）-消息传递 消息传递 Message Passing 接收Recv 2. 目标节点对收到的特征进行聚合 0号 1号 0号 2号"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-11",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 11,
+        "title": "） 信息传递",
+        "count": 1,
+        "summary": "） 信息传递 1 0号 GCN. GAT都是基于邻居聚合的模型 1 V3v3 1号 1 2号 称为 Spatial（空间）GNN GCN 大部分的Spatial GNN都可以用 J（e. ） 0号 Message Passing实现 • 1（••） 1号 J（ ） 2号 • 消息的发送 GAT • 消息的接收"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-12",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 12,
+        "title": "信息传递",
+        "count": 1,
+        "summary": "信息传递 基于消息传递的 Graph Neural Network的通用公式 多层MLP 邻居消息发送 F可以是聚合函数 通常是Mean/Max/Sum"
       }
     ],
     "related": [
+      "GCN",
       "卷积",
       "图卷积",
-      "GCN",
+      "消息传递",
       "节点",
-      "消息传递"
+      "GAT"
     ]
   },
   "节点分类": {
     "term": "节点分类",
-    "total_count": 3,
+    "total_count": 4,
     "files": [
-      "图学习课件_第一部分_20260602.pptx"
+      "图学习课件_第一部分_20260602.pptx",
+      "图神经网络课件_20260609.pptx"
     ],
     "hits": [
       {
@@ -25786,16 +26349,26 @@
         "title": "5 图卷积网络（GCN）",
         "count": 1,
         "summary": "5 图卷积网络（GCN） ⑦又% 区 龱。区 龱 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 -⑧ 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017）"
+      },
+      {
+        "chunk_id": "图神经网络课件_20260609::slide-4",
+        "file": "图神经网络课件_20260609.pptx",
+        "kind": "pptx",
+        "cell_index": null,
+        "slide_index": 4,
+        "title": "9 图卷积网络（GCN）",
+        "count": 1,
+        "summary": "9 图卷积网络（GCN） 叉又叉 区 区 ××× 囚• 凶凶 区 如何从圈像卷积，类比到圈结构卷积 怎么用消息传递方式实现图卷积网络 怎么用多层图网络完成节点分类任务 SEMI-SUPERVISED CLASSIFICATION WITH GRAPH CONVOLUTIONAL NETWORKS （ICLR 2017） AQ"
       }
     ],
     "related": [
       "节点",
-      "图学习",
-      "图分类",
       "卷积",
       "图卷积",
       "GCN",
-      "消息传递"
+      "消息传递",
+      "图学习",
+      "图分类"
     ]
   },
   "图分类": {

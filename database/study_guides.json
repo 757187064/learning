@@ -66,6 +66,14 @@
       "chunk_count": 91
     },
     {
+      "title": "图神经网络课件_20260609",
+      "file": "图神经网络课件_20260609.pptx",
+      "kind": "pptx",
+      "href": "guides/图神经网络课件-20260609-考试复习讲义.md",
+      "chapter_count": 11,
+      "chunk_count": 71
+    },
+    {
       "title": "多层感知机1_学生分发版",
       "file": "多层感知机1_学生分发版.ipynb",
       "kind": "ipynb",
@@ -136,6 +144,14 @@
       "href": "guides/注意力机制及Transformer3-学生分发版-终版2026-3-考试复习讲义.md",
       "chapter_count": 4,
       "chunk_count": 22
+    },
+    {
+      "title": "深度学习导学_20260609",
+      "file": "深度学习导学_20260609.md",
+      "kind": "markdown",
+      "href": "guides/深度学习导学-20260609-考试复习讲义.md",
+      "chapter_count": 6,
+      "chunk_count": 9
     }
   ]
 }

@@ -90,11 +90,9 @@ function questionMarkdown(q, idx) {
   if (q.type === "mcq") {
     return `${idx}. ${q.stem}\n\n${q.options.map(o => `   ${o}`).join("\n")}`;
   }
-  if (q.type === "tf") {
-    return `${idx}. ${q.stem}\n\n   A. 正确\n   B. 错误`;
-  }
-  if (q.type === "fill") {
-    return `${idx}. ${q.stem} <span class="blank"></span>`;
+  if (q.type === "material") {
+    const subs = q.subquestions || q.questions || [];
+    return `${idx}. ${q.stem}\n\n材料：${q.material || ""}\n\n${subs.map((x, i) => `   ${i + 1}. ${x}`).join("\n")}\n\n答题区：\n\n\n`;
   }
   return `${idx}. ${q.stem}\n\n答题区：\n\n\n`;
 }
@@ -108,7 +106,7 @@ function exportQuizMarkdown(mode, part) {
   if (!state || !state.chosen.length) return;
   const modeName = mode === "beginner" ? "基础练习" : "标准组卷";
   const title = `${modeName}${state.topic ? "：" + state.topic : ""}`;
-  const labels = {mcq: "单选题", tf: "判断题", fill: "填空题", short: "简答题"};
+  const labels = {mcq: "单选题", short: "简答题", material: "资料题"};
   const lines = [
     printStyleBlock(),
     `# ${title}${part === "questions" ? "（题目版）" : "（答案解析版）"}`,
@@ -184,7 +182,7 @@ function runSearch(query) {
     <h2>${escapeHtml(fuzzy.term)}</h2>
     <p class="muted">出现 ${fuzzy.total_count} 次，分布在 ${fuzzy.files.length} 个课件文件中。</p>
     <div class="chips">${(fuzzy.related || []).map(r => `<button class="chip" data-term="${escapeHtml(r)}">${escapeHtml(r)}</button>`).join("")}</div>
-  ` : `<h2>搜索说明</h2><p class="muted">搜索会定位到课件原文片段、相关词条和来源位置。适合先查概念，再回到教材目录和导图复习。</p>`;
+  ` : `<h2>搜索说明</h2><p class="muted">搜索会定位到课件原文片段、相关词条和来源位置。适合先查概念，再回到教材目录和主题书库复习。</p>`;
   $("explainBox").querySelectorAll(".chip[data-term]").forEach(chip => chip.addEventListener("click", () => {
     $("searchInput").value = chip.dataset.term;
     runSearch(chip.dataset.term);
@@ -201,7 +199,6 @@ function renderOutline() {
           <h2>${escapeHtml(course.title)}</h2>
           <p class="muted">${escapeHtml(course.file)} · ${course.chapter_count} 个章节块 · ${course.chunk_count} 个片段</p>
         </div>
-        <button class="btn secondary" data-map="${escapeHtml(course.file)}">看导图</button>
       </div>
       ${course.chapters.map(ch => `
         <div class="chapter">
@@ -223,61 +220,6 @@ function renderOutline() {
       `).join("")}
     </section>
   `).join("");
-  $("outlineBody").querySelectorAll("button[data-map]").forEach(btn => btn.addEventListener("click", () => {
-    showView("mindmaps");
-    const card = document.querySelector(`[data-map-card="${CSS.escape(btn.dataset.map)}"]`);
-    if (card) card.scrollIntoView({behavior: "smooth", block: "start"});
-  }));
-}
-
-function renderMapTree(map) {
-  return `<div class="map-tree"><ul>${map.chapters.map(ch => `
-    <li><span class="map-node">${escapeHtml(ch.title)}</span>
-      <ul>${(ch.terms || []).slice(0, 16).map(t => `<li><span class="map-node term" data-term="${escapeHtml(t)}">${escapeHtml(t)}</span></li>`).join("")}</ul>
-    </li>
-  `).join("")}</ul></div>`;
-}
-
-function renderMindmaps() {
-  $("mindmapBody").innerHTML = DB.mindmaps.map(course => `
-    <article class="panel map-card" data-map-card="${escapeHtml(course.file)}">
-      <h3>${escapeHtml(course.title)}</h3>
-      <p class="muted">${escapeHtml(course.file)} · ${course.maps.length} 张蜘蛛网导图${course.maps.length > 1 ? "，已按章节拆分" : ""}</p>
-      ${course.maps.slice(0, 1).map(map => `
-        <div class="chapter">
-          <div class="result-title">
-            <strong>${escapeHtml(map.title)} <span class="badge">${map.node_count} 节点</span></strong>
-            <span class="map-actions">
-              <a class="btn secondary" href="${escapeHtml(map.svg)}" target="_blank">打开大图</a>
-              <a class="btn secondary" href="${escapeHtml(map.svg)}" download>下载 SVG</a>
-              <a class="btn secondary" href="${escapeHtml(map.markdown)}" download>下载大纲</a>
-            </span>
-          </div>
-          <div class="map-preview"><img src="${escapeHtml(map.svg)}" alt="${escapeHtml(map.title)} 思维导图"></div>
-          <div class="map-tree compact-tree">${renderMapTree(map)}</div>
-        </div>
-      `).join("")}
-      ${course.maps.length > 1 ? `
-        <details class="submaps">
-          <summary>展开章节小图和大纲下载（${course.maps.length - 1} 张）</summary>
-          ${course.maps.slice(1).map(map => `
-            <div class="submap-row">
-              <strong>${escapeHtml(map.title)}</strong>
-              <span class="map-actions">
-                <a href="${escapeHtml(map.svg)}" target="_blank">打开</a>
-                <a href="${escapeHtml(map.svg)}" download>下载 SVG</a>
-                <a href="${escapeHtml(map.markdown)}" download>下载大纲</a>
-              </span>
-            </div>
-          `).join("")}
-        </details>` : ""}
-    </article>
-  `).join("");
-  $("mindmapBody").querySelectorAll(".map-node.term").forEach(node => node.addEventListener("click", () => {
-    $("searchInput").value = node.dataset.term;
-    runSearch(node.dataset.term);
-    showView("search");
-  }));
 }
 
 function pickQuestions(bank, type, topic, count) {
@@ -290,9 +232,9 @@ function pickQuestions(bank, type, topic, count) {
 
 function generateQuiz(bank, mode, topic = "") {
   const spec = mode === "beginner"
-    ? [["mcq", 10], ["tf", 10], ["fill", 10], ["short", 3]]
-    : [["mcq", 20], ["fill", 10], ["short", 5]];
-  const labels = {mcq: "单选题", tf: "判断题", fill: "填空题", short: "简答题"};
+    ? [["mcq", 10], ["short", 4], ["material", 1]]
+    : [["mcq", 20], ["short", 6], ["material", 2]];
+  const labels = {mcq: "单选题", short: "简答题", material: "资料题"};
   const chosen = spec.flatMap(([type, count]) => pickQuestions(bank, type, topic, count));
   const title = mode === "beginner" ? "基础练习随机题" : "标准综合随机题";
   const targetTitle = mode === "beginner" ? $("beginnerTitle") : $("quizTitle");
@@ -327,11 +269,9 @@ function renderQuestion(q, idx) {
   if (q.type === "mcq") {
     return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="badge">${escapeHtml(q.difficulty)}</span></div><ul class="options">${q.options.map(o => `<li>${escapeHtml(o)}</li>`).join("")}</ul></div>`;
   }
-  if (q.type === "tf") {
-    return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="badge">${escapeHtml(q.difficulty)}</span></div><ul class="options"><li>A. 正确</li><li>B. 错误</li></ul></div>`;
-  }
-  if (q.type === "fill") {
-    return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="blank-answer"></span> <span class="badge">${escapeHtml(q.difficulty)}</span></div></div>`;
+  if (q.type === "material") {
+    const subs = q.subquestions || q.questions || [];
+    return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="badge">${escapeHtml(q.difficulty)}</span></div><p class="snippet"><strong>材料：</strong>${escapeHtml(q.material || "")}</p><ol>${subs.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ol><p class="muted">答题区：</p><p style="height:78px;border-bottom:1px solid var(--line)"></p></div>`;
   }
   return `<div class="q"><div class="q-stem">${idx}. ${escapeHtml(q.stem)} <span class="badge">${escapeHtml(q.difficulty)}</span></div><p class="muted">答题区：</p><p style="height:54px;border-bottom:1px solid var(--line)"></p></div>`;
 }
@@ -525,7 +465,6 @@ function init() {
   renderStats();
   renderTermCloud();
   renderOutline();
-  renderMindmaps();
   renderReview();
   runSearch("");
   generateBeginnerQuiz("", false);
