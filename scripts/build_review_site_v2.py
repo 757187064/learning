@@ -10,6 +10,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from textwrap import dedent
 
+from curated_quiz_bank import build_curated_quiz_banks, validate_quiz_bank
+
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "深度学习复习网站"
@@ -21,7 +23,7 @@ MINDMAP_OUT = SITE / "mindmaps"
 GUIDE_OUT = SITE / "guides"
 TOPIC_GUIDE_OUT = SITE / "topic_guides"
 TOC_IMAGE_OUT = SITE / "guide_toc_images"
-CACHE_VERSION = 7
+CACHE_VERSION = 8
 EXCLUDED_SOURCE_MD = {
     "深度学习期末复习_仅基于原始课件版.md",
     "深度学习期末复习_仅基于原始课件版.before_restore.md",
@@ -31,6 +33,8 @@ FINAL_REVIEW_SITE_MD = TOPIC_GUIDE_OUT / "深度学习期末复习-总复习资�
 
 
 KEY_TERMS = [
+    "TLU", "阈值逻辑单元", "逻辑门", "AND", "OR", "NOT", "XOR", "Constructive Synthesis",
+    "感知机", "ADALINE", "学习规则", "梯度更新",
     "梯度下降", "损失函数", "学习率", "Epoch", "Batch", "反向传播", "计算图", "自动微分",
     "Logistic", "Sigmoid", "Softmax", "交叉熵", "BCEWithLogitsLoss", "CrossEntropyLoss",
     "MLP", "多层感知机", "激活函数", "仿射变换", "卷积", "互相关", "卷积核", "步长", "填充",
@@ -256,6 +260,8 @@ def infer_course_family(title: str) -> str:
 def term_allowed(term, family, chapter_title=""):
     title = chapter_title or ""
     common = {
+        "TLU", "阈值逻辑单元", "逻辑门", "AND", "OR", "NOT", "XOR", "Constructive Synthesis",
+        "感知机", "ADALINE", "学习规则", "梯度更新",
         "梯度下降", "损失函数", "学习率", "Epoch", "Batch", "反向传播", "计算图", "自动微分",
         "Logistic", "Sigmoid", "Softmax", "交叉熵", "BCEWithLogitsLoss", "CrossEntropyLoss",
         "激活函数", "仿射变换", "归一化", "标准化", "Dropout", "BatchNorm", "梯度消失",
@@ -275,7 +281,7 @@ def term_allowed(term, family, chapter_title=""):
         return True
     if family == "transformer" and term in {"LSTM", "GRU"} and re.search(r"RNN|序列|Seq2Seq|过渡|瓶颈", title):
         return True
-    return family == "general"
+    return False
 
 
 def generic_row(term: str, evidence: str, family: str):
@@ -324,7 +330,11 @@ def extract_heading_terms(chunk):
     for value in values:
         clean = re.sub(r"第[一二三四五六七八九十\d]+\s*[章节]", "", value)
         for part in re.split(r"[：:、/|\-—\s]+", clean):
-            part = part.strip(" #（）()[]【】")
+            part = part.strip(" #（）()[]【】，,")
+            if re.fullmatch(r"\d+[.、]?", part):
+                continue
+            if part in {"Logic", "Unit", "Unit,", "Threshold", "根据", "录屏2026"}:
+                continue
             if 2 <= len(part) <= 18 and not part.isdigit():
                 terms.append(part)
     return terms
@@ -363,6 +373,10 @@ def terms_in(text: str):
     for term in KEY_TERMS:
         if term in {"GAT", "GCN", "GRU", "RNN", "LSTM", "MLP", "TCN"}:
             if re.search(rf"\b{term}\b", text, flags=re.I):
+                found.append(term)
+            continue
+        if term in {"AND", "OR", "NOT"}:
+            if re.search(rf"\b{term}\b", text) and re.search(r"(逻辑门|TLU|XOR|布尔|阈值逻辑)", text, flags=re.I):
                 found.append(term)
             continue
         if term == "Batch":
@@ -406,6 +420,14 @@ def load_cache():
         return {"version": CACHE_VERSION, "files": {}}
     cache.setdefault("files", {})
     return cache
+
+
+def include_source_markdown(path: Path) -> bool:
+    if path.name in EXCLUDED_SOURCE_MD:
+        return False
+    if path.stem.startswith("深度学习期末复习_仅基于原始课件版"):
+        return False
+    return True
 
 
 def extract_notebook(path: Path):
@@ -452,8 +474,75 @@ def extract_notebook(path: Path):
     return manifest, chunks
 
 
+def clean_markdown_source(path: Path, text: str) -> str:
+    if path.name != "深度学习导学_20260609.md":
+        return text
+    return dedent("""
+    # 深度学习导学
+
+    ## 课程主线
+
+    导学部分的作用是把深度学习课程从最早的人工神经元讲起，说明模型为什么需要“输入、权重、偏置、激活、学习规则”这些基本部件。复习时不要把它当成普通介绍页，而要把它看成神经元、感知机、MLP 和后续深层网络的起点。
+
+    ## 阈值逻辑单元（Threshold Logic Unit, TLU）
+
+    TLU 是最早的人工神经元模型之一。它先把多个输入做加权求和，再和阈值比较，最后输出 0 或 1。用一句话说，TLU 的思想是：输入证据足够强就激活，否则不激活。
+
+    数学形式可以写成：
+
+    $$
+    y = 
+    \\begin{cases}
+    1, & \\sum_i w_i x_i \\ge \\theta \\\\
+    0, & \\sum_i w_i x_i < \\theta
+    \\end{cases}
+    $$
+
+    这里 $x_i$ 是输入特征，$w_i$ 是每个输入的重要程度，$\\theta$ 是阈值。考试常考 TLU 和后续感知机的关系：它们都体现了“加权求和再判定输出”的思想。
+
+    ## 逻辑门：AND、OR、NOT
+
+    TLU 可以模拟简单逻辑门。AND 门要求所有关键输入都满足才输出 1；OR 门只要有一个输入满足就输出 1；NOT 门把输入取反。这部分的重点不是死背某组权重，而是理解权重和阈值如何共同决定决策边界。
+
+    AND、OR、NOT 都属于线性可分问题。也就是说，可以用一条直线或一个超平面把正类和负类分开。它们说明了早期神经元可以处理一部分逻辑判断，但也暴露出它的局限。
+
+    ## XOR 与 Constructive Synthesis
+
+    XOR 是导学里的关键分水岭。XOR 的输出规则是：两个输入不同则输出 1，相同则输出 0。它不能用单个线性决策边界分开，因此单个 TLU 或单层感知机无法直接解决 XOR。
+
+    Constructive Synthesis 的思想是把简单神经元组合起来，用多个中间单元构造更复杂的决策过程。它对应后面 MLP 的核心直觉：单层线性模型能力有限，多层结构通过隐藏层组合多个简单判断，可以表示更复杂的非线性关系。
+
+    ## 感知机
+
+    感知机把 TLU 的思想用于二分类学习：输入乘权重、加偏置、经过阶跃函数得到类别。它的训练目标是不断调整权重，让错误分类的样本逐渐被分到正确一侧。
+
+    感知机的常见更新可以理解为：如果样本被分错，就沿着能减少错误的方向调整参数。考试里常考两点：一是感知机只能保证在线性可分数据上收敛；二是它使用阶跃输出，不像后来的神经网络那样方便做梯度反向传播。
+
+    ## ADALINE
+
+    ADALINE 与感知机相近，但它更强调在激活前的线性输出上计算误差，并用梯度下降最小化均方误差。它把“学习”从简单的分类纠错推进到“定义损失函数，再按梯度更新参数”的训练框架。
+
+    ADALINE 的复习重点是：线性输出用于计算误差，阈值判定用于最终分类；这和感知机直接根据分类结果更新参数不同。它为后续反向传播、损失函数和优化器的学习铺垫了思路。
+
+    ## 学习规则与梯度更新
+
+    从导学到正式深度学习课程，核心变化是：模型不再靠人工指定规则，而是通过数据、损失函数和优化方法自动调整参数。训练的基本流程可以概括为：
+
+    1. 前向传播：输入经过模型得到预测。
+    2. 计算损失：比较预测和真实标签的差距。
+    3. 反向传播：计算每个参数对损失的影响。
+    4. 参数更新：用学习率控制更新幅度，让损失逐步下降。
+
+    这条主线会贯穿 MLP、CNN、RNN、Transformer 和图神经网络。考试遇到训练流程题时，先判断题目问的是前向计算、损失定义、梯度计算，还是参数更新。
+
+    ## 深度学习发展脉络
+
+    导学最后要建立的整体认识是：神经元解决简单线性判别，MLP 通过隐藏层解决非线性问题，CNN 利用空间结构处理图像，RNN 处理序列，Transformer 用注意力机制建模全局依赖，图神经网络把关系结构纳入学习。后续的大语言模型、生成式算法、PINN 和 AI for material science 都是在这些基础模型思想上发展出的应用方向。
+    """).strip()
+
+
 def extract_markdown(path: Path):
-    text = path.read_text(encoding="utf-8")
+    text = clean_markdown_source(path, path.read_text(encoding="utf-8"))
     lines = text.splitlines()
     headings = []
     for i, line in enumerate(lines, 1):
@@ -644,7 +733,7 @@ def extract_sources():
     files = sorted(
         list(ROOT.glob("*.ipynb"))
         + list(ROOT.glob("*.pptx"))
-        + [p for p in ROOT.glob("*.md") if p.name not in EXCLUDED_SOURCE_MD]
+        + [p for p in ROOT.glob("*.md") if include_source_markdown(p)]
     )
     new_cache = {"version": CACHE_VERSION, "files": {}}
     for path in files:
@@ -714,6 +803,8 @@ def choose_chapter(chunk):
     path = [p for p in chunk.get("heading_path", []) if p]
     if not path:
         return chunk.get("title") or chunk["file"]
+    if chunk.get("kind") == "markdown":
+        return path[-1]
     section_re = re.compile(r"(第\s*\d+\s*[章节]|第[一二三四五六七八九十]+[章节])")
     section_indices = [i for i, title in enumerate(path) if section_re.search(title)]
     if section_indices:
@@ -784,7 +875,10 @@ def build_course_outline(manifest, chunks, quiz_lookup=None):
                 candidate = current_chapter or Path(file_name).stem
             if course_chapter and re.match(r"^第\s*\d+\s*节|^第[一二三四五六七八九十]+节", candidate):
                 candidate = f"{course_chapter} / {candidate}"
-            if not is_structural_chapter(candidate) and current_chapter:
+            if chunk.get("kind") == "markdown":
+                chapter = candidate
+                current_chapter = chapter
+            elif not is_structural_chapter(candidate) and current_chapter:
                 chapter = current_chapter
             else:
                 chapter = candidate
@@ -1301,9 +1395,9 @@ def guide_term_story(row, idx, prev_term=None, next_term=None):
     lines = [
         f"### {idx}. 先讲 {term}",
         "",
-        f"先用最普通的话说，**{term}** 就是：{row['plain']}",
+        f"**{term}** 的核心含义：{row['plain']}",
         "",
-        f"它在这份课件里不是孤立出现的。你要把它理解成这一节用来解决问题的一块拼图：{row['exam']}",
+        f"它在课件中的考查位置：{row['exam']}",
         "",
     ]
     if prev_term or next_term:
@@ -1315,7 +1409,7 @@ def guide_term_story(row, idx, prev_term=None, next_term=None):
             "",
         ])
     lines.extend([
-        f"考试写到这里，最稳的一句话是：**{row['memory']}**",
+        f"考试作答时可以写成：**{row['memory']}**",
         "",
         f"这里最容易错的是：{row['pitfall']}",
         "",
@@ -1498,7 +1592,7 @@ def q_material(id_, topic, material, questions, answer, explanation, source, dif
         "id": id_,
         "type": "material",
         "topic": topic,
-        "stem": "阅读材料并回答问题。",
+        "stem": f"根据下面关于“{topic}”的场景材料回答问题。",
         "material": material,
         "subquestions": questions,
         "answer": answer,
@@ -1703,99 +1797,8 @@ def q_options(correct, wrongs):
 
 
 def make_exam_banks():
-    standard = []
-    beginner = []
-    material_templates = []
-    idx = 1
-    for item in EXAM_TOPIC_BLUEPRINTS:
-        repeat = 4 if item["tier"] == "重点" else 2
-        difficulty = "中" if item["tier"] == "重点" else "易"
-        for n in range(repeat):
-            wrong = item["wrong"][n % len(item["wrong"])]
-            standard.append(q_mc(
-                f"MC{idx:04d}",
-                item["topic"],
-                f"关于{item['topic']}，下列说法错误的是",
-                [
-                    f"A. {item['fact']}",
-                    f"B. 复习这一部分时，要说明它解决什么问题，并把它放回数据、模型结构、训练或输出流程中。",
-                    f"C. 答题时需要避开这个常见误区：{item['trap']}",
-                    f"D. {wrong}",
-                ],
-                "D",
-                f"D错误：{wrong}。A、B、C正确，其中A是课程主线，C提示了常见易错方向。",
-                item["source"],
-                difficulty,
-            ))
-            beginner.append(q_mc(
-                f"BMC{idx:04d}",
-                item["topic"],
-                f"复习{item['topic']}时，最应该先掌握的是哪一项？",
-                q_options(item["fact"], item["wrong"]),
-                "A",
-                f"A正确。基础阶段先抓主线：{item['fact']}",
-                item["source"],
-                "易",
-            ))
-            idx += 1
-        standard.append(q_short(
-            f"S{idx:04d}",
-            item["topic"],
-            item["short"],
-            item["answer"],
-            f"简答题要写出定义、作用、位置和易错点。{item['trap']}",
-            item["source"],
-            difficulty,
-        ))
-        beginner.append(q_short(
-            f"BS{idx:04d}",
-            item["topic"],
-            f"用自己的话解释{item['topic']}的核心作用。",
-            item["fact"],
-            "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
-            item["source"],
-            "易",
-        ))
-        material_templates.append(item)
-        idx += 1
-    for m, item in enumerate(material_templates, 1):
-        if item["key"] in {"cnn", "rnn", "transformer", "graph", "training", "mlp", "pinn", "materials"}:
-            material = (
-                f"某同学复习{item['topic']}时，只记住了名词，但没有把它放回课程流程。"
-                f"课件中的关键说法是：{item['fact']} 常见误区是：{item['trap']}"
-            )
-            questions = [
-                "指出材料中最核心的模型或训练思想。",
-                "写出一个最容易被选择题设置成错误选项的说法。",
-                "如果作为简答题，答案中至少应包含哪两个要点？",
-            ]
-            answer = (
-                f"核心思想：{item['fact']} "
-                f"易错说法：{item['wrong'][0]}。"
-                "简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。"
-            )
-            q = q_material(
-                f"M{m:04d}",
-                item["topic"],
-                material,
-                questions,
-                answer,
-                f"资料题不是背单词，要先读出材料所处环节，再把概念作用和误区对应起来。{item['trap']}",
-                item["source"],
-                "中" if item["tier"] == "重点" else "易",
-            )
-            standard.append(q)
-            beginner.append(q_material(
-                f"BM{m:04d}",
-                item["topic"],
-                material,
-                questions[:2],
-                answer,
-                "基础资料题只要求读懂材料主线和一个易错点。",
-                item["source"],
-                "易",
-            ))
-    return clean_quiz(standard), clean_quiz(beginner)
+    return build_curated_quiz_banks()
+
 
 
 def clean_quiz(data):
@@ -1813,107 +1816,8 @@ def clean_quiz(data):
 
 
 def extend_quiz_from_outline(standard, beginner, outline):
-    standard_limits = {"mlp": 34, "cnn": 42, "rnn": 24, "transformer": 30, "graph": 22, "general": 10}
-    beginner_limits = {"mlp": 18, "cnn": 22, "rnn": 14, "transformer": 16, "graph": 12, "general": 8}
-    used_terms = set()
-    counts = Counter()
-    idx = 1
-    material_idx = 1
-    for course in outline.get("courses", []):
-        family = course.get("family", "general")
-        limit = standard_limits.get(family, 10)
-        beginner_limit = beginner_limits.get(family, 8)
-        for chapter in course.get("chapters", []):
-            chapter_rows = []
-            for row in chapter.get("rows", []):
-                key = (family, row.get("term"))
-                if key in used_terms or counts[family] >= limit:
-                    continue
-                used_terms.add(key)
-                counts[family] += 1
-                chapter_rows.append(row)
-                standard.append(q_mc(
-                    f"OMC{idx:04d}",
-                    f"{course['title']} / {chapter['title']}",
-                    f"根据课件内容，关于{row['term']}的理解，下列说法错误的是",
-                    [
-                        f"A. {compact(row['plain'], 96)}",
-                        f"B. {compact(row['memory'], 96)}",
-                        f"C. {compact(row['exam'], 96)}",
-                        f"D. {narrative_bad_claim(row, family)}",
-                    ],
-                    "D",
-                    f"D错误：它把{row['term']}的作用或位置说反。A、B、C分别对应通俗解释、必记句和考试抓法。",
-                    course["file"],
-                    "中" if family in {"mlp", "cnn", "rnn", "transformer"} else "易",
-                ))
-                if counts[family] <= beginner_limit:
-                    beginner.append(q_mc(
-                        f"OBMC{idx:04d}",
-                        f"{course['title']} / {chapter['title']}",
-                        f"初学复习{row['term']}时，哪种说法最准确？",
-                        [
-                            f"A. {compact(row['plain'], 96)}",
-                            f"B. {narrative_bad_claim(row, family)}",
-                            f"C. {row['term']}只需要记名称，不需要结合模型或训练流程。",
-                            f"D. {row['term']}与本章其它知识点没有关系。",
-                        ],
-                        "A",
-                        f"A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：{compact(row['pitfall'], 100)}",
-                        course["file"],
-                        "易",
-                    ))
-                if idx % 2 == 0:
-                    standard.append(q_short(
-                        f"OS{idx:04d}",
-                        f"{course['title']} / {chapter['title']}",
-                        f"简述{row['term']}在本章中的作用，并写出一个容易混淆的点。",
-                        f"{row['term']}的作用：{compact(row['plain'], 170)} 易混点：{compact(row['pitfall'], 140)}",
-                        f"简答题不能只写定义，要补出它在课件中的位置和考试抓法：{compact(row['exam'], 120)}",
-                        course["file"],
-                        "中",
-                    ))
-                idx += 1
-            if len(chapter_rows) >= 2 and material_idx <= 36:
-                a, b = chapter_rows[0], chapter_rows[1]
-                material = (
-                    f"某同学复习“{chapter['title']}”时，把 {a['term']} 和 {b['term']} 都当成孤立名词背。"
-                    f"课件中 {a['term']} 的核心是：{compact(a['plain'], 100)}；"
-                    f"{b['term']} 的核心是：{compact(b['plain'], 100)}。"
-                )
-                questions = [
-                    f"分别说明 {a['term']} 和 {b['term']} 的作用。",
-                    "指出材料中两个知识点最容易被混淆的地方。",
-                    "如果出成简答题，答案中应该补充哪类考试抓法？",
-                ]
-                answer = (
-                    f"{a['term']}：{compact(a['plain'], 130)}；{b['term']}：{compact(b['plain'], 130)}。"
-                    f"易混点分别是：{compact(a['pitfall'], 90)}；{compact(b['pitfall'], 90)}。"
-                    "简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。"
-                )
-                standard.append(q_material(
-                    f"OM{material_idx:04d}",
-                    f"{course['title']} / {chapter['title']}",
-                    material,
-                    questions,
-                    answer,
-                    "资料题要先读材料定位知识点，再比较作用和易错点，不能只复述名词。",
-                    course["file"],
-                    "中",
-                ))
-                if material_idx <= 18:
-                    beginner.append(q_material(
-                        f"OBM{material_idx:04d}",
-                        f"{course['title']} / {chapter['title']}",
-                        material,
-                        questions[:2],
-                        answer,
-                        "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-                        course["file"],
-                        "易",
-                    ))
-                material_idx += 1
-    return clean_quiz(standard), clean_quiz(beginner)
+    return standard, beginner
+
 
 
 def fallback_review(outline):
@@ -3081,7 +2985,10 @@ def build_final_review_markdown(outline, manifest):
 
 
 def write_final_review_markdown(outline, manifest):
-    md = build_final_review_markdown(outline, manifest)
+    if FINAL_REVIEW_MD.exists() and len(FINAL_REVIEW_MD.read_text(encoding="utf-8")) > 60000:
+        md = FINAL_REVIEW_MD.read_text(encoding="utf-8")
+    else:
+        md = build_final_review_markdown(outline, manifest)
     FINAL_REVIEW_MD.write_text(md, encoding="utf-8")
     TOPIC_GUIDE_OUT.mkdir(parents=True, exist_ok=True)
     FINAL_REVIEW_SITE_MD.write_text(md, encoding="utf-8")
@@ -4224,6 +4131,8 @@ def main():
     terms = build_term_index(chunks)
     outline = build_course_outline(manifest, chunks, concept_lookup_from_quiz(standard_quiz))
     standard_quiz, beginner_quiz = extend_quiz_from_outline(standard_quiz, beginner_quiz, outline)
+    validate_quiz_bank(standard_quiz, "标准题库")
+    validate_quiz_bank(beginner_quiz, "基础题库")
     review = load_review_or_fallback(outline)
     guides = build_study_guides(outline)
     write_final_review_markdown(outline, manifest)

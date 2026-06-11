@@ -1,2560 +1,1227 @@
 [
   {
-    "id": "BMC0001",
+    "id": "BMCQ0001",
     "type": "mcq",
     "topic": "神经元与感知机",
-    "stem": "复习神经元与感知机时，最应该先掌握的是哪一项？",
+    "stem": "关于 TLU 与感知机的关系，下列说法正确的是",
     "options": [
-      "A. TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
-      "B. 单层感知机可以不加隐藏层直接表达任意 XOR 逻辑",
-      "C. 阈值逻辑单元不需要权重，输入只要相加即可完成所有分类",
-      "D. ADALINE 与感知机完全相同，训练时都只看二值阶跃输出"
+      "A. 二者都以加权求和为核心，感知机进一步把这种结构用于线性分类边界。",
+      "B. 单层感知机可以直接解决 XOR 的非线性可分问题。",
+      "C. ADALINE 和感知机训练时完全一样，都只使用阶跃后的二值输出。",
+      "D. TLU 不包含权重，只比较输入个数。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
+    "explanation": "A正确：TLU、感知机都围绕加权求和和阈值/偏置判断；XOR 需要多层或非线性结构。",
     "source": "深度学习导学_20260609.md",
     "difficulty": "易"
   },
   {
-    "id": "BMC0002",
+    "id": "BMCQ0002",
     "type": "mcq",
     "topic": "神经元与感知机",
-    "stem": "复习神经元与感知机时，最应该先掌握的是哪一项？",
+    "stem": "若二维平面中两类样本不能用一条直线分开，单层感知机通常会遇到什么问题？",
     "options": [
-      "A. TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
-      "B. 单层感知机可以不加隐藏层直接表达任意 XOR 逻辑",
-      "C. 阈值逻辑单元不需要权重，输入只要相加即可完成所有分类",
-      "D. ADALINE 与感知机完全相同，训练时都只看二值阶跃输出"
+      "A. 只要把学习率调大就一定能收敛到正确分类。",
+      "B. 模型表达能力不足，即使继续训练也无法表示非线性决策边界。",
+      "C. 只要增加 epoch，单层感知机就能自动变成多层网络。",
+      "D. 把偏置去掉后反而能表达任意非线性边界。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
+    "answer": "B",
+    "explanation": "B正确：单层感知机对应线性边界，训练不能弥补结构表达能力不足。",
     "source": "深度学习导学_20260609.md",
     "difficulty": "易"
   },
   {
-    "id": "BMC0003",
+    "id": "BMCQ0004",
     "type": "mcq",
-    "topic": "神经元与感知机",
-    "stem": "复习神经元与感知机时，最应该先掌握的是哪一项？",
+    "topic": "MLP 与激活函数",
+    "stem": "多层线性层中间不加激活函数时，下列判断正确的是",
     "options": [
-      "A. TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
-      "B. 单层感知机可以不加隐藏层直接表达任意 XOR 逻辑",
-      "C. 阈值逻辑单元不需要权重，输入只要相加即可完成所有分类",
-      "D. ADALINE 与感知机完全相同，训练时都只看二值阶跃输出"
+      "A. 线性层堆叠后会自动产生 ReLU 效果。",
+      "B. 层数越多就一定能表达 XOR。",
+      "C. 多层线性变换仍可合并为一个线性变换，表达能力不会变成非线性。",
+      "D. 不加激活函数时模型更容易表达复杂曲线边界。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0004",
-    "type": "mcq",
-    "topic": "神经元与感知机",
-    "stem": "复习神经元与感知机时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
-      "B. 单层感知机可以不加隐藏层直接表达任意 XOR 逻辑",
-      "C. 阈值逻辑单元不需要权重，输入只要相加即可完成所有分类",
-      "D. ADALINE 与感知机完全相同，训练时都只看二值阶跃输出"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "BS0005",
-    "type": "short",
-    "topic": "神经元与感知机",
-    "stem": "用自己的话解释神经元与感知机的核心作用。",
-    "answer": "TLU/感知机把输入加权求和后与阈值或偏置共同决定输出，本质是线性可分边界。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0006",
-    "type": "mcq",
-    "topic": "训练流程与自动微分",
-    "stem": "复习训练流程与自动微分时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. 训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
-      "B. 反向传播发生在优化器更新参数之后",
-      "C. 计算图只保存输入数据，不能用于自动求导",
-      "D. 训练时不需要清零梯度，PyTorch 会自动丢弃旧梯度"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0007",
-    "type": "mcq",
-    "topic": "训练流程与自动微分",
-    "stem": "复习训练流程与自动微分时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. 训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
-      "B. 反向传播发生在优化器更新参数之后",
-      "C. 计算图只保存输入数据，不能用于自动求导",
-      "D. 训练时不需要清零梯度，PyTorch 会自动丢弃旧梯度"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0008",
-    "type": "mcq",
-    "topic": "训练流程与自动微分",
-    "stem": "复习训练流程与自动微分时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. 训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
-      "B. 反向传播发生在优化器更新参数之后",
-      "C. 计算图只保存输入数据，不能用于自动求导",
-      "D. 训练时不需要清零梯度，PyTorch 会自动丢弃旧梯度"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0009",
-    "type": "mcq",
-    "topic": "训练流程与自动微分",
-    "stem": "复习训练流程与自动微分时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. 训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
-      "B. 反向传播发生在优化器更新参数之后",
-      "C. 计算图只保存输入数据，不能用于自动求导",
-      "D. 训练时不需要清零梯度，PyTorch 会自动丢弃旧梯度"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "BS0010",
-    "type": "short",
-    "topic": "训练流程与自动微分",
-    "stem": "用自己的话解释训练流程与自动微分的核心作用。",
-    "answer": "训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0011",
-    "type": "mcq",
-    "topic": "MLP 与分类损失",
-    "stem": "复习MLP 与分类损失时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
-      "B. 只要全连接层足够多，即使没有激活函数也能拟合任意非线性边界",
-      "C. CrossEntropyLoss 前必须先手动 Softmax",
-      "D. BCEWithLogitsLoss 的输入应该是 Sigmoid 后的概率"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
+    "answer": "C",
+    "explanation": "C正确：线性变换的复合仍是线性变换，激活函数负责引入非线性。",
     "source": "多层感知机2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0012",
+    "id": "BMCQ0005",
     "type": "mcq",
     "topic": "MLP 与分类损失",
-    "stem": "复习MLP 与分类损失时，最应该先掌握的是哪一项？",
+    "stem": "二分类模型最后一层输出一个 logit，训练时最稳妥的 PyTorch 损失通常是",
     "options": [
-      "A. MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
-      "B. 只要全连接层足够多，即使没有激活函数也能拟合任意非线性边界",
-      "C. CrossEntropyLoss 前必须先手动 Softmax",
-      "D. BCEWithLogitsLoss 的输入应该是 Sigmoid 后的概率"
+      "A. MSELoss，因为分类任务都要回归到 0.5。",
+      "B. NLLLoss，并且标签必须是 one-hot 浮点矩阵。",
+      "C. CrossEntropyLoss，并且输入必须先手动 Softmax。",
+      "D. BCEWithLogitsLoss，因为它把 Sigmoid 和 BCE 合并，数值更稳定。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
+    "answer": "D",
+    "explanation": "D正确：BCEWithLogitsLoss 适合二分类或多标签 logits；CrossEntropyLoss 多用于单标签多分类 logits。",
     "source": "多层感知机2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0013",
+    "id": "BMCQ0006",
     "type": "mcq",
     "topic": "MLP 与分类损失",
-    "stem": "复习MLP 与分类损失时，最应该先掌握的是哪一项？",
+    "stem": "多分类任务使用 CrossEntropyLoss 时，模型输出和标签通常应满足",
     "options": [
-      "A. MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
-      "B. 只要全连接层足够多，即使没有激活函数也能拟合任意非线性边界",
-      "C. CrossEntropyLoss 前必须先手动 Softmax",
-      "D. BCEWithLogitsLoss 的输入应该是 Sigmoid 后的概率"
+      "A. 输出是每类 logits，标签是类别编号，不需要先手动 Softmax。",
+      "B. 输出必须是 Sigmoid 后的独立概率，标签必须全为浮点数。",
+      "C. 输出必须先转 one-hot，标签必须是概率分布。",
+      "D. CrossEntropyLoss 只适用于二分类，不能处理多分类。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
+    "explanation": "A正确：CrossEntropyLoss 内部包含 LogSoftmax/NLLLoss 类计算，直接接收 logits。",
     "source": "多层感知机2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0014",
+    "id": "BMCQ0007",
     "type": "mcq",
-    "topic": "MLP 与分类损失",
-    "stem": "复习MLP 与分类损失时，最应该先掌握的是哪一项？",
+    "topic": "训练流程与自动微分",
+    "stem": "一个标准 PyTorch 训练 batch 的顺序最合理的是",
     "options": [
-      "A. MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
-      "B. 只要全连接层足够多，即使没有激活函数也能拟合任意非线性边界",
-      "C. CrossEntropyLoss 前必须先手动 Softmax",
-      "D. BCEWithLogitsLoss 的输入应该是 Sigmoid 后的概率"
+      "A. 前向传播、优化器更新、清零梯度、计算损失、反向传播。",
+      "B. 清零梯度、前向传播、计算损失、反向传播、优化器更新。",
+      "C. 计算损失、清零梯度、优化器更新、前向传播、反向传播。",
+      "D. 优化器更新、反向传播、前向传播、计算损失、清零梯度。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
-    "source": "多层感知机2-学生分发版-终版2026.ipynb",
+    "answer": "B",
+    "explanation": "B正确：旧梯度需要先清零，loss.backward() 计算梯度，optimizer.step() 才更新参数。",
+    "source": "多层感知机1_学生分发版.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BS0015",
-    "type": "short",
-    "topic": "MLP 与分类损失",
-    "stem": "用自己的话解释MLP 与分类损失的核心作用。",
-    "answer": "MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
-    "source": "多层感知机2-学生分发版-终版2026.ipynb",
+    "id": "BMCQ0008",
+    "type": "mcq",
+    "topic": "训练流程与自动微分",
+    "stem": "验证模型性能时通常使用 model.eval() 和 torch.no_grad()，主要目的是",
+    "options": [
+      "A. 让 BatchNorm 使用当前 batch 重新训练参数。",
+      "B. 让优化器继续更新参数。",
+      "C. 切换训练态层的行为并避免记录梯度，减少验证阶段干扰和开销。",
+      "D. 强制 Dropout 丢弃更多神经元。"
+    ],
+    "answer": "C",
+    "explanation": "C正确：eval 影响 Dropout/BatchNorm 等层行为，no_grad 避免构建反向图。",
+    "source": "多层感知机1_学生分发版.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0016",
+    "id": "BMCQ0011",
     "type": "mcq",
-    "topic": "CNN 卷积、池化与架构",
-    "stem": "复习CNN 卷积、池化与架构时，最应该先掌握的是哪一项？",
+    "topic": "张量与 Batch",
+    "stem": "关于 Batch、Epoch、Iteration 的关系，下列说法正确的是",
     "options": [
-      "A. CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
-      "B. CNN 为了保留图像结构必须把所有像素全连接到每个神经元",
-      "C. 卷积输出大小与卷积核大小、步长和填充无关",
-      "D. 池化层的主要作用是增加大量可学习参数"
+      "A. 一个 batch 就等于完整训练集。",
+      "B. 一个 iteration 必须包含所有 epoch。",
+      "C. Epoch 表示一次 optimizer.zero_grad()，与数据量无关。",
+      "D. 一个 epoch 表示完整遍历训练集一次，通常包含多个 batch/iteration。"
+    ],
+    "answer": "D",
+    "explanation": "D正确：Batch 是一批样本；iteration 通常对应一次 batch 更新；epoch 是全训练集一遍。",
+    "source": "多层感知机1_学生分发版.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0012",
+    "type": "mcq",
+    "topic": "优化器与学习率",
+    "stem": "学习率设置过大时，训练中常见现象是",
+    "options": [
+      "A. 损失震荡、难以收敛，甚至出现数值发散。",
+      "B. BatchNorm 会被自动关闭。",
+      "C. 收敛一定更快且泛化一定更好。",
+      "D. 反向传播将不再产生梯度。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
+    "explanation": "A正确：学习率控制更新步长，过大可能越过较优区域。",
+    "source": "多层感知机1_学生分发版.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0016",
+    "type": "mcq",
+    "topic": "CNN 基础",
+    "stem": "全连接网络直接处理图像时，最核心的缺陷是",
+    "options": [
+      "A. 它会自动产生平移不变性。",
+      "B. 展平会破坏空间结构，且参数量随像素数快速膨胀。",
+      "C. 它无法接收浮点数输入。",
+      "D. 它一定比 CNN 参数更少。"
+    ],
+    "answer": "B",
+    "explanation": "B正确：CNN 出现的动机就是保留局部空间关系并通过参数共享减少参数。",
     "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0017",
+    "id": "BMCQ0017",
     "type": "mcq",
-    "topic": "CNN 卷积、池化与架构",
-    "stem": "复习CNN 卷积、池化与架构时，最应该先掌握的是哪一项？",
+    "topic": "CNN 卷积计算",
+    "stem": "输入尺寸为 10x10，卷积核 3x3，步长 1，无填充，输出空间尺寸是",
     "options": [
-      "A. CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
-      "B. CNN 为了保留图像结构必须把所有像素全连接到每个神经元",
-      "C. 卷积输出大小与卷积核大小、步长和填充无关",
-      "D. 池化层的主要作用是增加大量可学习参数"
+      "A. 7x7。",
+      "B. 12x12。",
+      "C. 8x8。",
+      "D. 10x10。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
+    "answer": "C",
+    "explanation": "C正确：输出边长为 (10 + 2*0 - 3) / 1 + 1 = 8。",
     "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0018",
+    "id": "BMCQ0018",
     "type": "mcq",
-    "topic": "CNN 卷积、池化与架构",
-    "stem": "复习CNN 卷积、池化与架构时，最应该先掌握的是哪一项？",
+    "topic": "CNN 卷积计算",
+    "stem": "若希望 5x5 卷积核、步长 1 时输出尺寸尽量与输入相同，通常需要",
     "options": [
-      "A. CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
-      "B. CNN 为了保留图像结构必须把所有像素全连接到每个神经元",
-      "C. 卷积输出大小与卷积核大小、步长和填充无关",
-      "D. 池化层的主要作用是增加大量可学习参数"
+      "A. 把 stride 改成 5。",
+      "B. 删除所有边界像素。",
+      "C. 把卷积核参数固定不训练。",
+      "D. 在边界做 padding，常见对称填充大小为 2。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
+    "answer": "D",
+    "explanation": "D正确：Same 卷积通过合适填充保持空间尺寸，5x5 核对应半径 2。",
     "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0019",
+    "id": "BMCQ0020",
     "type": "mcq",
-    "topic": "CNN 卷积、池化与架构",
-    "stem": "复习CNN 卷积、池化与架构时，最应该先掌握的是哪一项？",
+    "topic": "CNN 通道",
+    "stem": "RGB 图像输入 Conv2d 时，卷积核的输入通道数应与什么一致？",
     "options": [
-      "A. CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
-      "B. CNN 为了保留图像结构必须把所有像素全连接到每个神经元",
-      "C. 卷积输出大小与卷积核大小、步长和填充无关",
-      "D. 池化层的主要作用是增加大量可学习参数"
+      "A. 输入图像通道数，一般 RGB 为 3。",
+      "B. 训练 epoch 数。",
+      "C. 输出类别数。",
+      "D. batch size。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
+    "explanation": "A正确：Conv2d 的 in_channels 必须匹配输入张量的通道维。",
     "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BS0020",
-    "type": "short",
-    "topic": "CNN 卷积、池化与架构",
-    "stem": "用自己的话解释CNN 卷积、池化与架构的核心作用。",
-    "answer": "CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
+    "id": "BMCQ0021",
+    "type": "mcq",
+    "topic": "CNN 数据格式",
+    "stem": "PyTorch 中图像张量常用的维度顺序是",
+    "options": [
+      "A. CHWN，即 channel、height、width、batch。",
+      "B. NCHW，即 batch、channel、height、width。",
+      "C. HWNC，即 height、width、batch、channel。",
+      "D. NHWC 是 PyTorch 卷积层唯一接受的格式。"
+    ],
+    "answer": "B",
+    "explanation": "B正确：PyTorch Conv2d 默认使用 NCHW；不同框架可能使用不同格式。",
     "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0021",
+    "id": "BMCQ0022",
     "type": "mcq",
-    "topic": "CNN 训练技巧",
-    "stem": "复习CNN 训练技巧时，最应该先掌握的是哪一项？",
+    "topic": "CNN 池化",
+    "stem": "最大池化层的主要作用更接近于",
     "options": [
-      "A. BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
-      "B. Dropout 在推理阶段仍应随机丢弃神经元来保持训练一致",
-      "C. BatchNorm 推理时一定使用当前 batch 的均值方差",
-      "D. 梯度裁剪主要用于让梯度消失得更快"
+      "A. 增加大量可学习参数。",
+      "B. 把类别标签转换为 one-hot。",
+      "C. 保留局部显著响应、降低空间尺寸，并增强一定平移不变性。",
+      "D. 替代损失函数计算交叉熵。"
+    ],
+    "answer": "C",
+    "explanation": "C正确：池化通常没有可学习参数，属于降采样/汇聚操作。",
+    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0024",
+    "type": "mcq",
+    "topic": "CNN 架构",
+    "stem": "VGG 网络设计最典型的特点是",
+    "options": [
+      "A. 只依赖图邻接矩阵传播消息。",
+      "B. 使用复杂多分支 Inception 模块。",
+      "C. 完全不用卷积层，只用循环结构。",
+      "D. 大量堆叠 3x3 小卷积核构建更深网络。"
+    ],
+    "answer": "D",
+    "explanation": "D正确：VGG 的代表性设计是小卷积核、深层堆叠。",
+    "source": "卷积神经网络3-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0026",
+    "type": "mcq",
+    "topic": "CNN 架构",
+    "stem": "ResNet 中残差连接的主要作用是",
+    "options": [
+      "A. 提供跨层信息和梯度通路，缓解深层网络退化与训练困难。",
+      "B. 让所有层参数完全共享。",
+      "C. 把图像通道数强制改为 1。",
+      "D. 使模型只能学习线性分类边界。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
+    "explanation": "A正确：残差块学习 F(x)+x，有助于训练更深网络。",
+    "source": "卷积神经网络3-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0027",
+    "type": "mcq",
+    "topic": "CNN 训练技巧",
+    "stem": "BatchNorm 在训练和推理阶段的关键差异是",
+    "options": [
+      "A. 推理时随机丢弃神经元。",
+      "B. 训练时使用当前 batch 统计并更新累计统计，推理时通常使用累计均值方差。",
+      "C. 训练时完全不计算均值方差。",
+      "D. 推理时必须重新反向传播。"
+    ],
+    "answer": "B",
+    "explanation": "B正确：BatchNorm 的模式差异是训练/评估切换的重要考点。",
     "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0022",
+    "id": "BMCQ0028",
     "type": "mcq",
     "topic": "CNN 训练技巧",
-    "stem": "复习CNN 训练技巧时，最应该先掌握的是哪一项？",
+    "stem": "Dropout 的正确理解是",
     "options": [
-      "A. BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
-      "B. Dropout 在推理阶段仍应随机丢弃神经元来保持训练一致",
-      "C. BatchNorm 推理时一定使用当前 batch 的均值方差",
-      "D. 梯度裁剪主要用于让梯度消失得更快"
+      "A. 它会替代 optimizer.step()。",
+      "B. 推理时随机失活更多神经元。",
+      "C. 训练时随机失活部分神经元，推理时关闭随机失活。",
+      "D. 它的主要作用是扩大卷积核尺寸。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
+    "answer": "C",
+    "explanation": "C正确：Dropout 是正则化方法，训练和推理行为不同。",
     "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0023",
+    "id": "BMCQ0029",
     "type": "mcq",
-    "topic": "CNN 训练技巧",
-    "stem": "复习CNN 训练技巧时，最应该先掌握的是哪一项？",
+    "topic": "CNN 数据增强",
+    "stem": "图像数据增强的主要目的通常是",
     "options": [
-      "A. BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
-      "B. Dropout 在推理阶段仍应随机丢弃神经元来保持训练一致",
-      "C. BatchNorm 推理时一定使用当前 batch 的均值方差",
-      "D. 梯度裁剪主要用于让梯度消失得更快"
+      "A. 减少所有训练样本数量。",
+      "B. 保证训练准确率必然达到 100%。",
+      "C. 让验证集标签参与训练。",
+      "D. 让模型见到合理变化，提高泛化能力。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
+    "answer": "D",
+    "explanation": "D正确：随机裁剪、翻转、颜色扰动等增强有助于缓解过拟合。",
     "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0024",
+    "id": "BMCQ0032",
     "type": "mcq",
-    "topic": "CNN 训练技巧",
-    "stem": "复习CNN 训练技巧时，最应该先掌握的是哪一项？",
+    "topic": "RNN 基础",
+    "stem": "RNN 能处理序列数据的关键在于",
     "options": [
-      "A. BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
-      "B. Dropout 在推理阶段仍应随机丢弃神经元来保持训练一致",
-      "C. BatchNorm 推理时一定使用当前 batch 的均值方差",
-      "D. 梯度裁剪主要用于让梯度消失得更快"
+      "A. 隐藏状态在时间步之间传递，当前计算能利用过去信息。",
+      "B. 输出层不需要任何参数。",
+      "C. 每个时间步完全独立。",
+      "D. 只使用二维卷积核处理 token。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
-    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "BS0025",
-    "type": "short",
-    "topic": "CNN 训练技巧",
-    "stem": "用自己的话解释CNN 训练技巧的核心作用。",
-    "answer": "BatchNorm、Dropout、权重衰减、数据增强、学习率调度、早停用于处理训练不稳和过拟合。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
-    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0026",
-    "type": "mcq",
-    "topic": "RNN、GRU、LSTM",
-    "stem": "复习RNN、GRU、LSTM时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
-      "B. RNN 每个时间步完全独立，不需要隐藏状态",
-      "C. LSTM 没有门控结构，只是普通线性层堆叠",
-      "D. Padding 补出来的位置都是真实有效时间步，不需要 mask 或 packing"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
+    "explanation": "A正确：隐藏状态是 RNN 连接前后时间步的核心。",
     "source": "循环神经网络-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0027",
+    "id": "BMCQ0033",
     "type": "mcq",
-    "topic": "RNN、GRU、LSTM",
-    "stem": "复习RNN、GRU、LSTM时，最应该先掌握的是哪一项？",
+    "topic": "RNN 基础",
+    "stem": "普通 RNN 在长序列上常见的训练困难是",
     "options": [
-      "A. RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
-      "B. RNN 每个时间步完全独立，不需要隐藏状态",
-      "C. LSTM 没有门控结构，只是普通线性层堆叠",
-      "D. Padding 补出来的位置都是真实有效时间步，不需要 mask 或 packing"
+      "A. 不能使用任何损失函数。",
+      "B. 梯度消失或梯度爆炸，使较早时间步信息难以有效学习。",
+      "C. 每个时间步都会自动拥有无限记忆。",
+      "D. 无法接收离散 token。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
+    "answer": "B",
+    "explanation": "B正确：长时间反向传播会产生梯度连乘问题。",
     "source": "循环神经网络-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0028",
+    "id": "BMCQ0034",
     "type": "mcq",
-    "topic": "RNN、GRU、LSTM",
-    "stem": "复习RNN、GRU、LSTM时，最应该先掌握的是哪一项？",
+    "topic": "RNN GRU",
+    "stem": "GRU 中更新门的直观作用是",
     "options": [
-      "A. RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
-      "B. RNN 每个时间步完全独立，不需要隐藏状态",
-      "C. LSTM 没有门控结构，只是普通线性层堆叠",
-      "D. Padding 补出来的位置都是真实有效时间步，不需要 mask 或 packing"
+      "A. 控制卷积核是否翻转。",
+      "B. 决定 batch size 的大小。",
+      "C. 控制历史信息保留多少、新信息写入多少。",
+      "D. 替代词嵌入矩阵。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
+    "answer": "C",
+    "explanation": "C正确：GRU 用门控在保留旧状态和接受新输入之间折中。",
     "source": "循环神经网络-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0029",
+    "id": "BMCQ0035",
     "type": "mcq",
-    "topic": "RNN、GRU、LSTM",
-    "stem": "复习RNN、GRU、LSTM时，最应该先掌握的是哪一项？",
+    "topic": "RNN GRU",
+    "stem": "GRU 与 LSTM 的一个常见区别是",
     "options": [
-      "A. RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
-      "B. RNN 每个时间步完全独立，不需要隐藏状态",
-      "C. LSTM 没有门控结构，只是普通线性层堆叠",
-      "D. Padding 补出来的位置都是真实有效时间步，不需要 mask 或 packing"
+      "A. GRU 有输入门、遗忘门、输出门和细胞状态四套结构。",
+      "B. LSTM 没有门控。",
+      "C. GRU 只能处理图像，不能处理序列。",
+      "D. GRU 通常没有独立细胞状态，结构比 LSTM 更简洁。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
+    "answer": "D",
+    "explanation": "D正确：GRU 常见门是更新门、重置门；LSTM 有细胞状态和三类门。",
     "source": "循环神经网络-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BS0030",
-    "type": "short",
-    "topic": "RNN、GRU、LSTM",
-    "stem": "用自己的话解释RNN、GRU、LSTM的核心作用。",
-    "answer": "RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
+    "id": "BMCQ0038",
+    "type": "mcq",
+    "topic": "RNN 变长序列",
+    "stem": "处理变长序列组成 batch 时，padding 的问题是",
+    "options": [
+      "A. 补齐位置不是真实时间步，需要 mask、packing 或长度信息避免干扰。",
+      "B. padding 位置一定代表真实词。",
+      "C. padding 会自动提升少数类采样概率。",
+      "D. padding 只能用于 CNN，不能用于 RNN。"
+    ],
+    "answer": "A",
+    "explanation": "A正确：变长序列训练要区分真实 token 和补齐 token。",
     "source": "循环神经网络-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0031",
+    "id": "BMCQ0046",
     "type": "mcq",
-    "topic": "Attention 与 Transformer",
-    "stem": "复习Attention 与 Transformer时，最应该先掌握的是哪一项？",
+    "topic": "RNN 情感分类",
+    "stem": "IMDB 情感分类中，Embedding 层的作用通常是",
     "options": [
-      "A. 注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
-      "B. Value 用来和 Query 点积计算匹配分数，Key 不参与匹配",
-      "C. Transformer 不需要任何位置信息也能天然知道词序",
-      "D. Target Mask 的作用是屏蔽源序列 padding，而不是防止看未来"
+      "A. 直接输出最终正负标签。",
+      "B. 把离散词编号映射为可训练的稠密向量表示。",
+      "C. 删除序列顺序。",
+      "D. 把所有句子转换成图像像素。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
+    "answer": "B",
+    "explanation": "B正确：神经网络不能直接理解词编号大小，需要 embedding 表示语义和可学习特征。",
+    "source": "循环神经网络-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0047",
+    "type": "mcq",
+    "topic": "Attention 机制",
+    "stem": "缩放点积注意力的核心计算顺序是",
+    "options": [
+      "A. V 与 K 点积后直接作为标签。",
+      "B. Q、K、V 都不参与权重计算。",
+      "C. Q 与 K 点积得到分数，除以 sqrt(d_k)，Softmax 后对 V 加权求和。",
+      "D. 先池化图像再计算邻接矩阵。"
+    ],
+    "answer": "C",
+    "explanation": "C正确：Q/K 决定权重，V 提供被加权汇总的信息。",
     "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0032",
+    "id": "BMCQ0049",
     "type": "mcq",
-    "topic": "Attention 与 Transformer",
-    "stem": "复习Attention 与 Transformer时，最应该先掌握的是哪一项？",
+    "topic": "Attention 机制",
+    "stem": "Self-Attention 中 Q、K、V 的来源通常是",
     "options": [
-      "A. 注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
-      "B. Value 用来和 Query 点积计算匹配分数，Key 不参与匹配",
-      "C. Transformer 不需要任何位置信息也能天然知道词序",
-      "D. Target Mask 的作用是屏蔽源序列 padding，而不是防止看未来"
+      "A. 卷积层的三个池化输出。",
+      "B. 优化器保存的三个学习率。",
+      "C. 三个完全无关的数据集。",
+      "D. 同一输入序列经过不同线性变换得到。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
+    "answer": "D",
+    "explanation": "D正确：Self-Attention 是序列内部位置之间相互建模。",
     "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0033",
+    "id": "BMCQ0050",
     "type": "mcq",
-    "topic": "Attention 与 Transformer",
-    "stem": "复习Attention 与 Transformer时，最应该先掌握的是哪一项？",
+    "topic": "Transformer Mask",
+    "stem": "Target Mask 在自回归解码器中的作用是",
     "options": [
-      "A. 注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
-      "B. Value 用来和 Query 点积计算匹配分数，Key 不参与匹配",
-      "C. Transformer 不需要任何位置信息也能天然知道词序",
-      "D. Target Mask 的作用是屏蔽源序列 padding，而不是防止看未来"
+      "A. 遮住未来 token，防止当前位置看到还不该知道的答案。",
+      "B. 只用于屏蔽源序列中的 padding。",
+      "C. 让模型忽略所有历史 token。",
+      "D. 把注意力头数变成 1。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
+    "explanation": "A正确：目标序列生成必须保持因果性，不能偷看未来。",
     "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0034",
+    "id": "BMCQ0052",
     "type": "mcq",
-    "topic": "Attention 与 Transformer",
-    "stem": "复习Attention 与 Transformer时，最应该先掌握的是哪一项？",
+    "topic": "Transformer 位置编码",
+    "stem": "Transformer 需要位置编码的原因是",
     "options": [
-      "A. 注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
-      "B. Value 用来和 Query 点积计算匹配分数，Key 不参与匹配",
-      "C. Transformer 不需要任何位置信息也能天然知道词序",
-      "D. Target Mask 的作用是屏蔽源序列 padding，而不是防止看未来"
+      "A. Softmax 会自动产生词序。",
+      "B. 自注意力本身不含天然顺序信息，需要额外注入 token 位置。",
+      "C. RNN 已经提供隐藏状态，所以 Transformer 不需要输入。",
+      "D. 卷积核会自动记录每个词的绝对位置。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
+    "answer": "B",
+    "explanation": "B正确：没有位置编码，序列重排可能难以区分。",
     "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BS0035",
-    "type": "short",
-    "topic": "Attention 与 Transformer",
-    "stem": "用自己的话解释Attention 与 Transformer的核心作用。",
-    "answer": "注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
+    "id": "BMCQ0053",
+    "type": "mcq",
+    "topic": "Transformer 多头注意力",
+    "stem": "多头注意力的主要价值是",
+    "options": [
+      "A. 只为了减少所有参数到 0。",
+      "B. 用于替代所有残差连接。",
+      "C. 让模型在不同子空间并行关注不同关系，再拼接融合。",
+      "D. 把一个注意力头复制成相同输出，不增加表达角度。"
+    ],
+    "answer": "C",
+    "explanation": "C正确：不同头可学习不同类型的依赖关系。",
     "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0036",
+    "id": "BMCQ0054",
     "type": "mcq",
-    "topic": "大语言模型与 Prompt",
-    "stem": "复习大语言模型与 Prompt时，最应该先掌握的是哪一项？",
+    "topic": "Transformer 结构",
+    "stem": "Transformer 编码器层通常包含",
     "options": [
-      "A. 大语言模型以 Transformer 为核心，通过大规模预训练获得语言生成和理解能力，Prompt 用自然语言引导模型完成任务。",
-      "B. Prompt 只用于装饰输入文字，不影响模型输出方向",
-      "C. 大语言模型完全不依赖 Transformer 或注意力机制",
-      "D. MoE 的核心是让所有专家每次都完整参与计算"
+      "A. 卷积核翻转、池化、反卷积和图采样。",
+      "B. 遗忘门、输入门、输出门和细胞状态。",
+      "C. 判别器、生成器和对抗损失。",
+      "D. 多头自注意力、前馈网络、残差连接和归一化。"
+    ],
+    "answer": "D",
+    "explanation": "D正确：编码器不包含 LSTM 门结构，也不是 GAN。",
+    "source": "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0058",
+    "type": "mcq",
+    "topic": "Transformer RoPE",
+    "stem": "RoPE 属于哪类思想？",
+    "options": [
+      "A. 位置编码思想，通过旋转方式把位置信息注入表示。",
+      "B. 损失函数选择方法。",
+      "C. 卷积池化方法。",
+      "D. 优化器动量算法。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：大语言模型以 Transformer 为核心，通过大规模预训练获得语言生成和理解能力，Prompt 用自然语言引导模型完成任务。",
-    "source": "图学习课件_第二部分_20260602.pptx",
+    "explanation": "A正确：RoPE 是现代 Transformer 常见的位置表达方式。",
+    "source": "注意力机制及Transformer3-学生分发版-终版2026(3).ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BMC0037",
+    "id": "BMCQ0061",
     "type": "mcq",
-    "topic": "大语言模型与 Prompt",
-    "stem": "复习大语言模型与 Prompt时，最应该先掌握的是哪一项？",
+    "topic": "Transformer 代码配置",
+    "stem": "若 MultiHeadAttention 的 embed_dim=128、num_heads=8，则每个头的维度通常是",
     "options": [
-      "A. 大语言模型以 Transformer 为核心，通过大规模预训练获得语言生成和理解能力，Prompt 用自然语言引导模型完成任务。",
-      "B. Prompt 只用于装饰输入文字，不影响模型输出方向",
-      "C. 大语言模型完全不依赖 Transformer 或注意力机制",
-      "D. MoE 的核心是让所有专家每次都完整参与计算"
+      "A. 64。",
+      "B. 16。",
+      "C. 136。",
+      "D. 8。"
+    ],
+    "answer": "B",
+    "explanation": "B正确：每头维度通常为 embed_dim / num_heads = 128 / 8 = 16。",
+    "source": "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0062",
+    "type": "mcq",
+    "topic": "图学习基础",
+    "stem": "图学习中，邻接矩阵 A 通常表示",
+    "options": [
+      "A. 每个节点的类别标签。",
+      "B. 每个样本的 batch 编号。",
+      "C. 节点之间是否有边或边的权重。",
+      "D. 卷积核中每个参数的梯度。"
+    ],
+    "answer": "C",
+    "explanation": "C正确：邻接矩阵是图结构连接关系的矩阵表示。",
+    "source": "图学习课件_第一部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0063",
+    "type": "mcq",
+    "topic": "图学习基础",
+    "stem": "节点分类任务的预测对象是",
+    "options": [
+      "A. 整张图唯一的标签。",
+      "B. 两个节点之间是否连边。",
+      "C. 每个卷积核的大小。",
+      "D. 图中每个节点的类别或属性。"
+    ],
+    "answer": "D",
+    "explanation": "D正确：图任务要区分节点级、边级和图级输出。",
+    "source": "图学习课件_第一部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0067",
+    "type": "mcq",
+    "topic": "GNN 消息传递",
+    "stem": "GNN 消息传递的核心流程可以概括为",
+    "options": [
+      "A. 节点接收邻居消息，聚合后更新自身表示。",
+      "B. 每个节点只看自己，不接收任何边上的信息。",
+      "C. 先把图像展平，再做 CrossEntropyLoss。",
+      "D. 把所有邻接关系删除后再训练。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：大语言模型以 Transformer 为核心，通过大规模预训练获得语言生成和理解能力，Prompt 用自然语言引导模型完成任务。",
-    "source": "图学习课件_第二部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "BS0038",
-    "type": "short",
-    "topic": "大语言模型与 Prompt",
-    "stem": "用自己的话解释大语言模型与 Prompt的核心作用。",
-    "answer": "大语言模型以 Transformer 为核心，通过大规模预训练获得语言生成和理解能力，Prompt 用自然语言引导模型完成任务。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
-    "source": "图学习课件_第二部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0039",
-    "type": "mcq",
-    "topic": "生成式算法",
-    "stem": "复习生成式算法时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. 生成式算法关注学习数据分布并产生新样本，常见思想包括自回归生成、扩散式逐步去噪和表示空间生成。",
-      "B. 生成式算法的目标只是给已有样本贴标签",
-      "C. 自回归生成可以在生成当前 token 时直接使用未来 token",
-      "D. 扩散模型不需要学习从噪声恢复数据的过程"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：生成式算法关注学习数据分布并产生新样本，常见思想包括自回归生成、扩散式逐步去噪和表示空间生成。",
-    "source": "图学习课件_第二部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0040",
-    "type": "mcq",
-    "topic": "生成式算法",
-    "stem": "复习生成式算法时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. 生成式算法关注学习数据分布并产生新样本，常见思想包括自回归生成、扩散式逐步去噪和表示空间生成。",
-      "B. 生成式算法的目标只是给已有样本贴标签",
-      "C. 自回归生成可以在生成当前 token 时直接使用未来 token",
-      "D. 扩散模型不需要学习从噪声恢复数据的过程"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：生成式算法关注学习数据分布并产生新样本，常见思想包括自回归生成、扩散式逐步去噪和表示空间生成。",
-    "source": "图学习课件_第二部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "BS0041",
-    "type": "short",
-    "topic": "生成式算法",
-    "stem": "用自己的话解释生成式算法的核心作用。",
-    "answer": "生成式算法关注学习数据分布并产生新样本，常见思想包括自回归生成、扩散式逐步去噪和表示空间生成。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
-    "source": "图学习课件_第二部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0042",
-    "type": "mcq",
-    "topic": "图学习与图神经网络",
-    "stem": "复习图学习与图神经网络时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. 图神经网络在节点、边和邻接关系上做消息传递，通过邻居聚合更新节点表示。",
-      "B. 图学习只看节点自身特征，不需要边或邻接矩阵",
-      "C. GCN 的邻居聚合与图结构无关",
-      "D. GAT 和 GCN 完全一样，都不能区分不同邻居重要性"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：图神经网络在节点、边和邻接关系上做消息传递，通过邻居聚合更新节点表示。",
+    "explanation": "A正确：多数空间 GNN 都可用 send/aggregate/update 思路解释。",
     "source": "图神经网络课件_20260609.pptx",
     "difficulty": "易"
   },
   {
-    "id": "BMC0043",
+    "id": "BMCQ0068",
     "type": "mcq",
-    "topic": "图学习与图神经网络",
-    "stem": "复习图学习与图神经网络时，最应该先掌握的是哪一项？",
+    "topic": "GCN",
+    "stem": "GCN 中加入自环的目的通常是",
     "options": [
-      "A. 图神经网络在节点、边和邻接关系上做消息传递，通过邻居聚合更新节点表示。",
-      "B. 图学习只看节点自身特征，不需要边或邻接矩阵",
-      "C. GCN 的邻居聚合与图结构无关",
-      "D. GAT 和 GCN 完全一样，都不能区分不同邻居重要性"
+      "A. 把节点分类改成图像分类。",
+      "B. 让节点聚合邻居信息时也保留自身特征。",
+      "C. 让所有边权变为 0。",
+      "D. 删除度矩阵。"
+    ],
+    "answer": "B",
+    "explanation": "B正确：A+I 可以让节点自身也参与消息聚合。",
+    "source": "图神经网络课件_20260609.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0070",
+    "type": "mcq",
+    "topic": "GAT",
+    "stem": "GAT 相比普通 GCN 的一个核心差异是",
+    "options": [
+      "A. GAT 完全不使用邻居信息。",
+      "B. GAT 只能处理规则图像网格。",
+      "C. GAT 学习不同邻居的重要性权重，再进行加权聚合。",
+      "D. GAT 不包含任何可学习参数。"
+    ],
+    "answer": "C",
+    "explanation": "C正确：图注意力让模型区分邻居贡献，而不是固定平均。",
+    "source": "图神经网络课件_20260609.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0072",
+    "type": "mcq",
+    "topic": "图学习应用",
+    "stem": "金融欺诈检测使用图神经网络时，边通常可以表示",
+    "options": [
+      "A. Softmax 的类别概率总和。",
+      "B. 卷积核的宽度。",
+      "C. 训练 epoch 编号。",
+      "D. 账号之间的交易、关联或交互关系。"
+    ],
+    "answer": "D",
+    "explanation": "D正确：图学习应用的关键是把对象及其关系建模出来。",
+    "source": "图神经网络课件_20260609.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0073",
+    "type": "mcq",
+    "topic": "图学习应用",
+    "stem": "材料或分子建图时，节点和边较常见的含义是",
+    "options": [
+      "A. 节点表示原子，边表示化学键或空间邻近相互作用。",
+      "B. 节点表示卷积核，边表示 padding。",
+      "C. 节点表示 token 位置，边表示 Teacher Forcing。",
+      "D. 节点表示 batch，边表示学习率。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：图神经网络在节点、边和邻接关系上做消息传递，通过邻居聚合更新节点表示。",
+    "explanation": "A正确：分子/晶体结构天然适合用图表达局部关系。",
+    "source": "图学习课件_第二部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0074",
+    "type": "mcq",
+    "topic": "NLP 任务",
+    "stem": "词向量或 embedding 的作用是",
+    "options": [
+      "A. 把所有词替换为同一个编号。",
+      "B. 把离散词或 token 映射为可训练的连续向量表示。",
+      "C. 直接删除序列顺序和语义。",
+      "D. 只用于计算图像通道数。"
+    ],
+    "answer": "B",
+    "explanation": "B正确：神经网络需要连续向量输入，embedding 是 NLP 的基础表示。",
+    "source": "图学习课件_第二部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0075",
+    "type": "mcq",
+    "topic": "语言模型",
+    "stem": "自回归语言模型生成文本时，一般遵循",
+    "options": [
+      "A. 一次性读取未来所有答案后再生成当前 token。",
+      "B. 只用邻接矩阵预测图节点标签。",
+      "C. 根据已有 token 逐步预测下一个 token。",
+      "D. 完全不依赖上下文。"
+    ],
+    "answer": "C",
+    "explanation": "C正确：GPT 类模型典型目标是 next-token prediction。",
+    "source": "图学习课件_第二部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0076",
+    "type": "mcq",
+    "topic": "LLM Prompt",
+    "stem": "Prompt 在大语言模型中的作用更接近",
+    "options": [
+      "A. 把 Transformer 改成 CNN。",
+      "B. 永久修改模型参数。",
+      "C. 替代所有预训练数据。",
+      "D. 提供任务指令、上下文或示例，引导模型生成目标输出。"
+    ],
+    "answer": "D",
+    "explanation": "D正确：Prompt 不等于参数更新，但会明显影响模型输出方向。",
+    "source": "图学习课件_第二部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0078",
+    "type": "mcq",
+    "topic": "LLM 推理模型",
+    "stem": "DeepSeek R1 一类推理模型的复习重点更接近",
+    "options": [
+      "A. 理解其通过后训练/强化学习等方式增强复杂推理表现。",
+      "B. 背诵某个网页界面按钮。",
+      "C. 把图像像素直接当作邻接矩阵。",
+      "D. 认为它与 Transformer 和语言模型完全无关。"
+    ],
+    "answer": "A",
+    "explanation": "A正确：课程层面更可能考概念和演进脉络，而不是工程细节。",
+    "source": "图学习课件_第二部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0079",
+    "type": "mcq",
+    "topic": "生成式模型",
+    "stem": "判别模型与生成模型的核心区别是",
+    "options": [
+      "A. 生成模型只能做分类，不能产生样本。",
+      "B. 判别模型偏判断标签，生成模型偏学习数据分布并产生新样本。",
+      "C. 判别模型必须先从噪声生成图片。",
+      "D. 二者训练目标完全相同，没有区别。"
+    ],
+    "answer": "B",
+    "explanation": "B正确：生成式算法的关键词是数据分布、采样、生成过程。",
     "source": "图神经网络课件_20260609.pptx",
     "difficulty": "易"
   },
   {
-    "id": "BS0044",
-    "type": "short",
-    "topic": "图学习与图神经网络",
-    "stem": "用自己的话解释图学习与图神经网络的核心作用。",
-    "answer": "图神经网络在节点、边和邻接关系上做消息传递，通过邻居聚合更新节点表示。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
+    "id": "BMCQ0080",
+    "type": "mcq",
+    "topic": "GAN",
+    "stem": "GAN 的训练过程可以概括为",
+    "options": [
+      "A. 判别器的目标是让所有输入都判为真实。",
+      "B. 只有一个网络负责同时做所有任务。",
+      "C. 生成器试图生成逼真样本，判别器试图区分真实与生成样本，二者对抗优化。",
+      "D. 生成器输入必须是真实标签而不是噪声。"
+    ],
+    "answer": "C",
+    "explanation": "C正确：GAN 的核心是 generator 与 discriminator 的博弈。",
     "source": "图神经网络课件_20260609.pptx",
     "difficulty": "易"
   },
   {
-    "id": "BMC0045",
+    "id": "BMCQ0082",
+    "type": "mcq",
+    "topic": "Diffusion",
+    "stem": "扩散模型的直观流程是",
+    "options": [
+      "A. 先分类再删除所有噪声参数。",
+      "B. 只训练一个判别器判断真假。",
+      "C. 通过邻居聚合更新节点标签。",
+      "D. 前向逐步加噪，反向学习逐步去噪生成样本。"
+    ],
+    "answer": "D",
+    "explanation": "D正确：Diffusion 的关键词是加噪过程和反向去噪过程。",
+    "source": "图神经网络课件_20260609.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMCQ0084",
     "type": "mcq",
     "topic": "PINN",
-    "stem": "复习PINN时，最应该先掌握的是哪一项？",
+    "stem": "PINN 与普通监督神经网络相比，关键变化是",
     "options": [
-      "A. PINN 把物理方程约束加入神经网络训练，使模型不仅拟合数据，也尽量满足物理规律。",
-      "B. PINN 完全不需要物理方程，只要数据越多越好",
-      "C. PINN 的物理约束只在测试阶段检查，不参与训练损失",
-      "D. PINN 与普通 MLP 的差别只是网络层数更深"
+      "A. 把物理方程残差、边界条件或初始条件写进损失函数。",
+      "B. 只能用于文本生成。",
+      "C. 只把网络层数加深，不使用物理规律。",
+      "D. 训练时完全不需要损失函数。"
     ],
     "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：PINN 把物理方程约束加入神经网络训练，使模型不仅拟合数据，也尽量满足物理规律。",
+    "explanation": "A正确：PINN 的核心是 physics-informed loss，不是换一个激活函数。",
     "source": "图神经网络课件_20260609.pptx",
     "difficulty": "易"
   },
   {
-    "id": "BMC0046",
+    "id": "BMCQ0086",
     "type": "mcq",
-    "topic": "PINN",
-    "stem": "复习PINN时，最应该先掌握的是哪一项？",
+    "topic": "AI for material science",
+    "stem": "材料科学中使用 GNN 的自然原因是",
     "options": [
-      "A. PINN 把物理方程约束加入神经网络训练，使模型不仅拟合数据，也尽量满足物理规律。",
-      "B. PINN 完全不需要物理方程，只要数据越多越好",
-      "C. PINN 的物理约束只在测试阶段检查，不参与训练损失",
-      "D. PINN 与普通 MLP 的差别只是网络层数更深"
+      "A. 材料数据一定没有结构关系。",
+      "B. 原子、键、晶格邻近关系可以表示为节点、边和图结构。",
+      "C. GNN 只能处理社交网络，不能处理分子。",
+      "D. 材料性质预测只需要随机噪声。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：PINN 把物理方程约束加入神经网络训练，使模型不仅拟合数据，也尽量满足物理规律。",
+    "answer": "B",
+    "explanation": "B正确：材料结构和分子图天然适合图建模。",
     "source": "图神经网络课件_20260609.pptx",
     "difficulty": "易"
   },
   {
-    "id": "BS0047",
+    "id": "BSHORT0001",
     "type": "short",
-    "topic": "PINN",
-    "stem": "用自己的话解释PINN的核心作用。",
-    "answer": "PINN 把物理方程约束加入神经网络训练，使模型不仅拟合数据，也尽量满足物理规律。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
-    "source": "图神经网络课件_20260609.pptx",
+    "topic": "神经元与感知机",
+    "stem": "说明 TLU、感知机、ADALINE 的递进关系。",
+    "answer": "TLU 强调加权求和和阈值输出；感知机把这种结构用于线性分类，形成决策边界；ADALINE 在连续线性输出上计算误差，引出损失函数、梯度下降和参数更新。三者从逻辑判断逐步过渡到可训练模型。",
+    "explanation": "要写出递进关系，而不是三个孤立定义。",
+    "source": "深度学习导学_20260609.md",
     "difficulty": "易"
   },
   {
-    "id": "BMC0048",
-    "type": "mcq",
-    "topic": "AI for material science",
-    "stem": "复习AI for material science时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. 材料科学中的 AI 常把分子、晶体或结构关系表示为图，再用 GNN/PINN 等模型预测性质或辅助设计。",
-      "B. 材料科学应用中图结构没有意义，只需要普通表格特征",
-      "C. GNN 不能处理原子之间的连接关系",
-      "D. 材料性质预测不需要考虑结构或物理先验"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：材料科学中的 AI 常把分子、晶体或结构关系表示为图，再用 GNN/PINN 等模型预测性质或辅助设计。",
-    "source": "图神经网络课件_20260609.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "BMC0049",
-    "type": "mcq",
-    "topic": "AI for material science",
-    "stem": "复习AI for material science时，最应该先掌握的是哪一项？",
-    "options": [
-      "A. 材料科学中的 AI 常把分子、晶体或结构关系表示为图，再用 GNN/PINN 等模型预测性质或辅助设计。",
-      "B. 材料科学应用中图结构没有意义，只需要普通表格特征",
-      "C. GNN 不能处理原子之间的连接关系",
-      "D. 材料性质预测不需要考虑结构或物理先验"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓主线：材料科学中的 AI 常把分子、晶体或结构关系表示为图，再用 GNN/PINN 等模型预测性质或辅助设计。",
-    "source": "图神经网络课件_20260609.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "BS0050",
+    "id": "BSHORT0002",
     "type": "short",
-    "topic": "AI for material science",
-    "stem": "用自己的话解释AI for material science的核心作用。",
-    "answer": "材料科学中的 AI 常把分子、晶体或结构关系表示为图，再用 GNN/PINN 等模型预测性质或辅助设计。",
-    "explanation": "基础简答先把“它解决什么问题”说清楚，再补一个易错点即可。",
-    "source": "图神经网络课件_20260609.pptx",
+    "topic": "神经元与感知机",
+    "stem": "为什么单层感知机不能直接解决 XOR？",
+    "answer": "XOR 的正负样本在线性空间中不能用一条直线分开，而单层感知机只能表示线性决策边界。要解决 XOR，需要多层结构或非线性变换先构造中间特征。",
+    "explanation": "关键是线性可分性，不是训练次数不够。",
+    "source": "深度学习导学_20260609.md",
     "difficulty": "易"
   },
   {
-    "id": "BM0002",
-    "type": "material",
+    "id": "BSHORT0003",
+    "type": "short",
     "topic": "训练流程与自动微分",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习训练流程与自动微分时，只记住了名词，但没有把它放回课程流程。课件中的关键说法是：训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。 常见误区是：清零梯度、训练/评估模式、no_grad 与 scheduler 的位置经常被混淆。",
-    "subquestions": [
-      "指出材料中最核心的模型或训练思想。",
-      "写出一个最容易被选择题设置成错误选项的说法。"
-    ],
-    "answer": "核心思想：训练闭环是前向传播得到预测、损失函数衡量误差、反向传播计算梯度、优化器更新参数。 易错说法：反向传播发生在优化器更新参数之后。简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。",
-    "explanation": "基础资料题只要求读懂材料主线和一个易错点。",
+    "stem": "写出一个 batch 的 PyTorch 训练流程，并说明 backward 与 step 的区别。",
+    "answer": "流程为清零梯度、前向传播、计算损失、loss.backward()、optimizer.step()。backward 根据计算图计算并累积梯度；step 根据已有梯度更新参数。",
+    "explanation": "backward 不直接改参数，step 才改参数。",
     "source": "多层感知机1_学生分发版.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BM0003",
-    "type": "material",
+    "id": "BSHORT0004",
+    "type": "short",
+    "topic": "训练流程与自动微分",
+    "stem": "解释为什么验证阶段常用 model.eval() 与 torch.no_grad()。",
+    "answer": "model.eval() 切换 Dropout、BatchNorm 等层的评估行为；torch.no_grad() 不记录梯度，节省显存和计算，避免验证阶段影响训练图。",
+    "explanation": "二者作用不同，一个管层行为，一个管梯度记录。",
+    "source": "多层感知机1_学生分发版.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0005",
+    "type": "short",
+    "topic": "MLP 与激活函数",
+    "stem": "为什么 MLP 不能只堆叠线性层？",
+    "answer": "多个线性层复合后仍等价于一个线性变换，不能表达复杂非线性边界。激活函数引入非线性，使隐藏层能构造更复杂的特征表示。",
+    "explanation": "必须写出“线性复合仍线性”。",
+    "source": "多层感知机2-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0006",
+    "type": "short",
     "topic": "MLP 与分类损失",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习MLP 与分类损失时，只记住了名词，但没有把它放回课程流程。课件中的关键说法是：MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。 常见误区是：没有激活函数时，多层线性层仍可合并为一个线性变换；CrossEntropyLoss 应输入 logits。",
-    "subquestions": [
-      "指出材料中最核心的模型或训练思想。",
-      "写出一个最容易被选择题设置成错误选项的说法。"
-    ],
-    "answer": "核心思想：MLP 由仿射变换和非线性激活堆叠而成，分类任务要让输出层、标签格式和损失函数匹配。 易错说法：只要全连接层足够多，即使没有激活函数也能拟合任意非线性边界。简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。",
-    "explanation": "基础资料题只要求读懂材料主线和一个易错点。",
+    "stem": "比较 BCEWithLogitsLoss 与 CrossEntropyLoss 的适用场景。",
+    "answer": "BCEWithLogitsLoss 常用于二分类或多标签任务，输入每个标签的 logit；CrossEntropyLoss 常用于单标签多分类，输入每类 logits，标签通常是类别编号。",
+    "explanation": "不要在 BCEWithLogitsLoss 前手动 Sigmoid，也不要在 CrossEntropyLoss 前手动 Softmax。",
     "source": "多层感知机2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BM0004",
-    "type": "material",
-    "topic": "CNN 卷积、池化与架构",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习CNN 卷积、池化与架构时，只记住了名词，但没有把它放回课程流程。课件中的关键说法是：CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。 常见误区是：输出尺寸由输入、卷积核、步长、填充共同决定；CNN 实践里常做互相关而不是翻转卷积核。",
-    "subquestions": [
-      "指出材料中最核心的模型或训练思想。",
-      "写出一个最容易被选择题设置成错误选项的说法。"
-    ],
-    "answer": "核心思想：CNN 用局部连接、参数共享、卷积/互相关、池化和层级特征提取处理图像。 易错说法：CNN 为了保留图像结构必须把所有像素全连接到每个神经元。简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。",
-    "explanation": "基础资料题只要求读懂材料主线和一个易错点。",
+    "id": "BSHORT0009",
+    "type": "short",
+    "topic": "CNN 基础",
+    "stem": "为什么 CNN 比 MLP 更适合处理图像？",
+    "answer": "图像有局部空间结构，展平输入会破坏位置关系且参数量巨大。CNN 用局部连接保留邻域关系，用参数共享减少参数，用池化降低空间尺寸并增强一定平移不变性。",
+    "explanation": "答案要包含空间结构、局部连接、参数共享。",
     "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BM0006",
-    "type": "material",
-    "topic": "RNN、GRU、LSTM",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习RNN、GRU、LSTM时，只记住了名词，但没有把它放回课程流程。课件中的关键说法是：RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。 常见误区是：LSTM 有细胞状态和输入/遗忘/输出门；GRU 通常只有更新门和重置门，没有独立细胞状态。",
-    "subquestions": [
-      "指出材料中最核心的模型或训练思想。",
-      "写出一个最容易被选择题设置成错误选项的说法。"
-    ],
-    "answer": "核心思想：RNN 通过隐藏状态沿时间传递信息，GRU/LSTM 用门控结构缓解长序列依赖和梯度问题。 易错说法：RNN 每个时间步完全独立，不需要隐藏状态。简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。",
-    "explanation": "基础资料题只要求读懂材料主线和一个易错点。",
+    "id": "BSHORT0010",
+    "type": "short",
+    "topic": "CNN 卷积计算",
+    "stem": "写出二维卷积输出尺寸公式，并说明各符号含义。",
+    "answer": "输出尺寸通常为 (输入尺寸 + 2P - K) / S + 1，其中 P 是 padding，K 是卷积核大小，S 是 stride。若结果不是整数，实际框架会按配置处理或报错。",
+    "explanation": "要说明 padding、kernel、stride 的作用。",
+    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0011",
+    "type": "short",
+    "topic": "CNN 池化",
+    "stem": "说明池化层的作用，并指出它和卷积层的区别。",
+    "answer": "池化对局部区域做最大值或平均值汇聚，降低空间尺寸并保留显著信息；卷积层有可学习卷积核并提取特征，池化通常没有可学习参数。",
+    "explanation": "不要说池化用来增加参数。",
+    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0012",
+    "type": "short",
+    "topic": "CNN 训练技巧",
+    "stem": "BatchNorm 与 Dropout 在训练/推理阶段有什么差异？",
+    "answer": "BatchNorm 训练时使用当前 batch 统计并更新累计统计，推理时通常用累计均值方差；Dropout 训练时随机失活神经元，推理时关闭随机失活。",
+    "explanation": "这两个都是训练/推理差异高频考点。",
+    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0015",
+    "type": "short",
+    "topic": "RNN 基础",
+    "stem": "RNN 中隐藏状态的作用是什么？",
+    "answer": "隐藏状态保存当前时间步对历史信息的压缩表示，并传递给下一时间步，使模型能根据上下文处理序列。",
+    "explanation": "隐藏状态不是固定参数，而是随输入序列变化。",
     "source": "循环神经网络-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BM0007",
-    "type": "material",
-    "topic": "Attention 与 Transformer",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习Attention 与 Transformer时，只记住了名词，但没有把它放回课程流程。课件中的关键说法是：注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。 常见误区是：sqrt(d_k) 是缩放项，不是可学习参数；Target Mask 用于防止解码器看到未来。",
-    "subquestions": [
-      "指出材料中最核心的模型或训练思想。",
-      "写出一个最容易被选择题设置成错误选项的说法。"
-    ],
-    "answer": "核心思想：注意力用 Q/K 匹配得到权重，再对 V 加权求和；Transformer 由多头注意力、前馈网络、残差、归一化和位置编码组成。 易错说法：Value 用来和 Query 点积计算匹配分数，Key 不参与匹配。简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。",
-    "explanation": "基础资料题只要求读懂材料主线和一个易错点。",
+    "id": "BSHORT0016",
+    "type": "short",
+    "topic": "RNN 门控",
+    "stem": "比较 GRU 与 LSTM 的结构差异。",
+    "answer": "GRU 通常有更新门和重置门，没有独立细胞状态，结构较简洁；LSTM 有输入门、遗忘门、输出门和细胞状态，长期记忆通道更明确。",
+    "explanation": "别把 GRU 说成也有 LSTM 的三门一状态。",
+    "source": "循环神经网络-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0017",
+    "type": "short",
+    "topic": "RNN 变长序列",
+    "stem": "为什么变长序列需要 padding、mask 或 packing？",
+    "answer": "组成 batch 时序列长度需对齐，因此会 padding；但 padding 位置不是真实信息，需要 mask 或 packing 避免模型把补位当有效时间步。",
+    "explanation": "答案要写出 padding 是无效补位。",
+    "source": "循环神经网络-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0019",
+    "type": "short",
+    "topic": "Attention 机制",
+    "stem": "解释 Q、K、V 在注意力机制中的作用。",
+    "answer": "Query 表示当前位置要查找什么，Key 表示候选位置可匹配的索引，Value 表示真正被加权汇总的信息。Q 与 K 计算相关性，Softmax 得到权重，再加权求和 V。",
+    "explanation": "不要把 V 用来计算匹配分数。",
     "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "BM0010",
-    "type": "material",
-    "topic": "图学习与图神经网络",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习图学习与图神经网络时，只记住了名词，但没有把它放回课程流程。课件中的关键说法是：图神经网络在节点、边和邻接关系上做消息传递，通过邻居聚合更新节点表示。 常见误区是：图卷积不能简单理解成固定方形卷积核在规则图像网格上滑动，图的邻域由边决定。",
-    "subquestions": [
-      "指出材料中最核心的模型或训练思想。",
-      "写出一个最容易被选择题设置成错误选项的说法。"
-    ],
-    "answer": "核心思想：图神经网络在节点、边和邻接关系上做消息传递，通过邻居聚合更新节点表示。 易错说法：图学习只看节点自身特征，不需要边或邻接矩阵。简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。",
-    "explanation": "基础资料题只要求读懂材料主线和一个易错点。",
+    "id": "BSHORT0020",
+    "type": "short",
+    "topic": "Attention 机制",
+    "stem": "为什么缩放点积注意力要除以 sqrt(d_k)？",
+    "answer": "维度较大时 QK 点积数值可能过大，使 Softmax 过于尖锐、梯度不稳定。除以 sqrt(d_k) 可以稳定分数尺度。",
+    "explanation": "sqrt(d_k) 不是可学习参数。",
+    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0021",
+    "type": "short",
+    "topic": "Transformer Mask",
+    "stem": "比较 Source Mask 与 Target Mask。",
+    "answer": "Source Mask 通常屏蔽源序列 padding，防止模型关注无效补位；Target Mask 用于自回归解码，遮住未来 token，保证生成时不能偷看答案。",
+    "explanation": "二者目的不同。",
+    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0022",
+    "type": "short",
+    "topic": "Transformer 结构",
+    "stem": "Transformer 编码器层由哪些主要模块组成？",
+    "answer": "典型编码器层包括多头自注意力、前馈网络、残差连接和 LayerNorm。位置编码在进入层前为序列补充顺序信息。",
+    "explanation": "不要把 LSTM 门控写进 Transformer 编码器。",
+    "source": "注意力机制及Transformer2-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0025",
+    "type": "short",
+    "topic": "图学习基础",
+    "stem": "图学习为什么不能只看单个样本特征？",
+    "answer": "图数据的关键信息包含对象之间的关系。节点特征和边结构共同决定任务表现，例如社交关系、分子键、交易网络都需要关系建模。",
+    "explanation": "图学习的核心是特征 + 结构。",
+    "source": "图学习课件_第一部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0026",
+    "type": "short",
+    "topic": "图任务类型",
+    "stem": "区分节点分类、链路预测和图分类。",
+    "answer": "节点分类预测每个节点标签；链路预测判断两个节点之间是否存在边或关系；图分类/回归预测整张图的属性，例如分子性质。",
+    "explanation": "先看输出对象是谁。",
+    "source": "图学习课件_第一部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0027",
+    "type": "short",
+    "topic": "GCN",
+    "stem": "解释 GCN 公式中邻接矩阵、自环和度归一化的作用。",
+    "answer": "邻接矩阵决定哪些邻居参与聚合；自环让节点保留自身信息；度归一化校正不同度数节点的聚合尺度，使训练更稳定。",
+    "explanation": "不要把 GCN 理解成规则图片上的方形卷积核。",
     "source": "图神经网络课件_20260609.pptx",
     "difficulty": "易"
   },
   {
-    "id": "BM0011",
-    "type": "material",
+    "id": "BSHORT0029",
+    "type": "short",
+    "topic": "生成式模型",
+    "stem": "比较 GAN、VAE、Diffusion 的基本生成思想。",
+    "answer": "GAN 通过生成器和判别器对抗训练；VAE 学习潜在分布并采样解码；Diffusion 先逐步加噪，再学习反向去噪生成样本。",
+    "explanation": "要写生成思想，不要只列名字。",
+    "source": "图神经网络课件_20260609.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0030",
+    "type": "short",
+    "topic": "LLM",
+    "stem": "Prompt、MoE、推理型模型分别强调什么？",
+    "answer": "Prompt 用任务说明和上下文引导输出；MoE 通过路由选择部分专家提高容量和效率；推理型模型强调通过后训练等方式增强复杂推理能力。",
+    "explanation": "这部分偏概念和演进脉络。",
+    "source": "图学习课件_第二部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0031",
+    "type": "short",
     "topic": "PINN",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习PINN时，只记住了名词，但没有把它放回课程流程。课件中的关键说法是：PINN 把物理方程约束加入神经网络训练，使模型不仅拟合数据，也尽量满足物理规律。 常见误区是：PINN 的关键不是换一种激活函数，而是把方程残差、边界条件或初始条件写进损失。",
-    "subquestions": [
-      "指出材料中最核心的模型或训练思想。",
-      "写出一个最容易被选择题设置成错误选项的说法。"
-    ],
-    "answer": "核心思想：PINN 把物理方程约束加入神经网络训练，使模型不仅拟合数据，也尽量满足物理规律。 易错说法：PINN 完全不需要物理方程，只要数据越多越好。简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。",
-    "explanation": "基础资料题只要求读懂材料主线和一个易错点。",
+    "stem": "PINN 如何把物理规律加入神经网络训练？",
+    "answer": "PINN 在数据损失之外加入物理方程残差、边界条件或初始条件等物理损失，使模型输出既拟合数据又满足先验规律。",
+    "explanation": "关键是物理约束进入损失函数。",
     "source": "图神经网络课件_20260609.pptx",
     "difficulty": "易"
   },
   {
-    "id": "BM0012",
-    "type": "material",
+    "id": "BSHORT0033",
+    "type": "short",
+    "topic": "LLM",
+    "stem": "大语言模型中的 Prompt 为什么会影响输出？",
+    "answer": "Prompt 提供任务目标、上下文、约束和示例，相当于把同一个模型引导到不同的条件生成模式。回答时要说明它不改变模型参数，但会改变输入条件和生成方向。",
+    "explanation": "不要把 Prompt 写成重新训练模型。",
+    "source": "图学习课件_第二部分_20260602.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0035",
+    "type": "short",
+    "topic": "PINN",
+    "stem": "PINN 与普通监督学习在训练目标上有什么区别？",
+    "answer": "普通监督学习主要拟合输入与标签；PINN 在数据误差之外加入物理方程残差、边界条件或初始条件，使输出受到已知物理规律约束。",
+    "explanation": "区别要落在损失函数，而不是只说应用领域不同。",
+    "source": "图神经网络课件_20260609.pptx",
+    "difficulty": "易"
+  },
+  {
+    "id": "BSHORT0037",
+    "type": "short",
     "topic": "AI for material science",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习AI for material science时，只记住了名词，但没有把它放回课程流程。课件中的关键说法是：材料科学中的 AI 常把分子、晶体或结构关系表示为图，再用 GNN/PINN 等模型预测性质或辅助设计。 常见误区是：材料科学不是孤立的应用名词，关键是把结构、关系、物理约束和预测目标联系起来。",
-    "subquestions": [
-      "指出材料中最核心的模型或训练思想。",
-      "写出一个最容易被选择题设置成错误选项的说法。"
-    ],
-    "answer": "核心思想：材料科学中的 AI 常把分子、晶体或结构关系表示为图，再用 GNN/PINN 等模型预测性质或辅助设计。 易错说法：材料科学应用中图结构没有意义，只需要普通表格特征。简答至少要包含概念定义和它在数据、模型结构、训练或输出环节中的作用。",
-    "explanation": "基础资料题只要求读懂材料主线和一个易错点。",
+    "stem": "材料性质预测为什么常需要结构信息而不只是元素列表？",
+    "answer": "相同或相近组成的材料可能因晶体结构、键连接和局部环境不同而性质差异很大。结构信息能帮助模型理解原子之间的关系和相互作用。",
+    "explanation": "材料科学不是普通表格分类，结构关系很关键。",
     "source": "图神经网络课件_20260609.pptx",
     "difficulty": "易"
   },
   {
-    "id": "OBMC0001",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习卷积时，哪种说法最准确？",
-    "options": [
-      "A. 用小窗口在图像局部滑动，对局部像素和卷积核权重相乘求和，提取边缘、纹理等局部特征。",
-      "B. 卷积层会把所有像素完全展开后做全连接，因此主要靠增加参数量提升效果。",
-      "C. 卷积只需要记名称，不需要结合模型或训练流程。",
-      "D. 卷积与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把 CNN 说成全连接；卷积核心是局部连接和参数共享。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0002",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习感受野时，哪种说法最准确？",
-    "options": [
-      "A. 某一层一个神经元能看到原始输入图像的区域大小。",
-      "B. 网络越深，高层神经元看到的原始图像范围一定越小。",
-      "C. 感受野只需要记名称，不需要结合模型或训练流程。",
-      "D. 感受野与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：步长变大通常会让前一层对应感受野扩大，不是缩小。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0003",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习池化时，哪种说法最准确？",
-    "options": [
-      "A. 对局部区域做最大值或平均值汇总，降低空间尺寸并增强一定平移不变性。",
-      "B. 池化的主要作用是增加可学习参数量。",
-      "C. 池化只需要记名称，不需要结合模型或训练流程。",
-      "D. 池化与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：池化不是全连接，也不是用来增加参数量。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0004",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习卷积核时，哪种说法最准确？",
-    "options": [
-      "A. 卷积层中可学习的小矩阵/滤波器，用来扫描局部区域并提取特征。",
-      "B. 卷积核只是固定模板，训练中不会更新。",
-      "C. 卷积核只需要记名称，不需要结合模型或训练流程。",
-      "D. 卷积核与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：卷积核参数会训练更新，不是手工固定模板。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0005",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习损失函数时，哪种说法最准确？",
-    "options": [
-      "A. 把模型预测和真实标签之间的差距变成一个可优化的数值，反向传播就是从损失开始计算梯度。",
-      "B. 训练时只看准确率即可，损失函数不参与反向传播。",
-      "C. 损失函数只需要记名称，不需要结合模型或训练流程。",
-      "D. 损失函数与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把准确率当作训练损失；也不要把 BCE 和 CE 的适用场景混用。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0006",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习互相关时，哪种说法最准确？",
-    "options": [
-      "A. 形式接近卷积，但不翻转卷积核；深度学习框架里的卷积层通常实际做互相关。",
-      "B. 深度学习里的卷积必须手动翻转卷积核，否则无法学习局部特征。",
-      "C. 互相关只需要记名称，不需要结合模型或训练流程。",
-      "D. 互相关与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要因为名字叫卷积层，就默认一定执行数学卷积的核翻转。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0007",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习Valid时，哪种说法最准确？",
-    "options": [
-      "A. 不填充边界，只在卷积核完全落入输入时计算，输出尺寸会变小。",
-      "B. Valid 卷积会大量填充边界，所以输出尺寸通常最大。",
-      "C. Valid只需要记名称，不需要结合模型或训练流程。",
-      "D. Valid与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Valid 不是大量填充，恰好是不填充。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0008",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习Same时，哪种说法最准确？",
-    "options": [
-      "A. 通过适当填充，让卷积输出空间尺寸尽量和输入保持一致。",
-      "B. Same 卷积的目的就是让输出尺寸尽量缩小。",
-      "C. Same只需要记名称，不需要结合模型或训练流程。",
-      "D. Same与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Same 的目标是保持尺寸，不是扩大特征图。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0009",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习Full时，哪种说法最准确？",
-    "options": [
-      "A. 在边界外进行更充分的填充，使卷积核可以覆盖到输入边缘外侧，输出会变大。",
-      "B. Full 卷积完全不填充，所以输出尺寸最小。",
-      "C. Full只需要记名称，不需要结合模型或训练流程。",
-      "D. Full与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Full 不是常规 CNN 默认选择，考试多用于概念区分。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0010",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习NCHW时，哪种说法最准确？",
-    "options": [
-      "A. 图像张量格式，依次表示 Batch、Channel、Height、Width，PyTorch 中很常见。",
-      "B. NCHW在 CNN 中通常用于增加全连接参数量，而不是保留图像结构。",
-      "C. NCHW只需要记名称，不需要结合模型或训练流程。",
-      "D. NCHW与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把 Channel 和 Height/Width 顺序写反。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0011",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习NHWC时，哪种说法最准确？",
-    "options": [
-      "A. 图像张量格式，依次表示 Batch、Height、Width、Channel。",
-      "B. NHWC在 CNN 中通常用于增加全连接参数量，而不是保留图像结构。",
-      "C. NHWC只需要记名称，不需要结合模型或训练流程。",
-      "D. NHWC与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把 NHWC 当成 PyTorch 卷积层默认输入格式。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0012",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习归一化时，哪种说法最准确？",
-    "options": [
-      "A. 把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。",
-      "B. 归一化在 CNN 中通常用于增加全连接参数量，而不是保留图像结构。",
-      "C. 归一化只需要记名称，不需要结合模型或训练流程。",
-      "D. 归一化与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：归一化不等于 BatchNorm，前者多是输入预处理。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0013",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习LeNet时，哪种说法最准确？",
-    "options": [
-      "A. 早期 CNN 结构，包含卷积、池化和全连接层，用于手写数字识别。",
-      "B. LeNet在 CNN 中通常用于增加全连接参数量，而不是保留图像结构。",
-      "C. LeNet只需要记名称，不需要结合模型或训练流程。",
-      "D. LeNet与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把 LeNet 写成现代超深残差网络。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0014",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习AlexNet时，哪种说法最准确？",
-    "options": [
-      "A. 较早取得突破的深层 CNN，引入 ReLU、Dropout、数据增强等训练技巧。",
-      "B. AlexNet在 CNN 中通常用于增加全连接参数量，而不是保留图像结构。",
-      "C. AlexNet只需要记名称，不需要结合模型或训练流程。",
-      "D. AlexNet与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要只记名字，要能说出 ReLU/Dropout 等关键点。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0015",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习WeightedRandomSampler时，哪种说法最准确？",
-    "options": [
-      "A. 按样本权重采样，常用于类别不平衡时提高少数类被抽到的概率。",
-      "B. WeightedRandomSampler在 CNN 中通常用于增加全连接参数量，而不是保留图像结构。",
-      "C. WeightedRandomSampler只需要记名称，不需要结合模型或训练流程。",
-      "D. WeightedRandomSampler与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：它改变采样概率，不直接改变损失函数公式。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0016",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "初学复习类别不平衡时，哪种说法最准确？",
-    "options": [
-      "A. 不同类别样本数量差距很大，模型容易偏向多数类。",
-      "B. 类别不平衡在 CNN 中通常用于增加全连接参数量，而不是保留图像结构。",
-      "C. 类别不平衡只需要记名称，不需要结合模型或训练流程。",
-      "D. 类别不平衡与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：准确率高不一定说明少数类学得好。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0001",
+    "id": "BMAT0001",
     "type": "material",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第四章 卷积神经网络基础与入门实践”时，把 卷积 和 感受野 都当成孤立名词背。课件中 卷积 的核心是：用小窗口在图像局部滑动，对局部像素和卷积核权重相乘求和，提取边缘、纹理等局部特征。；感受野 的核心是：某一层一个神经元能看到原始输入图像的区域大小。。",
+    "topic": "训练代码",
+    "stem": "材料题 BMAT0001：根据下面关于“训练代码”的场景材料回答问题。",
+    "material": "下面是一段训练代码：\n\n```python\nfor x, y in loader:\n    pred = model(x)\n    loss = loss_fn(pred, y)\n    loss.backward()\n    optimizer.step()\n```\n训练若干 batch 后，loss 大幅震荡，梯度也越来越异常。",
     "subquestions": [
-      "分别说明 卷积 和 感受野 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
+      "指出这段代码缺少哪一步。",
+      "说明缺少该步骤会导致什么问题。"
     ],
-    "answer": "卷积：用小窗口在图像局部滑动，对局部像素和卷积核权重相乘求和，提取边缘、纹理等局部特征。；感受野：某一层一个神经元能看到原始输入图像的区域大小。。易混点分别是：不要把 CNN 说成全连接；卷积核心是局部连接和参数共享。；步长变大通常会让前一层对应感受野扩大，不是缩小。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
+    "answer": "缺少 optimizer.zero_grad()。PyTorch 默认累积梯度，不清零会让不同 batch 的梯度叠加，导致更新方向和步幅异常。正确顺序是 zero_grad、forward、loss、backward、step。",
+    "explanation": "材料题要从代码顺序定位训练流程错误。",
+    "source": "多层感知机1_学生分发版.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "OBMC0017",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践 / 第1节 卷积神经网络简介",
-    "stem": "初学复习步长时，哪种说法最准确？",
-    "options": [
-      "A. 卷积核或池化窗口每次移动的间隔。",
-      "B. 步长越大，输出特征图通常越大。",
-      "C. 步长只需要记名称，不需要结合模型或训练流程。",
-      "D. 步长与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：步长越大，输出空间尺寸通常越小。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0018",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践 / 第1节 卷积神经网络简介",
-    "stem": "初学复习填充时，哪种说法最准确？",
-    "options": [
-      "A. 在输入边界补值，让卷积能处理边缘或保持输出尺寸。",
-      "B. 填充只会删除边界信息，不能控制输出尺寸。",
-      "C. 填充只需要记名称，不需要结合模型或训练流程。",
-      "D. 填充与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：填充不是增加有效信息，而是控制边界和尺寸。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0019",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践 / 第1节 卷积神经网络简介",
-    "stem": "初学复习Batch时，哪种说法最准确？",
-    "options": [
-      "A. 一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。",
-      "B. Batch 表示序列长度，而不是一次送入模型的样本数。",
-      "C. Batch只需要记名称，不需要结合模型或训练流程。",
-      "D. Batch与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0020",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践 / 第1节 卷积神经网络简介",
-    "stem": "初学复习反向传播时，哪种说法最准确？",
-    "options": [
-      "A. 从损失函数出发，按链式法则把梯度传回各层参数。",
-      "B. 反向传播在 CNN 中通常用于增加全连接参数量，而不是保留图像结构。",
-      "C. 反向传播只需要记名称，不需要结合模型或训练流程。",
-      "D. 反向传播与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：反向传播只负责算梯度，真正改参数的是优化器。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0002",
+    "id": "BMAT0002",
     "type": "material",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践 / 第1节 卷积神经网络简介",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第四章 卷积神经网络基础与入门实践 / 第1节 卷积神经网络简介”时，把 步长 和 填充 都当成孤立名词背。课件中 步长 的核心是：卷积核或池化窗口每次移动的间隔。；填充 的核心是：在输入边界补值，让卷积能处理边缘或保持输出尺寸。。",
+    "topic": "分类损失配置",
+    "stem": "材料题 BMAT0002：根据下面关于“分类损失配置”的场景材料回答问题。",
+    "material": "二分类任务中，模型最后一层是 `nn.Linear(hidden, 1)`，输出未经过 Sigmoid 的 logit。代码写成：\n\n```python\nprob = torch.sigmoid(model(x))\nloss = nn.BCEWithLogitsLoss()(prob, y.float().view(-1, 1))\n```",
     "subquestions": [
-      "分别说明 步长 和 填充 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
+      "指出损失函数使用中的问题。",
+      "写出更合适的写法。"
     ],
-    "answer": "步长：卷积核或池化窗口每次移动的间隔。；填充：在输入边界补值，让卷积能处理边缘或保持输出尺寸。。易混点分别是：步长越大，输出空间尺寸通常越小。；填充不是增加有效信息，而是控制边界和尺寸。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0021",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践 / 第2节 图像表示与通道概念",
-    "stem": "初学复习标准化时，哪种说法最准确？",
-    "options": [
-      "A. 把数据按均值和方差调整到更稳定的尺度，帮助模型训练。",
-      "B. 标准化在 CNN 中通常用于增加全连接参数量，而不是保留图像结构。",
-      "C. 标准化只需要记名称，不需要结合模型或训练流程。",
-      "D. 标准化与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把标准化简单等同于除以 255；标准化通常涉及均值和标准差。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0022",
-    "type": "mcq",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践 / 第2节 图像表示与通道概念",
-    "stem": "初学复习激活函数时，哪种说法最准确？",
-    "options": [
-      "A. 给线性变换加入非线性，使网络能拟合非线性关系。",
-      "B. 没有激活函数时，多层线性网络也能自然表达复杂非线性关系。",
-      "C. 激活函数只需要记名称，不需要结合模型或训练流程。",
-      "D. 激活函数与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把激活函数说成只改变维度，它主要提供非线性。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0003",
-    "type": "material",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践 / 第2节 图像表示与通道概念",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第四章 卷积神经网络基础与入门实践 / 第2节 图像表示与通道概念”时，把 标准化 和 激活函数 都当成孤立名词背。课件中 标准化 的核心是：把数据按均值和方差调整到更稳定的尺度，帮助模型训练。；激活函数 的核心是：给线性变换加入非线性，使网络能拟合非线性关系。。",
-    "subquestions": [
-      "分别说明 标准化 和 激活函数 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "标准化：把数据按均值和方差调整到更稳定的尺度，帮助模型训练。；激活函数：给线性变换加入非线性，使网络能拟合非线性关系。。易混点分别是：不要把标准化简单等同于除以 255；标准化通常涉及均值和标准差。；不要把激活函数说成只改变维度，它主要提供非线性。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0004",
-    "type": "material",
-    "topic": "卷积神经网络1-学生分发版-终版2026 / 第四章 卷积神经网络基础与入门实践 / 第4节 网络配置与损失函数应匹配",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第四章 卷积神经网络基础与入门实践 / 第4节 网络配置与损失函数应匹配”时，把 交叉熵 和 BCEWithLogitsLoss 都当成孤立名词背。课件中 交叉熵 的核心是：衡量预测概率分布与真实类别之间差距的分类损失。；BCEWithLogitsLoss 的核心是：二分类或多标签任务常用损失，内部把 Sigmoid 和 BCE 合在一起，数值更稳定。。",
-    "subquestions": [
-      "分别说明 交叉熵 和 BCEWithLogitsLoss 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "交叉熵：衡量预测概率分布与真实类别之间差距的分类损失。；BCEWithLogitsLoss：二分类或多标签任务常用损失，内部把 Sigmoid 和 BCE 合在一起，数值更稳定。。易混点分别是：不要把交叉熵和准确率混成同一个东西。；不要在 BCEWithLogitsLoss 前再手动 Sigmoid。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0005",
-    "type": "material",
-    "topic": "卷积神经网络2-学生分发版-终版2026(1) / 第五章 神经网络训练技巧深度解析",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第五章 神经网络训练技巧深度解析”时，把 梯度消失 和 梯度爆炸 都当成孤立名词背。课件中 梯度消失 的核心是：反向传播经过很多层或很多时间步时，梯度可能不断变小，导致前面层或早期时间步很难学到东西。；梯度爆炸 的核心是：梯度在反向传播中变得过大，使参数更新剧烈，训练损失可能震荡或变成 NaN。。",
-    "subquestions": [
-      "分别说明 梯度消失 和 梯度爆炸 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "梯度消失：反向传播经过很多层或很多时间步时，梯度可能不断变小，导致前面层或早期时间步很难学到东西。；梯度爆炸：梯度在反向传播中变得过大，使参数更新剧烈，训练损失可能震荡或变成 NaN。。易混点分别是：梯度消失不是过拟合；它是参数难以有效更新的问题。；Dropout 主要缓解过拟合，不是解决梯度爆炸的标准答案。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "卷积神经网络2-学生分发版-终版2026(1).ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0006",
-    "type": "material",
-    "topic": "卷积神经网络2-学生分发版-终版2026(1) / 第五章 神经网络训练技巧深度解析 / 第1节 梯度消失、梯度爆炸及其解决方案",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第五章 神经网络训练技巧深度解析 / 第1节 梯度消失、梯度爆炸及其解决方案”时，把 ResNet 和 Inception 都当成孤立名词背。课件中 ResNet 的核心是：用残差/跳跃连接让网络学习 F(x)+x，缓解深层网络退化和梯度传播困难。；Inception 的核心是：用不同大小卷积核和池化分支并行提取多尺度特征。。",
-    "subquestions": [
-      "分别说明 ResNet 和 Inception 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "ResNet：用残差/跳跃连接让网络学习 F(x)+x，缓解深层网络退化和梯度传播困难。；Inception：用不同大小卷积核和池化分支并行提取多尺度特征。。易混点分别是：残差连接不是单纯增加层数，而是改变信息和梯度路径。；Inception 不是单纯加深网络，而是多尺度并行。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "卷积神经网络2-学生分发版-终版2026(1).ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0007",
-    "type": "material",
-    "topic": "卷积神经网络2-学生分发版-终版2026(1) / 第五章 神经网络训练技巧深度解析 / 第2节 优化器改进与学习率调整",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第五章 神经网络训练技巧深度解析 / 第2节 优化器改进与学习率调整”时，把 Adam 和 RMSProp 都当成孤立名词背。课件中 Adam 的核心是：结合动量和自适应学习率思想，为不同参数调整更新幅度。；RMSProp 的核心是：用梯度平方的指数滑动平均调整学习率，缓解 Adagrad 学习率过快衰减。。",
-    "subquestions": [
-      "分别说明 Adam 和 RMSProp 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "Adam：结合动量和自适应学习率思想，为不同参数调整更新幅度。；RMSProp：用梯度平方的指数滑动平均调整学习率，缓解 Adagrad 学习率过快衰减。。易混点分别是：Adam 方便但不等于一定泛化最好，仍需调学习率等超参数。；不要写成简单固定学习率下降。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "卷积神经网络2-学生分发版-终版2026(1).ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0043",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 什么是图？",
-    "stem": "初学复习节点时，哪种说法最准确？",
-    "options": [
-      "A. 图中的对象或实体，可以带有节点特征。",
-      "B. 节点表示关系，边表示对象。",
-      "C. 节点只需要记名称，不需要结合模型或训练流程。",
-      "D. 节点与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：节点特征和边关系是两类信息，不要混在一起。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0044",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 什么是图？",
-    "stem": "初学复习Edge时，哪种说法最准确？",
-    "options": [
-      "A. 图中的边，表示两个节点之间的关系，可以有方向和权重。",
-      "B. Edge只处理单个节点特征，不需要考虑边或邻居。",
-      "C. Edge只需要记名称，不需要结合模型或训练流程。",
-      "D. Edge与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Edge 不是节点特征本身，而是节点之间的连接。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0008",
-    "type": "material",
-    "topic": "图学习课件_第一部分_20260602 / 什么是图？",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“什么是图？”时，把 节点 和 Edge 都当成孤立名词背。课件中 节点 的核心是：图中的对象或实体，可以带有节点特征。；Edge 的核心是：图中的边，表示两个节点之间的关系，可以有方向和权重。。",
-    "subquestions": [
-      "分别说明 节点 和 Edge 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "节点：图中的对象或实体，可以带有节点特征。；Edge：图中的边，表示两个节点之间的关系，可以有方向和权重。。易混点分别是：节点特征和边关系是两类信息，不要混在一起。；Edge 不是节点特征本身，而是节点之间的连接。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0045",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 遂图数据的基本结构",
-    "stem": "初学复习Vertex时，哪种说法最准确？",
-    "options": [
-      "A. 图中的节点，也就是图结构里的对象或实体。",
-      "B. Vertex只处理单个节点特征，不需要考虑边或邻居。",
-      "C. Vertex只需要记名称，不需要结合模型或训练流程。",
-      "D. Vertex与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Vertex 是节点，不是边。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0046",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 邻接矩阵",
-    "stem": "初学复习邻接矩阵时，哪种说法最准确？",
-    "options": [
-      "A. 用矩阵记录节点之间是否相连或连接权重。",
-      "B. 邻接矩阵记录节点特征，不记录连接关系。",
-      "C. 邻接矩阵只需要记名称，不需要结合模型或训练流程。",
-      "D. 邻接矩阵与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：无向图邻接矩阵通常对称；有向图不一定对称。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0047",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 图数据结构的学习优势",
-    "stem": "初学复习图学习时，哪种说法最准确？",
-    "options": [
-      "A. 研究如何在图结构数据上学习表示和完成预测，核心是同时利用节点特征与关系结构。",
-      "B. 图学习只看单个样本特征，不需要关系结构。",
-      "C. 图学习只需要记名称，不需要结合模型或训练流程。",
-      "D. 图学习与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要只看单个样本特征，图学习关键是关系。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0048",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / ）节点级别任务——金融诈骗检测",
-    "stem": "初学复习节点分类时，哪种说法最准确？",
-    "options": [
-      "A. 预测图中每个节点的类别。",
-      "B. 节点分类只处理单个节点特征，不需要考虑边或邻居。",
-      "C. 节点分类只需要记名称，不需要结合模型或训练流程。",
-      "D. 节点分类与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：节点分类输出对象是节点，不是整张图。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0049",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 图学习算法分类",
-    "stem": "初学复习GAT时，哪种说法最准确？",
-    "options": [
-      "A. 图注意力网络，给不同邻居分配不同注意力权重再聚合。",
-      "B. GAT 假设所有邻居同等重要，不学习注意力权重。",
-      "C. GAT只需要记名称，不需要结合模型或训练流程。",
-      "D. GAT与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：GAT 的重点是邻居权重可学习，不是所有邻居同等重要。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0050",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 图学习算法分类",
-    "stem": "初学复习嵌入时，哪种说法最准确？",
-    "options": [
-      "A. 把离散对象映射成连续向量，便于模型计算相似性和下游任务。",
-      "B. 嵌入只处理单个节点特征，不需要考虑边或邻居。",
-      "C. 嵌入只需要记名称，不需要结合模型或训练流程。",
-      "D. 嵌入与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：嵌入不是 one-hot 本身，而是可学习或训练出的稠密向量。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0009",
-    "type": "material",
-    "topic": "图学习课件_第一部分_20260602 / 图学习算法分类",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“图学习算法分类”时，把 GAT 和 嵌入 都当成孤立名词背。课件中 GAT 的核心是：图注意力网络，给不同邻居分配不同注意力权重再聚合。；嵌入 的核心是：把离散对象映射成连续向量，便于模型计算相似性和下游任务。。",
-    "subquestions": [
-      "分别说明 GAT 和 嵌入 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "GAT：图注意力网络，给不同邻居分配不同注意力权重再聚合。；嵌入：把离散对象映射成连续向量，便于模型计算相似性和下游任务。。易混点分别是：GAT 的重点是邻居权重可学习，不是所有邻居同等重要。；嵌入不是 one-hot 本身，而是可学习或训练出的稠密向量。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0051",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 图学习课件第一部分，第 30 页",
-    "stem": "初学复习度矩阵时，哪种说法最准确？",
-    "options": [
-      "A. 对角矩阵，对角线记录每个节点的度。",
-      "B. 度矩阵把所有边权放在非对角位置。",
-      "C. 度矩阵只需要记名称，不需要结合模型或训练流程。",
-      "D. 度矩阵与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：度矩阵不是邻接矩阵，它只放在对角线上。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0052",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 图学习课件第一部分，第 30 页",
-    "stem": "初学复习拉普拉斯矩阵时，哪种说法最准确？",
-    "options": [
-      "A. 用度矩阵和邻接矩阵构造，反映图的连接结构。",
-      "B. 图拉普拉斯矩阵就是邻接矩阵 A。",
-      "C. 拉普拉斯矩阵只需要记名称，不需要结合模型或训练流程。",
-      "D. 拉普拉斯矩阵与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把 L 和 A 混用。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0010",
-    "type": "material",
-    "topic": "图学习课件_第一部分_20260602 / 图学习课件第一部分，第 30 页",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“图学习课件第一部分，第 30 页”时，把 度矩阵 和 拉普拉斯矩阵 都当成孤立名词背。课件中 度矩阵 的核心是：对角矩阵，对角线记录每个节点的度。；拉普拉斯矩阵 的核心是：用度矩阵和邻接矩阵构造，反映图的连接结构。。",
-    "subquestions": [
-      "分别说明 度矩阵 和 拉普拉斯矩阵 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "度矩阵：对角矩阵，对角线记录每个节点的度。；拉普拉斯矩阵：用度矩阵和邻接矩阵构造，反映图的连接结构。。易混点分别是：度矩阵不是邻接矩阵，它只放在对角线上。；不要把 L 和 A 混用。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0053",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / 看 Word2vec: Skip Gram",
-    "stem": "初学复习Softmax时，哪种说法最准确？",
-    "options": [
-      "A. 把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。",
-      "B. Softmax 输出不需要总和为 1。",
-      "C. Softmax只需要记名称，不需要结合模型或训练流程。",
-      "D. Softmax与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Softmax 是对一组数整体归一化，不是逐个独立压缩。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0054",
-    "type": "mcq",
-    "topic": "图学习课件_第一部分_20260602 / Word2vec: Negative Sampling",
-    "stem": "初学复习Sigmoid时，哪种说法最准确？",
-    "options": [
-      "A. 把任意实数压到 0 到 1 之间，可解释为概率或门控强度。GRU/LSTM 的门通常用它决定保留多少信息。",
-      "B. Sigmoid 的输出范围可以小于 0 或大于 1。",
-      "C. Sigmoid只需要记名称，不需要结合模型或训练流程。",
-      "D. Sigmoid与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Sigmoid 不只属于分类输出，在 RNN 门控里也很重要。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0011",
-    "type": "material",
-    "topic": "图学习课件_第一部分_20260602 / 5 图卷积网络（GCN）",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“5 图卷积网络（GCN）”时，把 图卷积 和 GCN 都当成孤立名词背。课件中 图卷积 的核心是：把卷积思想扩展到图结构，通过邻居聚合更新节点表示。；GCN 的核心是：图卷积网络，通过邻接关系聚合邻居节点特征，再更新节点表示。。",
-    "subquestions": [
-      "分别说明 图卷积 和 GCN 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "图卷积：把卷积思想扩展到图结构，通过邻居聚合更新节点表示。；GCN：图卷积网络，通过邻接关系聚合邻居节点特征，再更新节点表示。。易混点分别是：不要把图卷积理解成固定方形卷积核在图上滑动。；GCN 不只看节点自身特征，还看邻居。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "图学习课件_第一部分_20260602.pptx",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0065",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程",
-    "stem": "初学复习自动微分时，哪种说法最准确？",
-    "options": [
-      "A. 深度学习框架自动根据计算图计算梯度。",
-      "B. 自动微分只需要背名字，不需要知道它解决什么问题。",
-      "C. 自动微分只需要记名称，不需要结合模型或训练流程。",
-      "D. 自动微分与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：自动微分不是自动训练；还需要 loss.backward 和 optimizer.step。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0066",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程",
-    "stem": "初学复习梯度下降时，哪种说法最准确？",
-    "options": [
-      "A. 沿着损失函数下降最快的方向调整参数，让模型预测逐步变好。",
-      "B. 梯度下降只需要背名字，不需要知道它解决什么问题。",
-      "C. 梯度下降只需要记名称，不需要结合模型或训练流程。",
-      "D. 梯度下降与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：梯度下降不是直接调准确率，而是通过损失函数和梯度改参数。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0067",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程",
-    "stem": "初学复习计算图时，哪种说法最准确？",
-    "options": [
-      "A. 把张量运算组织成图结构，框架据此追踪梯度计算路径。",
-      "B. 计算图只需要背名字，不需要知道它解决什么问题。",
-      "C. 计算图只需要记名称，不需要结合模型或训练流程。",
-      "D. 计算图与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要在需要梯度的地方把计算图断开。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0012",
-    "type": "material",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第二章 神经网络训练流程”时，把 自动微分 和 梯度下降 都当成孤立名词背。课件中 自动微分 的核心是：深度学习框架自动根据计算图计算梯度。；梯度下降 的核心是：沿着损失函数下降最快的方向调整参数，让模型预测逐步变好。。",
-    "subquestions": [
-      "分别说明 自动微分 和 梯度下降 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "自动微分：深度学习框架自动根据计算图计算梯度。；梯度下降：沿着损失函数下降最快的方向调整参数，让模型预测逐步变好。。易混点分别是：自动微分不是自动训练；还需要 loss.backward 和 optimizer.step。；梯度下降不是直接调准确率，而是通过损失函数和梯度改参数。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0068",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第一节 梯度下降法",
-    "stem": "初学复习Epoch时，哪种说法最准确？",
-    "options": [
-      "A. 训练集被模型完整看过一遍，叫一个 epoch。一个 epoch 内通常包含很多个 batch 更新。",
-      "B. 一个 epoch 就是一次参数更新。",
-      "C. Epoch只需要记名称，不需要结合模型或训练流程。",
-      "D. Epoch与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Epoch 不是一次参数更新；一次更新通常对应一个 batch。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0069",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第一节 梯度下降法",
-    "stem": "初学复习Batch时，哪种说法最准确？",
-    "options": [
-      "A. 一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。",
-      "B. Batch 表示序列长度，而不是一次送入模型的样本数。",
-      "C. Batch只需要记名称，不需要结合模型或训练流程。",
-      "D. Batch与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0070",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第一节 梯度下降法",
-    "stem": "初学复习损失函数时，哪种说法最准确？",
-    "options": [
-      "A. 把模型预测和真实标签之间的差距变成一个可优化的数值，反向传播就是从损失开始计算梯度。",
-      "B. 训练时只看准确率即可，损失函数不参与反向传播。",
-      "C. 损失函数只需要记名称，不需要结合模型或训练流程。",
-      "D. 损失函数与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把准确率当作训练损失；也不要把 BCE 和 CE 的适用场景混用。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0071",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第一节 梯度下降法",
-    "stem": "初学复习反向传播时，哪种说法最准确？",
-    "options": [
-      "A. 从损失函数出发，按链式法则把梯度传回各层参数。",
-      "B. 反向传播只需要背名字，不需要知道它解决什么问题。",
-      "C. 反向传播只需要记名称，不需要结合模型或训练流程。",
-      "D. 反向传播与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：反向传播只负责算梯度，真正改参数的是优化器。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0072",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第一节 梯度下降法",
-    "stem": "初学复习学习率时，哪种说法最准确？",
-    "options": [
-      "A. 控制每次参数沿梯度方向更新的步子大小。学习率太大容易震荡甚至发散，太小则收敛很慢。",
-      "B. 学习率越大训练越稳定，通常不需要调整。",
-      "C. 学习率只需要记名称，不需要结合模型或训练流程。",
-      "D. 学习率与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：学习率不是越大越好；也不是模型学到的参数。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0073",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第一节 梯度下降法",
-    "stem": "初学复习超参数时，哪种说法最准确？",
-    "options": [
-      "A. 训练前人为设定的配置，如学习率、batch size、层数、dropout 比例。",
-      "B. 超参数只需要背名字，不需要知道它解决什么问题。",
-      "C. 超参数只需要记名称，不需要结合模型或训练流程。",
-      "D. 超参数与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：超参数不是通过反向传播直接学出来的参数。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0013",
-    "type": "material",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第一节 梯度下降法",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第二章 神经网络训练流程 / 第一节 梯度下降法”时，把 Epoch 和 Batch 都当成孤立名词背。课件中 Epoch 的核心是：训练集被模型完整看过一遍，叫一个 epoch。一个 epoch 内通常包含很多个 batch 更新。；Batch 的核心是：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。。",
-    "subquestions": [
-      "分别说明 Epoch 和 Batch 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "Epoch：训练集被模型完整看过一遍，叫一个 epoch。一个 epoch 内通常包含很多个 batch 更新。；Batch：一次送入模型并一起计算损失的一组样本。它决定每次参数更新看到多少样本，也影响显存占用和训练稳定性。。易混点分别是：Epoch 不是一次参数更新；一次更新通常对应一个 batch。；Batch 不是序列长度；在 RNN 中常见形状里 N 是样本数，L 才是时间步长度。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0074",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第二节 模型训练流程的优化",
-    "stem": "初学复习优化器时，哪种说法最准确？",
-    "options": [
-      "A. 根据梯度和自身规则更新模型参数。",
-      "B. 优化器只需要背名字，不需要知道它解决什么问题。",
-      "C. 优化器只需要记名称，不需要结合模型或训练流程。",
-      "D. 优化器与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：优化器不是损失函数；损失给目标，优化器改参数。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0075",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第四节 构建神经网络训练代码",
-    "stem": "初学复习Dropout时，哪种说法最准确？",
-    "options": [
-      "A. 训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。",
-      "B. Dropout 推理阶段仍要随机丢弃神经元。",
-      "C. Dropout只需要记名称，不需要结合模型或训练流程。",
-      "D. Dropout与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Dropout 不是提高模型容量，而是正则化。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0076",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第四节 构建神经网络训练代码",
-    "stem": "初学复习CrossEntropyLoss时，哪种说法最准确？",
-    "options": [
-      "A. 多分类常用损失，内部包含 LogSoftmax 和 NLLLoss。",
-      "B. CrossEntropyLoss只需要背名字，不需要知道它解决什么问题。",
-      "C. CrossEntropyLoss只需要记名称，不需要结合模型或训练流程。",
-      "D. CrossEntropyLoss与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要在 CrossEntropyLoss 前手动 Softmax。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0077",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第四节 构建神经网络训练代码",
-    "stem": "初学复习Xavier时，哪种说法最准确？",
-    "options": [
-      "A. Xavier是本节需要掌握的概念，复习时要把它放回课件讲解的前后关系中理解。",
-      "B. Xavier只需要背名字，不需要知道它解决什么问题。",
-      "C. Xavier只需要记名称，不需要结合模型或训练流程。",
-      "D. Xavier与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把线性变换、非线性激活、损失函数和优化器的职责混在一起。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0078",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第四节 构建神经网络训练代码",
-    "stem": "初学复习BatchNorm时，哪种说法最准确？",
-    "options": [
-      "A. 在小批量上标准化中间激活，再用可学习参数恢复表达能力，帮助训练更稳定。",
-      "B. BatchNorm 推理时仍必须使用当前 batch 的统计量。",
-      "C. BatchNorm只需要记名称，不需要结合模型或训练流程。",
-      "D. BatchNorm与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：推理阶段一般使用训练中累计的均值方差，不依赖当前 batch。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0079",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第四节 构建神经网络训练代码",
-    "stem": "初学复习权重衰减时，哪种说法最准确？",
-    "options": [
-      "A. 通过惩罚过大的权重来正则化模型，常用于缓解过拟合。",
-      "B. 权重衰减只需要背名字，不需要知道它解决什么问题。",
-      "C. 权重衰减只需要记名称，不需要结合模型或训练流程。",
-      "D. 权重衰减与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把权重衰减当成学习率衰减。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0080",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第四节 构建神经网络训练代码",
-    "stem": "初学复习RMSProp时，哪种说法最准确？",
-    "options": [
-      "A. 用梯度平方的指数滑动平均调整学习率，缓解 Adagrad 学习率过快衰减。",
-      "B. RMSProp只需要背名字，不需要知道它解决什么问题。",
-      "C. RMSProp只需要记名称，不需要结合模型或训练流程。",
-      "D. RMSProp与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要写成简单固定学习率下降。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0081",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第四节 构建神经网络训练代码",
-    "stem": "初学复习Adam时，哪种说法最准确？",
-    "options": [
-      "A. 结合动量和自适应学习率思想，为不同参数调整更新幅度。",
-      "B. Adam只需要背名字，不需要知道它解决什么问题。",
-      "C. Adam只需要记名称，不需要结合模型或训练流程。",
-      "D. Adam与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Adam 方便但不等于一定泛化最好，仍需调学习率等超参数。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0082",
-    "type": "mcq",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第四节 构建神经网络训练代码",
-    "stem": "初学复习归一化时，哪种说法最准确？",
-    "options": [
-      "A. 把数值缩放到较统一范围，例如图像像素从 0-255 缩放到 0-1。",
-      "B. 归一化只需要背名字，不需要知道它解决什么问题。",
-      "C. 归一化只需要记名称，不需要结合模型或训练流程。",
-      "D. 归一化与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：归一化不等于 BatchNorm，前者多是输入预处理。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0014",
-    "type": "material",
-    "topic": "多层感知机1_学生分发版 / 第二章 神经网络训练流程 / 第四节 构建神经网络训练代码",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第二章 神经网络训练流程 / 第四节 构建神经网络训练代码”时，把 Dropout 和 CrossEntropyLoss 都当成孤立名词背。课件中 Dropout 的核心是：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。；CrossEntropyLoss 的核心是：多分类常用损失，内部包含 LogSoftmax 和 NLLLoss。。",
-    "subquestions": [
-      "分别说明 Dropout 和 CrossEntropyLoss 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "Dropout：训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。；CrossEntropyLoss：多分类常用损失，内部包含 LogSoftmax 和 NLLLoss。。易混点分别是：Dropout 不是提高模型容量，而是正则化。；不要在 CrossEntropyLoss 前手动 Softmax。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "多层感知机1_学生分发版.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0015",
-    "type": "material",
-    "topic": "多层感知机2-学生分发版-终版2026 / 第三章 分类问题与多层感知机",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第三章 分类问题与多层感知机”时，把 Sigmoid 和 Softmax 都当成孤立名词背。课件中 Sigmoid 的核心是：把任意实数压到 0 到 1 之间，可解释为概率或门控强度。GRU/LSTM 的门通常用它决定保留多少信息。；Softmax 的核心是：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。。",
-    "subquestions": [
-      "分别说明 Sigmoid 和 Softmax 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
-    ],
-    "answer": "Sigmoid：把任意实数压到 0 到 1 之间，可解释为概率或门控强度。GRU/LSTM 的门通常用它决定保留多少信息。；Softmax：把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。。易混点分别是：Sigmoid 不只属于分类输出，在 RNN 门控里也很重要。；Softmax 是对一组数整体归一化，不是逐个独立压缩。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
+    "answer": "问题是 BCEWithLogitsLoss 前又手动 Sigmoid，造成重复处理。更合适：`logits = model(x)`，`loss = BCEWithLogitsLoss()(logits, y.float().view(-1,1))`。该损失内部合并 Sigmoid 与 BCE，数值更稳定。",
+    "explanation": "关键是识别 logits 与概率的区别。",
     "source": "多层感知机2-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "OBM0016",
+    "id": "BMAT0003",
     "type": "material",
-    "topic": "多层感知机2-学生分发版-终版2026 / 第三章 分类问题与多层感知机 / 第五节 多层感知机（MLP），也叫做全连接神经网络",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第三章 分类问题与多层感知机 / 第五节 多层感知机（MLP），也叫做全连接神经网络”时，把 梯度消失 和 仿射变换 都当成孤立名词背。课件中 梯度消失 的核心是：反向传播经过很多层或很多时间步时，梯度可能不断变小，导致前面层或早期时间步很难学到东西。；仿射变换 的核心是：线性加权求和再加偏置，常写作 Wx+b。。",
+    "topic": "卷积尺寸",
+    "stem": "材料题 BMAT0003：根据下面关于“卷积尺寸”的场景材料回答问题。",
+    "material": "输入单通道图像大小为 28x28，使用 `Conv2d(in_channels=1, out_channels=16, kernel_size=5, stride=1, padding=0)`。",
     "subquestions": [
-      "分别说明 梯度消失 和 仿射变换 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
+      "计算输出特征图的空间尺寸。",
+      "如果希望空间尺寸保持 28x28，应如何设置 padding？"
     ],
-    "answer": "梯度消失：反向传播经过很多层或很多时间步时，梯度可能不断变小，导致前面层或早期时间步很难学到东西。；仿射变换：线性加权求和再加偏置，常写作 Wx+b。。易混点分别是：梯度消失不是过拟合；它是参数难以有效更新的问题。；不要把仿射变换本身说成非线性映射。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "多层感知机2-学生分发版-终版2026.ipynb",
+    "answer": "无填充输出边长为 (28+0-5)/1+1=24，所以输出空间尺寸为 24x24。若 stride=1 且 kernel=5，要保持 28x28，padding 通常设为 2。out_channels=16 表示学习 16 个卷积核，输出 16 个通道。",
+    "explanation": "资料题把公式、padding 和通道含义放在一起考。",
+    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "OBMC0093",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络",
-    "stem": "初学复习GRU时，哪种说法最准确？",
-    "options": [
-      "A. 用更新门和重置门控制历史信息保留与遗忘，是简化版门控循环网络。",
-      "B. GRU 和 LSTM 一样有单独的细胞状态 c_t。",
-      "C. GRU只需要记名称，不需要结合模型或训练流程。",
-      "D. GRU与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：GRU 没有单独的细胞状态 c_t。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0094",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络",
-    "stem": "初学复习LSTM时，哪种说法最准确？",
-    "options": [
-      "A. 通过输入门、遗忘门、输出门和细胞状态保存长期信息。",
-      "B. LSTM 没有门控结构，只是普通 RNN 的另一个名字。",
-      "C. LSTM只需要记名称，不需要结合模型或训练流程。",
-      "D. LSTM与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要漏掉细胞状态是 LSTM 的关键通道。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0095",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络",
-    "stem": "初学复习Padding时，哪种说法最准确？",
-    "options": [
-      "A. 把不同长度的序列补到同一长度，方便组成 batch 输入模型。",
-      "B. Padding 补出来的位置都是真实有效的信息。",
-      "C. Padding只需要记名称，不需要结合模型或训练流程。",
-      "D. Padding与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Padding 补出来的位置不是真实信息，训练时要避免把它当有效时间步。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0096",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络",
-    "stem": "初学复习Packing时，哪种说法最准确？",
-    "options": [
-      "A. 把变长序列的有效部分打包，让 RNN 少处理 padding 位置。",
-      "B. Packing 的目的就是增加 padding，让序列更长。",
-      "C. Packing只需要记名称，不需要结合模型或训练流程。",
-      "D. Packing与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Packing 不是改变序列含义，而是提高变长序列处理效率。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0097",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络",
-    "stem": "初学复习1D卷积时，哪种说法最准确？",
-    "options": [
-      "A. 在序列的一维时间/位置方向上滑动卷积核，提取局部 n-gram 或短期模式。",
-      "B. 1D卷积说明序列各时间步彼此独立，不需要保存历史信息。",
-      "C. 1D卷积只需要记名称，不需要结合模型或训练流程。",
-      "D. 1D卷积与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：1D 卷积适合局部依赖，不等于天然拥有长期记忆。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0017",
+    "id": "BMAT0004",
     "type": "material",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第五章 循环神经网络”时，把 GRU 和 LSTM 都当成孤立名词背。课件中 GRU 的核心是：用更新门和重置门控制历史信息保留与遗忘，是简化版门控循环网络。；LSTM 的核心是：通过输入门、遗忘门、输出门和细胞状态保存长期信息。。",
+    "topic": "CNN 结构判断",
+    "stem": "材料题 BMAT0004：根据下面关于“CNN 结构判断”的场景材料回答问题。",
+    "material": "某图像分类模型把 224x224x3 图像先展平成长度 150528 的向量，再接一个很大的全连接层；另一模型用多层卷积、池化和最后分类头。两者都用于同一个分类任务，但前者没有显式利用相邻像素之间的局部结构。",
     "subquestions": [
-      "分别说明 GRU 和 LSTM 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
+      "比较两种模型在空间结构利用上的差异。",
+      "说明 CNN 参数共享的意义。"
     ],
-    "answer": "GRU：用更新门和重置门控制历史信息保留与遗忘，是简化版门控循环网络。；LSTM：通过输入门、遗忘门、输出门和细胞状态保存长期信息。。易混点分别是：GRU 没有单独的细胞状态 c_t。；不要漏掉细胞状态是 LSTM 的关键通道。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
+    "answer": "展平全连接会破坏图像二维空间邻域关系且参数量巨大；CNN 用卷积局部连接保留空间结构，用参数共享减少参数量；池化用于降采样、保留显著响应并增强一定平移不变性。",
+    "explanation": "材料考 CNN 出现动机，而不是死背结构名。",
+    "source": "卷积神经网络1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "OBMC0098",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "初学复习隐藏状态时，哪种说法最准确？",
-    "options": [
-      "A. RNN 在每个时间步保存的当前记忆，用来把历史信息传给后续时间步。",
-      "B. 隐藏状态是固定模型参数，不随输入序列变化。",
-      "C. 隐藏状态只需要记名称，不需要结合模型或训练流程。",
-      "D. 隐藏状态与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：隐藏状态不是模型参数，而是随输入序列变化的中间表示。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0099",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "初学复习双向RNN时，哪种说法最准确？",
-    "options": [
-      "A. 同时从前往后和从后往前读序列，让当前位置利用左右两侧上下文。",
-      "B. 双向 RNN 只能利用过去信息，不能利用后文。",
-      "C. 双向RNN只需要记名称，不需要结合模型或训练流程。",
-      "D. 双向RNN与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：双向 RNN 不适合严格只能用过去信息的实时预测场景。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0100",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "初学复习RNN时，哪种说法最准确？",
-    "options": [
-      "A. 按时间步处理序列，用隐藏状态把前面信息传到后面。",
-      "B. RNN 的各个时间步之间完全独立。",
-      "C. RNN只需要记名称，不需要结合模型或训练流程。",
-      "D. RNN与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：RNN 不是一次性把所有时间步完全独立处理。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0101",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "初学复习激活函数时，哪种说法最准确？",
-    "options": [
-      "A. 给线性变换加入非线性，使网络能拟合非线性关系。",
-      "B. 没有激活函数时，多层线性网络也能自然表达复杂非线性关系。",
-      "C. 激活函数只需要记名称，不需要结合模型或训练流程。",
-      "D. 激活函数与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把激活函数说成只改变维度，它主要提供非线性。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0102",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "初学复习梯度消失时，哪种说法最准确？",
-    "options": [
-      "A. 反向传播经过很多层或很多时间步时，梯度可能不断变小，导致前面层或早期时间步很难学到东西。",
-      "B. 梯度消失就是模型在训练集上过拟合。",
-      "C. 梯度消失只需要记名称，不需要结合模型或训练流程。",
-      "D. 梯度消失与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：梯度消失不是过拟合；它是参数难以有效更新的问题。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0103",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "初学复习堆叠RNN时，哪种说法最准确？",
-    "options": [
-      "A. 把多层 RNN 叠起来，上一层的输出序列作为下一层输入。",
-      "B. 堆叠 RNN 是把时间步变多，不是增加层数。",
-      "C. 堆叠RNN只需要记名称，不需要结合模型或训练流程。",
-      "D. 堆叠RNN与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：堆叠不是时间步变多，而是层数变深。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0104",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "初学复习损失函数时，哪种说法最准确？",
-    "options": [
-      "A. 把模型预测和真实标签之间的差距变成一个可优化的数值，反向传播就是从损失开始计算梯度。",
-      "B. 训练时只看准确率即可，损失函数不参与反向传播。",
-      "C. 损失函数只需要记名称，不需要结合模型或训练流程。",
-      "D. 损失函数与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把准确率当作训练损失；也不要把 BCE 和 CE 的适用场景混用。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0105",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "初学复习Dropout时，哪种说法最准确？",
-    "options": [
-      "A. 训练时随机丢弃一部分神经元，迫使网络不要过度依赖某些特征。",
-      "B. Dropout 推理阶段仍要随机丢弃神经元。",
-      "C. Dropout只需要记名称，不需要结合模型或训练流程。",
-      "D. Dropout与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Dropout 不是提高模型容量，而是正则化。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0106",
-    "type": "mcq",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "初学复习Seq2Seq时，哪种说法最准确？",
-    "options": [
-      "A. 编码器把输入序列压成表示，解码器再生成输出序列，常用于翻译、问答等序列到序列任务。",
-      "B. Seq2Seq说明序列各时间步彼此独立，不需要保存历史信息。",
-      "C. Seq2Seq只需要记名称，不需要结合模型或训练流程。",
-      "D. Seq2Seq与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：普通 Seq2Seq 容易受固定长度上下文瓶颈影响。",
-    "source": "循环神经网络-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBM0018",
+    "id": "BMAT0005",
     "type": "material",
-    "topic": "循环神经网络-学生分发版-终版2026 / 第五章 循环神经网络 / 第一节 序列数据与循环神经网络",
-    "stem": "阅读材料并回答问题。",
-    "material": "某同学复习“第五章 循环神经网络 / 第一节 序列数据与循环神经网络”时，把 隐藏状态 和 双向RNN 都当成孤立名词背。课件中 隐藏状态 的核心是：RNN 在每个时间步保存的当前记忆，用来把历史信息传给后续时间步。；双向RNN 的核心是：同时从前往后和从后往前读序列，让当前位置利用左右两侧上下文。。",
+    "topic": "训练/推理模式",
+    "stem": "材料题 BMAT0005：根据下面关于“训练/推理模式”的场景材料回答问题。",
+    "material": "某模型含 BatchNorm 和 Dropout。验证集评估时忘记调用 `model.eval()`，结果同一批验证图片多次测试输出不稳定，并且显存占用比预期更高。训练代码没有更新参数，但仍然保留了计算图。",
     "subquestions": [
-      "分别说明 隐藏状态 和 双向RNN 的作用。",
-      "指出材料中两个知识点最容易被混淆的地方。"
+      "解释输出不稳定的原因。",
+      "BatchNorm 和 Dropout 在 eval 模式下有什么变化？"
     ],
-    "answer": "隐藏状态：RNN 在每个时间步保存的当前记忆，用来把历史信息传给后续时间步。；双向RNN：同时从前往后和从后往前读序列，让当前位置利用左右两侧上下文。。易混点分别是：隐藏状态不是模型参数，而是随输入序列变化的中间表示。；双向 RNN 不适合严格只能用过去信息的实时预测场景。。简答应补充它们处在数据、模型结构、训练优化还是输出目标中的哪一环。",
-    "explanation": "基础资料题先能读出两个知识点分别是什么，再说一个差异。",
+    "answer": "Dropout 在训练模式会随机失活，BatchNorm 在训练模式会用当前 batch 统计，因此输出可能不稳定。eval 后 Dropout 关闭随机失活，BatchNorm 使用累计统计。no_grad 避免记录梯度，节省资源。",
+    "explanation": "这是训练/推理阶段差异的典型资料题。",
+    "source": "卷积神经网络2-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMAT0006",
+    "type": "material",
+    "topic": "RNN 变长序列",
+    "stem": "材料题 BMAT0006：根据下面关于“RNN 变长序列”的场景材料回答问题。",
+    "material": "一个 batch 中句子长度分别为 8、5、3。为了组成张量，短句被补 `<pad>` 到长度 8，随后直接把最后时间步输出用于分类。短句的最后几个时间步实际上是补位符，不携带原句真实语义。",
+    "subquestions": [
+      "这种做法可能有什么问题？",
+      "可以用哪些方法避免 padding 干扰？"
+    ],
+    "answer": "最后时间步可能对应 `<pad>`，不是句子真实结尾，分类会受无效补位干扰。可以使用 mask、pack_padded_sequence，或根据真实长度取最后有效时间步。使用隐藏状态时也要确保对应真实序列信息。",
+    "explanation": "材料考 padding/packing 和有效时间步。",
     "source": "循环神经网络-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "OBMC0117",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Seq2Seq时，哪种说法最准确？",
-    "options": [
-      "A. 编码器把输入序列压成表示，解码器再生成输出序列，常用于翻译、问答等序列到序列任务。",
-      "B. Seq2Seq可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. Seq2Seq只需要记名称，不需要结合模型或训练流程。",
-      "D. Seq2Seq与本章其它知识点没有关系。"
+    "id": "BMAT0007",
+    "type": "material",
+    "topic": "GRU/LSTM 结构",
+    "stem": "材料题 BMAT0007：根据下面关于“GRU/LSTM 结构”的场景材料回答问题。",
+    "material": "课堂讨论中有人认为：GRU 和 LSTM 都有输入门、遗忘门、输出门和独立细胞状态，因此二者只是名字不同。已知二者都用于缓解普通 RNN 的长序列依赖问题，但门控数量和状态设计并不相同。",
+    "subquestions": [
+      "判断这句话是否正确。",
+      "写出 GRU 的主要门控。"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：普通 Seq2Seq 容易受固定长度上下文瓶颈影响。",
+    "answer": "不正确。GRU 通常有更新门和重置门，没有独立细胞状态；LSTM 有输入门、遗忘门、输出门和细胞状态。二者都用于缓解长序列依赖，但结构复杂度不同。",
+    "explanation": "材料考 GRU/LSTM 对比。",
+    "source": "循环神经网络-学生分发版-终版2026.ipynb",
+    "difficulty": "易"
+  },
+  {
+    "id": "BMAT0008",
+    "type": "material",
+    "topic": "Attention 计算",
+    "stem": "材料题 BMAT0008：根据下面关于“Attention 计算”的场景材料回答问题。",
+    "material": "在一个 self-attention 层中，输入序列先线性变换得到 Q、K、V。模型计算 `scores = Q @ K.T` 后直接 Softmax，没有除以 `sqrt(d_k)`。",
+    "subquestions": [
+      "这一步缺少什么缩放？",
+      "为什么需要缩放？"
+    ],
+    "answer": "缺少除以 sqrt(d_k)。维度大时点积可能过大，使 Softmax 过于尖锐、梯度不稳定。Softmax 得到的注意力权重用于对 V 加权求和。",
+    "explanation": "材料考注意力公式各项含义。",
     "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "OBMC0118",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Encoder-Decoder时，哪种说法最准确？",
-    "options": [
-      "A. 编码器把输入变成表示，解码器根据表示生成输出。",
-      "B. Encoder-Decoder可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. Encoder-Decoder只需要记名称，不需要结合模型或训练流程。",
-      "D. Encoder-Decoder与本章其它知识点没有关系。"
+    "id": "BMAT0009",
+    "type": "material",
+    "topic": "Transformer Mask",
+    "stem": "材料题 BMAT0009：根据下面关于“Transformer Mask”的场景材料回答问题。",
+    "material": "机器翻译解码器训练时，目标序列为 `<bos> 我 喜欢 机器 学习`。若 self-attention 不加后续位置遮罩，当前位置可以看到右侧未来词。这样训练时模型获得了推理阶段不可能拥有的信息。",
+    "subquestions": [
+      "应使用哪类 mask？",
+      "它解决什么问题？"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把编码器和解码器的输入输出方向混淆。",
+    "answer": "应使用 Target/Subsequent Mask，防止解码器当前位置看到未来 token，保证自回归训练和推理一致。Source padding mask 主要屏蔽源序列补位，目的不同。",
+    "explanation": "材料考 mask 的类型和用途。",
     "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
     "difficulty": "易"
   },
   {
-    "id": "OBMC0119",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Attention时，哪种说法最准确？",
-    "options": [
-      "A. 根据相关性分配权重，再对信息加权汇总。",
-      "B. Attention可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. Attention只需要记名称，不需要结合模型或训练流程。",
-      "D. Attention与本章其它知识点没有关系。"
+    "id": "BMAT0011",
+    "type": "material",
+    "topic": "图结构任务",
+    "stem": "材料题 BMAT0011：根据下面关于“图结构任务”的场景材料回答问题。",
+    "material": "一个分子被表示为图：节点是原子，边是化学键，每个节点带有元素种类、价电子等特征。模型不是预测单个原子类别，而是输出整个分子的毒性类别，用于筛选候选化合物，需要综合整张图的信息。",
+    "subquestions": [
+      "这是节点级、边级还是图级任务？",
+      "节点和边分别表示什么？"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Attention 不是简单平均。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
+    "answer": "这是图级任务，因为输出是整张分子的标签。节点表示原子，边表示化学键或相互作用。GNN 能沿边聚合邻居信息，把局部结构和整体性质联系起来。",
+    "explanation": "材料考图任务类型和建图含义。",
+    "source": "图学习课件_第一部分_20260602.pptx",
     "difficulty": "易"
   },
   {
-    "id": "OBMC0120",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Q/K/V时，哪种说法最准确？",
-    "options": [
-      "A. 注意力中的 Query、Key、Value 三类向量，分别负责查询、匹配和取信息。",
-      "B. Q/K/V可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. Q/K/V只需要记名称，不需要结合模型或训练流程。",
-      "D. Q/K/V与本章其它知识点没有关系。"
+    "id": "BMAT0014",
+    "type": "material",
+    "topic": "GAN 训练",
+    "stem": "材料题 BMAT0014：根据下面关于“GAN 训练”的场景材料回答问题。",
+    "material": "一个 GAN 用随机噪声输入生成器生成手写数字图像，判别器接收真实 MNIST 图像和生成图像并判断真假。训练过程中，生成器希望图像更像真实样本，判别器希望更准确区分真假样本。",
+    "subquestions": [
+      "生成器和判别器的目标分别是什么？",
+      "为什么说 GAN 是对抗训练？"
     ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把三者都说成同一个东西。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0121",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Self-Attention时，哪种说法最准确？",
-    "options": [
-      "A. Q、K、V 来自同一个序列，让序列内部不同位置相互建立联系。",
-      "B. Self-Attention 中 Q、K、V 必须来自三个完全不同的序列。",
-      "C. Self-Attention只需要记名称，不需要结合模型或训练流程。",
-      "D. Self-Attention与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Self 不是只看自己一个位置，而是同一序列内部互相看。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0122",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Positional Encoding时，哪种说法最准确？",
-    "options": [
-      "A. Transformer 中加入位置信息的方法，可用正余弦或可学习位置向量。",
-      "B. Positional Encoding可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. Positional Encoding只需要记名称，不需要结合模型或训练流程。",
-      "D. Positional Encoding与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把它当成普通标签。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0123",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Transformer时，哪种说法最准确？",
-    "options": [
-      "A. 以注意力为核心的序列模型，用多头注意力、前馈网络、残差和归一化堆叠编码器/解码器。",
-      "B. Transformer 必须依赖 RNN 的递归结构处理序列。",
-      "C. Transformer只需要记名称，不需要结合模型或训练流程。",
-      "D. Transformer与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Transformer 不依赖 RNN 的逐步递归来建模序列。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0124",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习注意力机制时，哪种说法最准确？",
-    "options": [
-      "A. 根据 Query 与 Key 的匹配程度，给 Value 分配权重并加权求和。",
-      "B. 注意力机制就是对所有位置做简单平均。",
-      "C. 注意力机制只需要记名称，不需要结合模型或训练流程。",
-      "D. 注意力机制与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：注意力不是简单平均，而是按相关性加权。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0125",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习位置编码时，哪种说法最准确？",
-    "options": [
-      "A. 给序列注入位置信息，让注意力知道顺序。",
-      "B. 位置编码可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. 位置编码只需要记名称，不需要结合模型或训练流程。",
-      "D. 位置编码与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：没有位置编码时，自注意力本身不天然知道词序。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0126",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Softmax时，哪种说法最准确？",
-    "options": [
-      "A. 把一组分数转成和为 1 的概率分布，常用于多分类或注意力权重。",
-      "B. Softmax 输出不需要总和为 1。",
-      "C. Softmax只需要记名称，不需要结合模型或训练流程。",
-      "D. Softmax与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Softmax 是对一组数整体归一化，不是逐个独立压缩。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0127",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习梯度消失时，哪种说法最准确？",
-    "options": [
-      "A. 反向传播经过很多层或很多时间步时，梯度可能不断变小，导致前面层或早期时间步很难学到东西。",
-      "B. 梯度消失就是模型在训练集上过拟合。",
-      "C. 梯度消失只需要记名称，不需要结合模型或训练流程。",
-      "D. 梯度消失与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：梯度消失不是过拟合；它是参数难以有效更新的问题。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0128",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习RNN时，哪种说法最准确？",
-    "options": [
-      "A. 按时间步处理序列，用隐藏状态把前面信息传到后面。",
-      "B. RNN 的各个时间步之间完全独立。",
-      "C. RNN只需要记名称，不需要结合模型或训练流程。",
-      "D. RNN与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：RNN 不是一次性把所有时间步完全独立处理。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0129",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Teacher Forcing时，哪种说法最准确？",
-    "options": [
-      "A. 训练解码器时使用真实上一步输出作为下一步输入，加快训练。",
-      "B. Teacher Forcing可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. Teacher Forcing只需要记名称，不需要结合模型或训练流程。",
-      "D. Teacher Forcing与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：推理时没有真实答案可喂，只能用模型自己生成的结果。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0130",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Query时，哪种说法最准确？",
-    "options": [
-      "A. Query 表示当前位置主动提出的查询，用来和 Key 计算匹配度。",
-      "B. Query可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. Query只需要记名称，不需要结合模型或训练流程。",
-      "D. Query与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把 Query 和 Value 的角色混淆。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0131",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Key时，哪种说法最准确？",
-    "options": [
-      "A. Key 表示被匹配的索引，用来和 Query 计算相关性。",
-      "B. Key可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. Key只需要记名称，不需要结合模型或训练流程。",
-      "D. Key与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：Key 不是最终被加权求和的内容，Value 才是内容。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0132",
-    "type": "mcq",
-    "topic": "注意力机制及Transformer1-学生分发版-终版2026 / 第六章 Seq2Seq、注意力机制与Transformer基础",
-    "stem": "初学复习Value时，哪种说法最准确？",
-    "options": [
-      "A. Value 是被注意力权重加权求和的信息内容。",
-      "B. Value可以完全脱离 Q/K/V、位置关系和 mask 单独理解。",
-      "C. Value只需要记名称，不需要结合模型或训练流程。",
-      "D. Value与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要把 Value 当成计算匹配度的主要对象。",
-    "source": "注意力机制及Transformer1-学生分发版-终版2026.ipynb",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0147",
-    "type": "mcq",
-    "topic": "深度学习导学_20260609 / 深度学习导学",
-    "stem": "初学复习深度学习导学时，哪种说法最准确？",
-    "options": [
-      "A. 根据 录屏2026-06-09 14.13.15.mov 复原。原始内容是 Jupyter Notebook 讲解，本文件按 notebook 的阅读顺序整理：标题、讲解要点、可辨认代码/公式...",
-      "B. 深度学习导学只需要背名字，不需要知道它解决什么问题。",
-      "C. 深度学习导学只需要记名称，不需要结合模型或训练流程。",
-      "D. 深度学习导学与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要脱离课件上下文孤立背诵。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0148",
-    "type": "mcq",
-    "topic": "深度学习导学_20260609 / 深度学习导学",
-    "stem": "初学复习1.时，哪种说法最准确？",
-    "options": [
-      "A. 根据 录屏2026-06-09 14.13.15.mov 复原。原始内容是 Jupyter Notebook 讲解，本文件按 notebook 的阅读顺序整理：标题、讲解要点、可辨认代码/公式...",
-      "B. 1.只需要背名字，不需要知道它解决什么问题。",
-      "C. 1.只需要记名称，不需要结合模型或训练流程。",
-      "D. 1.与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要脱离课件上下文孤立背诵。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0149",
-    "type": "mcq",
-    "topic": "深度学习导学_20260609 / 深度学习导学",
-    "stem": "初学复习阈值逻辑单元（Threshold时，哪种说法最准确？",
-    "options": [
-      "A. 根据 录屏2026-06-09 14.13.15.mov 复原。原始内容是 Jupyter Notebook 讲解，本文件按 notebook 的阅读顺序整理：标题、讲解要点、可辨认代码/公式...",
-      "B. 阈值逻辑单元（Threshold只需要背名字，不需要知道它解决什么问题。",
-      "C. 阈值逻辑单元（Threshold只需要记名称，不需要结合模型或训练流程。",
-      "D. 阈值逻辑单元（Threshold与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要脱离课件上下文孤立背诵。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0150",
-    "type": "mcq",
-    "topic": "深度学习导学_20260609 / 深度学习导学",
-    "stem": "初学复习Logic时，哪种说法最准确？",
-    "options": [
-      "A. 根据 录屏2026-06-09 14.13.15.mov 复原。原始内容是 Jupyter Notebook 讲解，本文件按 notebook 的阅读顺序整理：标题、讲解要点、可辨认代码/公式...",
-      "B. Logic只需要背名字，不需要知道它解决什么问题。",
-      "C. Logic只需要记名称，不需要结合模型或训练流程。",
-      "D. Logic与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要脱离课件上下文孤立背诵。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0151",
-    "type": "mcq",
-    "topic": "深度学习导学_20260609 / 深度学习导学",
-    "stem": "初学复习Unit,时，哪种说法最准确？",
-    "options": [
-      "A. 根据 录屏2026-06-09 14.13.15.mov 复原。原始内容是 Jupyter Notebook 讲解，本文件按 notebook 的阅读顺序整理：标题、讲解要点、可辨认代码/公式...",
-      "B. Unit,只需要背名字，不需要知道它解决什么问题。",
-      "C. Unit,只需要记名称，不需要结合模型或训练流程。",
-      "D. Unit,与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要脱离课件上下文孤立背诵。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0152",
-    "type": "mcq",
-    "topic": "深度学习导学_20260609 / 深度学习导学",
-    "stem": "初学复习TLU时，哪种说法最准确？",
-    "options": [
-      "A. 根据 录屏2026-06-09 14.13.15.mov 复原。原始内容是 Jupyter Notebook 讲解，本文件按 notebook 的阅读顺序整理：标题、讲解要点、可辨认代码/公式...",
-      "B. TLU只需要背名字，不需要知道它解决什么问题。",
-      "C. TLU只需要记名称，不需要结合模型或训练流程。",
-      "D. TLU与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要脱离课件上下文孤立背诵。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0153",
-    "type": "mcq",
-    "topic": "深度学习导学_20260609 / 1. 阈值逻辑单元（Threshold Logic Unit, TLU）",
-    "stem": "初学复习2.时，哪种说法最准确？",
-    "options": [
-      "A. 2.是本节需要掌握的概念，复习时要把它放回课件讲解的前后关系中理解。",
-      "B. 2.只需要背名字，不需要知道它解决什么问题。",
-      "C. 2.只需要记名称，不需要结合模型或训练流程。",
-      "D. 2.与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要脱离课件上下文孤立背诵。",
-    "source": "深度学习导学_20260609.md",
-    "difficulty": "易"
-  },
-  {
-    "id": "OBMC0154",
-    "type": "mcq",
-    "topic": "深度学习导学_20260609 / 1. 阈值逻辑单元（Threshold Logic Unit, TLU）",
-    "stem": "初学复习表示基本逻辑门时，哪种说法最准确？",
-    "options": [
-      "A. 表示基本逻辑门是本节需要掌握的概念，复习时要把它放回课件讲解的前后关系中理解。",
-      "B. 表示基本逻辑门只需要背名字，不需要知道它解决什么问题。",
-      "C. 表示基本逻辑门只需要记名称，不需要结合模型或训练流程。",
-      "D. 表示基本逻辑门与本章其它知识点没有关系。"
-    ],
-    "answer": "A",
-    "explanation": "A正确。基础阶段先抓清楚它是什么、解决什么问题，再看考试陷阱：不要脱离课件上下文孤立背诵。",
-    "source": "深度学习导学_20260609.md",
+    "answer": "生成器目标是生成足以欺骗判别器的样本；判别器目标是区分真实和生成样本。二者目标相互竞争，所以是对抗训练。生成样本时通常使用生成器。",
+    "explanation": "材料考 GAN 两个网络的角色。",
+    "source": "图神经网络课件_20260609.pptx",
     "difficulty": "易"
   }
 ]
